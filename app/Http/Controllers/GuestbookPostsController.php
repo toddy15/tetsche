@@ -16,7 +16,7 @@ class GuestbookPostsController extends Controller
      */
     public function index()
     {
-        $guestbook_posts = GuestbookPost::all();
+        $guestbook_posts = GuestbookPost::latest()->get();
         return view('guestbook_posts.index', compact('guestbook_posts'));
     }
 
@@ -40,17 +40,6 @@ class GuestbookPostsController extends Controller
         $input = Request::all();
         GuestbookPost::create($input);
         return redirect(action('GuestbookPostsController@index'));
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function show($id)
-    {
-        //
     }
 
     /**
