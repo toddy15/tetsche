@@ -3,8 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\GuestbookPost;
-use Illuminate\Http\Request;
-
+use Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -28,7 +27,7 @@ class GuestbookPostsController extends Controller
      */
     public function create()
     {
-        //
+        return view('guestbook_posts.create');
     }
 
     /**
@@ -38,7 +37,9 @@ class GuestbookPostsController extends Controller
      */
     public function store()
     {
-        //
+        $input = Request::all();
+        GuestbookPost::create($input);
+        return redirect(action('GuestbookPostsController@index'));
     }
 
     /**
