@@ -3,3 +3,6 @@
 .env
 /.idea
 /storage
+/public/build
+/public/css
+/public/js
