@@ -16,5 +16,13 @@ elixir(function(mix) {
         'fonts.css',
         'bootstrap.min.css',
         'bootstrap-theme.min.css'
-    ]).version('css/all.css');
+    ]);
+    mix.scripts([
+        'jquery.min.js',
+        'bootstrap.min.js'
+    ]);
+    mix.version([
+        'css/all.css',
+        'js/all.js'
+    ]);
 });
