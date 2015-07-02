@@ -11,6 +11,13 @@
         @include('partials.nav')
 
         <div class="container">
+            <!--[if lt IE 9]>
+            <p>
+                Sie verwenden einen veralteten Browser.
+                <a href="http://browsehappy.com/">Aktualisieren Sie Ihren Browser noch heute</a>,
+                um diese Website fehlerlos ansehen zu können.
+            </p>
+            <![endif]-->
             @include('errors.list')
             @yield('content')
         </div>
