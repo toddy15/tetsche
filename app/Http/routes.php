@@ -1,8 +1,6 @@
 <?php
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'PagesController@homepage');
 
 Route::get('gästebuch', 'GuestbookPostsController@index');
 Route::get('gästebuch/neu', 'GuestbookPostsController@create');
