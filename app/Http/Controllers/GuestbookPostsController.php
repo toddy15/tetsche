@@ -54,18 +54,22 @@ class GuestbookPostsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $guestbook_post = GuestbookPost::findOrFail($id);
+        return view('guestbook_posts.edit', compact('guestbook_post'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  int  $id
+     * @param Request $request
+     * @param  int $id
      * @return Response
      */
-    public function update($id)
+    public function update(Request $request, $id)
     {
-        //
+        $guestbook_post = GuestbookPost::findOrFail($id);
+        $guestbook_post->update($request->all());
+        return redirect(action('GuestbookPostsController@index'));
     }
 
     /**

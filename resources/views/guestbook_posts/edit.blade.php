@@ -1,10 +1,9 @@
 @extends('app')
 
 @section('content')
-    <h1>Gästebuch: Neuer Eintrag</h1>
-    <p>Schön, dass Sie sich ins Gästebuch eintragen möchten.</p>
+    <h1>Gästebuch: Eintrag bearbeiten</h1>
 
-    {!! Form::open(['action' => 'GuestbookPostsController@store']) !!}
+    {!! Form::model($guestbook_post, ['method' => 'PUT', 'action' => ['GuestbookPostsController@update', $guestbook_post->id]]) !!}
 
     @include('guestbook_posts.form')
 
