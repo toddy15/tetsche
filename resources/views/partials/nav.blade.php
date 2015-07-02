@@ -12,7 +12,9 @@
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
+                <li {!! Request::is('tetsche') ? 'class="active"' : '' !!}><a href="{{ url('tetsche') }}">Tetsche</a></li>
                 <li {!! Request::is('gästebuch') ? 'class="active"' : '' !!}><a href="{{ url('gästebuch') }}">Gästebuch</a></li>
+                <li {!! Request::is('impressum') ? 'class="active"' : '' !!}><a href="{{ url('impressum') }}">Impressum</a></li>
             </ul>
 
             <ul class="nav navbar-nav navbar-right">

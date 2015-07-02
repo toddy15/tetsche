@@ -22,6 +22,7 @@ elixir(function(mix) {
         'bootstrap.min.js'
     ]);
     mix.copy('resources/assets/fonts', 'public/build/fonts');
+    mix.copy('resources/assets/images', 'public/images');
     mix.version([
         'css/all.css',
         'js/all.js'

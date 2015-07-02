@@ -13,4 +13,14 @@ class PagesController extends Controller
     {
         return view('pages.homepage');
     }
+
+    public function tetsche()
+    {
+        return view('pages.tetsche');
+    }
+
+    public function impressum()
+    {
+        return view('pages.impressum');
+    }
 }
