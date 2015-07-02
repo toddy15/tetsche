@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\GuestbookPost;
-use Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 
 class GuestbookPostsController extends Controller
 {
@@ -33,12 +33,16 @@ class GuestbookPostsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
+     * @param Request $request
      * @return Response
      */
-    public function store()
+    public function store(Request $request)
     {
-        $input = Request::all();
-        GuestbookPost::create($input);
+        $this->validate($request, [
+            'name' => 'required',
+            'message' => 'required'
+        ]);
+        GuestbookPost::create($request->all());
         return redirect(action('GuestbookPostsController@index'));
     }
 
