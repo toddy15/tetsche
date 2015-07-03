@@ -1,3 +1,5 @@
+@inject ('utils', 'App\TwsLib\Utils')
+
 <!-- Name Form Input  -->
 <div class="form-group {{ $errors->has('name') ? 'has-error has-feedback' : '' }}">
     {!! Form::label('name', 'Name:', ['class' => 'control-label']) !!}
@@ -14,4 +16,13 @@
     @if ($errors->has('message'))
         <span class="glyphicon glyphicon-remove form-control-feedback"></span>
     @endif
+</div>
+
+<!-- Images Input  -->
+<div class="text-center">
+    <ul class="list-inline">
+        @foreach ($utils->getSmileysImages() as $image)
+            <li>{!! $image !!}</li>
+        @endforeach
+    </ul>
 </div>

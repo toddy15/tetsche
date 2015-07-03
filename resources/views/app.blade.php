@@ -23,5 +23,6 @@
         </div>
 
         <script src="{{ asset(elixir('js/all.js')) }}"></script>
+        @include('additional_javascript')
     </body>
 </html>
