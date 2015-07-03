@@ -7,6 +7,11 @@
 
     @include('guestbook_posts.form')
 
+    <!-- Cheffe Form Input  -->
+    <div class="form-group">
+        {!! Form::label('cheffe', 'Cheffe:') !!}
+        {!! Form::textarea('cheffe', null, ['class' => 'form-control']) !!}
+    </div>
     <!-- Submit Form Input  -->
     <div class="form-group text-center">
         {!! Form::submit('Speichern', ['class' => 'btn btn-default btn-primary']) !!}

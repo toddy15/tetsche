@@ -27,6 +27,9 @@
                     <p>
                         {!! $utils->replaceSmileys($guestbook_post->message) !!}
                     </p>
+                    @if ($guestbook_post->cheffe)
+                        <p class="text-danger">{!! $utils->replaceSmileys($guestbook_post->cheffe) !!}</p>
+                    @endif
                 </td>
             </tr>
             @endforeach

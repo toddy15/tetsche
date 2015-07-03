@@ -13,7 +13,7 @@
         });
     </script>
 @endif
-@if (Request::is('gästebuch/neu'))
+@if (Request::is('gästebuch/neu') or Request::is('gästebuch/*/edit'))
     @inject ('utils', 'App\TwsLib\Utils')
     <script type="text/javascript">
         @foreach ($utils->getSmileysIDsAndText() as $code => $filename)
