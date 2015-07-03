@@ -6,6 +6,7 @@ use App\GuestbookPost;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class GuestbookPostsController extends Controller
 {
@@ -43,6 +44,7 @@ class GuestbookPostsController extends Controller
             'message' => 'required'
         ]);
         GuestbookPost::create($request->all());
+        Session::flash('info', 'Der Eintrag wurde gespeichert.');
         return redirect(action('GuestbookPostsController@index'));
     }
 

@@ -19,6 +19,7 @@
             </p>
             <![endif]-->
             @include('errors.list')
+            @include('partials.info')
             @yield('content')
         </div>
 
