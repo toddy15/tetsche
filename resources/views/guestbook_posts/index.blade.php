@@ -1,5 +1,7 @@
 @extends('app')
 
+@inject('utils', 'App\TwsLib\Utils')
+
 @section('content')
     <h1>Gästebuch</h1>
     <p><a href="{{ action('GuestbookPostsController@create') }}" class="btn btn-primary" role="button">Neuer Eintrag</a></p>
@@ -23,7 +25,7 @@
                 </td>
                 <td>
                     <p>
-                        {{ $guestbook_post->message }}
+                        {!! $utils->replaceSmileys($guestbook_post->message) !!}
                     </p>
                 </td>
             </tr>
