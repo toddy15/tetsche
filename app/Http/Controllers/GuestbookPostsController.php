@@ -71,6 +71,7 @@ class GuestbookPostsController extends Controller
     {
         $guestbook_post = GuestbookPost::findOrFail($id);
         $guestbook_post->update($request->all());
+        Session::flash('info', 'Der Eintrag wurde geändert.');
         return redirect(action('GuestbookPostsController@index'));
     }
 
@@ -82,6 +83,8 @@ class GuestbookPostsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        GuestbookPost::destroy($id);
+        Session::flash('info', 'Der Eintrag wurde gelöscht.');
+        return redirect(action('GuestbookPostsController@index'));
     }
 }

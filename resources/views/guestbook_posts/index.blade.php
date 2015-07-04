@@ -42,7 +42,10 @@
                     </td>
                     @if (Auth::check())
                         <td>
-                            Sowas.
+                            {!! Form::open(array('action' => array('GuestbookPostsController@destroy', $guestbook_post->id), 'method' => 'delete')) !!}
+                            <a href="{!! action('GuestbookPostsController@edit', $guestbook_post->id) !!}" class="btn btn-primary" role="button">Bearbeiten</a>
+                            {!! Form::submit('Löschen', array('class' => 'btn btn-danger')) !!}
+                            {!! Form::close() !!}
                         </td>
                     @endif
                 </tr>
