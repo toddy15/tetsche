@@ -16,18 +16,18 @@ elixir(function(mix) {
         'fonts.css',
         'bootstrap.min.css',
         'bootstrap-theme.min.css'
-    ]);
+    ], 'public/theme/css');
     mix.scripts([
         'jquery.min.js',
         'bootstrap.min.js'
-    ]);
+    ], 'public/theme/js');
     mix.scripts([
         'html5shiv.min.js',
         'respond.min.js'
-    ], 'public/js/ie8.js');
+    ], 'public/theme/js/ie8.js');
     mix.version([
-        'css/all.css',
-        'js/all.js',
-        'js/ie8.js'
+        'theme/css/all.css',
+        'theme/js/all.js',
+        'theme/js/ie8.js'
     ]);
 });

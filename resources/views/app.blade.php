@@ -10,14 +10,14 @@
             <meta name="description" lang="de" content="{{ $description }}">
         @endif
         <title>{{ isset($title) ? $title . ' | ': '' }}Tetsche</title>
-        <link rel="shortcut icon" href="{{ asset('images/website/favicon.ico') }}">
-        <link rel="icon" sizes="192x192" href="{{ asset('images/website/puempel-192x192.png') }}">
+        <link rel="shortcut icon" href="{{ asset('theme/images/favicon.ico') }}">
+        <link rel="icon" sizes="192x192" href="{{ asset('theme/images/puempel-192x192.png') }}">
         @foreach ([180, 152, 144, 120, 114, 76, 72, 60, 57] as $res)
-            <link rel="apple-touch-icon" sizes="{{ $res }}x{{ $res }}" href="{{ asset('images/website/puempel-' . $res . 'x' . $res . '.png') }}">
+            <link rel="apple-touch-icon" sizes="{{ $res }}x{{ $res }}" href="{{ asset('theme/images/puempel-' . $res . 'x' . $res . '.png') }}">
         @endforeach
-        <link href="{{ asset(elixir('css/all.css')) }}" rel="stylesheet">
+        <link href="{{ asset(elixir('theme/css/all.css')) }}" rel="stylesheet">
         <!--[if lt IE 9]>
-        <script src="{{ asset(elixir('js/ie8.js')) }}"></script>
+        <script src="{{ asset(elixir('theme/js/ie8.js')) }}"></script>
         <![endif]-->
     </head>
     <body>
@@ -36,7 +36,7 @@
             @yield('content')
         </div>
 
-        <script src="{{ asset(elixir('js/all.js')) }}"></script>
+        <script src="{{ asset(elixir('theme/js/all.js')) }}"></script>
         @include('additional_javascript')
     </body>
 </html>
