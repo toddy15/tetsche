@@ -17,6 +17,7 @@ class CreateGuestbookPostsTable extends Migration
 			$table->string('name', 255);
 			$table->text('message');
 			$table->text('cheffe')->nullable();
+            $table->string('category', 14)->nullable();
             $table->timestamps();
         });
     }
