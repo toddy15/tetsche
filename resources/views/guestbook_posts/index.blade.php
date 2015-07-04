@@ -3,7 +3,7 @@
 @inject('utils', 'App\TwsLib\Utils')
 
 @section('content')
-    <h1>Gästebuch</h1>
+    <h1>{{ $pagetitle or $title }}</h1>
     <p><a href="{{ action('GuestbookPostsController@create') }}" class="btn btn-primary" role="button">Neuer Eintrag</a></p>
     <table class="table table-striped">
         <colgroup>
@@ -52,4 +52,5 @@
             @endforeach
         </tbody>
     </table>
+    {!! $guestbook_posts->render() !!}
 @stop

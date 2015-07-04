@@ -17,8 +17,15 @@ class GuestbookPostsController extends Controller
      */
     public function index()
     {
-        $guestbook_posts = GuestbookPost::latest()->get();
-        return view('guestbook_posts.index', compact('guestbook_posts'));
+        $guestbook_posts = GuestbookPost::whereNotIn('category', ['manual_spam', 'autolearn_spam'])
+            ->orderBy('created_at', 'desc')
+            ->simplePaginate(10);
+        return view('guestbook_posts.index', [
+            'guestbook_posts' => $guestbook_posts,
+            'title' => 'Gästebuch',
+            'keywords' => 'Gästebuch',
+            'description' => 'Gästebuch der Tetsche-Website',
+        ]);
     }
 
     /**
@@ -43,7 +50,9 @@ class GuestbookPostsController extends Controller
             'name' => 'required',
             'message' => 'required'
         ]);
-        GuestbookPost::create($request->all());
+        $post = $request->all();
+        $post['category'] = 'ham';
+        GuestbookPost::create($post);
         Session::flash('info', 'Der Eintrag wurde gespeichert.');
         return redirect(action('GuestbookPostsController@index'));
     }

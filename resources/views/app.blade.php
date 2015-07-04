@@ -4,7 +4,13 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Tetsche</title>
+        <meta name="author" content="Tetsche">
+        <meta name="keywords" lang="de" content="Tetsche, stern, Kalauerkönig, Tetsche-Seite, Kalau{{ isset($keywords) ? ', ' . $keywords : '' }}">
+        @if (isset($description))
+            <meta name="description" lang="de" content="{{ $description }}">
+        @endif
+        <title>{{ isset($title) ? $title . ' | ': '' }}Tetsche</title>
+        <link rel="shortcut icon" href="{{ asset('theme/favicon.ico') }}">
         <link href="{{ asset(elixir('css/all.css')) }}" rel="stylesheet">
     </head>
     <body>

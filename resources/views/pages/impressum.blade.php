@@ -1,7 +1,7 @@
 @extends('app')
 
 @section('content')
-<h1>Impressum</h1>
+<h1>{{ $pagetitle or $title }}</h1>
 <h2>Angaben gemäß § 5 TMG</h2>
 <p>
     Tetsche Tödter<br />
