@@ -52,5 +52,5 @@
             @endforeach
         </tbody>
     </table>
-    {!! $guestbook_posts->render() !!}
+    {!! str_replace('/?', '?', $guestbook_posts->render()) !!}
 @stop
