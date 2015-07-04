@@ -1,2 +1,8 @@
 User-agent: *
-Disallow:
+Disallow: /cgi-bin/
+Disallow: /build/
+Disallow: /css/
+Disallow: /fonts/
+Disallow: /images/
+Disallow: /js/
+Disallow: /piwik/
