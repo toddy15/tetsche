@@ -4,5 +4,6 @@
 /.idea
 /storage
 /public/build
-/public/css
-/public/js
+/public/theme/css
+/public/theme/images
+/public/theme/js

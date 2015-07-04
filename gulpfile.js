@@ -30,4 +30,6 @@ elixir(function(mix) {
         'theme/js/all.js',
         'theme/js/ie8.js'
     ]);
+    mix.copy('resources/assets/fonts', 'public/build/theme/fonts');
+    mix.copy('resources/assets/images', 'public/theme/images');
 });
