@@ -16,6 +16,9 @@
             <link rel="apple-touch-icon" sizes="{{ $res }}x{{ $res }}" href="{{ asset('images/website/puempel-' . $res . 'x' . $res . '.png') }}">
         @endforeach
         <link href="{{ asset(elixir('css/all.css')) }}" rel="stylesheet">
+        <!--[if lt IE 9]>
+        <script src="{{ asset(elixir('js/ie8.js')) }}"></script>
+        <![endif]-->
     </head>
     <body>
         @include('partials.nav')

@@ -21,8 +21,13 @@ elixir(function(mix) {
         'jquery.min.js',
         'bootstrap.min.js'
     ]);
+    mix.scripts([
+        'html5shiv.min.js',
+        'respond.min.js'
+    ], 'public/js/ie8.js');
     mix.version([
         'css/all.css',
-        'js/all.js'
+        'js/all.js',
+        'js/ie8.js'
     ]);
 });
