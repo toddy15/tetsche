@@ -11,6 +11,10 @@
         @endif
         <title>{{ isset($title) ? $title . ' | ': '' }}Tetsche</title>
         <link rel="shortcut icon" href="{{ asset('images/website/favicon.ico') }}">
+        <link rel="icon" sizes="192x192" href="{{ asset('images/website/puempel-192x192.png') }}">
+        @foreach ([180, 152, 144, 120, 114, 76, 72, 60, 57] as $res)
+            <link rel="apple-touch-icon" sizes="{{ $res }}x{{ $res }}" href="{{ asset('images/website/puempel-' . $res . 'x' . $res . '.png') }}">
+        @endforeach
         <link href="{{ asset(elixir('css/all.css')) }}" rel="stylesheet">
     </head>
     <body>
