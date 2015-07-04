@@ -1,3 +1,20 @@
+# Serve resources with the proper media types.
+<IfModule mod_mime.c>
+    # Workaround for Internet Explorer
+    AddType image/x-icon	                ico
+    # Web fonts
+    AddType application/font-woff           woff
+    AddType application/font-woff2          woff2
+    AddType application/vnd.ms-fontobject   eot
+    AddType application/x-font-ttf          ttc ttf
+    AddType font/opentype                   otf
+</IfModule>
+
+# Block access to directories without a default document
+<IfModule mod_autoindex.c>
+    Options -Indexes
+</IfModule>
+
 <IfModule mod_rewrite.c>
     <IfModule mod_negotiation.c>
         Options -MultiViews
@@ -6,11 +23,95 @@
     RewriteEngine On
     RewriteBase /~toddy/l5-tetsche/public/
 
+    # Always use the www. prefix
+    RewriteCond %{HTTP_HOST} !^www\. [NC]
+    RewriteCond %{HTTP_HOST} !^localhost$ [NC]
+    RewriteRule ^(.*)$ http://www.%{HTTP_HOST}/$1 [L,R=301]
+
     # Redirect Trailing Slashes...
     RewriteRule ^(.*)/$ /$1 [L,R=301]
+
+    # Add redirects for old pages
+    RewriteCond %{QUERY_STRING} ^date=([0-9-]+)$
+    RewriteRule ^tetsche-seite/index\.php$ /archiv/%1? [L,R=permanent]
+    Redirect permanent /tetsche-seite/archiv.php /archiv
+    Redirect permanent /tetsche-seite/index.php /stern
+    Redirect permanent /tetsche-seite /stern
+
+    Redirect permanent /ueber-tetsche.php /tetsche
+    Redirect permanent /guestbook/index.php /gästebuch
+    Redirect permanent /guestbook /gästebuch
+    Redirect permanent /guestbook/eintrag.php /gästebuch/eintrag/neu
+    Redirect permanent /impressum.php /impressum
+    Redirect permanent /puempel.php /pümpel
+
+    Redirect gone /magnete.php
+    Redirect gone /buecher.php
+    Redirect gone /drucke.php
+    Redirect gone /wunschcartoon/index.php
+    Redirect gone /wunschcartoon/geburtstag.php
+    Redirect gone /wunschcartoon/tote-gegend.php
+    Redirect gone /wunschcartoon/nummernschild.php
+    Redirect gone /wunschcartoon
+    Redirect gone /warenkorb.php
+    Redirect gone /anzeige.php
+    Redirect gone /detailanzeige.php
+    Redirect gone /kasse.php
+    Redirect gone /guestbook/suche.php
+    Redirect gone /magnet-edition.php
 
     # Handle Front Controller...
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]
+</IfModule>
+
+# Serve resources with expires headers
+<IfModule mod_expires.c>
+    ExpiresActive on
+    ExpiresDefault "access plus 1 month"
+
+    # CSS
+    ExpiresByType text/css "access plus 1 year"
+
+    # HTML
+    ExpiresByType text/html "access plus 0 seconds"
+
+    # JavaScript
+    ExpiresByType application/javascript "access plus 1 year"
+    ExpiresByType application/x-javascript "access plus 1 year"
+    ExpiresByType text/javascript "access plus 1 year"
+
+    # Media files
+    ExpiresByType audio/ogg "access plus 1 month"
+    ExpiresByType image/bmp "access plus 1 month"
+    ExpiresByType image/gif "access plus 1 month"
+    ExpiresByType image/jpeg "access plus 1 month"
+    ExpiresByType image/png "access plus 1 month"
+    ExpiresByType image/svg+xml "access plus 1 month"
+    ExpiresByType video/mp4 "access plus 1 month"
+    ExpiresByType video/ogg "access plus 1 month"
+    ExpiresByType video/webm "access plus 1 month"
+
+    # Web fonts
+    # Embedded OpenType (EOT)
+    ExpiresByType application/vnd.ms-fontobject "access plus 1 year"
+    ExpiresByType font/eot "access plus 1 year"
+
+    # OpenType
+    ExpiresByType font/opentype "access plus 1 year"
+
+    # TrueType
+    ExpiresByType application/x-font-ttf "access plus 1 year"
+
+    # Web Open Font Format (WOFF) 1.0
+    ExpiresByType application/font-woff "access plus 1 year"
+    ExpiresByType application/x-font-woff "access plus 1 year"
+    ExpiresByType font/woff "access plus 1 year"
+
+    # Web Open Font Format (WOFF) 2.0
+    ExpiresByType application/font-woff2 "access plus 1 year"
+
+    # Other
+    ExpiresByType text/x-cross-domain-policy "access plus 1 week"
 </IfModule>
