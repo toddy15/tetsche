@@ -10,7 +10,7 @@
             <meta name="description" lang="de" content="{{ $description }}">
         @endif
         <title>{{ isset($title) ? $title . ' | ': '' }}Tetsche</title>
-        <link rel="shortcut icon" href="{{ asset('theme/favicon.ico') }}">
+        <link rel="shortcut icon" href="{{ asset('images/website/favicon.ico') }}">
         <link href="{{ asset(elixir('css/all.css')) }}" rel="stylesheet">
     </head>
     <body>
