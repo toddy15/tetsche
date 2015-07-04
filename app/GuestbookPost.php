@@ -10,5 +10,6 @@ class GuestbookPost extends Model
         'name',
         'message',
         'cheffe',
+        'category',
     ];
 }
