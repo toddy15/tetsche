@@ -25,5 +25,6 @@ $factory->define(App\GuestbookPost::class, function ($faker) {
         'name' => $faker->name,
         'message' => $faker->text,
         'cheffe' => $faker->text,
+        'category' => 'ham',
     ];
 });
