@@ -29,5 +29,6 @@ Route::post('gästebuch', 'GuestbookPostsController@store');
 Route::get('gästebuch/{id}/edit', 'GuestbookPostsController@edit');
 Route::put('gästebuch/{id}', 'GuestbookPostsController@update');
 Route::delete('gästebuch/{id}', 'GuestbookPostsController@destroy');
+Route::get('spam', 'SpamController@index');
 Route::get('spam/relearn', 'SpamController@relearn');
 Route::get('spam/{category}', 'SpamController@showPosts');

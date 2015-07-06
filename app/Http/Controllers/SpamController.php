@@ -12,6 +12,14 @@ use App\Http\Controllers\Controller;
 class SpamController extends Controller
 {
     /**
+     * Show overview of possible actions.
+     */
+    public function index()
+    {
+        return view('admin.guestbook');
+    }
+
+    /**
      * Relearn all ham and spam texts
      */
     public function relearn(Request $request)
@@ -34,9 +42,15 @@ class SpamController extends Controller
         $spamfilter = new Spamfilter();
         $spamfilter->initializeAll($texts);
         $request->session()->flash('info', 'Alle Ham- und Spamtexte wurden neu gelernt.');
-        return redirect('gästebuch');
+        return redirect('spam');
     }
 
+    /**
+     * Show all posts of a category.
+     *
+     * @param $category
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\View\View
+     */
     public function showPosts($category)
     {
         switch ($category) {
