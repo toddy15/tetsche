@@ -54,7 +54,7 @@ return [
     |
     */
 
-    'from' => ['address' => null, 'name' => null],
+    'from' => ['address' => 'webmaster@tetsche.de', 'name' => 'Webmaster'],
 
     /*
     |--------------------------------------------------------------------------
