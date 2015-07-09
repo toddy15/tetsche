@@ -44,6 +44,28 @@ class Spamfilter
     }
 
     /**
+     * Check if the given score is spam
+     */
+    public function isSpam($score)
+    {
+        if ($score >= $this->threshold_spam) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Check if the given score should be learned as spam
+     */
+    public function isAutolearnSpam($score)
+    {
+        if ($score >= $this->threshold_autolearn_spam and $score < $this->threshold_no_autolearn_spam) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
      * Classify a text
      */
     public function classify($text)

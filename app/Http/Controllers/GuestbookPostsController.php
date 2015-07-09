@@ -7,7 +7,9 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\TwsLib\Spamfilter;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
 
 class GuestbookPostsController extends Controller
 {
@@ -47,15 +49,71 @@ class GuestbookPostsController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
+        $post = $request->all();
+        $spamfilter = new Spamfilter();
+        $text = $post['name'] . ' ' . $post['message'];
+        $post['score'] = $spamfilter->classify($text);
+        $post['category'] = $spamfilter->calculateCategory($post['score']);
+        $validator = Validator::make($post, [
             'name' => 'required',
             'message' => 'required'
         ]);
-        $post = $request->all();
-        $post['category'] = 'ham';
-        GuestbookPost::create($post);
+        // Add the spam check
+        $validator->after(function($validator) use ($post, $spamfilter) {
+            if ($spamfilter->isSpam($post['score'])) {
+                $validator->errors()->add('message', 'Der Eintrag wurde als Spam eingestuft und daher nicht gespeichert.');
+            }
+            // Special case: autolearning spam
+            if ($spamfilter->isAutolearnSpam($post['score'])) {
+                $new_post = GuestbookPost::create($post);
+                $spamfilter->learnStatus($new_post);
+                $data = [
+                    'id' => $new_post->id,
+                    'name' => $post['name'],
+                    // Watch out: the variable message is automatically
+                    // created, so we need to use another name.
+                    'body' => $post['message'],
+                    'score' => $post['score'],
+                    'category' => $post['category'],
+                ];
+                Mail::queue(['text' => 'emails.guestbook'], $data, function($message) {
+                    $message->from('webmaster@tetsche.de', 'Gästebuch');
+                    $message->to('toddy@example.org', 'Toddy');
+                    $message->subject('Neuer Eintrag im Tetsche-Gästebuch (als Spam gelernt)');
+                });
+            }
+        });
+        if ($validator->fails()) {
+            return redirect(action('GuestbookPostsController@create'))
+                ->withErrors($validator)
+                ->withInput();
+        }
+        // Store the post.
+        $new_post = GuestbookPost::create($post);
+        // Learn status.
+        $spamfilter->learnStatus($new_post);
+        $data = [
+            'id' => $new_post->id,
+            'name' => $post['name'],
+            // Watch out: the variable message is automatically
+            // created, so we need to use another name.
+            'body' => $post['message'],
+            'score' => $post['score'],
+            'category' => $post['category'],
+        ];
+        Mail::queue(['text' => 'emails.guestbook'], $data, function($message) {
+            $message->from('webmaster@tetsche.de', 'Gästebuch');
+            $message->to('toddy@example.org', 'Toddy');
+            $message->subject('Neuer Eintrag im Tetsche-Gästebuch');
+        });
         $request->session()->flash('info', 'Der Eintrag wurde gespeichert.');
         return redirect(action('GuestbookPostsController@index'));
+        // @TODO: This should probably go into an own Request class.
+//        $post = $request->all();
+//        $post['category'] = 'ham';
+//        GuestbookPost::create($post);
+//        $request->session()->flash('info', 'Der Eintrag wurde gespeichert.');
+//        return redirect(action('GuestbookPostsController@index'));
     }
 
     /**
