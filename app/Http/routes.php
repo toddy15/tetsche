@@ -17,6 +17,8 @@ Route::post('password/email', 'Auth\PasswordController@postEmail');
 Route::get('password/reset/{token}', 'Auth\PasswordController@getReset');
 Route::post('password/reset', 'Auth\PasswordController@postReset');
 
+
+
 // Static pages
 Route::get('/', 'PagesController@homepage');
 Route::get('tetsche', 'PagesController@tetsche');
@@ -25,6 +27,9 @@ Route::get('impressum', 'PagesController@impressum');
 Route::get('gästebuch', 'GuestbookPostsController@index');
 Route::get('gästebuch/neu', 'GuestbookPostsController@create');
 Route::post('gästebuch', 'GuestbookPostsController@store');
+
+Route::get('stern', 'CartoonsController@show');
+
 // Protected routes
 Route::get('gästebuch/{id}/edit', ['middleware' => 'auth', 'uses' => 'GuestbookPostsController@edit']);
 Route::put('gästebuch/{id}', ['middleware' => 'auth', 'uses' => 'GuestbookPostsController@update']);
