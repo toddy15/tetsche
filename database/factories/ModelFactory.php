@@ -28,3 +28,11 @@ $factory->define(App\GuestbookPost::class, function ($faker) {
         'category' => 'ham',
     ];
 });
+
+$factory->define(App\Cartoon::class, function ($faker) {
+    return [
+        'publish_on' => $faker->datetime,
+        'random_number' => $faker->numberBetween(10000, 99999),
+        'rebus' => $faker->sentence,
+    ];
+});
