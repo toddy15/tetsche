@@ -24,11 +24,13 @@ Route::get('/', 'PagesController@homepage');
 Route::get('tetsche', 'PagesController@tetsche');
 Route::get('impressum', 'PagesController@impressum');
 
+// Guestbook
 Route::get('gästebuch', 'GuestbookPostsController@index');
 Route::get('gästebuch/neu', 'GuestbookPostsController@create');
 Route::post('gästebuch', 'GuestbookPostsController@store');
 
-Route::get('stern', 'CartoonsController@show');
+// Cartoons
+Route::get('stern', 'CartoonsController@showCurrent');
 
 // Protected routes
 Route::get('gästebuch/{id}/edit', ['middleware' => 'auth', 'uses' => 'GuestbookPostsController@edit']);
