@@ -57,11 +57,71 @@ class CartoonsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
+     * @param Request $request
      * @return Response
      */
-    public function store()
+    public function store(Request $request)
     {
-        //
+        // Set up an error array for feedback
+        $errors = array();
+        // Check for an uploaded file
+        if ($request->hasFile('image')) {
+            $cartoon = new Cartoon;
+            // Construct the publish date
+            $cartoon->publish_on = sprintf("%04d-%02d-%02d",
+                $request->input('year'),
+                $request->input('month'),
+                $request->input('day'));
+            $cartoon->rebus = $request->input('rebus');
+            $cartoon->random_number = substr(mt_rand(100000, 999999), 1, 5);
+            // Save the uploaded file to a temp name
+            $destination_path = public_path() . '/images/cartoons/';
+            $tmp_filename = $cartoon->publish_on;
+            $tmp_filename .= '.upload.';
+            $tmp_filename .= $cartoon->random_number;
+            $tmp_filename .= '.jpg';
+            $request->file('image')->move($destination_path, $tmp_filename);
+            // Now get the absolute path for the tmp_filename
+            $tmp_filename = $destination_path . $tmp_filename;
+            // Create an image without metadata by copying it into a new image
+            // and create a thumbnail
+            $original_filename = str_replace(".upload.", ".cartoon.", $tmp_filename);
+            $small_filename = str_replace(".upload.", ".thumbnail.", $tmp_filename);
+            // Read the uploaded image
+            $tmp_image = @imagecreatefromjpeg($tmp_filename);
+            // Calculate the height for a thumbnail with 220 pixel width
+            $height = 220 * imagesy($tmp_image) / imagesx($tmp_image);
+            // Create blank images
+            $original_image = imagecreatetruecolor(imagesx($tmp_image), imagesy($tmp_image));
+            $small_image = imagecreatetruecolor(220, $height);
+            $white = imagecolorallocate($small_image, 255, 255, 255);
+            imagefill($small_image, 0, 0, $white);
+            // Copy the images
+            imagecopy($original_image, $tmp_image, 0, 0, 0, 0, imagesx($tmp_image), imagesy($tmp_image));
+            imagecopyresampled($small_image, $tmp_image, 0, 0, 0, 0, 220, $height, imagesx($tmp_image), imagesy($tmp_image));
+            // Write the images with 85% quality
+            imagejpeg($original_image, $original_filename, 85);
+            imagejpeg($small_image, $small_filename, 85);
+            imagedestroy($original_image);
+            imagedestroy($small_image);
+            // Remove the uploaded file, it's no longer needed.
+            unlink($tmp_filename);
+            if ($cartoon->save()) {
+                $request->session()->flash('info', 'Der Cartoon wurde gespeichert.');
+                return redirect(action('CartoonsController@index'));
+            }
+            else {
+                unlink($original_filename);
+                unlink($small_filename);
+                $errors[] = 'Der Cartoon konnte nicht gespeichert werden.';
+                $errors = array_merge($errors, $cartoon->errors());
+            }
+        }
+        else {
+            $errors[] = 'Die Datei für den Cartoon wurde nicht hochgeladen. ' .
+                'Ein Grund hierfür könnte sein, dass die ausgewählte Datei zu groß ist.';
+        }
+        return Redirect::to('admin/cartoon/neu')->withErrors($errors);
     }
 
     /**
@@ -139,29 +199,44 @@ class CartoonsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $cartoon = Cartoon::findOrFail($id);
+        return view('cartoons.edit', [
+            'title' => 'Cartoon bearbeiten',
+            'cartoon' => $cartoon,
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  int  $id
+     * @param Request $request
+     * @param  int $id
      * @return Response
      */
-    public function update($id)
+    public function update(Request $request, $id)
     {
-        //
+        $cartoon = Cartoon::findOrFail($id);
+        $cartoon->rebus = $request->input('rebus');
+        $cartoon->save();
+        $request->session()->flash('info', 'Die Rebuslösung wurde gespeichert.');
+        return redirect('cartoons');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param Request $request
+     * @param  int $id
      * @return Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        //
+        $cartoon = Cartoon::findOrFail($id);
+        unlink($cartoon->imagePath());
+        unlink($cartoon->thumbnailPath());
+        $cartoon->delete();
+        $request->session()->flash('info', 'Der Cartoon wurde gelöscht.');
+        return redirect('cartoons');
     }
 
     ///////////////////////////////////
