@@ -6,6 +6,8 @@ Route::post('auth/login', 'Auth\AuthController@postLogin');
 Route::get('auth/logout', 'Auth\AuthController@getLogout');
 
 // Registration routes...
+//Route::get('auth/register', 'Auth\AuthController@getRegister');
+//Route::post('auth/register', 'Auth\AuthController@postRegister');
 //Route::get('auth/register', ['middleware' => 'auth', 'uses' => 'Auth\AuthController@getRegister']);
 //Route::post('auth/register', ['middleware' => 'auth', 'uses' => 'Auth\AuthController@postRegister']);
 
@@ -31,11 +33,21 @@ Route::post('gästebuch', 'GuestbookPostsController@store');
 
 // Cartoons
 Route::get('stern', 'CartoonsController@showCurrent');
+Route::get('archiv', 'CartoonsController@showArchive');
+Route::get('archiv/{date}', 'CartoonsController@show');
 
 // Protected routes
 Route::get('gästebuch/{id}/edit', ['middleware' => 'auth', 'uses' => 'GuestbookPostsController@edit']);
 Route::put('gästebuch/{id}', ['middleware' => 'auth', 'uses' => 'GuestbookPostsController@update']);
 Route::delete('gästebuch/{id}', ['middleware' => 'auth', 'uses' => 'GuestbookPostsController@destroy']);
+
 Route::get('spam', ['middleware' => 'auth', 'uses' => 'SpamController@index']);
 Route::get('spam/relearn', ['middleware' => 'auth', 'uses' => 'SpamController@relearn']);
 Route::get('spam/{category}', ['middleware' => 'auth', 'uses' => 'SpamController@showPosts']);
+
+Route::get('cartoons', ['middleware' => 'auth', 'uses' => 'CartoonsController@index']);
+Route::get('cartoons/neu', ['middleware' => 'auth', 'uses' => 'CartoonsController@create']);
+Route::post('cartoons', ['middleware' => 'auth', 'uses' => 'CartoonsController@store']);
+Route::get('cartoons/{id}/edit', ['middleware' => 'auth', 'uses' => 'CartoonsController@edit']);
+Route::put('cartoons/{id}', ['middleware' => 'auth', 'uses' => 'CartoonsController@update']);
+Route::delete('cartoons/{id}', ['middleware' => 'auth', 'uses' => 'CartoonsController@destroy']);
