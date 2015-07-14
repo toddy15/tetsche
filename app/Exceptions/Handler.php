@@ -2,9 +2,11 @@
 
 namespace App\Exceptions;
 
+use App\TwsLib\Better404;
 use Exception;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class Handler extends ExceptionHandler
 {
@@ -39,6 +41,9 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $e)
     {
+        if ($e instanceof NotFoundHttpException) {
+            return Better404::handleNotFound($request);
+        }
         return parent::render($request, $e);
     }
 }
