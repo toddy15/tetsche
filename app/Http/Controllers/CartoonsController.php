@@ -62,10 +62,8 @@ class CartoonsController extends Controller
      */
     public function store(Request $request)
     {
-        // Set up an error array for feedback
-        $errors = array();
         // Check for an uploaded file
-        if ($request->hasFile('image')) {
+        if ($request->hasFile('image') and $request->file('image')->isValid()) {
             $cartoon = new Cartoon;
             // Construct the publish date
             $cartoon->publish_on = sprintf("%04d-%02d-%02d",
@@ -106,22 +104,16 @@ class CartoonsController extends Controller
             imagedestroy($small_image);
             // Remove the uploaded file, it's no longer needed.
             unlink($tmp_filename);
-            if ($cartoon->save()) {
-                $request->session()->flash('info', 'Der Cartoon wurde gespeichert.');
-                return redirect(action('CartoonsController@index'));
-            }
-            else {
-                unlink($original_filename);
-                unlink($small_filename);
-                $errors[] = 'Der Cartoon konnte nicht gespeichert werden.';
-                $errors = array_merge($errors, $cartoon->errors());
-            }
+            $cartoon->save();
+            $request->session()->flash('info', 'Der Cartoon wurde gespeichert.');
+            return redirect(action('CartoonsController@index'));
         }
         else {
-            $errors[] = 'Die Datei für den Cartoon wurde nicht hochgeladen. ' .
-                'Ein Grund hierfür könnte sein, dass die ausgewählte Datei zu groß ist.';
+            $request->session()->flash('error',
+                'Die Datei für den Cartoon wurde nicht hochgeladen. ' .
+                'Entweder wurde keine Datei ausgewählt oder die ausgewählte Datei ist zu groß.');
+            return redirect('cartoons/neu')->withInput();
         }
-        return Redirect::to('admin/cartoon/neu')->withErrors($errors);
     }
 
     /**

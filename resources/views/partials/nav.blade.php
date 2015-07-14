@@ -25,6 +25,7 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ Auth::user()->name }} <span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
                             <li><a href="{{ action('SpamController@index') }}">Administration des Gästebuchs</a></li>
+                            <li><a href="{{ action('CartoonsController@index') }}">Administration der Cartoons</a></li>
                             <li><a href="{{ url('/auth/logout') }}">Logout</a></li>
                         </ul>
                     </li>
