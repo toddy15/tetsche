@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Mail;
 
 class CartoonsController extends Controller
 {
@@ -231,6 +232,24 @@ class CartoonsController extends Controller
         return redirect('cartoons');
     }
 
+    /**
+     * Check if the current cartoon is the last one. If so, send an e-mail.
+     */
+    public function checkIfCurrentIsLastCartoon()
+    {
+        $newest_cartoon = Cartoon::orderBy('publish_on', 'desc')->first();
+        $newest_cartoon_date = $newest_cartoon->publish_on;
+        $current_date = date('Y-m-d');
+        if ($current_date >= $newest_cartoon_date) {
+            Mail::queue(['text' => 'emails.cartoon'], ['date' => $newest_cartoon_date], function($message) {
+                $message->from('webmaster@tetsche.de', 'DSW');
+                $message->to('tetsche@example.org', 'Tetsche');
+                $message->to('toddy@example.org', 'Toddy');
+                $message->subject('Nächste Tetsche-Seite fehlt');
+            });
+        }
+        return redirect(action('CartoonsController@showCurrent'));
+    }
     ///////////////////////////////////
     // Helper methods
     ///////////////////////////////////
