@@ -16,10 +16,13 @@
 					<form class="form-horizontal" role="form" method="POST" action="{{ url('/password/email') }}">
 						<input type="hidden" name="_token" value="{{ csrf_token() }}">
 
-						<div class="form-group">
+						<div class="form-group {{ $errors->has('email') ? 'has-error has-feedback' : '' }}">
 							<label class="col-md-4 control-label">E-Mail-Adresse</label>
 							<div class="col-md-6">
 								<input type="email" class="form-control" name="email" value="{{ old('email') }}">
+								@if ($errors->has('email'))
+									<span class="glyphicon glyphicon-remove form-control-feedback"></span>
+								@endif
 							</div>
 						</div>
 

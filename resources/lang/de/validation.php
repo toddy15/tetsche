@@ -106,6 +106,8 @@ return [
     'attributes' => [
         'name' => 'Name',
         'message' => 'Nachricht',
+        'email' => 'E-Mail',
+        'password' => 'Passwort',
     ],
 
 ];
