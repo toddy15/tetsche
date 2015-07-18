@@ -39,9 +39,12 @@ Route::get('archiv/{date}', 'CartoonsController@show');
 Route::get('cartoons/checkIfCurrentIsLastCartoon', 'CartoonsController@checkIfCurrentIsLastCartoon');
 
 // Protected routes
-Route::get('gästebuch/{id}/edit', ['middleware' => 'auth', 'uses' => 'GuestbookPostsController@edit']);
-Route::put('gästebuch/{id}', ['middleware' => 'auth', 'uses' => 'GuestbookPostsController@update']);
-Route::delete('gästebuch/{id}', ['middleware' => 'auth', 'uses' => 'GuestbookPostsController@destroy']);
+Route::get('gästebuch/{id}/edit', ['middleware' => 'auth', 'uses' => 'GuestbookPostsController@edit'])
+    ->where('id', '[0-9]+');
+Route::put('gästebuch/{id}', ['middleware' => 'auth', 'uses' => 'GuestbookPostsController@update'])
+    ->where('id', '[0-9]+');
+Route::delete('gästebuch/{id}', ['middleware' => 'auth', 'uses' => 'GuestbookPostsController@destroy'])
+    ->where('id', '[0-9]+');
 
 Route::get('spam', ['middleware' => 'auth', 'uses' => 'SpamController@index']);
 Route::get('spam/relearn', ['middleware' => 'auth', 'uses' => 'SpamController@relearn']);
@@ -50,6 +53,9 @@ Route::get('spam/{category}', ['middleware' => 'auth', 'uses' => 'SpamController
 Route::get('cartoons', ['middleware' => 'auth', 'uses' => 'CartoonsController@index']);
 Route::get('cartoons/neu', ['middleware' => 'auth', 'uses' => 'CartoonsController@create']);
 Route::post('cartoons', ['middleware' => 'auth', 'uses' => 'CartoonsController@store']);
-Route::get('cartoons/{id}/edit', ['middleware' => 'auth', 'uses' => 'CartoonsController@edit']);
-Route::put('cartoons/{id}', ['middleware' => 'auth', 'uses' => 'CartoonsController@update']);
-Route::delete('cartoons/{id}', ['middleware' => 'auth', 'uses' => 'CartoonsController@destroy']);
+Route::get('cartoons/{id}/edit', ['middleware' => 'auth', 'uses' => 'CartoonsController@edit'])
+    ->where('id', '[0-9]+');
+Route::put('cartoons/{id}', ['middleware' => 'auth', 'uses' => 'CartoonsController@update'])
+    ->where('id', '[0-9]+');
+Route::delete('cartoons/{id}', ['middleware' => 'auth', 'uses' => 'CartoonsController@destroy'])
+    ->where('id', '[0-9]+');
