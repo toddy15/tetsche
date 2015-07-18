@@ -41,10 +41,10 @@
     Redirect permanent /ueber-tetsche.php /tetsche
     Redirect permanent /guestbook/index.php /gästebuch
     Redirect permanent /guestbook /gästebuch
-    Redirect permanent /guestbook/eintrag.php /gästebuch/eintrag/neu
+    Redirect permanent /guestbook/eintrag.php /gästebuch/neu
     Redirect permanent /impressum.php /impressum
-    Redirect permanent /puempel.php /pümpel
 
+    Redirect gone /puempel.php
     Redirect gone /magnete.php
     Redirect gone /buecher.php
     Redirect gone /drucke.php
@@ -55,9 +55,13 @@
     Redirect gone /wunschcartoon
     Redirect gone /warenkorb.php
     Redirect gone /anzeige.php
+    Redirect gone /bestellung.php
+    Redirect gone /check.php
     Redirect gone /detailanzeige.php
+    Redirect gone /fehler.php
     Redirect gone /kasse.php
     Redirect gone /guestbook/suche.php
+    Redirect gone /guestbook/store.php
     Redirect gone /magnet-edition.php
 
     # Handle Front Controller...
