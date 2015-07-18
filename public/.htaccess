@@ -31,6 +31,8 @@
     # Redirect Trailing Slashes...
     RewriteRule ^(.*)/$ /$1 [L,R=301]
 
+    RewriteRule ^piwik - [L,NC]
+
     # Add redirects for old pages
     RewriteCond %{QUERY_STRING} ^date=([0-9-]+)$
     RewriteRule ^tetsche-seite/index\.php$ /archiv/%1? [L,R=permanent]
