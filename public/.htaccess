@@ -31,8 +31,6 @@
     # Redirect Trailing Slashes...
     RewriteRule ^(.*)/$ /$1 [L,R=301]
 
-    RewriteRule ^piwik - [L,NC]
-
     # Add redirects for old pages
     RewriteCond %{QUERY_STRING} ^date=([0-9-]+)$
     RewriteRule ^tetsche-seite/index\.php$ /archiv/%1? [L,R=permanent]
@@ -45,6 +43,7 @@
     Redirect permanent /guestbook /gästebuch
     Redirect permanent /guestbook/eintrag.php /gästebuch/neu
     Redirect permanent /impressum.php /impressum
+    Redirect permanent /work /auth/login
 
     Redirect gone /puempel.php
     Redirect gone /magnete.php
