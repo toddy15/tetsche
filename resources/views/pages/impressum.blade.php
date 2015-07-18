@@ -4,7 +4,7 @@
 <h1>{{ $pagetitle or $title }}</h1>
 <h2>Angaben gemäß § 5 TMG</h2>
 <p>
-    Tetsche Tödter<br />
+    Tetsche<br />
     c/o stern<br />
     Baumwall 11<br />
     20459 Hamburg
@@ -16,7 +16,7 @@
 </p>
 <h2>Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV</h2>
 <p>
-    Tetsche Tödter<br />
+    Tetsche<br />
     c/o stern<br />
     Baumwall 11<br />
     20459 Hamburg<br />
