@@ -103,6 +103,7 @@ class GuestbookPostsController extends Controller
         ];
         Mail::queue(['text' => 'emails.guestbook'], $data, function($message) {
             $message->from('webmaster@tetsche.de', 'Gästebuch');
+            $message->to('tetsche@example.org', 'Tetsche');
             $message->to('toddy@example.org', 'Toddy');
             $message->subject('Neuer Eintrag im Tetsche-Gästebuch');
         });
