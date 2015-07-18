@@ -4,6 +4,7 @@ namespace App\TwsLib;
 
 class Spamfilter
 {
+    private $threshold_no_autolearn_ham = 0.2;
     private $threshold_autolearn_ham = 0.4;
     private $threshold_ham = 0.48;
     private $threshold_spam = 0.6;
@@ -169,6 +170,9 @@ class Spamfilter
         }
         if ($score <= $this->threshold_autolearn_ham) {
             $category = 'autolearn_ham';
+        }
+        if ($score <= $this->threshold_no_autolearn_ham) {
+            $category = 'no_autolearn_ham';
         }
         if ($score >= $this->threshold_spam) {
             $category = 'spam';
