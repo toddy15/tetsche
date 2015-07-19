@@ -48,6 +48,7 @@
     Redirect permanent /impressum.php /impressum
     Redirect permanent /work /auth/login
 
+    Redirect gone /gästebuch/eintrag.php
     Redirect gone /puempel.php
     Redirect gone /magnete.php
     Redirect gone /buecher.php
