@@ -53,6 +53,9 @@
     Redirect permanent /impressum.php /impressum
     Redirect permanent /work /auth/login
 
+    # Note that some pages are simply gone
+    RewriteRule ^bilder - [G]
+    RewriteRule ^shop - [G]
     Redirect gone /gästebuch/eintrag.php
     Redirect gone /puempel.php
     Redirect gone /magnete.php
