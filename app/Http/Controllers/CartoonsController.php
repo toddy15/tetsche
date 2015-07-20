@@ -125,6 +125,7 @@ class CartoonsController extends Controller
     public function show($date)
     {
         $current_date = $this->getDateOfCurrentCartoon();
+        $last_archived = $this->getDateOfLastArchivedCartoon();
         // Make sure that no unpublished cartoons get shown
         if ($date > $current_date) {
             abort(404);
@@ -132,6 +133,10 @@ class CartoonsController extends Controller
         // Redirect to stern page for current date
         if ($date == $current_date) {
             return redirect(action('CartoonsController@showCurrent'));
+        }
+        // Make sure no older cartoons than allowed are shown
+        if ($date < $last_archived) {
+            abort(404);
         }
         // Search cartoon for the given date
         $cartoon = Cartoon::where('publish_on', '=', $date)->first();
@@ -174,7 +179,9 @@ class CartoonsController extends Controller
     public function showArchive()
     {
         $date = $this->getDateOfCurrentCartoon();
+        $last_archived = $this->getDateOfLastArchivedCartoon();
         $cartoons = Cartoon::where('publish_on', '<', $date)
+            ->where('publish_on', '>=', $last_archived)
             ->orderBy('publish_on', 'desc')->simplePaginate(8);
         return view('cartoons.archive', [
             'title' => 'Archiv',
@@ -257,12 +264,27 @@ class CartoonsController extends Controller
     /**
      * Helper method to determine the current cartoon.
      */
-    private function getDateOfCurrentCartoon() {
+    private function getDateOfCurrentCartoon()
+    {
         // Add 6 hours to the current time, so that the
         // cartoon is published at 18:00 one day before.
         $date = date('Y-m-d', time() + 6 * 60 * 60);
         return Cartoon::where('publish_on', '<=', $date)
             ->orderBy('publish_on', 'desc')
+            ->value('publish_on');
+    }
+
+    /**
+     * Helper method to determine the last archived cartoon.
+     *
+     * There should be only 16 cartoons in the archive.
+     */
+    private function getDateOfLastArchivedCartoon()
+    {
+        $current = $this->getDateOfCurrentCartoon();
+        return Cartoon::where('publish_on', '<=', $current)
+            ->orderBy('publish_on', 'desc')
+            ->skip(16)
             ->value('publish_on');
     }
 }
