@@ -21,7 +21,12 @@
         <![endif]-->
         <meta name="MSSmartTagsPreventParsing" content="TRUE">
     </head>
-    <body>
+    {{-- Hack to display the blue pages --}}
+    @if (Request::is('/') or Request::is('impressum'))
+        <body style="background:#437cff;color:#fff;">
+    @else
+        <body>
+    @endif
         @include('partials.nav')
 
         <div class="container">
