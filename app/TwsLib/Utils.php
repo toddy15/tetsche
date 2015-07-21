@@ -35,7 +35,8 @@ class Utils
         $smileys = $this->getSmileys($unique);
         $result = array();
         foreach ($smileys as $code => $info)	{
-            $result[$code] = '<img id="smiley-' . $info['filename'] . '" src="' . asset('images/guestbook/' . $info['filename']) . '.svg" ';
+            $result[$code] = '<img id="smiley-' . $info['filename'] . '" src="' .
+                asset(elixir('images/guestbook/' . $info['filename'] . '.svg')) . '" ';
             $result[$code] .= 'width="18" height="18" alt="' . $info['name'] . '" title="' . $info['name'] . '" />';
         }
         return $result;
