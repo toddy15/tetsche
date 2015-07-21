@@ -1,5 +1,18 @@
 {
   "theme/css/all.css": "theme/css/all-d6196c9a.css",
   "theme/js/all.js": "theme/js/all-f76f8feb.js",
-  "theme/js/ie8.js": "theme/js/ie8-aa471b61.js"
+  "theme/js/ie8.js": "theme/js/ie8-aa471b61.js",
+  "images/guestbook/baeh.svg": "images/guestbook/baeh-bdaaea01.svg",
+  "images/guestbook/blinzeln.svg": "images/guestbook/blinzeln-f0ec582e.svg",
+  "images/guestbook/cool.svg": "images/guestbook/cool-7f8d6a0c.svg",
+  "images/guestbook/herz.svg": "images/guestbook/herz-8c3e9184.svg",
+  "images/guestbook/kondom.svg": "images/guestbook/kondom-e1577e58.svg",
+  "images/guestbook/lachen.svg": "images/guestbook/lachen-50b3c776.svg",
+  "images/guestbook/oh.svg": "images/guestbook/oh-ed1fcd0c.svg",
+  "images/guestbook/puempel.svg": "images/guestbook/puempel-4e8efc90.svg",
+  "images/guestbook/saege.svg": "images/guestbook/saege-0089ceed.svg",
+  "images/guestbook/sauer.svg": "images/guestbook/sauer-ba826299.svg",
+  "images/guestbook/smile.svg": "images/guestbook/smile-a7320d01.svg",
+  "images/guestbook/spiegelei.svg": "images/guestbook/spiegelei-f7b67b8f.svg",
+  "images/guestbook/traurig.svg": "images/guestbook/traurig-505476da.svg"
 }
