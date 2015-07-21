@@ -33,5 +33,5 @@ elixir(function(mix) {
         'images/guestbook/*.svg'
     ]);
     mix.copy('resources/assets/fonts', 'public/build/theme/fonts');
-    mix.copy('resources/assets/images', 'public/theme/images');
+    mix.copy('resources/assets/images/icons', 'public/theme/images');
 });
