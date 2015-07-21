@@ -25,10 +25,12 @@ elixir(function(mix) {
         'html5shiv.min.js',
         'respond.min.js'
     ], 'public/theme/js/ie8.js');
+    mix.copy('resources/assets/images/guestbook', 'public/images/guestbook');
     mix.version([
         'theme/css/all.css',
         'theme/js/all.js',
-        'theme/js/ie8.js'
+        'theme/js/ie8.js',
+        'images/guestbook/*.svg'
     ]);
     mix.copy('resources/assets/fonts', 'public/build/theme/fonts');
     mix.copy('resources/assets/images', 'public/theme/images');
