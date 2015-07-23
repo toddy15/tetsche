@@ -16,7 +16,10 @@
                         <p id="solution" class="text-center hidden">{{ $cartoon->rebus }}</p>
                     </div>
                 @else
-                    <p class="text-center">Auflösung nächste Woche an dieser Stelle.</p>
+                    <p class="text-center">
+                        Auflösung nächste Woche im
+                        <a href="{!! action('CartoonsController@showArchive') !!}">Archiv</a>.
+                    </p>
                 @endif
             </div>
         </div>
