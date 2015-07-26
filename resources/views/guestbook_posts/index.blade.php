@@ -1,20 +1,28 @@
 @extends('app')
 
 @inject('utils', 'App\TwsLib\Utils')
+@inject('images', 'App\TwsLib\Images')
 
 @section('content')
-    <h1>{{ $pagetitle or $title }}</h1>
     <div class="row">
-        <div class="col-xs-6">
-            <p><a href="{{ action('GuestbookPostsController@create') }}" class="btn btn-primary" role="button">Neuer Eintrag</a></p>
-        </div>
-        <div class="col-xs-6 text-right">
-            {!! Form::open(['action' => 'GuestbookPostsController@search', 'method' => 'GET', 'class' => 'form-inline']) !!}
-            <div class="form-group">
-                {!! Form::label('search', 'Suche:', ['class' => 'sr-only control-label']) !!}
-                {!! Form::input('search', 'q', null, ['class' => 'form-control', 'placeholder' => 'Suche ...']) !!}
+        <div class="col-xs-12 col-sm-8">
+            <h1>{{ $pagetitle or $title }}</h1>
+            <div class="row">
+                <div class="col-xs-12 col-sm-6">
+                    <p><a href="{{ action('GuestbookPostsController@create') }}" class="btn btn-primary" role="button">Neuer Eintrag</a></p>
+                </div>
+                <div class="col-xs-12 col-sm-6">
+                    {!! Form::open(['action' => 'GuestbookPostsController@search', 'method' => 'GET', 'class' => 'form-inline']) !!}
+                    <div class="form-inline">
+                        {!! Form::label('search', 'Suche:', ['class' => 'sr-only control-label']) !!}
+                        {!! Form::input('search', 'q', null, ['class' => 'form-control', 'size' => 30, 'placeholder' => 'Suche ...']) !!}
+                    </div>
+                    {!! Form::close() !!}
+                </div>
             </div>
-            {!! Form::close() !!}
+        </div>
+        <div class="col-xs-12 col-sm-4 text-right">
+            {!! $images->getRandomImageForGuestbook() !!}
         </div>
     </div>
     @if ($guestbook_posts->count())

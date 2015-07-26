@@ -25,7 +25,7 @@ class Images
         $name = $this->getNameFromFilename($image);
         $result = '<img src="' . $url . '" ';
         $result .= $size[3];
-        $result .= ' alt="' . $name . '" title="' . $name . '" style="vertical-align:bottom" />';
+        $result .= ' alt="' . $name . '" title="' . $name . '" />';
         return $result;
     }
 
