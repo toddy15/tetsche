@@ -30,6 +30,7 @@ Route::get('impressum', 'PagesController@impressum');
 Route::get('gästebuch', 'GuestbookPostsController@index');
 Route::get('gästebuch/neu', 'GuestbookPostsController@create');
 Route::post('gästebuch', 'GuestbookPostsController@store');
+Route::get('gästebuch/suche', 'GuestbookPostsController@search');
 
 // Cartoons
 Route::get('stern', 'CartoonsController@showCurrent');

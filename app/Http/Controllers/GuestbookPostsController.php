@@ -21,7 +21,7 @@ class GuestbookPostsController extends Controller
     public function index()
     {
         $guestbook_posts = GuestbookPost::whereNotIn('category', ['manual_spam', 'autolearn_spam'])
-            ->orderBy('created_at', 'desc')
+            ->latest()
             ->simplePaginate(10);
         return view('guestbook_posts.index', [
             'guestbook_posts' => $guestbook_posts,
@@ -173,5 +173,29 @@ class GuestbookPostsController extends Controller
         GuestbookPost::destroy($id);
         $request->session()->flash('info', 'Der Eintrag wurde gelöscht.');
         return redirect(action('GuestbookPostsController@index'));
+    }
+
+    /**
+     * Filter guestbook by search string.
+     */
+    public function search(Request $request)
+    {
+        $query = $request->get('q');
+        if (trim($query) == '') {
+            return redirect(action('GuestbookPostsController@index'));
+        }
+        $guestbook_posts = GuestbookPost::whereNotIn('category', ['manual_spam', 'autolearn_spam'])
+            ->where('name', 'LIKE', "%$query%")
+            ->orWhere('message', 'LIKE', "%$query%")
+            ->orWhere('cheffe', 'LIKE', "%$query%")
+            ->latest()
+            ->simplePaginate(10);
+        return view('guestbook_posts.index', [
+            'guestbook_posts' => $guestbook_posts,
+            'title' => 'Gästebuch-Suche',
+            'keywords' => 'Gästebuch, Suche',
+            'description' => 'Gästebuch der Tetsche-Website',
+            'pagetitle' => 'Gästebuch - Suche nach »' . $query . '«',
+        ]);
     }
 }
