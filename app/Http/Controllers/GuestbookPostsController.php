@@ -28,6 +28,7 @@ class GuestbookPostsController extends Controller
             'title' => 'Gästebuch',
             'keywords' => 'Gästebuch',
             'description' => 'Gästebuch der Tetsche-Website',
+            'query' => '',
         ]);
     }
 
@@ -196,6 +197,7 @@ class GuestbookPostsController extends Controller
             'keywords' => 'Gästebuch, Suche',
             'description' => 'Gästebuch der Tetsche-Website',
             'pagetitle' => 'Gästebuch - Suche nach »' . $query . '«',
+            'query' => $query,
         ]);
     }
 }

@@ -73,7 +73,11 @@
                 @endforeach
             </tbody>
         </table>
-        {!! str_replace('/?', '?', $guestbook_posts->render()) !!}
+        @if ($query)
+            {!! str_replace('/?', '?', $guestbook_posts->appends(['q' => $query])->render()) !!}
+        @else
+            {!! str_replace('/?', '?', $guestbook_posts->render()) !!}
+        @endif
     @else
         <p>
             Keine Einträge gefunden.
