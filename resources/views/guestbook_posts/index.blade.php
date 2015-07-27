@@ -15,7 +15,14 @@
                     {!! Form::open(['action' => 'GuestbookPostsController@search', 'method' => 'GET', 'class' => 'form-inline']) !!}
                     <div class="form-inline">
                         {!! Form::label('search', 'Suche:', ['class' => 'sr-only control-label']) !!}
-                        {!! Form::input('search', 'q', null, ['class' => 'form-control', 'size' => 30, 'placeholder' => 'Suche ...']) !!}
+                        <div class="input-group">
+                            {!! Form::input('search', 'q', null, ['class' => 'form-control', 'size' => 30, 'placeholder' => 'Suche ...']) !!}
+                            <span class="input-group-btn">
+                                <button class="btn btn-primary" type="submit">
+                                    <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                                </button>
+                            </span>
+                        </div>
                     </div>
                     {!! Form::close() !!}
                 </div>
