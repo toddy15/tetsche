@@ -18,7 +18,7 @@ class Images
      */
     public function getRandomImageForGuestbook()
     {
-        $directory = 'images/rename';
+        $directory = 'images/gb_animals';
         $image = $this->getRandomImage($directory);
         $size= getimagesize($image);
         $url = asset(elixir($image));

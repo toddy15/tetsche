@@ -26,13 +26,13 @@ elixir(function(mix) {
         'respond.min.js'
     ], 'public/theme/js/ie8.js');
     mix.copy('resources/assets/images/guestbook', 'public/images/guestbook');
-    mix.copy('resources/assets/images/rename', 'public/images/rename');
+    mix.copy('resources/assets/images/gb_animals', 'public/images/gb_animals');
     mix.version([
         'theme/css/all.css',
         'theme/js/all.js',
         'theme/js/ie8.js',
         'images/guestbook/*.svg',
-        'images/rename/*.png'
+        'images/gb_animals/*.png'
     ]);
     mix.copy('resources/assets/fonts', 'public/build/theme/fonts');
     mix.copy('resources/assets/images/icons', 'public/theme/images');
