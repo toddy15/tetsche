@@ -186,9 +186,11 @@ class GuestbookPostsController extends Controller
             return redirect(action('GuestbookPostsController@index'));
         }
         $guestbook_posts = GuestbookPost::whereNotIn('category', ['manual_spam', 'autolearn_spam'])
-            ->where('name', 'LIKE', "%$query%")
-            ->orWhere('message', 'LIKE', "%$query%")
-            ->orWhere('cheffe', 'LIKE', "%$query%")
+            ->where(function ($sql) use ($query) {
+                $sql->where('name', 'LIKE', "%$query%")
+                    ->orWhere('message', 'LIKE', "%$query%")
+                    ->orWhere('cheffe', 'LIKE', "%$query%");
+            })
             ->latest()
             ->simplePaginate(10);
         return view('guestbook_posts.index', [
