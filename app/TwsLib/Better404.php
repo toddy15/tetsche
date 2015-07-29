@@ -18,6 +18,16 @@ class Better404
         $referer = $request->server->get('HTTP_REFERER');
         $my_host = $request->getHost();
         $requested_uri = $request->getRequestUri();
+        // Short cut: Do not send e-mails for some URIs.
+        $no_mail_uris = [
+            '#/archiv/[0-9]{4}-[0-9]{2}-[0-9]{2}#',
+            '#/favicon\.ico#',
+        ];
+        foreach ($no_mail_uris as $no_mail_uri) {
+            if (preg_match($no_mail_uri, $requested_uri)) {
+                $referer = '';
+            }
+        }
         // Set up message for user
         $msg_lines = [];
         $msg_lines[] = 'Die Seite, die Sie aufrufen wollten, existiert nicht.';
