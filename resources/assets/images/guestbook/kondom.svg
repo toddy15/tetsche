@@ -5,6 +5,8 @@
     <stop offset="0" stop-color="#dfbae0" />
     <stop offset="1" stop-color="#ac87ad" />
   </linearGradient>
-  <path d="M5.5 14c0 -2 0 -3.5 0 -6.5c0 -1 0 -1 1 -2c1.5 -1.5 0 -4 2.5 -4c2.5 0 1 2.5 2.5 4c1 1 1 1 1 2c0 -1 0 4.5 0 6.5" fill="url(#kondom)" stroke="black" stroke-width="0.75" />
-  <rect x="3.5" y="14" width="11" height="2.5" rx="1" fill="url(#kondom)" stroke="black" stroke-width="0.75" />
+  <g transform="translate(10.5,-5) rotate(45)">
+    <path d="M5.5 14c0 -2 0 -3.5 0 -6.5c0 -1 0 -1 1 -2c1.5 -1.5 0 -4 2.5 -4c2.5 0 1 2.5 2.5 4c1 1 1 1 1 2c0 -1 0 4.5 0 6.5" fill="url(#kondom)" stroke="black" stroke-width="0.75" />
+    <rect x="3.5" y="14" width="11" height="2.5" rx="1" fill="url(#kondom)" stroke="black" stroke-width="0.75" />
+  </g>
 </svg>
