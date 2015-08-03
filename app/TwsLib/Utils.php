@@ -66,6 +66,7 @@ class Utils
             '[Spiegelei]' => 'Spiegelei',
             '[Kondom]' => 'Kondom',
             '[Säge]' => 'Säge',
+            '[Knochen]' => 'Knochen',
         );
         $skip = array (':)', ';)', ':(', ':D', ':P', ':-p', ':p', ':-o');
         foreach ($smileys as $code => $name) {
