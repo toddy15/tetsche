@@ -35,22 +35,13 @@
     @if ($guestbook_posts->count())
         <table class="table table-striped">
             <colgroup>
-                @if (Auth::check())
-                    <col class="col-xs-3">
-                    <col class="col-xs-6">
-                    <col class="col-xs-3">
-                @else
-                    <col class="col-xs-4">
-                    <col class="col-xs-8">
-                @endif
+                <col class="col-xs-4">
+                <col class="col-xs-8">
             </colgroup>
             <thead>
                 <tr>
                     <th>Name</th>
                     <th>Nachricht</th>
-                    @if (Auth::check())
-                        <th>Aktion</th>
-                    @endif
                 </tr>
             </thead>
             <tbody>
@@ -67,15 +58,13 @@
                             @if ($guestbook_post->cheffe)
                                 <p class="text-danger">{!! $utils->replaceSmileys($guestbook_post->cheffe) !!}</p>
                             @endif
-                        </td>
-                        @if (Auth::check())
-                            <td>
+                            @if (Auth::check())
                                 {!! Form::open(array('action' => array('GuestbookPostsController@destroy', $guestbook_post->id), 'method' => 'delete')) !!}
                                 <a href="{!! action('GuestbookPostsController@edit', $guestbook_post->id) !!}" class="btn btn-primary" role="button">Bearbeiten</a>
                                 {!! Form::submit('Löschen', array('class' => 'btn btn-danger')) !!}
                                 {!! Form::close() !!}
-                            </td>
-                        @endif
+                            @endif
+                        </td>
                     </tr>
                 @endforeach
             </tbody>
