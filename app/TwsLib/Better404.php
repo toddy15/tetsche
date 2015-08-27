@@ -22,6 +22,7 @@ class Better404
         $no_mail_uris = [
             '#/archiv/[0-9]{4}-[0-9]{2}-[0-9]{2}#',
             '#/favicon\.ico#',
+            '#/g&auml;stebuch#',
         ];
         foreach ($no_mail_uris as $no_mail_uri) {
             if (preg_match($no_mail_uri, $requested_uri)) {
