@@ -132,3 +132,9 @@
     # Other
     ExpiresByType text/x-cross-domain-policy "access plus 1 week"
 </IfModule>
+
+# Enforce SSL, prepare for public key pinning
+<IfModule mod_headers.c>
+  # max-age is set to a year (365 * 86400)
+  Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+</IfModule>
