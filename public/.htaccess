@@ -133,17 +133,8 @@
     ExpiresByType text/x-cross-domain-policy "access plus 1 week"
 </IfModule>
 
-# Enforce SSL, prepare for public key pinning
+# Enforce SSL
 <IfModule mod_headers.c>
   # max-age is set to a year (365 * 86400)
   Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
-  # max-age will be set to a month (30 * 86400)
-  Header always set Public-Key-Pins "max-age=600; includeSubDomains; \
-    pin-sha256=\"6rN4X6RXb9tBUjEw7xs7j0rGxTJyTXS4Y0DjJenYhFw=\"; \
-    pin-sha256=\"Q4eFQpHHki35HdM0YqEINGiVwRvKqCRlWEU+6o6Ge70=\"; \
-    pin-sha256=\"Sm3OxJqJnmJLdJWHIW5ZXN6gKM+bcD1qQIttpmWprGA=\"; \
-    pin-sha256=\"jOZt1R5CL9XB6YYxCf8hOXLFm1QmKCjTFNDRbkve+G4=\"; \
-    pin-sha256=\"Ke1BKnh0ZS7LgELWYF7KiE5GftCnxjQZWuP7EDx6VeI=\"; \
-    pin-sha256=\"gSYFxyAYKFM4SUAKWLmKvvn8wI0pxc17rSXhhTp4Rhc=\"; \
-"
 </IfModule>
