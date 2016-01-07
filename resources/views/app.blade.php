@@ -16,9 +16,6 @@
             <link rel="apple-touch-icon" sizes="{{ $res }}x{{ $res }}" href="{{ asset('theme/images/puempel-' . $res . 'x' . $res . '.png') }}">
         @endforeach
         <link href="{{ asset(elixir('theme/css/all.css')) }}" rel="stylesheet">
-        <!--[if lt IE 9]>
-        <script src="{{ asset(elixir('theme/js/ie8.js')) }}"></script>
-        <![endif]-->
         <meta name="MSSmartTagsPreventParsing" content="TRUE">
     </head>
     {{-- Hack to display the blue pages --}}
@@ -30,13 +27,6 @@
         @include('partials.nav')
 
         <div class="container">
-            <!--[if lt IE 9]>
-            <p>
-                Sie verwenden einen veralteten Browser.
-                <a href="http://browsehappy.com/">Aktualisieren Sie Ihren Browser noch heute</a>,
-                um diese Website fehlerlos ansehen zu können.
-            </p>
-            <![endif]-->
             @include('errors.list')
             @include('partials.info')
             @yield('content')

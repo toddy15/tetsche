@@ -21,16 +21,11 @@ elixir(function(mix) {
         'jquery.min.js',
         'bootstrap.min.js'
     ], 'public/theme/js');
-    mix.scripts([
-        'html5shiv.min.js',
-        'respond.min.js'
-    ], 'public/theme/js/ie8.js');
     mix.copy('resources/assets/images/guestbook', 'public/images/guestbook');
     mix.copy('resources/assets/images/gb_animals', 'public/images/gb_animals');
     mix.version([
         'theme/css/all.css',
         'theme/js/all.js',
-        'theme/js/ie8.js',
         'images/guestbook/*.svg',
         'images/gb_animals/*.png'
     ]);
