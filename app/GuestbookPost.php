@@ -11,5 +11,6 @@ class GuestbookPost extends Model
         'message',
         'cheffe',
         'category',
+        'spam_detection',
     ];
 }
