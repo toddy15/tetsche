@@ -14,4 +14,23 @@ class EncryptCookies extends BaseEncrypter
     protected $except = [
         //
     ];
+
+    protected function decrypt(Request $request)
+    {
+        foreach ($request->cookies as $key => $c) {
+            if ($this->isDisabled($key)) {
+                continue;
+            }
+
+            try {
+                $request->cookies->set($key, $this->decryptCookie($c));
+            } catch (\Illuminate\Contracts\Encryption\DecryptException $e) {
+                $request->cookies->set($key, null);
+            } catch (\ErrorException $e) {
+                $request->cookies->set($key, null);
+            }
+        }
+
+        return $request;
+    }
 }
