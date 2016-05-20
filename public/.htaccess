@@ -21,7 +21,7 @@
     </IfModule>
 
     RewriteEngine On
-    RewriteBase /~toddy/l5-tetsche/public/
+    RewriteBase /~toddy/tetsche/www/public/
 
     # Always use the www. prefix
     RewriteCond %{HTTP_HOST} !^www\. [NC]
