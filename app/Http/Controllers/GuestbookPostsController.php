@@ -80,6 +80,7 @@ class GuestbookPostsController extends Controller
                     'body' => $post['message'],
                     'score' => $post['score'],
                     'category' => $post['category'],
+                    'spam_detection' => $post['spam_detection'],
                 ];
                 Mail::queue(['text' => 'emails.guestbook'], $data, function($message) {
                     $message->from('webmaster@tetsche.de', 'Gästebuch');
