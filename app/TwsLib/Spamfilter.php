@@ -4,11 +4,11 @@ namespace App\TwsLib;
 
 class Spamfilter
 {
-    private $threshold_no_autolearn_ham = 0.2;
-    private $threshold_autolearn_ham = 0.4;
+    private $threshold_no_autolearn_ham = 0.38;
+    private $threshold_autolearn_ham = 0.48;
     private $threshold_ham = 0.48;
-    private $threshold_spam = 0.6;
-    private $threshold_autolearn_spam = 0.6;
+    private $threshold_spam = 0.55;
+    private $threshold_autolearn_spam = 0.55;
     private $threshold_no_autolearn_spam = 0.9;
 
     /**
