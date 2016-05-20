@@ -69,13 +69,15 @@ class Spamfilter
     /**
      * Classify a text
      */
-    public function classify($text)
+    public function classify($text, $spam_detection)
     {
         // Make sure there is a text to rate, else return 0.5
         if (trim($text) == '') {
             return 0.5;
         }
         $tokens = $this->parse($text);
+        // Add the additional spam detection, but do not parse it.
+        $tokens[$spam_detection] = 1;
         // Get all known tokens for this text.
         $known_tokens = \DB::table('filter_tokens')
             ->whereIn('token', array_keys($tokens))->get();
@@ -137,11 +139,12 @@ class Spamfilter
     public function learnStatus($post)
     {
         $text = $post->name. ' ' . $post->message;
+        $spam_detection = $post->spam_detection;
         if (($post->category == 'manual_spam') or ($post->category == 'autolearn_spam')) {
-            $this->addSpam($text);
+            $this->addSpam($text, $spam_detection);
         }
         if (($post->category == 'manual_ham') or ($post->category == 'autolearn_ham')) {
-            $this->addHam($text);
+            $this->addHam($text, $spam_detection);
         }
     }
 
@@ -151,11 +154,12 @@ class Spamfilter
     public function unlearnStatus($post)
     {
         $text = $post->name . ' ' . $post->message;
+        $spam_detection = $post->spam_detection;
         if (($post->category == 'manual_spam') or ($post->category == 'autolearn_spam')) {
-            $this->removeSpam($text);
+            $this->removeSpam($text, $spam_detection);
         }
         if (($post->category == 'manual_ham') or ($post->category == 'autolearn_ham')) {
-            $this->removeHam($text);
+            $this->removeHam($text, $spam_detection);
         }
     }
 
@@ -189,9 +193,11 @@ class Spamfilter
     /**
      * Adds a text to the Ham database
      */
-    public function addHam($text)
+    public function addHam($text, $spam_detection)
     {
         $tokens = $this->parse($text);
+        // Add the additional spam detection, but do not parse it.
+        $tokens[$spam_detection] = 1;
         // If the token is already known, sum up the current count.
         $known_tokens = \DB::table('filter_tokens')
             ->whereIn('token', array_keys($tokens))->get();
@@ -227,9 +233,11 @@ class Spamfilter
     /**
      * Removes a text from the Ham database
      */
-    public function removeHam($text)
+    public function removeHam($text, $spam_detection)
     {
         $tokens = $this->parse($text);
+        // Add the additional spam detection, but do not parse it.
+        $tokens[$spam_detection] = 1;
         // Sum up the current count.
         $known_tokens = \DB::table('filter_tokens')
             ->whereIn('token', array_keys($tokens))->get();
@@ -262,9 +270,11 @@ class Spamfilter
     /**
      * Adds a text to the Spam database
      */
-    public function addSpam($text)
+    public function addSpam($text, $spam_detection)
     {
         $tokens = $this->parse($text);
+        // Add the additional spam detection, but do not parse it.
+        $tokens[$spam_detection] = 1;
         // If the token is already known, sum up the current count.
         $known_tokens = \DB::table('filter_tokens')
             ->whereIn('token', array_keys($tokens))->get();
@@ -300,9 +310,11 @@ class Spamfilter
     /**
      * Removes a text from the Spam database
      */
-    public function removeSpam($text)
+    public function removeSpam($text, $spam_detection)
     {
         $tokens = $this->parse($text);
+        // Add the additional spam detection, but do not parse it.
+        $tokens[$spam_detection] = 1;
         // Sum up the current count.
         $known_tokens = \DB::table('filter_tokens')
             ->whereIn('token', array_keys($tokens))->get();

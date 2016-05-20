@@ -53,8 +53,12 @@ class GuestbookPostsController extends Controller
         $post = $request->all();
         $spamfilter = new Spamfilter();
         $text = $post['name'] . ' ' . $post['message'];
-        $post['score'] = $spamfilter->classify($text);
+        // Use IP address and browser identification for more robust spam detection
+        $spam_detection = "IP: " . $request->ip();
+        $spam_detection .= ", Browser: " . $request->server('HTTP_USER_AGENT');
+        $post['score'] = $spamfilter->classify($text, $spam_detection);
         $post['category'] = $spamfilter->calculateCategory($post['score']);
+        $post['spam_detection'] = $spam_detection;
         $validator = Validator::make($post, [
             'name' => 'required',
             'message' => 'required'
@@ -101,6 +105,7 @@ class GuestbookPostsController extends Controller
             'body' => $post['message'],
             'score' => $post['score'],
             'category' => $post['category'],
+            'spam_detection' => $post['spam_detection'],
         ];
         Mail::queue(['text' => 'emails.guestbook'], $data, function($message) {
             $message->from('webmaster@tetsche.de', 'Gästebuch');
@@ -130,7 +135,7 @@ class GuestbookPostsController extends Controller
         // Calculate spam score
         $spamfilter = new Spamfilter();
         $text = $guestbook_post->name. ' ' . $guestbook_post->message;
-        $guestbook_post->score = round($spamfilter->classify($text) * 100, 1);
+        $guestbook_post->score = round($spamfilter->classify($text, $guestbook_post->spam_detection) * 100, 1);
         return view('guestbook_posts.edit', compact('guestbook_post'));
     }
 
