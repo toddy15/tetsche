@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Illuminate\Cookie\Middleware\EncryptCookies as BaseEncrypter;
+use Symfony\Component\HttpFoundation\Request;
 
 class EncryptCookies extends BaseEncrypter
 {
