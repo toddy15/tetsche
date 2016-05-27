@@ -57,6 +57,11 @@ class GuestbookPostsController extends Controller
         $spam_detection = "IP: " . $request->ip();
         $spam_detection .= ", Browser: " . $request->server('HTTP_USER_AGENT');
         $post['score'] = $spamfilter->classify($text, $spam_detection);
+        // @FIXME: Temporary fix for troll
+        $ip = explode('.', $request->ip());
+        if (($ip[0] == 141) and ($ip[1] == 48) and ($ip[2] == 118)) {
+            $post['score'] = 0.99;
+        }
         $post['category'] = $spamfilter->calculateCategory($post['score']);
         $post['spam_detection'] = $spam_detection;
         $validator = Validator::make($post, [
