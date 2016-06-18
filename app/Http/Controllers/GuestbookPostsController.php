@@ -57,10 +57,15 @@ class GuestbookPostsController extends Controller
         $spam_detection = "IP: " . $request->ip();
         $spam_detection .= ", Browser: " . $request->server('HTTP_USER_AGENT');
         $post['score'] = $spamfilter->classify($text, $spam_detection);
-        // @FIXME: Temporary fix for troll
-        $ip = explode('.', $request->ip());
-        if (($ip[0] == 141) and ($ip[1] == 48) and ($post['score'] < 0.75)) {
-            $post['score'] = 0.75;
+        // @FIXME: Filter out the fuckheads, based on IP address
+        if (!$spamfilter->isSpam($post['score'])) {
+            $ip = explode('.', $request->ip());
+            if (($ip[0] == 141) and ($ip[1] == 48)) {
+                $post['score'] = $spamfilter->threshold_autolearn_spam;
+            }
+            if (($ip[0] == 217) and ($ip[1] == 240) and ($ip[2] == 29)) {
+                $post['score'] = $spamfilter->threshold_autolearn_spam;
+            }
         }
         $post['category'] = $spamfilter->calculateCategory($post['score']);
         $post['spam_detection'] = $spam_detection;
@@ -91,6 +96,24 @@ class GuestbookPostsController extends Controller
                     $message->from('webmaster@tetsche.de', 'Gästebuch');
                     $message->to('toddy@example.org', 'Toddy');
                     $message->subject('Neuer Eintrag im Tetsche-Gästebuch (als Spam gelernt)');
+                });
+            }
+            // @FIXME: Remove the else clause if sending all spam mails is no longer necessary.
+            else {
+                $data = [
+                    'id' => 0,
+                    'name' => $post['name'],
+                    // Watch out: the variable message is automatically
+                    // created, so we need to use another name.
+                    'body' => $post['message'],
+                    'score' => $post['score'],
+                    'category' => $post['category'],
+                    'spam_detection' => $post['spam_detection'],
+                ];
+                Mail::queue(['text' => 'emails.guestbook'], $data, function($message) {
+                    $message->from('webmaster@tetsche.de', 'Gästebuch');
+                    $message->to('toddy@example.org', 'Toddy');
+                    $message->subject('Neuer Eintrag im Tetsche-Gästebuch (als Spam abgelehnt)');
                 });
             }
         });
