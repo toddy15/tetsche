@@ -2,7 +2,7 @@
 
 @section('content')
     <h1 style="color:#fdb3b4;font-size:81px;margin-bottom:80px;">Tetsche-Website</h1>
-    <img class="center-block img-responsive" src="{{ asset('images/hund-blau.jpg') }}" alt="Hund" title="Hund" width="548" height="361" />
+    <img class="center-block img-responsive" src="{{ asset('images/hund-grinsend.jpg') }}" alt="Hund" title="Hund" width="552" height="361" />
     <h2 class="text-center" style="color:#fdb3b4">Ausstellung in Hamburg, Fabrik der Künste</h2>
     <div class="container" style="margin-bottom:20px;">
         <div class="row">
