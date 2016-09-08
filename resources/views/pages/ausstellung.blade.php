@@ -11,10 +11,7 @@
             </div>
             <div class="col-md-6">
                 <p>
-                    Ausstellung: 6.&nbsp;September bis 2.&nbsp;Oktober<br />
-                    Vernissage am 6.&nbsp;September um 19&nbsp;Uhr<br />
-                    Laudatio: Wigald Boning<br />
-                    Die Künstler sind anwesend
+                    Ausstellung: 6.&nbsp;September bis 2.&nbsp;Oktober
                 </p>
                 <p>
                     Finissage: 2.&nbsp;Oktober um 17&nbsp;Uhr<br />
