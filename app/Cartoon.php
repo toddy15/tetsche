@@ -44,7 +44,7 @@ class Cartoon extends Model
         $date = Carbon::parse($this->publish_on)->formatLocalized('%e. %B %Y');
         $result = 'alt="Tetsche im »stern« vom ' . $date . '" ';
         $result .= 'title="Tetsche im »stern« vom ' . $date . '" ';
-        $size = getimagesize($this->imagePath());
+        $size = getimagesize(public_path() . '/' . $this->imagePath());
         $result .= $size[3];
         return $result;
     }
@@ -56,7 +56,7 @@ class Cartoon extends Model
         $date = Carbon::parse($this->publish_on)->formatLocalized('%e. %B %Y');
         $result = 'alt="Tetsche im »stern« vom ' . $date . '" ';
         $result .= 'title="Tetsche im »stern« vom ' . $date . '" ';
-        $size = getimagesize($this->thumbnailPath());
+        $size = getimagesize(public_path() . '/' . $this->thumbnailPath());
         $result .= $size[3];
         return $result;
     }
