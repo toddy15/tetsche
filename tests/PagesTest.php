@@ -14,12 +14,21 @@ class PagesTest extends TestCase
     public function testBasicPages()
     {
         $this->visit('/')
-            ->see('Tetsche-Website');
+            ->seeInElement('h1', 'Tetsche-Website');
         $this->visit('tetsche')
             ->see('Tetsche wurde in Soltau, mitten in der Lüneburger Heide, geboren.');
-        $this->visit('impressum')
-            ->see('Angaben gemäß § 5 TMG');
         $this->visit('stern')
-            ->see('Die Rebus-Abbildungen ergeben zusammen einen neuen Begriff.');
+            ->seeInElement('h1', 'Tetsche im »stern« vom')
+            ->see('Die Rebus-Abbildungen ergeben zusammen einen neuen Begriff.')
+            ->see('Auflösung nächste Woche');
+        $this->visit('archiv')
+            ->seeInElement('h1', 'Archiv');
+        $this->visit('gästebuch')
+            ->seeInElement('h1', 'Gästebuch')
+            ->see('Name')
+            ->see('Nachricht');
+        $this->visit('impressum')
+            ->seeInElement('h1', 'Impressum')
+            ->see('Angaben gemäß § 5 TMG');
     }
 }
