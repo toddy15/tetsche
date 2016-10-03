@@ -11,9 +11,6 @@ class PagesController extends Controller
 {
     public function homepage()
     {
-        return view('pages.ausstellung', [
-            'description' => 'Tetsche-Website',
-        ]);
         return view('pages.homepage', [
             'description' => 'Tetsche-Website',
         ]);
