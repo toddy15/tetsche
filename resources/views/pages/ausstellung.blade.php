@@ -2,7 +2,9 @@
 
 @section('content')
     <h1 style="color:#fdb3b4;font-size:81px;margin-bottom:80px;">Tetsche-Website</h1>
-    <img class="center-block img-responsive" src="{{ asset('images/hund-grinsend.jpg') }}" alt="Hund" title="Hund" width="729" height="1204" />
+    <h2 class="text-center" style="color:#fdb3b4">Supi! Die Ausstellung ist verlängert!</h2>
+    <h2 class="text-center" style="color:#fdb3b4">Bis 11. Juni, außerdem gibt's eine Signierstunde!</h2>
+    <!-- <img class="center-block img-responsive" src="{{ asset('images/hund-grinsend.jpg') }}" alt="Hund" title="Hund" width="729" height="1204" /> -->
     <h2 class="text-center" style="color:#fdb3b4">Ausstellung in der havengalerie Bremen</h2>
     <div class="container" style="margin-bottom:20px;">
         <div class="row">
@@ -11,8 +13,8 @@
             </div>
             <div class="col-md-6">
                 <p>
-                    25. März bis 27. Mai<br />
-                    Vernissage am 24. März um 18:00 Uhr
+                    25. März bis 11. Juni<br />
+                    Am 11. Juni mit einer extra Signierstunde!
                 </p>
                 <p>
                     Öffnungszeiten:<br />
