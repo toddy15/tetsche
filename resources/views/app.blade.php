@@ -16,7 +16,6 @@
             <link rel="apple-touch-icon" sizes="{{ $res }}x{{ $res }}" href="{{ asset('theme/images/puempel-' . $res . 'x' . $res . '.png') }}">
         @endforeach
         <link href="{{ asset(elixir('theme/css/all.css')) }}" rel="stylesheet">
-        <meta name="MSSmartTagsPreventParsing" content="TRUE">
     </head>
     {{-- Hack to display the blue pages --}}
     @if (Request::is('/') or Request::is('impressum'))
