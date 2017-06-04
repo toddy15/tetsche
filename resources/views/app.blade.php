@@ -9,6 +9,7 @@
             <meta name="description" lang="de" content="{{ $description }}">
         @endif
         <title>{{ isset($title) ? $title . ' | ': '' }}Tetsche</title>
+        <link rel="canonical" href="{!! urldecode(Request::url()) !!}" />
         <link rel="shortcut icon" href="{{ asset('theme/images/favicon.ico') }}">
         <link rel="icon" sizes="192x192" href="{{ asset('theme/images/puempel-192x192.png') }}">
         @foreach ([180, 152, 144, 120, 114, 76, 72, 60, 57] as $res)
