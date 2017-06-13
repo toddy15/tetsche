@@ -48,42 +48,7 @@
     Redirect gone /stern/bilder/2008-09-18.comic.01263
 
     # Add redirects for old pages
-    RewriteCond %{QUERY_STRING} ^date=([0-9-]+)$
-    RewriteRule ^tetsche-seite/index\.php$ /archiv/%1? [L,R=permanent]
-    Redirect permanent /tetsche-seite/archiv.php /archiv
-    Redirect permanent /tetsche-seite/index.php /stern
-    Redirect permanent /tetsche-seite /stern
-
-    Redirect permanent /ueber-tetsche.php /tetsche
-    Redirect permanent /guestbook/index.php /gästebuch
-    Redirect permanent /guestbook /gästebuch
-    Redirect permanent /guestbook/eintrag.php /gästebuch/neu
-    Redirect permanent /impressum.php /impressum
     Redirect permanent /work /auth/login
-
-    # Note that some pages are simply gone
-    RewriteRule ^bilder - [G]
-    RewriteRule ^shop - [G]
-    Redirect gone /gästebuch/eintrag.php
-    Redirect gone /puempel.php
-    Redirect gone /magnete.php
-    Redirect gone /buecher.php
-    Redirect gone /drucke.php
-    Redirect gone /wunschcartoon/index.php
-    Redirect gone /wunschcartoon/geburtstag.php
-    Redirect gone /wunschcartoon/tote-gegend.php
-    Redirect gone /wunschcartoon/nummernschild.php
-    Redirect gone /wunschcartoon
-    Redirect gone /warenkorb.php
-    Redirect gone /anzeige.php
-    Redirect gone /bestellung.php
-    Redirect gone /check.php
-    Redirect gone /detailanzeige.php
-    Redirect gone /fehler.php
-    Redirect gone /kasse.php
-    Redirect gone /guestbook/suche.php
-    Redirect gone /guestbook/store.php
-    Redirect gone /magnet-edition.php
 
     # Handle Front Controller...
     RewriteCond %{REQUEST_FILENAME} !-d
@@ -140,9 +105,3 @@
     # Other
     ExpiresByType text/x-cross-domain-policy "access plus 1 week"
 </IfModule>
-
-# Enforce SSL
-#<IfModule mod_headers.c>
-#  # max-age is set to a year (365 * 86400)
-#  Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
-#</IfModule>
