@@ -43,6 +43,10 @@
     Redirect permanent /build/theme/css/all-2383ee914b.css /build/theme/css/all-c2dcce57f7.css
     Redirect permanent /build/theme/js/all-ea07061099.js /build/theme/js/all-49a63c8b89.js
 
+    # Special case for lustich.de, the pages are not maintained ...
+    Redirect gone /stern/bilder/2008-09-25.cartoon.05749
+    Redirect gone /stern/bilder/2008-09-18.comic.01263
+
     # Add redirects for old pages
     RewriteCond %{QUERY_STRING} ^date=([0-9-]+)$
     RewriteRule ^tetsche-seite/index\.php$ /archiv/%1? [L,R=permanent]
