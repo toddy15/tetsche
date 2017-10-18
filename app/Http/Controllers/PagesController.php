@@ -11,16 +11,12 @@ class PagesController extends Controller
 {
     public function homepage()
     {
-        if (date("Y-m-d") > "2017-06-11") {
-            return view('pages.homepage', [
-                'description' => 'Tetsche-Website',
-            ]);
-        }
-        else {
-            return view('pages.ausstellung', [
-                'description' => 'Tetsche-Website',
-            ]);
-        }
+        return view('pages.sonderseite', [
+            'description' => 'Tetsche-Website',
+        ]);
+//        return view('pages.homepage', [
+//            'description' => 'Tetsche-Website',
+//        ]);
     }
 
     public function tetsche()
