@@ -43,13 +43,12 @@
         Silbermedaille des Art Directors Club,
         den Goldenen Jupp am Bande,
         die Marion-Möser-Medaille,
-        den Apfelbaum vom Lande,
         den goldenen Wink, mehrmals
         den Publikumspreis des Deutschen Karikaturenpreises
         und den 1. Platz des Deutschen Cartoonpreises 2017
         der Frankfurter Buchmesse.
         Tetsche ist seit 2012 Pate für die europäische Initiative
-        »Schule ohne Rassismus &ndash; Schule mit Courage«.
+        »Schule ohne Rassismus&nbsp;&ndash; Schule mit Courage«.
         Tetsche lebt hinterm Deich an der Elbe, in der Nähe von Hamburg,
         der schönsten Stadt der Welt!
     </div>
