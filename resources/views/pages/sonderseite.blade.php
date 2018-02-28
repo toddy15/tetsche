@@ -5,30 +5,32 @@
 
     <div class="row">
         <div class="col-sm-6">
-            <img class="center-block img-responsive" src="{{ asset('images/eisbaer.jpg') }}" alt="Eisbär" title="Eisbär" width="401" height="585" />
+            <img style="margin-bottom:40px" class="center-block img-responsive" src="{{ asset('images/platsch-cover.jpg') }}"
+                 alt="Platsch! Fridos Sprung ins Abenteuer" title="Platsch! Fridos Sprung ins Abenteuer" width="660" height="807" />
+            <img style="margin-bottom:40px" class="center-block img-responsive" src="{{ asset('images/platsch-innen.jpg') }}"
+                 alt="Platsch! Innenseite" title="Platsch! Innenseite" width="600" height="587" />
         </div>
         <div class="col-sm-6">
-            Es geschah auf dem weltberühmten Soltauer Weihnachtsmarkt!
-            Zu der Zeit trieben runtergekommene, übelriechende, zottelige
-            Eisbär-Gesellen auf ziemlich allen Weihnachtsmärkten ihr
-            Unwesen. Indem sie blitzartig&nbsp;– aus dem Nichts heraus&nbsp;– kleine,
-            unschuldige Knaben mit einem Prankenhieb an sich rissen,
-            die Eltern blöde angrinsten und lautstark grölend 50 Pfennig
-            Lösegeld forderten. Und hier (siehe Foto) war ich sein Opfer!
-            »Wenn Ihr nicht zahlt, zerquetsch ich diesen kleinen Tetsche!«,
-            knurrte er meine sichtlich belustigten Eltern an und roch dabei
-            nach extrem stark verzimten Glühwein. Mir wurde schlecht! Das
-            bekam Oma Anna mit, stürzte sich mit Gebrüll auf den Bär, zog
-            ihren Schlagschirm aus dem Gürtel und drosch mit den Worten:
-            »So nicht, Bürschchen!« auf den hart stinkenden Zottel ein.
-            Ich war schlagartig befreit! Aber der Lodenmantel war dahin,
-            der Tirolerhut auch, und meine Manchester-Büx hatte sich durch
-            den üblen Bärengeruch stark gewellt und auch teilweise aufgerollt.
-            »Halb so schlimm!«, tröstete mich meine Oma. »Kuck mal, da
-            vorne brennt noch Licht bei Gülcher&nbsp;&amp;&nbsp;Co. Da gehn wir jetzt hin,
-            und wenn Du möchtest, spendier ich Dir eine tolle Nietenhose!«
-            »Oma, Oma, Du bist die Beste!« tirilierte ich in höchsten Tönen.
-            »Das ist das schönste und beste Weihnachtsgeschenk aller Zeiten!«
+            <h2 style="color:#fdb3b4">NEU!</h2>
+            <p>
+                Tetsches allererstes Kinderbuch ist da!<br/>
+                Mit gereimten Versen von Hannes Lukas!
+            </p>
+            <p>
+                Voll mit wunderbar farbigen doppelseitigen Illustrationen
+                zu der abenteuerlichen Geschichte von Frosch Frido und seinen Freunden
+                Günni Gras und Willem Busch.<br/>
+                Mit vielen lustigen Details zum Suchen und Entdecken.<br/>
+                Für Kinder von 3 - 8 Jahren
+            </p>
+            <p>
+                ISBN 978-3-8303-1284-0<br/>
+                Lappan / Carlsen Verlag<br/>
+                € 12,99
+            </p>
+            <p>
+                Ab sofort in jeder Buchhandlung erhältlich.
+            </p>
         </div>
     </div>
 
