@@ -24,12 +24,16 @@
                 Für Kinder von 3 - 8 Jahren
             </p>
             <p>
-                ISBN 978-3-8303-1284-0<br/>
+                ISBN 978<span>-3</span>-8303-<span>1284<span>-0<br/>
                 Lappan / Carlsen Verlag<br/>
                 € 12,99
             </p>
             <p>
                 Ab sofort in jeder Buchhandlung erhältlich.
+            </p>
+            <p>
+                <a href="https://www.hannes-lukas.de/" class="btn btn-danger">Website von Hannes Lukas</a>
+                <a href="https://www.carlsen.de/hardcover/platsch/93241" class="btn btn-danger">Bei Carlsen ansehen</a>
             </p>
         </div>
     </div>
