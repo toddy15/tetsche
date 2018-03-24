@@ -68,12 +68,14 @@ class Better404
                     $subject = 'HTTP 404: Link von anderer Website fehlerhaft';
                 }
             }
-            // Send e-mail to webmaster
+            // Optional: send e-mail to webmaster
+            /*
             Mail::queue(['text' => 'emails.better404'], $data, function ($message) use ($subject) {
                 $message->from('webmaster@tetsche.de', 'Webmaster');
                 $message->to('webmaster@tetsche.de', 'Webmaster');
                 $message->subject($subject);
             });
+            */
         }
         return response()
             ->view('errors.better404', compact('msg_lines'))
