@@ -66,40 +66,6 @@
     nachträglich zu prüfen, wenn uns konkrete Anhaltspunkte für
     eine rechtswidrige Nutzung bekannt werden.
 </p>
-<h2>Matomo</h2>
-<p>
-    Wir verwenden den Open-Source-Webanalysedienst Matomo.
-    Matomo benutzt so genannte »Cookies«. Das sind Textdateien,
-    die auf Ihrem Computer gespeichert werden und die eine
-    Analyse der Benutzung der Website durch Sie ermöglichen.
-    Dazu werden die durch den Cookie erzeugten Informationen über
-    die Benutzung dieser Website auf unserem Server gespeichert.
-    Die IP-Adresse wird vor der Speicherung anonymisiert.
-</p>
-<p>
-    Die durch den Cookie erzeugten Informationen über die Benutzung
-    dieser Website bleiben auf unserem Server und
-    werden nicht an Dritte weitergegeben. Sie können
-    die Speicherung der Cookies durch eine entsprechende Einstellung
-    Ihrer Browser-Software verhindern; wir weisen Sie jedoch darauf
-    hin, dass Sie in diesem Fall gegebenenfalls nicht sämtliche
-    Funktionen dieser Website vollumfänglich werden nutzen können.
-</p>
-<p>
-    Wenn Sie mit der Speicherung und Nutzung Ihrer Daten nicht
-    einverstanden sind, können Sie die Speicherung und Nutzung
-    hier deaktivieren. In diesem Fall wird in Ihrem Browser ein
-    »Deaktivierungs-Cookie« hinterlegt, der verhindert, dass Matomo
-    Nutzungsdaten speichert. Wenn Sie Ihre Cookies löschen, hat
-    dies zur Folge, dass auch der Matomo-Deaktivierungs-Cookie
-    gelöscht wird. In diesem Fall müssen Sie die Speicherung
-    und Nutzung Ihrer Daten bei einem erneuten Besuch unserer
-    Seite wieder deaktivieren.
-</p>
-<iframe
-        style="border: 0; height: 300px; width: 600px;"
-        src="https://www.tetsche.de/piwik/index.php?module=CoreAdminHome&action=optOut&language=de&backgroundColor=ffffff&fontColor=&fontSize=18px&fontFamily=delicious-roman"
-></iframe>
 <h2>Kommentarfunktion auf dieser Website</h2>
 <p>
     Für die Kommentarfunktion auf dieser Seite werden neben
@@ -151,4 +117,38 @@
     rechtliche Schritte im Falle der unverlangten Zusendung
     von Werbeinformationen, etwa durch Spam-E-Mails, vor.
 </p>
+<h2>Matomo</h2>
+<p>
+    Wir verwenden den Open-Source-Webanalysedienst Matomo.
+    Matomo benutzt so genannte »Cookies«. Das sind Textdateien,
+    die auf Ihrem Computer gespeichert werden und die eine
+    Analyse der Benutzung der Website durch Sie ermöglichen.
+    Dazu werden die durch den Cookie erzeugten Informationen über
+    die Benutzung dieser Website auf unserem Server gespeichert.
+    Die IP-Adresse wird vor der Speicherung anonymisiert.
+</p>
+<p>
+    Die durch den Cookie erzeugten Informationen über die Benutzung
+    dieser Website bleiben auf unserem Server und
+    werden nicht an Dritte weitergegeben. Sie können
+    die Speicherung der Cookies durch eine entsprechende Einstellung
+    Ihrer Browser-Software verhindern; wir weisen Sie jedoch darauf
+    hin, dass Sie in diesem Fall gegebenenfalls nicht sämtliche
+    Funktionen dieser Website vollumfänglich werden nutzen können.
+</p>
+<p>
+    Wenn Sie mit der Speicherung und Nutzung Ihrer Daten nicht
+    einverstanden sind, können Sie die Speicherung und Nutzung
+    hier deaktivieren. In diesem Fall wird in Ihrem Browser ein
+    »Deaktivierungs-Cookie« hinterlegt, der verhindert, dass Matomo
+    Nutzungsdaten speichert. Wenn Sie Ihre Cookies löschen, hat
+    dies zur Folge, dass auch der Matomo-Deaktivierungs-Cookie
+    gelöscht wird. In diesem Fall müssen Sie die Speicherung
+    und Nutzung Ihrer Daten bei einem erneuten Besuch unserer
+    Seite wieder deaktivieren.
+</p>
+<iframe
+        style="border: 0; height: 300px; width: 600px;"
+        src="https://www.tetsche.de/piwik/index.php?module=CoreAdminHome&action=optOut&language=de&backgroundColor=ffffff&fontColor=&fontSize=18px&fontFamily=delicious-roman"
+></iframe>
 @stop
