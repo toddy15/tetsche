@@ -25,6 +25,7 @@ Route::post('password/reset', 'Auth\PasswordController@postReset');
 Route::get('/', 'PagesController@homepage');
 Route::get('tetsche', 'PagesController@tetsche');
 Route::get('impressum', 'PagesController@impressum');
+Route::get('datenschutzerklärung', 'PagesController@datenschutzerklaerung');
 
 // Guestbook
 Route::get('gästebuch', 'GuestbookPostsController@index');

@@ -17,6 +17,7 @@
                 <li {!! Request::is('archiv') ? 'class="active"' : '' !!}><a href="{{ url('archiv') }}">Archiv</a></li>
                 <li {!! Request::is('gästebuch') ? 'class="active"' : '' !!}><a href="{{ url('gästebuch') }}">Gästebuch</a></li>
                 <li {!! Request::is('impressum') ? 'class="active"' : '' !!}><a href="{{ url('impressum') }}">Impressum</a></li>
+                <li {!! Request::is('datenschutzerklärung') ? 'class="active"' : '' !!}><a href="{{ url('datenschutzerklärung') }}">Datenschutzerklärung</a></li>
             </ul>
 
             @unless (Auth::guest())

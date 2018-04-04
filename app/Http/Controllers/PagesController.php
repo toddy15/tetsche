@@ -38,4 +38,13 @@ class PagesController extends Controller
             'description' => 'Impressum, Kontaktadressen und Anbieterkennzeichnung der Tetsche-Website',
         ]);
     }
+
+    public function datenschutzerklaerung()
+    {
+        return view('pages.datenschutzerklaerung', [
+            'title' => 'Datenschutzerklärung',
+            'keywords' => 'Datenschutzerklärung, Datenschutz, DSGVO',
+            'description' => 'Datenschutzerklärung der Tetsche-Website',
+        ]);
+    }
 }
