@@ -60,7 +60,11 @@
     <li>Uhrzeit der Serveranfrage</li>
 </ul>
 <p>
-    Diese Daten sind nicht bestimmten Personen zuordenbar.
+    IP-Adressen speichern wir über einen Zeitraum von maximal
+    sieben Tagen. Die Speicherung erfolgt aus Gründen der
+    Datensicherheit, um die Stabilität und die Betriebssicherheit
+    unseres Systems zu gewährleisten.
+    Diese Daten sind nicht bestimmten Personen zuzuordnen.
     Eine Zusammenführung dieser Daten mit anderen Datenquellen
     wird nicht vorgenommen. Wir behalten uns vor, diese Daten
     nachträglich zu prüfen, wenn uns konkrete Anhaltspunkte für
@@ -73,7 +77,7 @@
     des Kommentars und, wenn Sie nicht anonym posten, der
     von Ihnen gewählte Nutzername gespeichert.
 </p>
-<h3>Speicherung der IP Adresse</h3>
+<h3>Speicherung der IP-Adresse</h3>
 <p>
     Unsere Kommentarfunktion speichert die IP-Adressen der
     Nutzer, die Kommentare verfassen. Da wir Kommentare auf
@@ -81,6 +85,8 @@
     benötigen wir diese Daten, um im Falle von Rechtsverletzungen
     wie Beleidigungen oder Propaganda gegen den Verfasser
     vorgehen zu können.
+    IP-Adressen speichern wir über einen Zeitraum von maximal
+    sieben Tagen.
 </p>
 <h2>SSL-Verschlüsselung</h2>
 <p>
