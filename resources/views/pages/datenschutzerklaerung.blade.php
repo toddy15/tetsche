@@ -102,7 +102,7 @@
     Daten, die Sie an uns übermitteln, nicht von
     Dritten mitgelesen werden.
 </p>
-<h2>Recht auf Auskunft, Löschung, Sperrung</h2>
+<h2>Recht auf Auskunft, Berichtigung, Sperrung, Löschung</h2>
 <p>
     Sie haben jederzeit das Recht auf unentgeltliche Auskunft
     über Ihre gespeicherten personenbezogenen Daten, deren
@@ -113,6 +113,15 @@
     der im <a href="impressum">Impressum</a> angegebenen
     Adresse an uns wenden.
 </p>
+<div class="panel panel-default">
+    <div class="panel-body bg-info">
+        <h2>Widerspruchsrecht</h2>
+        <p>
+            Sie haben jederzeit das Recht, gegen die Verarbeitung
+            Ihrer personenbezogenen Daten Widerspruch einzulegen.
+        </p>
+    </div>
+</div>
 <h2>Widerspruch Werbe-Mails</h2>
 <p>
     Der Nutzung von im Rahmen der Impressumspflicht
@@ -155,6 +164,6 @@
 </p>
 <iframe
         style="border: 0; height: 300px; width: 600px;"
-        src="https://www.tetsche.de/piwik/index.php?module=CoreAdminHome&action=optOut&language=de&backgroundColor=ffffff&fontColor=&fontSize=18px&fontFamily=delicious-roman"
+        src="https://www.tetsche.de/piwik/index.php?module=CoreAdminHome&action=optOut&language=de&backgroundColor=ffffff&fontColor=000000&fontSize=18px&fontFamily=delicious-roman"
 ></iframe>
 @stop
