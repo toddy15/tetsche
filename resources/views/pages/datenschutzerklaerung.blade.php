@@ -78,7 +78,8 @@
 </p>
 <p>
     Die durch den Cookie erzeugten Informationen über die Benutzung
-    dieser Website werden nicht an Dritte weitergegeben. Sie können
+    dieser Website bleiben auf unserem Server und
+    werden nicht an Dritte weitergegeben. Sie können
     die Speicherung der Cookies durch eine entsprechende Einstellung
     Ihrer Browser-Software verhindern; wir weisen Sie jedoch darauf
     hin, dass Sie in diesem Fall gegebenenfalls nicht sämtliche
@@ -88,11 +89,12 @@
     Wenn Sie mit der Speicherung und Nutzung Ihrer Daten nicht
     einverstanden sind, können Sie die Speicherung und Nutzung
     hier deaktivieren. In diesem Fall wird in Ihrem Browser ein
-    »Opt-Out-Cookie« hinterlegt, der verhindert, dass Matomo
+    »Deaktivierungs-Cookie« hinterlegt, der verhindert, dass Matomo
     Nutzungsdaten speichert. Wenn Sie Ihre Cookies löschen, hat
-    dies zur Folge, dass auch das Matomo-Opt-Out-Cookie gelöscht
-    wird. Das Opt-Out muss bei einem erneuten Besuch unserer
-    Seite wieder aktiviert werden.
+    dies zur Folge, dass auch der Matomo-Deaktivierungs-Cookie
+    gelöscht wird. In diesem Fall müssen Sie die Speicherung
+    und Nutzung Ihrer Daten bei einem erneuten Besuch unserer
+    Seite wieder deaktivieren.
 </p>
 <iframe
         style="border: 0; height: 300px; width: 600px;"
@@ -117,15 +119,14 @@
 <h2>SSL-Verschlüsselung</h2>
 <p>
     Diese Seite nutzt aus Gründen der Sicherheit und zum
-    Schutz der Übertragung vertraulicher Inhalte, wie zum
-    Beispiel der Anfragen, die Sie an uns als Seitenbetreiber
-    senden, eine SSL-Verschlüsselung. Eine verschlüsselte Verbindung
+    Schutz der Übertragung aller Inhalte eine
+    SSL-Verschlüsselung. Eine verschlüsselte Verbindung
     erkennen Sie daran, dass die Adresszeile des Browsers
     von »http://« auf »https://« wechselt und an dem
     Schloss-Symbol in Ihrer Browserzeile.
 </p>
 <p>
-    Wenn die SSL Verschlüsselung aktiviert ist, können die
+    Wenn die SSL-Verschlüsselung aktiviert ist, können die
     Daten, die Sie an uns übermitteln, nicht von
     Dritten mitgelesen werden.
 </p>
@@ -150,5 +151,4 @@
     rechtliche Schritte im Falle der unverlangten Zusendung
     von Werbeinformationen, etwa durch Spam-E-Mails, vor.
 </p>
-
 @stop
