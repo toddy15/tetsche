@@ -11,7 +11,7 @@ class PagesController extends Controller
 {
     public function homepage()
     {
-        if (date("Y-m-d") <= "2018-04-30") {
+        if (date("Y-m-d") <= "2018-05-05") {
             return view('pages.sonderseite', [
                 'description' => 'Tetsche-Website',
             ]);
