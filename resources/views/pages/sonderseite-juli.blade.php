@@ -52,7 +52,7 @@
             <h2 style="color:#fdb3b4">Tetsche &amp; Til Mette</h2>
             <p>
                 Saustarke Cartoons, Objekte &amp; andere Köstlichkeiten der stern-Cartoonisten Tetsche &amp; Til&nbsp;Mette<br />
-                21.&nbsp;August bis 15.&nbsp;September 2018<br />
+                21.&nbsp;August bis 9.&nbsp;September 2018<br />
                 Öffnungszeiten: Di&ndash;Fr 15&ndash;19&nbsp;Uhr, Sa&ndash;So 12&ndash;18&nbsp;Uhr<br />
                 Kreuzbrook&nbsp;12, 20537&nbsp;Hamburg
             </p>
