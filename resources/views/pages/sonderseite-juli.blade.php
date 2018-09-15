@@ -4,7 +4,7 @@
     <h1 style="color:#fdb3b4;font-size:81px;margin-bottom:80px;">Tetsche-Website</h1>
 
     <div class="row">
-        <div class="col-md-4" style="margin-bottom: 30px; text-align: center;">
+        <div class="col-md-6" style="margin-bottom: 30px; text-align: center;">
             <a href="https://www.soltau.de/desktopdefault.aspx/tabid-560/1428_read-31093/">
             <img class="center-block img-responsive" src="{{ asset('images/soltau.jpg') }}"
                  alt="Tetsche-Ausstellung in Soltau" title="Tetsche-Ausstellung in Soltau" width="596" height="842" />
@@ -25,10 +25,10 @@
                 <a href="https://www.soltau.de/desktopdefault.aspx/tabid-560/1428_read-31093/" class="btn btn-danger">Museum Soltau</a>
             </p>
         </div>
-        <div class="col-md-4" style="margin-bottom: 30px; text-align: center;">
+        <div class="col-md-6" style="margin-bottom: 30px; text-align: center;">
             <a href="https://www.carlsen.de/hardcover/cartoons-und-andere-kostbarkeiten/96575">
-                <img class="center-block img-responsive" src="{{ asset('images/gesundheit.jpg') }}"
-                     alt="Tetsche &ndash; Cartoons und andere Kostbarkeiten" title="Tetsche &ndash; Cartoons und andere Kostbarkeiten" width="596" height="842" />
+            <img class="center-block img-responsive" src="{{ asset('images/gesundheit.jpg') }}"
+                 alt="Tetsche &ndash; Cartoons und andere Kostbarkeiten" title="Tetsche &ndash; Cartoons und andere Kostbarkeiten" width="596" height="842" />
             </a>
             <h2 style="color:#fdb3b4">Endlich!</h2>
             <h2 style="color:#fdb3b4">Cartoons &amp; andere Kostbarkeiten</h2>
@@ -42,22 +42,6 @@
             </p>
             <p>
                 <a href="https://www.carlsen.de/hardcover/cartoons-und-andere-kostbarkeiten/96575" class="btn btn-danger">Lappan-Verlag</a>
-            </p>
-        </div>
-        <div class="col-md-4" style="margin-bottom: 30px; text-align: center;">
-            <a href="http://www.fabrikderkuenste.de/">
-                <img class="center-block img-responsive" src="{{ asset('images/fabrik-der-kuenste.jpg') }}"
-                     alt="Tetsche &amp; Til Mette - Saustarke Cartoons, Objekte &amp; andere Köstlichkeiten" title="Tetsche &amp; Til Mette - Saustarke Cartoons, Objekte &amp; andere Köstlichkeiten" width="596" height="842" />
-            </a>
-            <h2 style="color:#fdb3b4">Tetsche &amp; Til Mette</h2>
-            <p>
-                Saustarke Cartoons, Objekte &amp; andere Köstlichkeiten der stern-Cartoonisten Tetsche &amp; Til&nbsp;Mette<br />
-                21.&nbsp;August bis 9.&nbsp;September 2018<br />
-                Öffnungszeiten: Di&ndash;Fr 15&ndash;19&nbsp;Uhr, Sa&ndash;So 12&ndash;18&nbsp;Uhr<br />
-                Kreuzbrook&nbsp;12, 20537&nbsp;Hamburg
-            </p>
-            <p>
-                <a href="http://www.fabrikderkuenste.de/" class="btn btn-danger">Fabrik der Künste</a>
             </p>
         </div>
     </div>

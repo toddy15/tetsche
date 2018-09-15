@@ -28,7 +28,7 @@
         <div class="col-md-6" style="margin-bottom: 30px; text-align: center;">
             <a href="https://www.carlsen.de/hardcover/cartoons-und-andere-kostbarkeiten/96575">
             <img class="center-block img-responsive" src="{{ asset('images/gesundheit.jpg') }}"
-                 alt="Tetsche - Cartoons und andere Kostbarkeiten" title="Tetsche - Cartoons und andere Kostbarkeiten" width="596" height="842" />
+                 alt="Tetsche &ndash; Cartoons und andere Kostbarkeiten" title="Tetsche &ndash; Cartoons und andere Kostbarkeiten" width="596" height="842" />
             </a>
             <h2 style="color:#fdb3b4">Endlich!</h2>
             <h2 style="color:#fdb3b4">Cartoons &amp; andere Kostbarkeiten</h2>
