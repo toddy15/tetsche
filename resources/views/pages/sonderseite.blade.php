@@ -26,7 +26,7 @@
             </p>
         </div>
         <div class="col-md-6" style="margin-bottom: 30px; text-align: center;">
-            <a href="https://www.carlsen.de/hardcover/cartoons-und-andere-kostbarkeiten/96575">
+            <a href="https://www.amazon.de/Cartoons-andere-Kostbarkeiten-Tetsche/dp/3830335164/">
             <img class="center-block img-responsive" src="{{ asset('images/gesundheit.jpg') }}"
                  alt="Tetsche &ndash; Cartoons und andere Kostbarkeiten" title="Tetsche &ndash; Cartoons und andere Kostbarkeiten" width="596" height="842" />
             </a>
@@ -39,6 +39,9 @@
             <p>
                 Lappan Verlag<br />
                 ISBN 978-3-8303-3516-0
+            </p>
+            <p>
+                <a href="https://www.amazon.de/Cartoons-andere-Kostbarkeiten-Tetsche/dp/3830335164/" class="btn btn-danger">Bei Amazon ansehen</a>
             </p>
             <p>
                 <a href="https://www.carlsen.de/hardcover/cartoons-und-andere-kostbarkeiten/96575" class="btn btn-danger">Lappan-Verlag</a>
