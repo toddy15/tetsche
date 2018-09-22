@@ -5,24 +5,32 @@
 
     <div class="row">
         <div class="col-md-6" style="margin-bottom: 30px; text-align: center;">
-            <a href="https://www.soltau.de/desktopdefault.aspx/tabid-560/1428_read-31093/">
-            <img class="center-block img-responsive" src="{{ asset('images/soltau.jpg') }}"
-                 alt="Tetsche-Ausstellung in Soltau" title="Tetsche-Ausstellung in Soltau" width="596" height="842" />
+            <a href="https://www.amazon.de/Platsch-Fridos-Sprung-ins-Abenteuer/dp/3830312849/">
+            <img style="margin-bottom:40px" class="center-block img-responsive" src="{{ asset('images/platsch-cover.jpg') }}"
+                 alt="Platsch! Fridos Sprung ins Abenteuer" title="Platsch! Fridos Sprung ins Abenteuer" width="660" height="807" />
             </a>
-            <h2 style="color:#fdb3b4">Tetsche &ndash; Cartoons</h2>
+            <h2 style="color:#fdb3b4">NEU!</h2>
             <p>
-                Im Museum Soltau<br />
-                Dienstag, 19.&nbsp;Juni&nbsp;2018 bis Sonntag, 16.&nbsp;September&nbsp;2018<br />
-                Niveauvoller Blödsinn und andere Kostbarkeiten
-                vom Meister aus Soltau sind immer von 14 bis 17&nbsp;Uhr
-                bei uns für 3&nbsp;€ Eintritt (Kinder frei)
-                zu bewundern.<br />
-                Heimatbund Soltau<br />
-                Poststrasse&nbsp;11, 29614&nbsp;Soltau<br />
-                Montags geschlossen
+                Tetsches allererstes Kinderbuch ist da!<br/>
+                Mit gereimten Versen von Hannes Lukas!
             </p>
             <p>
-                <a href="https://www.soltau.de/desktopdefault.aspx/tabid-560/1428_read-31093/" class="btn btn-danger">Museum Soltau</a>
+                Voll mit wunderbar farbigen doppelseitigen Illustrationen
+                zu der abenteuerlichen Geschichte von Frosch Frido und seinen Freunden
+                Günni Gras und Willem Busch.<br/>
+                Mit vielen lustigen Details zum Suchen und Entdecken.<br/>
+                Für Kinder von 3 &ndash; 8 Jahren
+            </p>
+            <p>
+                ISBN 978-3-8303-1284-0<br/>
+                Lappan / Carlsen Verlag<br/>
+                € 12,99
+            </p>
+            <p>
+                Ab sofort in jeder Buchhandlung erhältlich.
+            </p>
+            <p>
+                <a href="https://www.amazon.de/Platsch-Fridos-Sprung-ins-Abenteuer/dp/3830312849/" class="btn btn-danger">Bei Amazon ansehen</a>
             </p>
         </div>
         <div class="col-md-6" style="margin-bottom: 30px; text-align: center;">
