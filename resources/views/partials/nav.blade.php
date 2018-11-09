@@ -15,6 +15,7 @@
                 <li {!! Request::is('tetsche') ? 'class="active"' : '' !!}><a href="{{ url('tetsche') }}">Tetsche</a></li>
                 <li {!! Request::is('stern') ? 'class="active"' : '' !!}><a href="{{ url('stern') }}">Stern</a></li>
                 <li {!! Request::is('archiv') ? 'class="active"' : '' !!}><a href="{{ url('archiv') }}">Archiv</a></li>
+                <li {!! Request::is('bücher') ? 'class="active"' : '' !!}><a href="{{ url('bücher') }}">Bücher</a></li>
                 <li {!! Request::is('gästebuch') ? 'class="active"' : '' !!}><a href="{{ url('gästebuch') }}">Gästebuch</a></li>
                 <li {!! Request::is('impressum') ? 'class="active"' : '' !!}><a href="{{ url('impressum') }}">Impressum</a></li>
                 <li {!! Request::is('datenschutzerklärung') ? 'class="active"' : '' !!}><a href="{{ url('datenschutzerklärung') }}">Datenschutzerklärung</a></li>

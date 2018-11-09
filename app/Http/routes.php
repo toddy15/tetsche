@@ -24,6 +24,7 @@ Route::post('password/reset', 'Auth\PasswordController@postReset');
 // Static pages
 Route::get('/', 'PagesController@homepage');
 Route::get('tetsche', 'PagesController@tetsche');
+Route::get('bücher', 'PagesController@buecher');
 Route::get('impressum', 'PagesController@impressum');
 Route::get('datenschutzerklärung', 'PagesController@datenschutzerklaerung');
 

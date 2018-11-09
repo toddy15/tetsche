@@ -28,6 +28,15 @@ class PagesController extends Controller
         ]);
     }
 
+    public function buecher()
+    {
+        return view('pages.buecher', [
+            'title' => 'Bücher',
+            'keywords' => 'Buch, Bücher, Buchveröffentlichung',
+            'description' => 'Bücher von Tetsche',
+        ]);
+    }
+
     public function impressum()
     {
         return view('pages.impressum', [
