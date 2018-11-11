@@ -147,6 +147,7 @@ class CartoonsController extends Controller
         $cartoon->showRebusSolution = true;
         return view('cartoons.show', [
             'title' => 'Archiv',
+            'pagetitle' => 'Tetsche im »stern« vom ' . \Carbon\Carbon::parse($date)->formatLocalized('%e. %B %Y'),
             'keywords' => 'Tetsche im »stern«, Kalauseite, Cartoon, Kalau-Archiv, Archiv',
             'description' => 'Archiv - ältere Ausgaben',
             'cartoon' => $cartoon,
@@ -160,13 +161,41 @@ class CartoonsController extends Controller
      */
     public function showCurrent()
     {
+        if (date("Y-m-d") >= "2018-12-13") {
+            return redirect('cartoon');
+        }
         $date = $this->getDateOfCurrentCartoon();
         $cartoon = Cartoon::where('publish_on', '=', $date)->first();
         $cartoon->showRebusSolution = false;
         return view('cartoons.show', [
             'title' => 'Stern',
+            'pagetitle' => 'Tetsche im »stern« vom ' . \Carbon\Carbon::parse($date)->formatLocalized('%e. %B %Y'),
             'keywords' => 'Tetsche im »stern«, Kalauseite, Cartoon',
             'description' => 'Tetsche im »stern« - jede Woche neu!',
+            'cartoon' => $cartoon,
+        ]);
+    }
+
+    /**
+     * Display a random cartoon, changing once per day.
+     *
+     * @return Response
+     */
+    public function showRandomDaily()
+    {
+        $cartoons = Cartoon::all();
+        // Seed the PRNG with the date in order to get the same
+        // "random" number on a given day.
+        mt_srand(date("Ymd"));
+        $random_cartoon = mt_rand(0, $cartoons->count() - 1);
+        // Just to be safe, revert the seeding.
+        mt_srand();
+        $cartoon = $cartoons->get($random_cartoon);
+        $cartoon->showRebusSolution = true;
+        return view('cartoons.show', [
+            'title' => 'Cartoon des Tages',
+            'keywords' => 'Tetsche im »stern«, Kalauseite des Tages, Cartoon des Tages',
+            'description' => 'Tetsche im »stern« - Cartoon des Tages!',
             'cartoon' => $cartoon,
         ]);
     }

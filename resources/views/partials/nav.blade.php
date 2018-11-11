@@ -13,6 +13,7 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
                 <li {!! Request::is('tetsche') ? 'class="active"' : '' !!}><a href="{{ url('tetsche') }}">Tetsche</a></li>
+                <!-- <li {!! Request::is('cartoon') ? 'class="active"' : '' !!}><a href="{{ url('cartoon') }}">Cartoon</a></li> -->
                 <li {!! Request::is('stern') ? 'class="active"' : '' !!}><a href="{{ url('stern') }}">Stern</a></li>
                 <li {!! Request::is('archiv') ? 'class="active"' : '' !!}><a href="{{ url('archiv') }}">Archiv</a></li>
                 <li {!! Request::is('bücher') ? 'class="active"' : '' !!}><a href="{{ url('bücher') }}">Bücher</a></li>

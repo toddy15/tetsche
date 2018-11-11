@@ -34,6 +34,9 @@ Route::get('gästebuch/neu', 'GuestbookPostsController@create');
 Route::post('gästebuch', 'GuestbookPostsController@store');
 Route::get('gästebuch/suche', 'GuestbookPostsController@search');
 
+// New site
+Route::get('cartoon', 'CartoonsController@showRandomDaily');
+
 // Cartoons
 Route::get('stern', 'CartoonsController@showCurrent');
 Route::get('archiv', 'CartoonsController@showArchive');

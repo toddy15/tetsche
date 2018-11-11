@@ -1,7 +1,7 @@
 @extends('app')
 
 @section('content')
-    <h1>Tetsche im »stern« vom {{ Carbon\Carbon::parse($cartoon->publish_on)->formatLocalized('%e. %B %Y') }}</h1>
+    <h1>{{ $pagetitle or $title }}</h1>
 
     <div>
         <img class="center-block img-responsive" src="{!! asset($cartoon->imagePath()) !!}" {!! $cartoon->imageSizeAndDescription() !!} />
