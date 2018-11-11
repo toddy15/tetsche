@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\TwsLib\Utils;
 use Illuminate\Support\Facades\Mail;
 
 class CartoonsController extends Controller
@@ -131,7 +132,7 @@ class CartoonsController extends Controller
             abort(404);
         }
         // Redirect to stern page for current date
-        if ($date == $current_date) {
+        if ($date == $current_date and !Utils::showNewSite()) {
             return redirect(action('CartoonsController@showCurrent'));
         }
         // Make sure no older cartoons than allowed are shown
@@ -161,7 +162,7 @@ class CartoonsController extends Controller
      */
     public function showCurrent()
     {
-        if (date("Y-m-d") >= "2018-12-13") {
+        if (Utils::showNewSite()) {
             return redirect('cartoon');
         }
         $date = $this->getDateOfCurrentCartoon();
@@ -208,6 +209,9 @@ class CartoonsController extends Controller
     public function showArchive()
     {
         $date = $this->getDateOfCurrentCartoon();
+        if (Utils::showNewSite()) {
+            $date = date("Y-m-d");
+        }
         $last_archived = $this->getDateOfLastArchivedCartoon();
         $cartoons = Cartoon::where('publish_on', '<', $date)
             ->where('publish_on', '>=', $last_archived)
@@ -311,6 +315,9 @@ class CartoonsController extends Controller
     private function getDateOfLastArchivedCartoon()
     {
         $current = $this->getDateOfCurrentCartoon();
+        if (Utils::showNewSite()) {
+            $current = date("Y-m-d");
+        }
         return Cartoon::where('publish_on', '<=', $current)
             ->orderBy('publish_on', 'desc')
             ->skip(16)

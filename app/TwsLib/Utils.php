@@ -84,4 +84,18 @@ class Utils
         }
         return $result;
     }
+
+    /**
+     * Check if the new site should be shown after the stern
+     * publication has ended.
+     *
+     * @TODO Include the time in the check as well (18:00)
+     * @return Boolean
+     */
+    public static function showNewSite() {
+        if (date("Y-m-d") >= "2018-12-13") {
+            return true;
+        }
+        return false;
+    }
 }
