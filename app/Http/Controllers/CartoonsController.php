@@ -191,6 +191,17 @@ class CartoonsController extends Controller
         $random_cartoon = mt_rand(0, $cartoons->count() - 1);
         // Just to be safe, revert the seeding.
         mt_srand();
+
+        // @TODO: Crude hack for xmas and silvester
+        if (date("m-d") >= "12-13") {
+            $wanted_ids = [49, 51, 52, 104, 157, 159, 216, 218, 276, 277];
+            if (date("m-d") >= "12-27") {
+                $wanted_ids = [160, 219, 278];
+            }
+            $cartoons = Cartoon::whereIn('id', $wanted_ids)->get();
+            $random_cartoon = date("d") % count($wanted_ids);
+        }
+
         $cartoon = $cartoons->get($random_cartoon);
         $cartoon->showRebusSolution = true;
         return view('cartoons.show', [
