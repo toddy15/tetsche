@@ -13,7 +13,7 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
                 <li {!! Request::is('tetsche') ? 'class="active"' : '' !!}><a href="{{ url('tetsche') }}">Tetsche</a></li>
-                @if (date("Y-m-d") >= "2018-12-13")
+                @if (date("Y-m-d") >= "2018-10-13")
                 <li {!! Request::is('cartoon') ? 'class="active"' : '' !!}><a href="{{ url('cartoon') }}">Cartoon</a></li>
                 @else
                 <li {!! Request::is('stern') ? 'class="active"' : '' !!}><a href="{{ url('stern') }}">Stern</a></li>

@@ -93,6 +93,7 @@ class Utils
      * @return Boolean
      */
     public static function showNewSite() {
+        return true;
         if (date("Y-m-d") >= "2018-12-13") {
             return true;
         }
