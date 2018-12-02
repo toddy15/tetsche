@@ -288,6 +288,9 @@ class CartoonsController extends Controller
      */
     public function checkIfCurrentIsLastCartoon()
     {
+        // Disable sending the mail, there are no more cartoons.
+        return redirect(action('CartoonsController@showCurrent'));
+
         $newest_cartoon = Cartoon::orderBy('publish_on', 'desc')->first();
         $newest_cartoon_date = $newest_cartoon->publish_on;
         $current_date = date('Y-m-d');
