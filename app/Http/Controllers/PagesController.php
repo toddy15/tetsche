@@ -21,6 +21,13 @@ class PagesController extends Controller
 
     public function tetsche()
     {
+        if (date("Y-m-d") >= "2018-12-13") {
+            return view('pages.tetsche-neu', [
+                'title' => 'Über Tetsche',
+                'keywords' => 'Informationen, Information',
+                'description' => 'Informationen über Tetsche',
+            ]);
+        }
         return view('pages.tetsche', [
             'title' => 'Über Tetsche',
             'keywords' => 'Informationen, Information',
