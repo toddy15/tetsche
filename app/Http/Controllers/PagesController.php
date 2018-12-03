@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\TwsLib\Utils;
 
 class PagesController extends Controller
 {
@@ -21,7 +22,7 @@ class PagesController extends Controller
 
     public function tetsche()
     {
-        if (date("Y-m-d") >= "2018-12-13") {
+        if (Utils::showNewSite()) {
             return view('pages.tetsche-neu', [
                 'title' => 'Über Tetsche',
                 'keywords' => 'Informationen, Information',
