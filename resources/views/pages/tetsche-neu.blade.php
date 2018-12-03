@@ -56,10 +56,10 @@
     <div class="col-sm-6">
         <p>
             Tetsche hat zahlreiche Preise und Auszeichnungen, u.&nbsp;a.
-            die Silbermedaille des Art Directors Club, bereits mehrmals
-            den Publikumspreis des Deutschen Karikaturenpreises und
-            den 1.&nbsp;Platz des Deutschen Cartoonpreises der
-            Frankfurter Buchmesse 2017.
+            zweimal die Silbermedaille des Art Directors Club Deutschland,
+            bereits mehrmals den Publikumspreis des Deutschen
+            Karikaturenpreises und den 1.&nbsp;Platz des Deutschen
+            Cartoonpreises der Frankfurter Buchmesse 2017.
         </p>
         <p>
             Seit 2012 ist Tetsche Pate der europäischen Initiative
