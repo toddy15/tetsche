@@ -12,6 +12,11 @@ class PagesController extends Controller
 {
     public function homepage()
     {
+        if (Utils::showNewSite()) {
+            return view('pages.sonderseite-neu', [
+                'description' => 'Tetsche-Website',
+            ]);
+        }
         return view('pages.sonderseite', [
             'description' => 'Tetsche-Website',
         ]);
