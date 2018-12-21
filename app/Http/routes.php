@@ -42,8 +42,6 @@ Route::get('stern', 'CartoonsController@showCurrent');
 Route::get('archiv', 'CartoonsController@showArchive');
 Route::get('archiv/{date}', 'CartoonsController@show');
 
-Route::get('cartoons/checkIfCurrentIsLastCartoon', 'CartoonsController@checkIfCurrentIsLastCartoon');
-
 // Protected routes
 Route::get('gästebuch/{id}/edit', ['middleware' => 'auth', 'uses' => 'GuestbookPostsController@edit'])
     ->where('id', '[0-9]+');
