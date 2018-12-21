@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\TwsLib\Utils;
 
 class PagesController extends Controller
 {
@@ -22,13 +21,6 @@ class PagesController extends Controller
 
     public function tetsche()
     {
-        if (Utils::showNewSite()) {
-            return view('pages.tetsche-neu', [
-                'title' => 'Über Tetsche',
-                'keywords' => 'Informationen, Information',
-                'description' => 'Informationen über Tetsche',
-            ]);
-        }
         return view('pages.tetsche', [
             'title' => 'Über Tetsche',
             'keywords' => 'Informationen, Information',

@@ -3,54 +3,70 @@
 @section('content')
 <div class="row" style="margin-bottom: 0.7em;">
     <div class="col-md-12">
-        <img class="center-block" src="{{ asset('images/tetsche.jpg') }}" />
+        <img class="center-block" src="{{ asset('images/tetsche-neu.jpg') }}" />
     </div>
 </div>
 <div class="row">
     <div class="col-xs-12 col-sm-6">
         <div class="hidden-xs text-right">
-            Tetsche wurde in Soltau, inmitten der Lüneburger Heide, geboren.
-            Während seiner Lehr- und Wanderjahre arbeitete er als
-            Pflastermaler in Amsterdam, als Layouter bei einer großen Tageszeitung in Köln
-            und schließlich als Creative Director in einer Hamburger Werbeagentur.
-            Bis ihn die unbändige Lust überkam, sich als Cartoonist
-            selbstständig zu machen. Erste Zeichnungen
-            veröffentlichte er in der »Zeit«, »Konkret«,
-            »Pardon« und »Hörzu«.
-            Für den »Stern« erfand er die Kult-Seite
-            »Neues aus Kalau«, die seitdem dort jede Woche für
-            die unzähligen Fans von Pümpel,
+            <p>
+                Tetsche veröffentlicht seinen ersten Cartoon im zarten Alter
+                von 16 Jahren in der »Hör&nbsp;zu«. Nach der Schulzeit und einer
+                Lehre als Schriftsetzer arbeitet er dann&nbsp;&ndash; während
+                seiner Lehr- und Wanderjahre&nbsp;&ndash; als Pflastermaler
+                in Amsterdam, als Layouter bei einer großen Tageszeitung
+                in Köln, grast diverse kleine Agenturen ab und landet
+                schließlich als Grafiker und Creative Director in einer
+                großen Hamburger Werbeagentur.
+            </p>
+            <p>
+                Bis ihn die unbändige Lust überkommt, sich als Cartoonist
+                selbstständig zu machen. Erste Zeichnungen erscheinen in
+                »Pardon«, »Zeit«, »konkret« und »Hör&nbsp;zu«.
+                Für den »stern« erfindet er die Kultseite »Neues&nbsp;aus&nbsp;Kalau«,
+                die dort 40 Jahre lang wöchentlich exklusiv erscheint und
+                unzählige Fans nicht nur von den Cartoons, sondern auch
+                von Kuhno van Oyten, dem Abgeschlossenen Roman,
+                Bauernweisheiten, dem Pümpel, Spiegelei und Konsorten hat.
+            </p>
         </div>
         <div class="hidden-sm hidden-md hidden-lg">
-            Tetsche wurde in Soltau, inmitten der Lüneburger Heide, geboren.
-            Während seiner Lehr- und Wanderjahre arbeitete er als
-            Pflastermaler in Amsterdam, als Layouter bei einer großen Tageszeitung in Köln
-            und schließlich als Creative Director in einer Hamburger Werbeagentur.
-            Bis ihn die unbändige Lust überkam, sich als Cartoonist
-            selbstständig zu machen. Erste Zeichnungen
-            veröffentlichte er in der »Zeit«, »Konkret«,
-            »Pardon« und »Hörzu«.
-            Für den »Stern« erfand er die Kult-Seite
-            »Neues aus Kalau«, die seitdem dort jede Woche für
-            die unzähligen Fans von Pümpel,
+          <p>
+              Tetsche veröffentlicht seinen ersten Cartoon im zarten Alter
+              von 16 Jahren in der »Hör&nbsp;zu«. Nach der Schulzeit und einer
+              Lehre als Schriftsetzer arbeitet er dann&nbsp;&ndash; während
+              seiner Lehr- und Wanderjahre&nbsp;&ndash; als Pflastermaler
+              in Amsterdam, als Layouter bei einer großen Tageszeitung
+              in Köln, grast diverse kleine Agenturen ab und landet
+              schließlich als Grafiker und Creative Director in einer
+              großen Hamburger Werbeagentur.
+          </p>
+          <p>
+              Bis ihn die unbändige Lust überkommt, sich als Cartoonist
+              selbstständig zu machen. Erste Zeichnungen erscheinen in
+              »Pardon«, »Zeit«, »konkret« und »Hör&nbsp;zu«.
+              Für den »stern« erfindet er die Kultseite »Neues&nbsp;aus&nbsp;Kalau«,
+              die dort 40 Jahre lang wöchentlich exklusiv erscheint und
+              unzählige Fans nicht nur von den Cartoons, sondern auch
+              von Kuhno van Oyten, dem Abgeschlossenen Roman,
+              Bauernweisheiten, dem Pümpel, Spiegelei und Konsorten hat.
+          </p>
         </div>
     </div>
     <div class="col-sm-6">
-        Spiegelei und
-        Konsorten exklusiv erscheint.
-        Tetsche erhielt zahlreiche Preise und Auszeichnungen,
-        u.&nbsp;a. den Deutschen Zynikerpreis in Gold,
-        Silbermedaille des Art Directors Club,
-        den Goldenen Jupp am Bande,
-        die Marion-Möser-Medaille,
-        den goldenen Wink, mehrmals
-        den Publikumspreis des Deutschen Karikaturenpreises
-        und den 1. Platz des Deutschen Cartoonpreises 2017
-        der Frankfurter Buchmesse.
-        Tetsche ist seit 2012 Pate für die europäische Initiative
-        »Schule ohne Rassismus&nbsp;&ndash; Schule mit Courage«.
-        Tetsche lebt hinterm Deich an der Elbe, in der Nähe von Hamburg,
-        der schönsten Stadt der Welt!
+        <p>
+            Tetsche hat zahlreiche Preise und Auszeichnungen, u.&nbsp;a.
+            zweimal die Silbermedaille des Art Directors Club Deutschland,
+            bereits mehrmals den Publikumspreis des Deutschen
+            Karikaturenpreises und den 1.&nbsp;Platz des Deutschen
+            Cartoonpreises der Frankfurter Buchmesse 2017.
+        </p>
+        <p>
+            Seit 2012 ist Tetsche Pate der europäischen Initiative
+            »Schule ohne Rassismus&nbsp;&ndash; Schule mit Courage«.
+            Er lebt hinterm Deich in der Nähe von Hamburg und
+            arbeitet dort als freier Künstler, Cartoonist und Autor.
+        </p>
     </div>
 </div>
 @stop
