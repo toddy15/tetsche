@@ -35,12 +35,9 @@ class CartoonsController extends Controller
      */
     public function create()
     {
-        // Find the date of the newest cartoon
-        $newest_cartoon = Cartoon::orderBy('publish_on', 'desc')->first();
-        $newest_cartoon_date = $newest_cartoon->publish_on;
-        // Calculate the next Thursday, starting three days from the newest date
-        $offset = 3;
-        list($year, $month, $day) = explode('-', $newest_cartoon_date);
+        // Calculate the next Thursday
+        $offset = 1;
+        list($year, $month, $day) = explode('-', date("Y-m-d"));
         while (date("w", mktime(0, 0, 0, $month, $day + $offset, $year)) != 4) {
             $offset++;
         }
