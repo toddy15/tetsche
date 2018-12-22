@@ -20,21 +20,6 @@ class CartoonsController extends Controller
      */
     public function index()
     {
-        $cartoons = Cartoon::all();
-        foreach ($cartoons as $cartoon) {
-            PublicationDate::create([
-                'cartoon_id' => $cartoon->id,
-                'publish_on' => $cartoon->publish_on,
-            ]);
-        }
-        PublicationDate::create([
-            'cartoon_id' => 104,
-            'publish_on' => "2018-12-13",
-        ]);
-        PublicationDate::create([
-            'cartoon_id' => 49,
-            'publish_on' => "2018-12-20",
-        ]);
         $cartoons = Cartoon::orderBy('publish_on', 'desc')->simplePaginate(8);
         return view('cartoons.index', [
             'title' => 'Übersicht',
