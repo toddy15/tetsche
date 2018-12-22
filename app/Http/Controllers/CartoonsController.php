@@ -130,7 +130,7 @@ class CartoonsController extends Controller
             abort(404);
         }
         // Redirect to stern page for current date
-        if ($date == $current_date and !Utils::showNewSite()) {
+        if ($date == $current_date) {
             return redirect(action('CartoonsController@showCurrent'));
         }
         // Make sure no older cartoons than allowed are shown
@@ -138,7 +138,7 @@ class CartoonsController extends Controller
             abort(404);
         }
         // Search cartoon for the given date
-        $cartoon = Cartoon::where('publish_on', '=', $date)->first();
+        $cartoon = PublicationDate::where('publish_on', '=', $date)->first()->cartoon;
         // Show 404 if the cartoon is not found
         if (!$cartoon) {
             abort(404);
@@ -146,8 +146,8 @@ class CartoonsController extends Controller
         $cartoon->showRebusSolution = true;
         return view('cartoons.show', [
             'title' => 'Archiv',
-            'pagetitle' => 'Tetsche im »stern« vom ' . \Carbon\Carbon::parse($date)->formatLocalized('%e. %B %Y'),
-            'keywords' => 'Tetsche im »stern«, Kalauseite, Cartoon, Kalau-Archiv, Archiv',
+            'pagetitle' => 'Cartoon der Woche vom ' . \Carbon\Carbon::parse($date)->formatLocalized('%e. %B %Y'),
+            'keywords' => 'Tetsche, Kalauseite, Cartoon, Kalau-Archiv, Archiv',
             'description' => 'Archiv - ältere Ausgaben',
             'cartoon' => $cartoon,
         ]);
@@ -160,17 +160,14 @@ class CartoonsController extends Controller
      */
     public function showCurrent()
     {
-        if (Utils::showNewSite()) {
-            return redirect('cartoon');
-        }
         $date = $this->getDateOfCurrentCartoon();
-        $cartoon = Cartoon::where('publish_on', '=', $date)->first();
+        $cartoon = PublicationDate::where('publish_on', '=', $date)->first()->cartoon;
         $cartoon->showRebusSolution = false;
         return view('cartoons.show', [
-            'title' => 'Stern',
-            'pagetitle' => 'Tetsche im »stern« vom ' . \Carbon\Carbon::parse($date)->formatLocalized('%e. %B %Y'),
-            'keywords' => 'Tetsche im »stern«, Kalauseite, Cartoon',
-            'description' => 'Tetsche im »stern« - jede Woche neu!',
+            'title' => 'Cartoon der Woche',
+            'pagetitle' => 'Cartoon der Woche vom ' . \Carbon\Carbon::parse($date)->formatLocalized('%e. %B %Y'),
+            'keywords' => 'Tetsche, Kalauseite der Woche, Cartoon der Woche',
+            'description' => 'Tetsche - Cartoon der Woche',
             'cartoon' => $cartoon,
         ]);
     }
@@ -218,18 +215,15 @@ class CartoonsController extends Controller
     public function showArchive()
     {
         $date = $this->getDateOfCurrentCartoon();
-        if (Utils::showNewSite()) {
-            $date = date("Y-m-d");
-        }
         $last_archived = $this->getDateOfLastArchivedCartoon();
-        $cartoons = Cartoon::where('publish_on', '<', $date)
+        $dates = PublicationDate::where('publish_on', '<', $date)
             ->where('publish_on', '>=', $last_archived)
             ->orderBy('publish_on', 'desc')->simplePaginate(8);
         return view('cartoons.archive', [
             'title' => 'Archiv',
             'keywords' => 'Tetsche im »stern«, Kalauseite, Cartoon, Kalau-Archiv, Archiv',
             'description' => 'Archiv - ältere Ausgaben',
-            'cartoons' => $cartoons,
+            'dates' => $dates,
         ]);
     }
 
@@ -281,27 +275,6 @@ class CartoonsController extends Controller
         return redirect('cartoons');
     }
 
-    /**
-     * Check if the current cartoon is the last one. If so, send an e-mail.
-     */
-    public function checkIfCurrentIsLastCartoon()
-    {
-        // Disable sending the mail, there are no more cartoons.
-        return redirect(action('CartoonsController@showCurrent'));
-
-        $newest_cartoon = Cartoon::orderBy('publish_on', 'desc')->first();
-        $newest_cartoon_date = $newest_cartoon->publish_on;
-        $current_date = date('Y-m-d');
-        if ($current_date >= $newest_cartoon_date) {
-            Mail::queue(['text' => 'emails.cartoon'], ['date' => $newest_cartoon_date], function($message) {
-                $message->from('webmaster@tetsche.de', 'DSW');
-                $message->to('tetsche@example.org', 'Tetsche');
-                $message->to('toddy@example.org', 'Toddy');
-                $message->subject('Nächste Tetsche-Seite fehlt');
-            });
-        }
-        return redirect(action('CartoonsController@showCurrent'));
-    }
     ///////////////////////////////////
     // Helper methods
     ///////////////////////////////////
@@ -314,9 +287,17 @@ class CartoonsController extends Controller
         // Add 6 hours to the current time, so that the
         // cartoon is published at 18:00 one day before.
         $date = date('Y-m-d', time() + 6 * 60 * 60);
-        return Cartoon::where('publish_on', '<=', $date)
-            ->orderBy('publish_on', 'desc')
-            ->value('publish_on');
+
+        // Calculate the last thursday
+        $offset = 0;
+        list($year, $month, $day) = explode('-', $date);
+        while (date("w", mktime(0, 0, 0, $month, $day + $offset, $year)) != 4) {
+            $offset--;
+        }
+        // Construct and explode the date again to cope with
+        // overflows (e.g. 2015-03-35) and get a valid date
+        $last_thursday = date("Y-m-d", mktime(0, 0, 0, $month, $day + $offset, $year));
+        return $last_thursday;
     }
 
     /**
@@ -327,10 +308,7 @@ class CartoonsController extends Controller
     private function getDateOfLastArchivedCartoon()
     {
         $current = $this->getDateOfCurrentCartoon();
-        if (Utils::showNewSite()) {
-            $current = date("Y-m-d");
-        }
-        return Cartoon::where('publish_on', '<=', $current)
+        return PublicationDate::where('publish_on', '<=', $current)
             ->orderBy('publish_on', 'desc')
             ->skip(16)
             ->value('publish_on');

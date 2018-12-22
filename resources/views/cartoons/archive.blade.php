@@ -4,20 +4,20 @@
     <h1>Archiv</h1>
 
     <div class="container-fluid">
-        @foreach (array_chunk($cartoons->all(), 4) as $row)
+        @foreach (array_chunk($dates->all(), 4) as $row)
             <div class="row">
-                @foreach ($row as $cartoon)
+                @foreach ($row as $date)
                     <div class="col-xs-6 col-md-3">
-                        <a class="thumbnail" href="{!! action('CartoonsController@show', ['date' => $cartoon->publish_on]) !!}">
-                            <img class="center-block img-responsive" src="{!! asset($cartoon->thumbnailPath()) !!}" {!! $cartoon->thumbnailSizeAndDescription() !!} />
+                        <a class="thumbnail" href="{!! action('CartoonsController@show', ['date' => $date->publish_on]) !!}">
+                            <img class="center-block img-responsive" src="{!! asset($date->cartoon->thumbnailPath()) !!}" {!! $date->cartoon->thumbnailSizeAndDescription() !!} />
                         </a>
                         <p class="text-center">
-                            {!! Carbon\Carbon::parse($cartoon->publish_on)->formatLocalized('%e. %B %Y') !!}
+                            {!! Carbon\Carbon::parse($date->publish_on)->formatLocalized('%e. %B %Y') !!}
                         </p>
                     </div>
                 @endforeach
             </div>
         @endforeach
-        {!! str_replace('/?', '?', $cartoons->render()) !!}
+        {!! str_replace('/?', '?', $dates->render()) !!}
     </div>
 @stop

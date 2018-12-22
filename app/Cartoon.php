@@ -14,7 +14,7 @@ class Cartoon extends Model
     ];
 
     /**
-     *
+     * Get the publication dates of the cartoon.
      */
     public function publicationDate() {
         return $this->hasMany('App\PublicationDate');
