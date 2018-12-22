@@ -14,6 +14,8 @@ class CreatePublicationDatesTable extends Migration
     {
         Schema::create('publication_dates', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('cartoon_id')->unsigned();
+            $table->date('publish_on')->unique();
             $table->timestamps();
         });
     }

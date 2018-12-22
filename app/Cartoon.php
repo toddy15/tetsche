@@ -14,6 +14,13 @@ class Cartoon extends Model
     ];
 
     /**
+     *
+     */
+    public function publicationDate() {
+        return $this->hasMany('App\PublicationDate');
+    }
+
+    /**
      * Return the path to the image.
      */
     public function imagePath() {
