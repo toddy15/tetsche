@@ -35,15 +35,7 @@ class CartoonsController extends Controller
      */
     public function create()
     {
-        // Calculate the next Thursday
-        $offset = 1;
-        list($year, $month, $day) = explode('-', date("Y-m-d"));
-        while (date("w", mktime(0, 0, 0, $month, $day + $offset, $year)) != 4) {
-            $offset++;
-        }
-        // Construct and explode the date again to cope with
-        // overflows (e.g. 2015-03-35) and get a valid date
-        $next_thursday = date("Y-n-j", mktime(0, 0, 0, $month, $day + $offset, $year));
+        $next_thursday = $this->getThursday("next");
         list($year, $month, $day) = explode('-', $next_thursday);
         return view('cartoons.create', [
             'title' => 'Neuer Cartoon',
@@ -128,7 +120,7 @@ class CartoonsController extends Controller
         if ($date > $current_date) {
             abort(404);
         }
-        // Redirect to stern page for current date
+        // Redirect to cartoon page for current date
         if ($date == $current_date) {
             return redirect(action('CartoonsController@showCurrent'));
         }
@@ -254,6 +246,32 @@ class CartoonsController extends Controller
     ///////////////////////////////////
 
     /**
+     * Helper method to determine the last or the next thursday.
+     *
+     * @param $which string with either "next" or "last".
+     * @param $date string with a date, defaults to current date.
+     */
+    private function getThursday($which = "next", $date = "")
+    {
+        if ($date == "") {
+            $date = date("Y-m-d");
+        }
+
+        $offset = 1;
+        if ($which == "last") {
+            $offset = -1;
+        }
+        list($year, $month, $day) = explode('-', $date);
+        while (date("w", mktime(0, 0, 0, $month, $day, $year)) != 4) {
+            $day = $day + $offset;
+        }
+        // Construct and explode the date again to cope with
+        // overflows (e.g. 2015-03-35) and get a valid date
+        $thursday = date("Y-m-d", mktime(0, 0, 0, $month, $day, $year));
+        return $thursday;
+    }
+
+    /**
      * Helper method to determine the current cartoon.
      */
     private function getDateOfCurrentCartoon()
@@ -261,17 +279,7 @@ class CartoonsController extends Controller
         // Add 6 hours to the current time, so that the
         // cartoon is published at 18:00 one day before.
         $date = date('Y-m-d', time() + 6 * 60 * 60);
-
-        // Calculate the last thursday
-        $offset = 0;
-        list($year, $month, $day) = explode('-', $date);
-        while (date("w", mktime(0, 0, 0, $month, $day + $offset, $year)) != 4) {
-            $offset--;
-        }
-        // Construct and explode the date again to cope with
-        // overflows (e.g. 2015-03-35) and get a valid date
-        $last_thursday = date("Y-m-d", mktime(0, 0, 0, $month, $day + $offset, $year));
-        return $last_thursday;
+        return $this->getThursday("last", $date);
     }
 
     /**
