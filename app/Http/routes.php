@@ -36,7 +36,9 @@ Route::get('gästebuch/suche', 'GuestbookPostsController@search');
 
 // Cartoons
 Route::get('cartoon', 'CartoonsController@showCurrent');
-Route::get('stern', 'CartoonsController@showCurrent');
+Route::get('stern', function () {
+    return redirect('cartoon');
+});
 Route::get('archiv', 'CartoonsController@showArchive');
 Route::get('archiv/{date}', 'CartoonsController@show');
 
