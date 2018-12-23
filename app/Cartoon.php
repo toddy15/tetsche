@@ -17,7 +17,14 @@ class Cartoon extends Model
      * Get the publication dates of the cartoon.
      */
     public function publicationDate() {
-        return $this->hasMany('App\PublicationDate');
+        return $this->hasMany('App\PublicationDate')->orderBy('publish_on', 'DESC');
+    }
+
+    /**
+     * Get the publication dates of the cartoon.
+     */
+    public function lastPublishOn() {
+        return $this->publicationDate->first()->publish_on;
     }
 
     /**
@@ -48,9 +55,9 @@ class Cartoon extends Model
      * Return image size, alt and title attributes.
      */
     public function imageSizeAndDescription() {
-        $date = Carbon::parse($this->publish_on)->formatLocalized('%e. %B %Y');
-        $result = 'alt="Tetsche im »stern« vom ' . $date . '" ';
-        $result .= 'title="Tetsche im »stern« vom ' . $date . '" ';
+        $date = Carbon::parse($this->lastPublishOn())->formatLocalized('%e. %B %Y');
+        $result = 'alt="Tetsche - Cartoon der Woche vom ' . $date . '" ';
+        $result .= 'title="Tetsche - Cartoon der Woche vom ' . $date . '" ';
         $size = getimagesize(public_path() . '/' . $this->imagePath());
         $result .= $size[3];
         return $result;
@@ -60,9 +67,9 @@ class Cartoon extends Model
      * Return thumbnail size, alt and title attributes.
      */
     public function thumbnailSizeAndDescription() {
-        $date = Carbon::parse($this->publish_on)->formatLocalized('%e. %B %Y');
-        $result = 'alt="Tetsche im »stern« vom ' . $date . '" ';
-        $result .= 'title="Tetsche im »stern« vom ' . $date . '" ';
+        $date = Carbon::parse($this->lastPublishOn())->formatLocalized('%e. %B %Y');
+        $result = 'alt="Tetsche - Cartoon der Woche vom ' . $date . '" ';
+        $result .= 'title="Tetsche - Cartoon der Woche vom ' . $date . '" ';
         $size = getimagesize(public_path() . '/' . $this->thumbnailPath());
         $result .= $size[3];
         return $result;
