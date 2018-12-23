@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\TwsLib\Utils;
 use App\PublicationDate;
 use Illuminate\Support\Facades\Mail;
 
@@ -23,7 +22,7 @@ class CartoonsController extends Controller
         $cartoons = Cartoon::orderBy('publish_on', 'desc')->simplePaginate(8);
         return view('cartoons.index', [
             'title' => 'Übersicht',
-            'keywords' => 'Tetsche im »stern«, Kalauseite, Cartoon',
+            'keywords' => 'Tetsche, Kalauseite, Cartoon',
             'description' => 'Alle Ausgaben',
             'cartoons' => $cartoons,
         ]);

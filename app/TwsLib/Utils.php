@@ -84,17 +84,4 @@ class Utils
         }
         return $result;
     }
-
-    /**
-     * Check if the new site should be shown after the stern
-     * publication has ended.
-     *
-     * @return Boolean
-     */
-    public static function showNewSite() {
-        if (date("Y-m-d H:i") >= "2018-12-12 18:00") {
-            return true;
-        }
-        return false;
-    }
 }
