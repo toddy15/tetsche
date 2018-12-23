@@ -1,4 +1,4 @@
-@if (Request::is('archiv/*') or Request::is('cartoon'))
+@if (Request::is('archiv/*'))
     <script type="text/javascript">
         var button = $("#btn-solution");
         button.on("click", function() {
