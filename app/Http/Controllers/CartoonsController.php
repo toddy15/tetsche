@@ -163,16 +163,6 @@ class CartoonsController extends Controller
         ]);
     }
 
-    // // @TODO: Crude hack for xmas and silvester
-    // if (date("m-d") >= "12-13") {
-    //     $wanted_ids = [49, 51, 52, 104, 157, 159, 216, 218, 276, 277];
-    //     if (date("m-d") >= "12-27") {
-    //         $wanted_ids = [160, 219, 278];
-    //     }
-    //     $cartoons = Cartoon::whereIn('id', $wanted_ids)->get();
-    //     $random_cartoon = date("d") % count($wanted_ids);
-    // }
-
     /**
      * Display a listing of the archive.
      *
@@ -239,6 +229,90 @@ class CartoonsController extends Controller
         $cartoon->delete();
         $request->session()->flash('info', 'Der Cartoon wurde gelöscht.');
         return redirect('cartoons');
+    }
+
+    /**
+     * Check if the current cartoon is the last one.
+     * If so, generate a new random number for the next
+     * cartoon, and check for some special cases.
+     */
+    public function checkIfCurrentIsLastCartoon()
+    {
+        $newest_cartoon = PublicationDate::orderBy('publish_on', 'desc')->first();
+        $newest_cartoon_date = $newest_cartoon->publish_on;
+        $current_date = $this->getDateOfCurrentCartoon();
+        // If there are no more cartoons for next week,
+        // generate a "random" number.
+        if ($current_date >= $newest_cartoon_date) {
+            // First, get all cartoon ids which have been shown
+            // less than two years ago, so they can be omitted.
+            $two_years_ago = date("Y-m-d", time() - 2 * 365 * 24 * 60 * 60);
+            $recent_cartoon_ids = PublicationDate::where('publish_on', '<=', $newest_cartoon_date)
+                ->where('publish_on', '>=', $two_years_ago)
+                ->orderBy('publish_on', 'DESC')
+                ->get()->pluck('cartoon_id')->all();
+
+            // Next, get all available cartoon ids.
+            $all_cartoon_ids = Cartoon::all()->pluck('id')->all();
+
+            // Define some ids for special cases:
+            $weihnachten_ids = [49, 51, 52, 104, 157, 159, 216, 218, 276, 277, 331];
+            $silvester_ids = [160, 219, 278];
+            $neujahr_ids = [1, 53, 105, 161, 221, 279];
+            $ostern_ids = [];
+            $all_special_ids = array_merge(
+                $weihnachten_ids,
+                $silvester_ids,
+                $neujahr_ids,
+                $ostern_ids
+            );
+            sort($all_special_ids);
+
+            // Determine the next thursday
+            $publish_on = $this->getThursday();
+
+            // Determine if any of the special ids should be chosen
+            // instead of a normal cartoon.
+
+            // Weihnachten
+            $thursday_before_weihnachten = $this->getThursday("last", date("Y-12-24"));
+            if ($publish_on == $thursday_before_weihnachten) {
+                $all_cartoon_ids = $weihnachten_ids;
+                $all_special_ids = [];
+            }
+
+            // Silvester
+            $thursday_before_silvester = $this->getThursday("last", date("Y-12-31"));
+            if ($publish_on == $thursday_before_silvester) {
+                $all_cartoon_ids = $silvester_ids;
+                $all_special_ids = [];
+            }
+
+            // Neujahr
+            $thursday_after_neujahr = $this->getThursday("last", date("Y") + 1 . "-01-07");
+            if ($publish_on == $thursday_after_neujahr) {
+                $all_cartoon_ids = $neujahr_ids;
+                $all_special_ids = [];
+            }
+
+            // Generate a random number and ensure that the chosen id
+            // is in the array of valid cartoon ids and also not
+            // in the array of recently shown cartoons or special cartoons.
+            $max_number = max($all_cartoon_ids);
+            while (true) {
+                $random_id = mt_rand(1, $max_number);
+                if (in_array($random_id, $all_cartoon_ids)
+                  and !in_array($random_id, $recent_cartoon_ids)
+                  and !in_array($random_id, $all_special_ids)) {
+                    break;
+                }
+            }
+            PublicationDate::create([
+                'publish_on' => $publish_on,
+                'cartoon_id' => $random_id,
+            ]);
+        }
+        return redirect(action('CartoonsController@showCurrent'));
     }
 
     ///////////////////////////////////
