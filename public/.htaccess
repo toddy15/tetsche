@@ -28,11 +28,6 @@
     RewriteCond %{HTTP_HOST} !^localhost$ [NC]
     RewriteRule ^(.*)$ http://www.%{HTTP_HOST}/$1 [L,R=301]
 
-    # Enforce the secure connection via https on www.tetsche.de
-    #RewriteCond %{HTTPS} !=on
-    #RewriteCond %{HTTP_HOST} ^www.tetsche.de$ [NC]
-    #RewriteRule ^/?(.*) https://%{SERVER_NAME}/$1 [R,L]
-
     # Add redirect for piwik folder
     RewriteRule ^piwik/?$ /piwik/index.php [L]
 
