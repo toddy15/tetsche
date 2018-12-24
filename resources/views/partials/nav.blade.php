@@ -13,11 +13,7 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
                 <li {!! Request::is('tetsche') ? 'class="active"' : '' !!}><a href="{{ url('tetsche') }}">Tetsche</a></li>
-                @if (date("Y-m-d H:i") >= "2018-12-12 18:00")
                 <li {!! Request::is('cartoon') ? 'class="active"' : '' !!}><a href="{{ url('cartoon') }}">Cartoon</a></li>
-                @else
-                <li {!! Request::is('stern') ? 'class="active"' : '' !!}><a href="{{ url('stern') }}">Stern</a></li>
-                @endif
                 <li {!! Request::is('archiv') ? 'class="active"' : '' !!}><a href="{{ url('archiv') }}">Archiv</a></li>
                 <li {!! Request::is('bücher') ? 'class="active"' : '' !!}><a href="{{ url('bücher') }}">Bücher</a></li>
                 <li {!! Request::is('gästebuch') ? 'class="active"' : '' !!}><a href="{{ url('gästebuch') }}">Gästebuch</a></li>
