@@ -38,12 +38,12 @@
     Redirect permanent /build/theme/css/all-2383ee914b.css /build/theme/css/all-c2dcce57f7.css
     Redirect permanent /build/theme/js/all-ea07061099.js /build/theme/js/all-49a63c8b89.js
 
+    # Redirect for stern page, now cartoon of the week
+    Redirect permanent /stern /cartoon
+
     # Special case for lustich.de, the pages are not maintained ...
     Redirect gone /stern/bilder/2008-09-25.cartoon.05749
     Redirect gone /stern/bilder/2008-09-18.comic.01263
-
-    # Add redirects for old pages
-    Redirect permanent /work /auth/login
 
     # Handle Front Controller...
     RewriteCond %{REQUEST_FILENAME} !-d
