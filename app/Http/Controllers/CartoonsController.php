@@ -137,7 +137,7 @@ class CartoonsController extends Controller
         $cartoon->showRebusSolution = true;
         return view('cartoons.show', [
             'title' => 'Archiv',
-            'pagetitle' => 'Cartoon der Woche vom ' . \Carbon\Carbon::parse($date)->formatLocalized('%e. %B %Y'),
+            'pagetitle' => 'Cartoon der Woche . . . vom ' . \Carbon\Carbon::parse($date)->formatLocalized('%e. %B %Y'),
             'keywords' => 'Tetsche, Kalauseite, Cartoon, Kalau-Archiv, Archiv',
             'description' => 'Archiv - ältere Ausgaben',
             'cartoon' => $cartoon,
@@ -156,7 +156,7 @@ class CartoonsController extends Controller
         $cartoon->showRebusSolution = false;
         return view('cartoons.show', [
             'title' => 'Cartoon der Woche',
-            'pagetitle' => 'Cartoon der Woche vom ' . \Carbon\Carbon::parse($date)->formatLocalized('%e. %B %Y'),
+            'pagetitle' => 'Cartoon der Woche . . . vom ' . \Carbon\Carbon::parse($date)->formatLocalized('%e. %B %Y'),
             'keywords' => 'Tetsche, Kalauseite der Woche, Cartoon der Woche',
             'description' => 'Tetsche - Cartoon der Woche',
             'cartoon' => $cartoon,
