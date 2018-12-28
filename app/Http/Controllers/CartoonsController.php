@@ -298,19 +298,25 @@ class CartoonsController extends Controller
             // Generate a random number and ensure that the chosen id
             // is in the array of valid cartoon ids and also not
             // in the array of recently shown cartoons or special cartoons.
+            $min_number = min($all_cartoon_ids);
             $max_number = max($all_cartoon_ids);
             while (true) {
-                $random_id = mt_rand(1, $max_number);
+                $random_id = mt_rand($min_number, $max_number);
                 if (in_array($random_id, $all_cartoon_ids)
                   and !in_array($random_id, $recent_cartoon_ids)
                   and !in_array($random_id, $all_special_ids)) {
                     break;
                 }
             }
-            PublicationDate::create([
-                'publish_on' => $publish_on,
-                'cartoon_id' => $random_id,
-            ]);
+
+            // Ensure that the publication date does not yet exist.
+            $date_exists = PublicationDate::where('publish_on', $publish_on)->first();
+            if (!$date_exists) {
+                PublicationDate::create([
+                    'publish_on' => $publish_on,
+                    'cartoon_id' => $random_id,
+                ]);
+            }
         }
         return redirect(action('CartoonsController@showCurrent'));
     }
