@@ -19,12 +19,12 @@ class CartoonsController extends Controller
      */
     public function index()
     {
-        $cartoons = Cartoon::orderBy('publish_on', 'desc')->simplePaginate(8);
+        $publication_dates = PublicationDate::orderBy('publish_on', 'desc')->simplePaginate(8);
         return view('cartoons.index', [
             'title' => 'Übersicht',
             'keywords' => 'Tetsche, Kalauseite, Cartoon',
             'description' => 'Alle Ausgaben',
-            'cartoons' => $cartoons,
+            'publication_dates' => $publication_dates,
         ]);
     }
 
