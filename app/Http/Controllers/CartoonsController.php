@@ -232,6 +232,21 @@ class CartoonsController extends Controller
     }
 
     /**
+     * Force a new randomly selected cartoon for next thursday.
+     */
+    public function forceNewCartoon()
+    {
+        $newest_cartoon = PublicationDate::orderBy('publish_on', 'desc')->first();
+        $newest_cartoon_date = $newest_cartoon->publish_on;
+        $current_date = $this->getDateOfCurrentCartoon();
+        if ($newest_cartoon_date > $current_date) {
+            $newest_cartoon->delete();
+            $this->checkIfCurrentIsLastCartoon();
+        }
+        return redirect('cartoons');
+    }
+
+    /**
      * Check if the current cartoon is the last one.
      * If so, generate a new random number for the next
      * cartoon, and check for some special cases.

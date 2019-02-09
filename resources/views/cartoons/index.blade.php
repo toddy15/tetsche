@@ -2,7 +2,10 @@
 
 @section('content')
     <h1>Übersicht aller Cartoons</h1>
-    <p><a href="{!! action('CartoonsController@create') !!}" class="btn btn-primary">Neuer Cartoon</a></p>
+    <p>
+        <a href="{!! action('CartoonsController@create') !!}" class="btn btn-primary">Neuer Cartoon</a>
+        <a href="{!! action('CartoonsController@forceNewCartoon') !!}" class="btn btn-default">Zufällig neuer nächster Cartoon</a>
+    </p>
 
     <div class="container-fluid">
         @foreach (array_chunk($publication_dates->all(), 4) as $row)

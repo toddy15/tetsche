@@ -55,6 +55,7 @@ Route::get('spam/{category}', ['middleware' => 'auth', 'uses' => 'SpamController
 
 Route::get('cartoons', ['middleware' => 'auth', 'uses' => 'CartoonsController@index']);
 Route::get('cartoons/neu', ['middleware' => 'auth', 'uses' => 'CartoonsController@create']);
+Route::get('cartoons/forceNewCartoon', ['middleware' => 'auth', 'uses' => 'CartoonsController@forceNewCartoon']);
 Route::post('cartoons', ['middleware' => 'auth', 'uses' => 'CartoonsController@store']);
 Route::get('cartoons/{id}/edit', ['middleware' => 'auth', 'uses' => 'CartoonsController@edit'])
     ->where('id', '[0-9]+');
