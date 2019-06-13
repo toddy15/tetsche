@@ -3,7 +3,7 @@
 @section('content')
 <div class="row" style="margin-bottom: 0.7em;">
     <div class="col-md-12">
-        <img class="center-block" src="{{ asset('images/tetsche-neu.jpg') }}" />
+        <img class="center-block img-responsive" src="{{ asset('images/tetsche-2019.jpg') }}" width="400" height="469" />
     </div>
 </div>
 <div class="row">
