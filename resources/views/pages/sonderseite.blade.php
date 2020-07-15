@@ -2,38 +2,26 @@
 
 @section('content')
     <h1 style="color:#fdb3b4;font-size:81px;margin-bottom:80px;">Tetsche-Website</h1>
-    <div class="row">
-        <div class="col-sm-6">
-            <img class="center-block img-responsive" src="{{ asset('images/agathenburg.jpg') }}" style="margin-bottom:80px;"
-              alt="Ausstellung Schloss Agathenburg" title="Ausstellung Schloss Agathenburg" width="624" height="879" />
-        </div>
-        <div class="col-sm-6">
-            <h2 style="color:#fdb3b4">Tetsche&nbsp;&ndash; Cartoons und andere Kostbarkeiten</h2>
-            @if(date("Y-m-d") <= "2019-03-02")
-            <p>
-              Am Samstag, den 2. März um 17 Uhr
-              sind Sie und Ihre Freunde herzlich
-              zur Ausstellungseröffnung eingeladen.
-            </p>
-            <p>
-              Mit Beiträgen von<br />
-              Michael Roesberg, Stiftungsratsvorsitzender und Landrat<br />
-              Piet Klocke, Kabarettist, Musiker, Autor und Schauspieler<br />
-            </p>
-            @endif
-            <p>
-              Vom 3. März bis 28. April 2019<br />
-              Dienstag bis Freitag: 14&nbsp;&ndash; 18 Uhr<br />
-              Samstag und Sonntag: 11&nbsp;&ndash; 18 Uhr<br />
-              Gruppen zusätzlich nach Vereinbarung
-            </p>
-            <p>
-              Kulturstiftung Schloss Agathenburg<br />
-              Hauptstraße, 21684 Agathenburg (bei Stade)<br />
-            </p>
-            <p>
-              <a href="https://www.schlossagathenburg.de/" class="btn btn-danger">Website Schloss Agathenburg</a>
-            </p>
-        </div>
+    <div style="text-align:center;">
+      <h2 style="color:#fdb3b4">ACHTUNG!</h2>
+      <p style="font-size:24px">
+        Ab jetzt gibt's ganz viel Neues von Tetsche<br>
+        Zwei tolle Tetsche-Shops sind am Start:
+      </p>
+      <p>
+        <a href="https://tetsche.merchrocket.shop/" class="btn btn-danger">digital print GmbH</a>
+      </p>
+      <p>
+        <a href="https://www.amazon.de/s?k=Tetsche&me=A1WT89TSWRBU51" class="btn btn-danger">GK Marketing &amp; Online Shops GmbH</a>
+      </p>
+      <p style="font-size:24px">
+        Alles was das Herz begehrt:<br>
+        Vom Mousepad über Becher, Magnete, Brillen- und Monitorputztücher usw. 
+        bis zu witzigen Corona-Abstandhalten-Plakaten in vielen Größen.
+      </p>
+      <p style="font-size:24px">
+        Gleich reingucken und wegkaufen, so lange der Vorrat reicht.<br>
+        … und demnächst gibt's auf vielfachen Wunsch auch wieder original signierte Drucke …
+      </p>
     </div>
 @stop
