@@ -164,6 +164,6 @@
 </p>
 <iframe
         style="border: 0; height: 300px; width: 600px;"
-        src="https://www.tetsche.de/piwik/index.php?module=CoreAdminHome&action=optOut&language=de&backgroundColor=ffffff&fontColor=000000&fontSize=18px&fontFamily=delicious-roman"
+        src="https://www.tetsche.de/matomo/index.php?module=CoreAdminHome&action=optOut&language=de&backgroundColor=ffffff&fontColor=000000&fontSize=18px&fontFamily=delicious-roman"
 ></iframe>
 @stop

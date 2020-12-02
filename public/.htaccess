@@ -28,8 +28,8 @@
     RewriteCond %{HTTP_HOST} !^localhost$ [NC]
     RewriteRule ^(.*)$ https://www.%{HTTP_HOST}/$1 [L,R=301]
 
-    # Add redirect for piwik folder
-    RewriteRule ^piwik/?$ /piwik/index.php [L]
+    # Add redirect for matomo folder
+    RewriteRule ^matomo/?$ /matomo/index.php [L]
 
     # Redirect Trailing Slashes...
     RewriteRule ^(.*)/$ /$1 [L,R=301]
