@@ -1,9 +1,5 @@
 <?php
 
-if (date("Y-m-d") == "2019-09-20") {
-  Route::get('{any}', 'PagesController@streik')->where('any', '.*');
-}
-
 // Authentication routes...
 Route::get('auth/login', 'Auth\AuthController@getLogin');
 Route::post('auth/login', 'Auth\AuthController@postLogin');

@@ -16,11 +16,6 @@ class PagesController extends Controller
         ]);
     }
 
-    public function streik()
-    {
-        return view('streik');
-    }
-
     public function tetsche()
     {
         return view('pages.tetsche', [
