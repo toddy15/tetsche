@@ -18,7 +18,7 @@
         <link href="{{ asset(elixir('theme/css/all.css')) }}" rel="stylesheet">
     </head>
     {{-- Hack to display the blue pages --}}
-    @if (Request::is('impressum'))
+    @if (Request::is('/') or Request::is('impressum'))
         <body style="background:#437cff;color:#fff;">
     @else
         <body>
