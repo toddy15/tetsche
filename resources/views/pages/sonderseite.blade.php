@@ -2,26 +2,22 @@
 
 @section('content')
     <h1 style="color:#fdb3b4;font-size:81px;margin-bottom:80px;">Tetsche-Website</h1>
-    <div style="text-align:center;">
-      <h2 style="color:#fdb3b4">ACHTUNG!</h2>
-      <p style="font-size:24px">
-        Ab jetzt gibt's ganz viel Neues von Tetsche<br>
-        Zwei tolle Tetsche-Shops sind am Start:
-      </p>
-      <p>
-        <a href="https://tetsche.merchrocket.shop/" class="btn btn-danger">digital print GmbH</a>
-      </p>
-      <p>
-        <a href="https://www.amazon.de/s?k=Tetsche&me=A1WT89TSWRBU51" class="btn btn-danger">GK Marketing &amp; Online Shops GmbH</a>
-      </p>
-      <p style="font-size:24px">
-        Alles was das Herz begehrt:<br>
-        Vom Mousepad über Becher, Magnete, Brillen- und Monitorputztücher usw. 
-        bis zu witzigen Corona-Abstandhalten-Plakaten in vielen Größen.
-      </p>
-      <p style="font-size:24px">
-        Gleich reingucken und wegkaufen, so lange der Vorrat reicht.<br>
-        … und demnächst gibt's auf vielfachen Wunsch auch wieder original signierte Drucke …
-      </p>
+    <div style="text-align:center;margin-bottom:2em;">
+        <img src="images/frido-tageblatt.jpg" width="511" height="700" alt="Frido am Kran im Stader Hafen"/>
+        <h2 style="color:#fdb3b4">Deutschlandweit einmalig</h2>
+        <p style="font-size:24px">
+            Große Tetsche-Open-Air-Ausstellung an der Kaimauer
+            im historischen Hansehafen von Stade
+        </p>
+        <p style="font-size:24px">
+            Ab jetzt bis zum Spätherbst
+        </p>
+        <p style="font-size:24px">
+            Siehe auch Bildergalerie unter
+            <a style="color: yellow" href="https://www.stade-tourismus.de/de/tetsche-ausstellung-im-hansehafen">
+                www.stade-tourismus.de
+            </a>
+        </p>
+        <img src="images/frido-am-regenbogen.jpg" width="723" height="489" alt="Frido am Regenbogen"/>
     </div>
 @stop
