@@ -84,6 +84,9 @@ class GuestbookPostsController extends Controller
             if (($ip[0] == 212) and ($ip[1] == 6) and ($ip[2] == 125)) {
                 $post['score'] = $spamfilter->threshold_autolearn_spam;
             }
+            if (($ip[0] == 112) and ($ip[1] == 206) and ($ip[2] == 2)) {
+                $post['score'] = $spamfilter->threshold_autolearn_spam;
+            }
         }
         $post['category'] = $spamfilter->calculateCategory($post['score']);
         $post['spam_detection'] = $spam_detection;
