@@ -374,7 +374,10 @@ class CartoonsController extends Controller
         // Add 6 hours to the current time, so that the
         // cartoon is published at 18:00 one day before.
         $date = date('Y-m-d', time() + 6 * 60 * 60);
-        return $this->getThursday("last", $date);
+        $current_cartoon = PublicationDate::where('publish_on', '<=', $date)
+            ->orderBy('publish_on', 'DESC')
+            ->first();
+        return $current_cartoon->publish_on;
     }
 
     /**
