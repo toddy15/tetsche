@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\GuestbookPost;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\PublicationDate;
 use App\TwsLib\Spamfilter;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -94,6 +95,20 @@ class GuestbookPostsController extends Controller
                 $post['score'] = $spamfilter->threshold_autolearn_spam;
             }
         }
+        // New feature: detect the solution to current rebus
+        // @todo: This code is copied from CartoonController, remove duplication.
+        $date = date('Y-m-d', time() + 6 * 60 * 60);
+        $current_cartoon = PublicationDate::where('publish_on', '<=', $date)
+            ->orderBy('publish_on', 'DESC')
+            ->first();
+        $cartoon = PublicationDate::where(
+            'publish_on', '=', $current_cartoon->publish_on
+        )->first()->cartoon;
+        // Compare case insensitive for better results
+        if (stripos($text, $cartoon->rebus) !== false) {
+           $post['score'] = $spamfilter->threshold_autolearn_spam;
+        }
+
         $post['category'] = $spamfilter->calculateCategory($post['score']);
         $post['spam_detection'] = $spam_detection;
         $validator = Validator::make($post, [
