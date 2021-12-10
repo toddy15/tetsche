@@ -18,9 +18,9 @@ class PagesTest extends TestCase
         $this->visit('/')
             ->seeInElement('h1', 'Tetsche-Website');
         $this->visit('tetsche')
-            ->see('Tetsche wurde in Soltau, mitten in der Lüneburger Heide, geboren.');
-        $this->visit('stern')
-            ->seeInElement('h1', 'Tetsche im »stern« vom')
+            ->see('Tetsche veröffentlichte seinen ersten Cartoon im zarten Alter');
+        $this->visit('cartoon')
+            ->seeInElement('h1', 'Cartoon der Woche . . . vom')
             ->see('Die Rebus-Abbildungen ergeben zusammen einen neuen Begriff.')
             ->see('Auflösung nächste Woche');
         $this->visit('archiv')
@@ -46,8 +46,8 @@ class PagesTest extends TestCase
 //            ->click('Neuer Eintrag')
 //            ->seeRouteIs('g%C3%A4stebuch/neu');
         $faker = Faker\Factory::create();
-        $name = $faker->name;
-        $message = $faker->text();
+        $name = "Herr Hallmackenreuther";
+        $message = "Mein Name ist Lohse. Ich kaufe hier ein.";
         // Ensure that the text is not there yet.
         $this->visit('gästebuch')
             ->dontSee($name)
