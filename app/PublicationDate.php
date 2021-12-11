@@ -18,5 +18,4 @@ class PublicationDate extends Model
     {
         return $this->belongsTo('App\Cartoon');
     }
-
 }

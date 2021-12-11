@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class PagesTest extends TestCase
@@ -54,7 +52,7 @@ class PagesTest extends TestCase
             ->dontSee($message);
         $this->dontSeeInDatabase('guestbook_posts', [
             'name' => $name,
-            'message' => $message
+            'message' => $message,
         ]);
         // Create the new entry
         $this->visit('gästebuch/neu')
@@ -69,7 +67,7 @@ class PagesTest extends TestCase
             ->see($message);
         $this->seeInDatabase('guestbook_posts', [
             'name' => $name,
-            'message' => $message
+            'message' => $message,
         ]);
     }
 }

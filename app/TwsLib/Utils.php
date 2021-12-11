@@ -4,46 +4,55 @@ namespace App\TwsLib;
 
 class Utils
 {
-    public function replaceSmileys($text) {
+    public function replaceSmileys($text)
+    {
         $text = nl2br(htmlspecialchars($text));
         $smileys = $this->getSmileysImageHTML();
-        foreach ($smileys as $code => $image)	{
+        foreach ($smileys as $code => $image) {
             $text = str_replace($code, $image, $text);
         }
+
         return $text;
     }
 
-    public function getSmileysImages() {
+    public function getSmileysImages()
+    {
         $smileys = $this->getSmileysImageHTML(true);
-        $result = array();
-        foreach ($smileys as $code => $image)	{
+        $result = [];
+        foreach ($smileys as $code => $image) {
             $result[] = $image;
         }
+
         return $result;
     }
 
-    public function getSmileysIDsAndText() {
+    public function getSmileysIDsAndText()
+    {
         $smileys = $this->getSmileys(true);
-        $result = array();
-        foreach ($smileys as $code => $info)	{
+        $result = [];
+        foreach ($smileys as $code => $info) {
             $result[$code] = $info['filename'];
         }
+
         return $result;
     }
 
-    private function getSmileysImageHTML($unique = false) {
+    private function getSmileysImageHTML($unique = false)
+    {
         $smileys = $this->getSmileys($unique);
-        $result = array();
-        foreach ($smileys as $code => $info)	{
+        $result = [];
+        foreach ($smileys as $code => $info) {
             $result[$code] = '<img id="smiley-' . $info['filename'] . '" src="' .
                 asset(elixir('images/guestbook/' . $info['filename'] . '.svg')) . '" ';
             $result[$code] .= 'width="18" height="18" alt="' . $info['name'] . '" title="' . $info['name'] . '" />';
         }
+
         return $result;
     }
 
-    private function getSmileys($unique = false) {
-        $smileys = array(
+    private function getSmileys($unique = false)
+    {
+        $smileys = [
             ':-)' => 'Smile',
             ':)' => 'Smile',
             ';-)' => 'Blinzeln',
@@ -67,10 +76,12 @@ class Utils
             '[Kondom]' => 'Kondom',
             '[Säge]' => 'Säge',
             '[Knochen]' => 'Knochen',
-        );
-        $skip = array (':)', ';)', ':(', ':D', ':P', ':-p', ':p', ':-o');
+        ];
+        $skip = [':)', ';)', ':(', ':D', ':P', ':-p', ':p', ':-o'];
         foreach ($smileys as $code => $name) {
-            if ($unique and in_array($code, $skip)) continue;
+            if ($unique and in_array($code, $skip)) {
+                continue;
+            }
             $filename = strtolower($name);
             $filename = str_replace("ä", "ae", $filename);
             $filename = str_replace("ö", "oe", $filename);
@@ -80,8 +91,9 @@ class Utils
             $filename = str_replace("Ü", "Ue", $filename);
             $filename = str_replace("ß", "ss", $filename);
             $filename = str_replace("!", "", $filename);
-            $result[$code] = array('filename' => $filename, 'name' => $name);
+            $result[$code] = ['filename' => $filename, 'name' => $name];
         }
+
         return $result;
     }
 }

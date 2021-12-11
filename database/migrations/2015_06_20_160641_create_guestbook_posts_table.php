@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class CreateGuestbookPostsTable extends Migration
 {
@@ -14,9 +14,9 @@ class CreateGuestbookPostsTable extends Migration
     {
         Schema::create('guestbook_posts', function (Blueprint $table) {
             $table->increments('id');
-			$table->string('name', 255);
-			$table->text('message');
-			$table->text('cheffe')->nullable();
+            $table->string('name', 255);
+            $table->text('message');
+            $table->text('cheffe')->nullable();
             $table->string('category', 14)->nullable();
             $table->timestamps();
         });

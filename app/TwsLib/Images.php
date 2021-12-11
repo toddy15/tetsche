@@ -20,12 +20,13 @@ class Images
     {
         $directory = 'images/gb_animals';
         $image = $this->getRandomImage($directory);
-        $size= getimagesize(public_path() . '/' . $image);
+        $size = getimagesize(public_path() . '/' . $image);
         $url = asset(elixir($image));
         $name = $this->getNameFromFilename($image);
         $result = '<img src="' . $url . '" ';
         $result .= $size[3];
         $result .= ' alt="' . $name . '" title="' . $name . '" />';
+
         return $result;
     }
 
@@ -39,6 +40,7 @@ class Images
     {
         $images = $this->getImagesInDirectory(public_path() . '/' . $directory);
         $num = mt_rand(0, count($images) - 1);
+
         return $directory . '/' . $images[$num];
     }
 
@@ -60,6 +62,7 @@ class Images
         }
         closedir($dir);
         sort($images);
+
         return $images;
     }
 
@@ -73,6 +76,7 @@ class Images
             ['ä', 'ö', 'ü', 'Ä', 'Ö', 'Ü', ' '],
             $filename
         );
+
         return ucwords($filename);
     }
 }

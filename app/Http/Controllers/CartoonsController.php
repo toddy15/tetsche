@@ -3,12 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Cartoon;
-use Illuminate\Http\Request;
-
-use App\Http\Requests;
-use App\Http\Controllers\Controller;
 use App\PublicationDate;
-use Illuminate\Support\Facades\Mail;
+
+use Illuminate\Http\Request;
 
 class CartoonsController extends Controller
 {
@@ -20,6 +17,7 @@ class CartoonsController extends Controller
     public function index()
     {
         $publication_dates = PublicationDate::orderBy('publish_on', 'desc')->simplePaginate(8);
+
         return view('cartoons.index', [
             'title' => 'Übersicht',
             'keywords' => 'Tetsche, Kalauseite, Cartoon',
@@ -37,6 +35,7 @@ class CartoonsController extends Controller
     {
         $next_thursday = $this->getThursday("next");
         list($year, $month, $day) = explode('-', $next_thursday);
+
         return view('cartoons.create', [
             'title' => 'Neuer Cartoon',
             'year' => $year,
@@ -55,12 +54,14 @@ class CartoonsController extends Controller
     {
         // Check for an uploaded file
         if ($request->hasFile('image') and $request->file('image')->isValid()) {
-            $cartoon = new Cartoon;
+            $cartoon = new Cartoon();
             // Construct the publish date
-            $cartoon->publish_on = sprintf("%04d-%02d-%02d",
+            $cartoon->publish_on = sprintf(
+                "%04d-%02d-%02d",
                 $request->input('year'),
                 $request->input('month'),
-                $request->input('day'));
+                $request->input('day')
+            );
             $cartoon->rebus = $request->input('rebus');
             $cartoon->random_number = substr(mt_rand(100000, 999999), 1, 5);
             // Save the uploaded file to a temp name
@@ -97,12 +98,15 @@ class CartoonsController extends Controller
             unlink($tmp_filename);
             $cartoon->save();
             $request->session()->flash('info', 'Der Cartoon wurde gespeichert.');
+
             return redirect(action('CartoonsController@index'));
-        }
-        else {
-            $request->session()->flash('error',
+        } else {
+            $request->session()->flash(
+                'error',
                 'Die Datei für den Cartoon wurde nicht hochgeladen. ' .
-                'Entweder wurde keine Datei ausgewählt oder die ausgewählte Datei ist zu groß.');
+                'Entweder wurde keine Datei ausgewählt oder die ausgewählte Datei ist zu groß.'
+            );
+
             return redirect('cartoons/neu')->withInput();
         }
     }
@@ -131,10 +135,11 @@ class CartoonsController extends Controller
         // Search cartoon for the given date
         $cartoon = PublicationDate::where('publish_on', '=', $date)->first()->cartoon;
         // Show 404 if the cartoon is not found
-        if (!$cartoon) {
+        if (! $cartoon) {
             abort(404);
         }
         $cartoon->showRebusSolution = true;
+
         return view('cartoons.show', [
             'title' => 'Archiv',
             'pagetitle' => 'Cartoon der Woche . . . vom ' . \Carbon\Carbon::parse($date)->formatLocalized('%e. %B %Y'),
@@ -154,6 +159,7 @@ class CartoonsController extends Controller
         $date = $this->getDateOfCurrentCartoon();
         $cartoon = PublicationDate::where('publish_on', '=', $date)->first()->cartoon;
         $cartoon->showRebusSolution = false;
+
         return view('cartoons.show', [
             'title' => 'Cartoon der Woche',
             'pagetitle' => 'Cartoon der Woche . . . vom ' . \Carbon\Carbon::parse($date)->formatLocalized('%e. %B %Y'),
@@ -175,6 +181,7 @@ class CartoonsController extends Controller
         $dates = PublicationDate::where('publish_on', '<', $date)
             ->where('publish_on', '>=', $last_archived)
             ->orderBy('publish_on', 'desc')->simplePaginate(8);
+
         return view('cartoons.archive', [
             'title' => 'Archiv',
             'keywords' => 'Tetsche im »stern«, Kalauseite, Cartoon, Kalau-Archiv, Archiv',
@@ -192,6 +199,7 @@ class CartoonsController extends Controller
     public function edit($id)
     {
         $cartoon = Cartoon::findOrFail($id);
+
         return view('cartoons.edit', [
             'title' => 'Cartoon bearbeiten',
             'cartoon' => $cartoon,
@@ -211,6 +219,7 @@ class CartoonsController extends Controller
         $cartoon->rebus = $request->input('rebus');
         $cartoon->save();
         $request->session()->flash('info', 'Die Rebuslösung wurde gespeichert.');
+
         return redirect('cartoons');
     }
 
@@ -228,6 +237,7 @@ class CartoonsController extends Controller
         unlink($cartoon->thumbnailPath());
         $cartoon->delete();
         $request->session()->flash('info', 'Der Cartoon wurde gelöscht.');
+
         return redirect('cartoons');
     }
 
@@ -243,6 +253,7 @@ class CartoonsController extends Controller
             $newest_cartoon->delete();
             $this->checkIfCurrentIsLastCartoon();
         }
+
         return redirect('cartoons');
     }
 
@@ -318,21 +329,22 @@ class CartoonsController extends Controller
             while (true) {
                 $random_id = mt_rand($min_number, $max_number);
                 if (in_array($random_id, $all_cartoon_ids)
-                  and !in_array($random_id, $recent_cartoon_ids)
-                  and !in_array($random_id, $all_special_ids)) {
+                  and ! in_array($random_id, $recent_cartoon_ids)
+                  and ! in_array($random_id, $all_special_ids)) {
                     break;
                 }
             }
 
             // Ensure that the publication date does not yet exist.
             $date_exists = PublicationDate::where('publish_on', $publish_on)->first();
-            if (!$date_exists) {
+            if (! $date_exists) {
                 PublicationDate::create([
                     'publish_on' => $publish_on,
                     'cartoon_id' => $random_id,
                 ]);
             }
         }
+
         return redirect(action('CartoonsController@showCurrent'));
     }
 
@@ -363,6 +375,7 @@ class CartoonsController extends Controller
         // Construct and explode the date again to cope with
         // overflows (e.g. 2015-03-35) and get a valid date
         $thursday = date("Y-m-d", mktime(0, 0, 0, $month, $day, $year));
+
         return $thursday;
     }
 
@@ -377,6 +390,7 @@ class CartoonsController extends Controller
         $current_cartoon = PublicationDate::where('publish_on', '<=', $date)
             ->orderBy('publish_on', 'DESC')
             ->first();
+
         return $current_cartoon->publish_on;
     }
 
@@ -388,6 +402,7 @@ class CartoonsController extends Controller
     private function getDateOfLastArchivedCartoon()
     {
         $current = $this->getDateOfCurrentCartoon();
+
         return PublicationDate::where('publish_on', '<=', $current)
             ->orderBy('publish_on', 'desc')
             ->skip(16)

@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\GuestbookPost;
-use App\Http\Requests;
-use App\Http\Controllers\Controller;
 use App\PublicationDate;
 use App\TwsLib\Spamfilter;
 use Illuminate\Http\Request;
@@ -24,6 +22,7 @@ class GuestbookPostsController extends Controller
         $guestbook_posts = GuestbookPost::whereNotIn('category', ['manual_spam', 'autolearn_spam'])
             ->latest()
             ->simplePaginate(10);
+
         return view('guestbook_posts.index', [
             'guestbook_posts' => $guestbook_posts,
             'title' => 'Gästebuch',
@@ -59,7 +58,7 @@ class GuestbookPostsController extends Controller
         $spam_detection .= ", Browser: " . $request->server('HTTP_USER_AGENT');
         $post['score'] = $spamfilter->classify($text, $spam_detection);
         // @FIXME: Filter out the fuckheads, based on IP address
-        if (!$spamfilter->isSpam($post['score'])) {
+        if (! $spamfilter->isSpam($post['score'])) {
             $ip = explode('.', $request->ip());
             if (($ip[0] == 141) and ($ip[1] == 48)) {
                 $post['score'] = $spamfilter->threshold_autolearn_spam;
@@ -102,25 +101,27 @@ class GuestbookPostsController extends Controller
             ->orderBy('publish_on', 'DESC')
             ->first();
         $cartoon = PublicationDate::where(
-            'publish_on', '=', $current_cartoon->publish_on
+            'publish_on',
+            '=',
+            $current_cartoon->publish_on
         )->first()->cartoon;
         // Compare case insensitive for better results
         if (stripos($text, $cartoon->rebus) !== false) {
-           $post['score'] = $spamfilter->threshold_autolearn_spam;
+            $post['score'] = $spamfilter->threshold_autolearn_spam;
         }
 
         $post['category'] = $spamfilter->calculateCategory($post['score']);
         $post['spam_detection'] = $spam_detection;
         $validator = Validator::make($post, [
             'name' => 'required',
-            'message' => 'required'
+            'message' => 'required',
         ]);
         // Add the spam check
-        $validator->after(function($validator) use ($post, $spamfilter) {
+        $validator->after(function ($validator) use ($post, $spamfilter) {
             if ($spamfilter->isSpam($post['score'])) {
                 $validator->errors()->add('message', 'Der Eintrag wurde als Spam eingestuft und daher nicht gespeichert.');
                 // @FIXME: Remove this part if sending all spam mails is no longer necessary.
-                if (!$spamfilter->isAutolearnSpam($post['score'])) {
+                if (! $spamfilter->isAutolearnSpam($post['score'])) {
                     $data = [
                         'id' => 0,
                         'name' => $post['name'],
@@ -131,7 +132,7 @@ class GuestbookPostsController extends Controller
                         'category' => $post['category'],
                         'spam_detection' => $post['spam_detection'],
                     ];
-                    Mail::queue(['text' => 'emails.guestbook'], $data, function($message) {
+                    Mail::queue(['text' => 'emails.guestbook'], $data, function ($message) {
                         $message->from('webmaster@tetsche.de', 'Gästebuch');
                         $message->to('toddy@example.org', 'Toddy');
                         $message->subject('Neuer Eintrag im Tetsche-Gästebuch (als Spam abgelehnt)');
@@ -152,7 +153,7 @@ class GuestbookPostsController extends Controller
                     'category' => $post['category'],
                     'spam_detection' => $post['spam_detection'],
                 ];
-                Mail::queue(['text' => 'emails.guestbook'], $data, function($message) {
+                Mail::queue(['text' => 'emails.guestbook'], $data, function ($message) {
                     $message->from('webmaster@tetsche.de', 'Gästebuch');
                     $message->to('toddy@example.org', 'Toddy');
                     $message->subject('Neuer Eintrag im Tetsche-Gästebuch (als Spam gelernt)');
@@ -178,13 +179,14 @@ class GuestbookPostsController extends Controller
             'category' => $post['category'],
             'spam_detection' => $post['spam_detection'],
         ];
-        Mail::queue(['text' => 'emails.guestbook'], $data, function($message) {
+        Mail::queue(['text' => 'emails.guestbook'], $data, function ($message) {
             $message->from('webmaster@tetsche.de', 'Gästebuch');
             $message->to('tetsche@example.org', 'Tetsche');
             $message->to('toddy@example.org', 'Toddy');
             $message->subject('Neuer Eintrag im Tetsche-Gästebuch');
         });
         $request->session()->flash('info', 'Der Eintrag wurde gespeichert.');
+
         return redirect(action('GuestbookPostsController@index'));
         // @TODO: This should probably go into an own Request class.
 //        $post = $request->all();
@@ -205,8 +207,9 @@ class GuestbookPostsController extends Controller
         $guestbook_post = GuestbookPost::findOrFail($id);
         // Calculate spam score
         $spamfilter = new Spamfilter();
-        $text = $guestbook_post->name. ' ' . $guestbook_post->message;
+        $text = $guestbook_post->name . ' ' . $guestbook_post->message;
         $guestbook_post->score = round($spamfilter->classify($text, $guestbook_post->spam_detection) * 100, 1);
+
         return view('guestbook_posts.edit', compact('guestbook_post'));
     }
 
@@ -232,6 +235,7 @@ class GuestbookPostsController extends Controller
         // Relearn spam status
         $spamfilter->learnStatus($guestbook_post);
         $request->session()->flash('info', 'Der Eintrag wurde geändert.');
+
         return redirect(action('GuestbookPostsController@index'));
     }
 
@@ -249,6 +253,7 @@ class GuestbookPostsController extends Controller
         $spamfilter->unlearnStatus($guestbook_post);
         GuestbookPost::destroy($id);
         $request->session()->flash('info', 'Der Eintrag wurde gelöscht.');
+
         return redirect(action('GuestbookPostsController@index'));
     }
 
@@ -269,6 +274,7 @@ class GuestbookPostsController extends Controller
             })
             ->latest()
             ->simplePaginate(10);
+
         return view('guestbook_posts.index', [
             'guestbook_posts' => $guestbook_posts,
             'title' => 'Gästebuch-Suche',

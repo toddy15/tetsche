@@ -17,15 +17,15 @@ class Spamfilter
     public function initializeAll($texts)
     {
         \DB::table('filter_texts')->delete();
-        \DB::table('filter_texts')->insert(array('category' => 'ham', 'count_texts' => count($texts['ham'])));
-        \DB::table('filter_texts')->insert(array('category' => 'spam', 'count_texts' => count($texts['spam'])));
+        \DB::table('filter_texts')->insert(['category' => 'ham', 'count_texts' => count($texts['ham'])]);
+        \DB::table('filter_texts')->insert(['category' => 'spam', 'count_texts' => count($texts['spam'])]);
         \DB::table('filter_tokens')->delete();
         $table_data = [];
         foreach ($texts as $category => $posts) {
             foreach ($posts as $post) {
                 $tokens = $this->parse($post);
                 foreach ($tokens as $token => $count) {
-                    if (!isset($table_data[$token])) {
+                    if (! isset($table_data[$token])) {
                         $table_data[$token] = ['count_ham' => 0, 'count_spam' => 0];
                     }
                     if ($category == 'ham') {
@@ -52,6 +52,7 @@ class Spamfilter
         if ($score >= $this->threshold_spam) {
             return true;
         }
+
         return false;
     }
 
@@ -63,6 +64,7 @@ class Spamfilter
         if ($score >= $this->threshold_autolearn_spam and $score < $this->threshold_no_autolearn_spam) {
             return true;
         }
+
         return false;
     }
 
@@ -130,6 +132,7 @@ class Spamfilter
         $spam_score = ($hamminess - $spamminess) / ($hamminess + $spamminess);
         // Adapt the scale to 0 and 1
         $spam_score = (1 + $spam_score) / 2;
+
         return $spam_score;
     }
 
@@ -138,7 +141,7 @@ class Spamfilter
      */
     public function learnStatus($post)
     {
-        $text = $post->name. ' ' . $post->message;
+        $text = $post->name . ' ' . $post->message;
         $spam_detection = $post->spam_detection;
         if (($post->category == 'manual_spam') or ($post->category == 'autolearn_spam')) {
             $this->addSpam($text, $spam_detection);
@@ -187,6 +190,7 @@ class Spamfilter
         if ($score >= $this->threshold_no_autolearn_spam) {
             $category = 'no_autolearn_spam';
         }
+
         return $category;
     }
 
@@ -214,8 +218,7 @@ class Spamfilter
                 \DB::table('filter_tokens')
                     ->where('token', $token)
                     ->update(['count_ham' => $count['count_ham'], 'count_spam' => $count['count_spam']]);
-            }
-            else {
+            } else {
                 // New record.
                 \DB::table('filter_tokens')->insert([
                     'token' => $token,
@@ -291,8 +294,7 @@ class Spamfilter
                 \DB::table('filter_tokens')
                     ->where('token', $token)
                     ->update(['count_ham' => $count['count_ham'], 'count_spam' => $count['count_spam']]);
-            }
-            else {
+            } else {
                 // New record.
                 \DB::table('filter_tokens')->insert([
                     'token' => $token,
@@ -365,6 +367,7 @@ class Spamfilter
                 $result[$token] = 1;
             }
         }
+
         return $result;
     }
 
@@ -374,12 +377,12 @@ class Spamfilter
     public function parseHTML($text)
     {
         // Ensure an array as input
-        if (!is_array($text)) {
+        if (! is_array($text)) {
             $text = [$text];
         }
         $result = [];
         foreach ($text as $part) {
-            $tokens = preg_split('/(<[^>]+?>)/', $part, NULL, PREG_SPLIT_DELIM_CAPTURE);
+            $tokens = preg_split('/(<[^>]+?>)/', $part, null, PREG_SPLIT_DELIM_CAPTURE);
             foreach ($tokens as $token) {
                 $token = trim($token);
                 if ($token == '') {
@@ -388,6 +391,7 @@ class Spamfilter
                 $result[] = $token;
             }
         }
+
         return $result;
     }
 
@@ -398,11 +402,11 @@ class Spamfilter
     {
         $result = [];
         // Ensure an array as input
-        if (!is_array($text)) {
+        if (! is_array($text)) {
             $text = [$text];
         }
         foreach ($text as $part) {
-            $tokens = preg_split('/(\[[^[\]]+?])/', $part, NULL, PREG_SPLIT_DELIM_CAPTURE);
+            $tokens = preg_split('/(\[[^[\]]+?])/', $part, null, PREG_SPLIT_DELIM_CAPTURE);
             foreach ($tokens as $token) {
                 $token = trim($token);
                 if ($token == '') {
@@ -411,6 +415,7 @@ class Spamfilter
                 $result[] = $token;
             }
         }
+
         return $result;
     }
 }

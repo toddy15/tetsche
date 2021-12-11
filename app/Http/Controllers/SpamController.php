@@ -6,9 +6,6 @@ use App\GuestbookPost;
 use App\TwsLib\Spamfilter;
 use Illuminate\Http\Request;
 
-use App\Http\Requests;
-use App\Http\Controllers\Controller;
-
 class SpamController extends Controller
 {
     /**
@@ -42,6 +39,7 @@ class SpamController extends Controller
         $spamfilter = new Spamfilter();
         $spamfilter->initializeAll($texts);
         $request->session()->flash('info', 'Alle Ham- und Spamtexte wurden neu gelernt.');
+
         return redirect('spam');
     }
 
@@ -56,18 +54,23 @@ class SpamController extends Controller
         switch ($category) {
             case 'manual_ham':
                 $description = 'Manuell als Ham gelernt';
+
                 break;
             case 'unsure':
                 $description = 'Keine Zuordnung';
+
                 break;
             case 'manual_spam':
                 $description = 'Manuell als Spam gelernt';
+
                 break;
             case 'autolearn_ham':
                 $description = 'Automatisch als Ham gelernt';
+
                 break;
             case 'autolearn_spam':
                 $description = 'Automatisch als Spam gelernt';
+
                 break;
             default:
                 return redirect(action('GuestbookPostsController@index'));
@@ -75,6 +78,7 @@ class SpamController extends Controller
         $guestbook_posts = GuestbookPost::where('category', $category)
             ->orderBy('created_at', 'desc')
             ->simplePaginate(10);
+
         return view('guestbook_posts.index', [
             'guestbook_posts' => $guestbook_posts,
             'title' => 'Gästebuch - ' . $description,
