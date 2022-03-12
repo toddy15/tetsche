@@ -24,9 +24,9 @@
     RewriteBase /~toddy/tetsche/www/public/
 
     # Always use the www. prefix
-    RewriteCond %{HTTP_HOST} !^www\. [NC]
-    RewriteCond %{HTTP_HOST} !^localhost$ [NC]
-    RewriteRule ^(.*)$ https://www.%{HTTP_HOST}/$1 [L,R=301]
+    #RewriteCond %{HTTP_HOST} !^www\. [NC]
+    #RewriteCond %{HTTP_HOST} !^localhost$ [NC]
+    #RewriteRule ^(.*)$ https://www.%{HTTP_HOST}/$1 [L,R=301]
 
     # Add redirect for matomo folder
     RewriteRule ^matomo/?$ /matomo/index.php [L]
