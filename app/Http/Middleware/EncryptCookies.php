@@ -2,10 +2,9 @@
 
 namespace App\Http\Middleware;
 
-use Illuminate\Cookie\Middleware\EncryptCookies as BaseEncrypter;
-use Symfony\Component\HttpFoundation\Request;
+use Illuminate\Cookie\Middleware\EncryptCookies as Middleware;
 
-class EncryptCookies extends BaseEncrypter
+class EncryptCookies extends Middleware
 {
     /**
      * The names of the cookies that should not be encrypted.
@@ -15,23 +14,4 @@ class EncryptCookies extends BaseEncrypter
     protected $except = [
         //
     ];
-
-    protected function decrypt(Request $request)
-    {
-        foreach ($request->cookies as $key => $c) {
-            if ($this->isDisabled($key)) {
-                continue;
-            }
-
-            try {
-                $request->cookies->set($key, $this->decryptCookie($c));
-            } catch (\Illuminate\Contracts\Encryption\DecryptException $e) {
-                $request->cookies->set($key, null);
-            } catch (\ErrorException $e) {
-                $request->cookies->set($key, null);
-            }
-        }
-
-        return $request;
-    }
 }
