@@ -3,6 +3,7 @@
 return [
 
     'env' => env('APP_ENV', 'production'),
+    'name' => env('APP_NAME', 'Your Application Name'),
 
     /*
     |--------------------------------------------------------------------------
@@ -145,6 +146,7 @@ return [
         App\Providers\AppServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        App\Providers\BroadcastServiceProvider::class,
 
     ],
 
@@ -194,6 +196,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Form' => Collective\Html\FormFacade::class,
+        'Notification' => Illuminate\Support\Facades\Notification::class,
 
     ],
 
