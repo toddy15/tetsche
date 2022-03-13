@@ -5,7 +5,7 @@
     <p>Schön, dass Sie sich ins Gästebuch eintragen möchten.</p>
 
     <form method="POST" action="{{ action("GuestbookPostsController@store") }}">
-        {{ csrf_token() }}
+        @csrf
 
         @include('guestbook_posts.form')
 
