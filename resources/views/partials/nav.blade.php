@@ -28,7 +28,7 @@
                         <ul class="dropdown-menu" role="menu">
                             <li><a href="{{ action('SpamController@index') }}">Administration des Gästebuchs</a></li>
                             <li><a href="{{ action('CartoonsController@index') }}">Administration der Cartoons</a></li>
-                            <li><a href="{{ url('/auth/logout') }}">Logout</a></li>
+                            <li><a href="{{ url('/logout') }}">Logout</a></li>
                         </ul>
                     </li>
                 </ul>
