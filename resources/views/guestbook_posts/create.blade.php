@@ -4,14 +4,14 @@
     <h1>Gästebuch: Neuer Eintrag</h1>
     <p>Schön, dass Sie sich ins Gästebuch eintragen möchten.</p>
 
-    {!! Form::open(['action' => 'GuestbookPostsController@store']) !!}
+    <form method="POST" action="{{ action("GuestbookPostsController@store") }}">
+        {{ csrf_token() }}
 
-    @include('guestbook_posts.form')
+        @include('guestbook_posts.form')
 
-    <!-- Submit Form Input  -->
-    <div class="form-group text-center">
-        {!! Form::submit('Speichern', ['class' => 'btn btn-default btn-primary']) !!}
-    </div>
+        <div class="form-group text-center">
+            <button type="submit" class="btn btn-default btn-primary">Speichern</button>
+        </div>
 
-    {!! Form::close() !!}
+    </form>
 @stop
