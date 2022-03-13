@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Cartoon;
 use App\PublicationDate;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class CartoonsController extends Controller
@@ -114,7 +115,7 @@ class CartoonsController extends Controller
     /**
      * Display an archived cartoon.
      *
-     * @return Response
+     * @return \Illuminate\View\View
      */
     public function show($date)
     {
@@ -142,7 +143,7 @@ class CartoonsController extends Controller
 
         return view('cartoons.show', [
             'title' => 'Archiv',
-            'pagetitle' => 'Cartoon der Woche . . . vom ' . \Carbon\Carbon::parse($date)->formatLocalized('%e. %B %Y'),
+            'pagetitle' => 'Cartoon der Woche . . . vom ' . Carbon::parse($date)->locale("de")->format('%e. %B %Y'),
             'keywords' => 'Tetsche, Kalauseite, Cartoon, Kalau-Archiv, Archiv',
             'description' => 'Archiv - ältere Ausgaben',
             'cartoon' => $cartoon,
@@ -162,7 +163,7 @@ class CartoonsController extends Controller
 
         return view('cartoons.show', [
             'title' => 'Cartoon der Woche',
-            'pagetitle' => 'Cartoon der Woche . . . vom ' . \Carbon\Carbon::parse($date)->formatLocalized('%e. %B %Y'),
+            'pagetitle' => 'Cartoon der Woche . . . vom ' . Carbon::parse($date)->locale("de")->format('%e. %B %Y'),
             'keywords' => 'Tetsche, Kalauseite der Woche, Cartoon der Woche',
             'description' => 'Tetsche - Cartoon der Woche',
             'cartoon' => $cartoon,
