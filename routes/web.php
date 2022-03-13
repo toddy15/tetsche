@@ -11,6 +11,10 @@
 |
 */
 
+// Authentication routes
+Auth::routes();
+Route::get('/logout', 'Auth\LoginController@logout');
+
 // Static pages
 Route::get('/', 'PagesController@homepage');
 Route::get('tetsche', 'PagesController@tetsche');
@@ -53,7 +57,3 @@ Route::put('cartoons/{id}', ['middleware' => 'auth', 'uses' => 'CartoonsControll
     ->where('id', '[0-9]+');
 Route::delete('cartoons/{id}', ['middleware' => 'auth', 'uses' => 'CartoonsController@destroy'])
     ->where('id', '[0-9]+');
-
-// Authentication routes
-Auth::routes();
-Route::get('/logout', 'Auth\LoginController@logout');
