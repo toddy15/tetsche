@@ -44,7 +44,7 @@
 							<div class="col-md-6 col-md-offset-4">
 								<button type="submit" class="btn btn-primary">Anmelden</button>
 
-								<a class="btn btn-link" href="{{ url('/password/email') }}">Passwort vergessen?</a>
+								<a class="btn btn-link" href="{{ url('/password/reset') }}">Passwort vergessen?</a>
 							</div>
 						</div>
 					</form>
