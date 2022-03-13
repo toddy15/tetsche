@@ -12,9 +12,7 @@
 <!-- Message Form Input  -->
 <div class="form-group {{ $errors->has('message') ? 'has-error has-feedback' : '' }}">
     <label for="message">Nachricht:</label>
-    <textarea class="form-control" id="message" name="message" placeholder="Ihre Nachricht" rows="10" cols="50">
-        {{ old("name") }}
-    </textarea>
+    <textarea class="form-control" id="message" name="message" placeholder="Ihre Nachricht" rows="10" cols="50">{{ old("name") }}</textarea>
     @if ($errors->has('message'))
         <span class="glyphicon glyphicon-remove form-control-feedback"></span>
     @endif
