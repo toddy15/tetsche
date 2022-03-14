@@ -31,7 +31,7 @@
     <div id="app">
         @include('partials.nav')
 
-        <div class="container-xl">
+        <div class="container mt-4">
             @include('partials.errors')
             @include('partials.info')
 
