@@ -1,38 +1,53 @@
-<nav class="navbar navbar-default">
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #fa6666;">
     <div class="container-fluid">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                <span class="sr-only">Toggle Navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="{{ url('/') }}">Home</a>
-        </div>
+        <a class="navbar-brand" href="{{ url('/') }}">Home</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item {{ Request::is('tetsche') ? 'active' : ''}}">
+                    <a class="nav-link {{ Request::is('tetsche') ? 'active' : '' }}" {!! Request::is('tetsche') ? 'aria-current="page"' : '' !!} href="{{ url('tetsche') }}">Tetsche</a>
+                </li>
+                <li class="nav-item {{ Request::is('cartoon') ? 'active' : ''}}">
+                    <a class="nav-link {{ Request::is('cartoon') ? 'active' : '' }}" {!! Request::is('cartoon') ? 'aria-current="page"' : '' !!} href="{{ url('cartoon') }}">Cartoon</a>
+                </li>
+                <li class="nav-item {{ Request::is('archiv') ? 'active' : ''}}">
+                    <a class="nav-link {{ Request::is('archiv') ? 'active' : '' }}" {!! Request::is('archiv') ? 'aria-current="page"' : '' !!} href="{{ url('archiv') }}">Archiv</a>
+                </li>
+                <li class="nav-item {{ Request::is('bücher') ? 'active' : ''}}">
+                    <a class="nav-link {{ Request::is('bücher') ? 'active' : '' }}" {!! Request::is('bücher') ? 'aria-current="page"' : '' !!} href="{{ url('bücher') }}">Bücher</a>
+                </li>
+                <li class="nav-item {{ Request::is('gästebuch') ? 'active' : ''}}">
+                    <a class="nav-link {{ Request::is('gästebuch') ? 'active' : '' }}" {!! Request::is('gästebuch') ? 'aria-current="page"' : '' !!} href="{{ url('gästebuch') }}">Gästebuch</a>
+                </li>
+                <li class="nav-item {{ Request::is('impressum') ? 'active' : ''}}">
+                    <a class="nav-link {{ Request::is('impressum') ? 'active' : '' }}" {!! Request::is('impressum') ? 'aria-current="page"' : '' !!} href="{{ url('impressum') }}">Impressum</a>
+                </li>
+                <li class="nav-item {{ Request::is('datenschutzerklärung') ? 'active' : ''}}">
+                    <a class="nav-link {{ Request::is('datenschutzerklärung') ? 'active' : '' }}" {!! Request::is('datenschutzerklärung') ? 'aria-current="page"' : '' !!} href="{{ url('datenschutzerklärung') }}">Datenschutzerklärung</a>
+                </li>
 
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-                <li {!! Request::is('tetsche') ? 'class="active"' : '' !!}><a href="{{ url('tetsche') }}">Tetsche</a></li>
-                <li {!! Request::is('cartoon') ? 'class="active"' : '' !!}><a href="{{ url('cartoon') }}">Cartoon</a></li>
-                <li {!! Request::is('archiv') ? 'class="active"' : '' !!}><a href="{{ url('archiv') }}">Archiv</a></li>
-                <li {!! Request::is('bücher') ? 'class="active"' : '' !!}><a href="{{ url('bücher') }}">Bücher</a></li>
-                <li {!! Request::is('gästebuch') ? 'class="active"' : '' !!}><a href="{{ url('gästebuch') }}">Gästebuch</a></li>
-                <li {!! Request::is('impressum') ? 'class="active"' : '' !!}><a href="{{ url('impressum') }}">Impressum</a></li>
-                <li {!! Request::is('datenschutzerklärung') ? 'class="active"' : '' !!}><a href="{{ url('datenschutzerklärung') }}">Datenschutzerklärung</a></li>
+                @unless (Auth::guest())
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                       data-bs-toggle="dropdown" aria-expanded="false">
+                        {{ Auth::user()->name }}
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="{{ action([App\Http\Controllers\SpamController::class, 'index']) }}">Administration
+                                    des Gästebuchs</a></li>
+                        <li><a class="dropdown-item" href="{{ action([App\Http\Controllers\CartoonsController::class, 'index']) }}">Administration
+                                    der Cartoons</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="{{ url('/logout') }}">Abmelden</a></li>
+                    </ul>
+                </li>
+                @endunless
             </ul>
-
-            @unless (Auth::guest())
-                <ul class="nav navbar-nav navbar-right">
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ Auth::user()->name }} <span class="caret"></span></a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li><a href="{{ action([App\Http\Controllers\SpamController::class, 'index']) }}">Administration des Gästebuchs</a></li>
-                            <li><a href="{{ action([App\Http\Controllers\CartoonsController::class, 'index']) }}">Administration der Cartoons</a></li>
-                            <li><a href="{{ url('/logout') }}">Logout</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            @endunless
         </div>
     </div>
 </nav>
