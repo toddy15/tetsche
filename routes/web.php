@@ -65,3 +65,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('cartoons/{id}', [CartoonsController::class, 'destroy'])
         ->where('id', '[0-9]+');
 });
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
