@@ -75,6 +75,17 @@ class PagesTest extends TestCase
         $response->assertSeeText('Gästebuch');
         $response->assertSeeText('Name');
         $response->assertSeeText('Nachricht');
+
+        $this->get('/gästebuch/neu')
+            ->assertOk()
+            ->assertSeeText('Gästebuch: Neuer Eintrag');
+
+        $entry = GuestbookPost::factory()->raw();
+        $this->assertDatabaseMissing('guestbook_posts', $entry);
+
+        $this->post('/gästebuch/neu', $entry);
+
+        $this->assertDatabaseHas('guestbook_posts', $entry);
     }
 }
 
