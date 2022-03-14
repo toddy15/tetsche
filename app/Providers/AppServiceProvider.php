@@ -14,8 +14,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        // @TODO: Use Bootstrap 4 and remove this call.
-        Paginator::useBootstrapThree();
+        Paginator::useBootstrap();
     }
 
     /**

@@ -12,7 +12,7 @@
                     <p><a href="{{ action([App\Http\Controllers\GuestbookPostsController::class, 'create']) }}" class="btn btn-primary" role="button">Neuer Eintrag</a></p>
                 </div>
                 <div class="col-xs-12 col-sm-6">
-                    <form method="GET" action="{{ action([\App\Http\Controllers\GuestbookPostsController::class, 'search']) }}"
+                    <form method="GET" action="{{ action([\App\Http\Controllers\GuestbookPostsController::class, 'search']) }}">
                     <div class="form-inline">
                         {!! Form::label('search', 'Suche:', ['class' => 'sr-only control-label']) !!}
                         <div class="input-group">
@@ -24,7 +24,7 @@
                             </span>
                         </div>
                     </div>
-                    {!! Form::close() !!}
+                    </form>
                 </div>
             </div>
         </div>
@@ -34,14 +34,10 @@
     </div>
     @if ($guestbook_posts->count())
         <table class="table table-striped">
-            <colgroup>
-                <col class="col-xs-4">
-                <col class="col-xs-8">
-            </colgroup>
             <thead>
                 <tr>
-                    <th>Name</th>
-                    <th>Nachricht</th>
+                    <th class="col-4">Name</th>
+                    <th class="col-8">Nachricht</th>
                 </tr>
             </thead>
             <tbody>
