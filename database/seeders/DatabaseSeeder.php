@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\PublicationDate;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -14,6 +13,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-         PublicationDate::factory(30)->create();
+         //
     }
 }
