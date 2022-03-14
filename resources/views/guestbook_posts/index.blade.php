@@ -1,4 +1,4 @@
-@extends('app')
+@extends('layouts.app')
 
 @inject('utils', 'App\TwsLib\Utils')
 @inject('images', 'App\TwsLib\Images')
