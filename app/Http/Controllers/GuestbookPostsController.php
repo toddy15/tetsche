@@ -161,7 +161,7 @@ class GuestbookPostsController extends Controller
             }
         });
         if ($validator->fails()) {
-            return redirect(action('GuestbookPostsController@create'))
+            return redirect(action([GuestbookPostsController::class, 'create']))
                 ->withErrors($validator)
                 ->withInput();
         }
@@ -264,7 +264,7 @@ class GuestbookPostsController extends Controller
     {
         $query = $request->get('q');
         if (trim($query) == '') {
-            return redirect(action('GuestbookPostsController@index'));
+            return redirect(action([GuestbookPostsController::class, 'index']));
         }
         $guestbook_posts = GuestbookPost::whereNotIn('category', ['manual_spam', 'autolearn_spam'])
             ->where(function ($sql) use ($query) {
