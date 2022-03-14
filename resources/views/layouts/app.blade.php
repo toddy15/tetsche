@@ -24,10 +24,6 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
 
-    <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
@@ -45,7 +41,6 @@
         </div>
     </div>
 
-    @include('additional_javascript')
     <!-- Matomo -->
     <script type="text/javascript">
         var _paq = window._paq = window._paq || [];
