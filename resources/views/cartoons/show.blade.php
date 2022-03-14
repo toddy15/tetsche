@@ -4,7 +4,7 @@
     <h1>{{ $pagetitle or $title }}</h1>
 
     <div>
-        <img class="center-block img-responsive" src="{!! asset($cartoon->imagePath()) !!}" {!! $cartoon->imageSizeAndDescription() !!} />
+        <img class="center-block img-responsive" src="{{ $cartoon->imagePath() }}" {!! $cartoon->imageSizeAndDescription() !!} />
     </div>
     @if ($cartoon->rebus)
         <div class="panel panel-default">

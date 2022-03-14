@@ -25,6 +25,22 @@ class Cartoon extends Model
     }
 
     /**
+     * Return image size, alt and title attributes.
+     */
+    public function imageSizeAndDescription()
+    {
+        $date = Carbon::parse($this->lastPublishOn())->formatLocalized('%e. %B %Y');
+        $result = 'alt="Tetsche - Cartoon der Woche . . . vom '.$date.'" ';
+        $result .= 'title="Tetsche - Cartoon der Woche . . . vom '.$date.'" ';
+        if (is_file(public_path().'/'.$this->imagePath())) {
+            $size = getimagesize(public_path().'/'.$this->imagePath());
+            $result .= $size[3];
+        }
+
+        return $result;
+    }
+
+    /**
      * Get the publication dates of the cartoon.
      */
     public function lastPublishOn()
@@ -47,6 +63,22 @@ class Cartoon extends Model
     }
 
     /**
+     * Return thumbnail size, alt and title attributes.
+     */
+    public function thumbnailSizeAndDescription()
+    {
+        $date = Carbon::parse($this->lastPublishOn())->formatLocalized('%e. %B %Y');
+        $result = 'alt="Tetsche - Cartoon der Woche . . . vom '.$date.'" ';
+        $result .= 'title="Tetsche - Cartoon der Woche . . . vom '.$date.'" ';
+        if (is_file(public_path().'/'.$this->thumbnailPath())) {
+            $size = getimagesize(public_path().'/'.$this->thumbnailPath());
+            $result .= $size[3];
+        }
+
+        return $result;
+    }
+
+    /**
      * Return the path to the thumbnail.
      */
     public function thumbnailPath()
@@ -58,33 +90,5 @@ class Cartoon extends Model
         $path .= '.jpg';
 
         return $path;
-    }
-
-    /**
-     * Return image size, alt and title attributes.
-     */
-    public function imageSizeAndDescription()
-    {
-        $date = Carbon::parse($this->lastPublishOn())->formatLocalized('%e. %B %Y');
-        $result = 'alt="Tetsche - Cartoon der Woche . . . vom ' . $date . '" ';
-        $result .= 'title="Tetsche - Cartoon der Woche . . . vom ' . $date . '" ';
-        $size = getimagesize(public_path() . '/' . $this->imagePath());
-        $result .= $size[3];
-
-        return $result;
-    }
-
-    /**
-     * Return thumbnail size, alt and title attributes.
-     */
-    public function thumbnailSizeAndDescription()
-    {
-        $date = Carbon::parse($this->lastPublishOn())->formatLocalized('%e. %B %Y');
-        $result = 'alt="Tetsche - Cartoon der Woche . . . vom ' . $date . '" ';
-        $result .= 'title="Tetsche - Cartoon der Woche . . . vom ' . $date . '" ';
-        $size = getimagesize(public_path() . '/' . $this->thumbnailPath());
-        $result .= $size[3];
-
-        return $result;
     }
 }
