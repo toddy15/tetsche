@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\GuestbookPost;
+use App\Mail\NewGuestbookPost;
 use App\PublicationDate;
 use App\TwsLib\Spamfilter;
 use Illuminate\Http\Request;
@@ -45,20 +46,20 @@ class GuestbookPostsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param Request $request
+     * @param  Request  $request
      * @return Response
      */
     public function store(Request $request)
     {
         $post = $request->all();
         $spamfilter = new Spamfilter();
-        $text = $post['name'] . ' ' . $post['message'];
+        $text = $post['name'].' '.$post['message'];
         // Use IP address and browser identification for more robust spam detection
-        $spam_detection = "IP: " . $request->ip();
-        $spam_detection .= ", Browser: " . $request->server('HTTP_USER_AGENT');
+        $spam_detection = "IP: ".$request->ip();
+        $spam_detection .= ", Browser: ".$request->server('HTTP_USER_AGENT');
         $post['score'] = $spamfilter->classify($text, $spam_detection);
         // @FIXME: Filter out the fuckheads, based on IP address
-        if (! $spamfilter->isSpam($post['score'])) {
+        if (!$spamfilter->isSpam($post['score'])) {
             $ip = explode('.', $request->ip());
             if (($ip[0] == 141) and ($ip[1] == 48)) {
                 $post['score'] = $spamfilter->threshold_autolearn_spam;
@@ -119,9 +120,12 @@ class GuestbookPostsController extends Controller
         // Add the spam check
         $validator->after(function ($validator) use ($post, $spamfilter) {
             if ($spamfilter->isSpam($post['score'])) {
-                $validator->errors()->add('message', 'Der Eintrag wurde als Spam eingestuft und daher nicht gespeichert.');
+                $validator->errors()->add(
+                    'message',
+                    'Der Eintrag wurde als Spam eingestuft und daher nicht gespeichert.'
+                );
                 // @FIXME: Remove this part if sending all spam mails is no longer necessary.
-                if (! $spamfilter->isAutolearnSpam($post['score'])) {
+                if (!$spamfilter->isAutolearnSpam($post['score'])) {
                     $data = [
                         'id' => 0,
                         'name' => $post['name'],
@@ -132,11 +136,14 @@ class GuestbookPostsController extends Controller
                         'category' => $post['category'],
                         'spam_detection' => $post['spam_detection'],
                     ];
+                    // @TODO: Implement mailable
+                    /*
                     Mail::queue(['text' => 'emails.guestbook'], $data, function ($message) {
                         $message->from('webmaster@tetsche.de', 'Gästebuch');
                         $message->to('toddy@example.org', 'Toddy');
                         $message->subject('Neuer Eintrag im Tetsche-Gästebuch (als Spam abgelehnt)');
                     });
+                    */
                 }
             }
             // Special case: autolearning spam
@@ -153,11 +160,14 @@ class GuestbookPostsController extends Controller
                     'category' => $post['category'],
                     'spam_detection' => $post['spam_detection'],
                 ];
+                // @TODO: Implement mailable
+                /*
                 Mail::queue(['text' => 'emails.guestbook'], $data, function ($message) {
                     $message->from('webmaster@tetsche.de', 'Gästebuch');
                     $message->to('toddy@example.org', 'Toddy');
                     $message->subject('Neuer Eintrag im Tetsche-Gästebuch (als Spam gelernt)');
                 });
+                */
             }
         });
         if ($validator->fails()) {
@@ -181,12 +191,12 @@ class GuestbookPostsController extends Controller
             'category' => $post['category'],
             'spam_detection' => $post['spam_detection'],
         ];
-        Mail::queue(['text' => 'emails.guestbook'], $data, function ($message) {
-            $message->from('webmaster@tetsche.de', 'Gästebuch');
-            $message->to('tetsche@example.org', 'Tetsche');
-            $message->to('toddy@example.org', 'Toddy');
-            $message->subject('Neuer Eintrag im Tetsche-Gästebuch');
-        });
+
+        Mail::to([
+            (object)['name' => 'Toddy', 'email' => 'toddy@example.org'],
+            (object)['name' => 'Tetsche', 'email' => 'tetsche@example.org'],
+        ])->send(new NewGuestbookPost($new_post));
+//        subject('Neuer Eintrag im Tetsche-Gästebuch');
         $request->session()->flash('info', 'Der Eintrag wurde gespeichert.');
 
         return redirect(action([GuestbookPostsController::class, 'index']));
@@ -203,7 +213,7 @@ class GuestbookPostsController extends Controller
         $guestbook_post = GuestbookPost::findOrFail($id);
         // Calculate spam score
         $spamfilter = new Spamfilter();
-        $text = $guestbook_post->name . ' ' . $guestbook_post->message;
+        $text = $guestbook_post->name.' '.$guestbook_post->message;
         $guestbook_post->score = round($spamfilter->classify($text, $guestbook_post->spam_detection) * 100, 1);
 
         return view('guestbook_posts.edit', compact('guestbook_post'));
@@ -212,8 +222,8 @@ class GuestbookPostsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param Request $request
-     * @param  int $id
+     * @param  Request  $request
+     * @param  int  $id
      * @return Response
      */
     public function update(Request $request, $id)
@@ -238,8 +248,8 @@ class GuestbookPostsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param Request $request
-     * @param  int $id
+     * @param  Request  $request
+     * @param  int  $id
      * @return Response
      */
     public function destroy(Request $request, $id)
@@ -276,7 +286,7 @@ class GuestbookPostsController extends Controller
             'title' => 'Gästebuch-Suche',
             'keywords' => 'Gästebuch, Suche',
             'description' => 'Gästebuch der Tetsche-Website',
-            'pagetitle' => 'Gästebuch&nbsp;&ndash; Suche nach »' . $query . '«',
+            'pagetitle' => 'Gästebuch&nbsp;&ndash; Suche nach »'.$query.'«',
             'query' => $query,
         ]);
     }
