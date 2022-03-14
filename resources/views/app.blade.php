@@ -26,7 +26,7 @@
         @include('partials.nav')
 
         <div class="container">
-            @include('errors.list')
+            @include('partials.errors')
             @include('partials.info')
             @yield('content')
         </div>
