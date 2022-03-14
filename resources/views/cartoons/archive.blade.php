@@ -12,7 +12,7 @@
                             <img class="center-block img-responsive" src="{!! asset($date->cartoon->thumbnailPath()) !!}" {!! $date->cartoon->thumbnailSizeAndDescription() !!} />
                         </a>
                         <p class="text-center">
-                            {!! Carbon\Carbon::parse($date->publish_on)->formatLocalized('%e. %B %Y') !!}
+                            {!! Carbon\Carbon::parse($date->publish_on)->locale('de')->isoFormat('Do MMMM YYYY') !!}
                         </p>
                     </div>
                 @endforeach

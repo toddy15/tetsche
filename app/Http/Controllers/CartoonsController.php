@@ -143,7 +143,7 @@ class CartoonsController extends Controller
 
         return view('cartoons.show', [
             'title' => 'Archiv',
-            'pagetitle' => 'Cartoon der Woche . . . vom ' . Carbon::parse($date)->locale("de")->format('%e. %B %Y'),
+            'pagetitle' => 'Cartoon der Woche . . . vom ' . Carbon::parse($date)->locale('de')->isoFormat('Do MMMM YYYY'),
             'keywords' => 'Tetsche, Kalauseite, Cartoon, Kalau-Archiv, Archiv',
             'description' => 'Archiv - ältere Ausgaben',
             'cartoon' => $cartoon,
@@ -163,7 +163,7 @@ class CartoonsController extends Controller
 
         return view('cartoons.show', [
             'title' => 'Cartoon der Woche',
-            'pagetitle' => 'Cartoon der Woche . . . vom ' . Carbon::parse($date)->locale("de")->format('%e. %B %Y'),
+            'pagetitle' => 'Cartoon der Woche . . . vom ' . Carbon::parse($date)->locale('de')->isoFormat('Do MMMM YYYY'),
             'keywords' => 'Tetsche, Kalauseite der Woche, Cartoon der Woche',
             'description' => 'Tetsche - Cartoon der Woche',
             'cartoon' => $cartoon,
