@@ -21,7 +21,7 @@ class Images
         $directory = 'images/gb_animals';
         $image = $this->getRandomImage($directory);
         $size = getimagesize(public_path() . '/' . $image);
-        $url = asset(elixir($image));
+        $url = asset(mix($image));
         $name = $this->getNameFromFilename($image);
         $result = '<img src="' . $url . '" ';
         $result .= $size[3];

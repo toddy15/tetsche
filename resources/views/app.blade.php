@@ -15,7 +15,7 @@
         @foreach ([180, 152, 144, 120, 114, 76, 72, 60, 57] as $res)
             <link rel="apple-touch-icon" sizes="{{ $res }}x{{ $res }}" href="{{ asset('theme/images/puempel-' . $res . 'x' . $res . '.png') }}">
         @endforeach
-        <link href="{{ asset(elixir('theme/css/all.css')) }}" rel="stylesheet">
+        <link href="{{ asset(mix('theme/css/all.css')) }}" rel="stylesheet">
     </head>
     {{-- Hack to display the blue pages --}}
     @if (Request::is('/') or Request::is('impressum'))
@@ -31,7 +31,7 @@
             @yield('content')
         </div>
 
-        <script src="{{ asset(elixir('theme/js/all.js')) }}"></script>
+        <script src="{{ asset(mix('theme/js/all.js')) }}"></script>
         @include('additional_javascript')
         <!-- Matomo -->
         <script type="text/javascript">
