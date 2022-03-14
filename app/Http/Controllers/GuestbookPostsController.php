@@ -166,6 +166,8 @@ class GuestbookPostsController extends Controller
                 ->withInput();
         }
         // Store the post.
+        // @TODO: Do not truncate the category ...
+        $post['category'] = substr($post['category'], 0, 14);
         $new_post = GuestbookPost::create($post);
         // Learn status.
         $spamfilter->learnStatus($new_post);
@@ -187,13 +189,7 @@ class GuestbookPostsController extends Controller
         });
         $request->session()->flash('info', 'Der Eintrag wurde gespeichert.');
 
-        return redirect(action('GuestbookPostsController@index'));
-        // @TODO: This should probably go into an own Request class.
-//        $post = $request->all();
-//        $post['category'] = 'ham';
-//        GuestbookPost::create($post);
-//        $request->session()->flash('info', 'Der Eintrag wurde gespeichert.');
-//        return redirect(action('GuestbookPostsController@index'));
+        return redirect(action([GuestbookPostsController::class, 'index']));
     }
 
     /**
