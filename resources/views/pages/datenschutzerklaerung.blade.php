@@ -1,7 +1,7 @@
 @extends('app')
 
 @section('content')
-<h1>{{ $pagetitle or $title }}</h1>
+<h1>{{ $pagetitle ?? $title }}</h1>
 <h2>Datenschutz</h2>
 <p>
     Wir nehmen den Schutz Ihrer persönlichen Daten sehr ernst.

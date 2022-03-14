@@ -1,7 +1,7 @@
 @extends('app')
 
 @section('content')
-<h1 style="color:#fdb3b4;">{{ $pagetitle or $title }}</h1>
+<h1 style="color:#fdb3b4;">{{ $pagetitle ?? $title }}</h1>
 <h3 style="color:#fdb3b4;">Angaben gemäß § 5 TMG</h3>
 <p>
     Tetsche<br />
