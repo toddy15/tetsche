@@ -1,6 +1,6 @@
-# Laravel 6.0 for Laravel Shift
+# Laravel 8.x for Laravel Shift
 
-This repository contains the latest version of Laravel 6.0. It is used as a reference by [Laravel Shift - the automated way to upgrade Laravel applications](https://laravelshift.com).
+This repository contains the latest version of Laravel 8. It is used as a reference by [Laravel Shift - the automated way to upgrade Laravel applications](https://laravelshift.com).
 
 ## About Shift
 *Shift* focuses on providing [automated Shifts](https://laravelshift.com/shifts) and [Human Shifts](https://laravelshift.com/human-shifts) for upgrading and improving your Laravel, Lumen, PHP, and Tailwind projects.
