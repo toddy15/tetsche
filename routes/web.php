@@ -42,24 +42,26 @@ Route::get('archiv/{date}', [CartoonsController::class, 'show']);
 Route::get('cartoons/checkIfCurrentIsLastCartoon', [CartoonsController::class, 'checkIfCurrentIsLastCartoon']);
 
 // Protected routes
-Route::get('gästebuch/{id}/edit', ['middleware' => 'auth', 'uses' => [GuestbookPostsController::class, 'edit']])
-    ->where('id', '[0-9]+');
-Route::put('gästebuch/{id}', ['middleware' => 'auth', 'uses' => [GuestbookPostsController::class, 'update']])
-    ->where('id', '[0-9]+');
-Route::delete('gästebuch/{id}', ['middleware' => 'auth', 'uses' => [GuestbookPostsController::class, 'destroy']])
-    ->where('id', '[0-9]+');
+Route::middleware('auth')->group(function () {
+    Route::get('gästebuch/{id}/edit', [GuestbookPostsController::class, 'edit'])
+        ->where('id', '[0-9]+');
+    Route::put('gästebuch/{id}', [GuestbookPostsController::class, 'update'])
+        ->where('id', '[0-9]+');
+    Route::delete('gästebuch/{id}', [GuestbookPostsController::class, 'destroy'])
+        ->where('id', '[0-9]+');
 
-Route::get('spam', ['middleware' => 'auth', 'uses' => [SpamController::class, 'index']]);
-Route::get('spam/relearn', ['middleware' => 'auth', 'uses' => [SpamController::class, 'relearn']]);
-Route::get('spam/{category}', ['middleware' => 'auth', 'uses' => [SpamController::class, 'showPosts']]);
+    Route::get('spam', [SpamController::class, 'index']);
+    Route::get('spam/relearn', [SpamController::class, 'relearn']);
+    Route::get('spam/{category}', [SpamController::class, 'showPosts']);
 
-Route::get('cartoons', ['middleware' => 'auth', 'uses' => [CartoonsController::class, 'index']]);
-Route::get('cartoons/neu', ['middleware' => 'auth', 'uses' => [CartoonsController::class, 'create']]);
-Route::get('cartoons/forceNewCartoon', ['middleware' => 'auth', 'uses' => [CartoonsController::class, 'forceNewCartoon']]);
-Route::post('cartoons', ['middleware' => 'auth', 'uses' => [CartoonsController::class, 'store']]);
-Route::get('cartoons/{id}/edit', ['middleware' => 'auth', 'uses' => [CartoonsController::class, 'edit']])
-    ->where('id', '[0-9]+');
-Route::put('cartoons/{id}', ['middleware' => 'auth', 'uses' => [CartoonsController::class, 'update']])
-    ->where('id', '[0-9]+');
-Route::delete('cartoons/{id}', ['middleware' => 'auth', 'uses' => [CartoonsController::class, 'destroy']])
-    ->where('id', '[0-9]+');
+    Route::get('cartoons', [CartoonsController::class, 'index']);
+    Route::get('cartoons/neu', [CartoonsController::class, 'create']);
+    Route::get('cartoons/forceNewCartoon', [CartoonsController::class, 'forceNewCartoon']);
+    Route::post('cartoons', [CartoonsController::class, 'store']);
+    Route::get('cartoons/{id}/edit', [CartoonsController::class, 'edit'])
+        ->where('id', '[0-9]+');
+    Route::put('cartoons/{id}', [CartoonsController::class, 'update'])
+        ->where('id', '[0-9]+');
+    Route::delete('cartoons/{id}', [CartoonsController::class, 'destroy'])
+        ->where('id', '[0-9]+');
+});
