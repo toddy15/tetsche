@@ -2,10 +2,13 @@
 
 namespace App;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class PublicationDate extends Model
 {
+    use HasFactory;
+
     protected $fillable = [
         'cartoon_id',
         'publish_on',

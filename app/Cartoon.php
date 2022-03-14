@@ -3,10 +3,13 @@
 namespace App;
 
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Cartoon extends Model
 {
+    use HasFactory;
+
     protected $fillable = [
         'publish_on',
         'random_number',
