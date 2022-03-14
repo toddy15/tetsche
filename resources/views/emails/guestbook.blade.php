@@ -1,9 +1,9 @@
-Wahrscheinlichkeit für Spam: {{ round($score * 100, 1) }}%
-Kategorie: {{ $category }}
-Identifikation: {!! $spam_detection !!}
+Wahrscheinlichkeit für Spam: {{ round($guestbook_post->score * 100, 1) }}%
+Kategorie: {{ $guestbook_post->category }}
+Identifikation: {!! $guestbook_post->spam_detection !!}
 
-{!! $name !!}
+{!! $guestbook_post->name !!}
 
-{!! $body !!}
+{!! $guestbook_post->message !!}
 
-Bearbeiten: {!! action('GuestbookPostsController@edit', ['id' => $id]) !!}
+Bearbeiten: {!! action('GuestbookPostsController@edit', ['id' => $guestbook_post->id]) !!}
