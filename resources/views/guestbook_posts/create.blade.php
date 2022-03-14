@@ -4,7 +4,7 @@
     <h1>Gästebuch: Neuer Eintrag</h1>
     <p>Schön, dass Sie sich ins Gästebuch eintragen möchten.</p>
 
-    <form method="POST" action="{{ action("GuestbookPostsController@store") }}">
+    <form method="POST" action="{{ action([\App\Http\Controllers\GuestbookPostsController::class, 'store']) }}">
         @csrf
 
         @include('guestbook_posts.form')

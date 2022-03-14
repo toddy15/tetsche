@@ -26,8 +26,8 @@
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ Auth::user()->name }} <span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="{{ action('SpamController@index') }}">Administration des Gästebuchs</a></li>
-                            <li><a href="{{ action('CartoonsController@index') }}">Administration der Cartoons</a></li>
+                            <li><a href="{{ action([App\Http\Controllers\SpamController::class, 'index']) }}">Administration des Gästebuchs</a></li>
+                            <li><a href="{{ action([App\Http\Controllers\CartoonsController::class, 'index']) }}">Administration der Cartoons</a></li>
                             <li><a href="{{ url('/logout') }}">Logout</a></li>
                         </ul>
                     </li>

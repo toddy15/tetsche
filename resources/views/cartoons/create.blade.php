@@ -3,7 +3,7 @@
 @section('content')
     <h1>Neuer Cartoon</h1>
 
-    {!! Form::open(['url' => action('CartoonsController@store'), 'files' => true]) !!}
+    {!! Form::open(['url' => action([App\Http\Controllers\CartoonsController::class, 'store']), 'files' => true]) !!}
 
     <div class="form-inline">
         {!! Form::label('day', 'Tag der Veröffentlichung:', ['class' => 'control-label']) !!}

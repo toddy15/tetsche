@@ -9,10 +9,10 @@
             <h1>{{ $pagetitle or $title }}</h1>
             <div class="row">
                 <div class="col-xs-12 col-sm-6">
-                    <p><a href="{{ action('GuestbookPostsController@create') }}" class="btn btn-primary" role="button">Neuer Eintrag</a></p>
+                    <p><a href="{{ action([App\Http\Controllers\GuestbookPostsController::class, 'create']) }}" class="btn btn-primary" role="button">Neuer Eintrag</a></p>
                 </div>
                 <div class="col-xs-12 col-sm-6">
-                    {!! Form::open(['action' => 'GuestbookPostsController@search', 'method' => 'GET', 'class' => 'form-inline']) !!}
+                    {!! Form::open(['action' => [App\Http\Controllers\GuestbookPostsController::class, 'search'], 'method' => 'GET', 'class' => 'form-inline']) !!}
                     <div class="form-inline">
                         {!! Form::label('search', 'Suche:', ['class' => 'sr-only control-label']) !!}
                         <div class="input-group">
@@ -59,8 +59,8 @@
                                 <p class="text-danger">{!! $utils->replaceSmileys($guestbook_post->cheffe) !!}</p>
                             @endif
                             @if (Auth::check())
-                                {!! Form::open(array('action' => array('GuestbookPostsController@destroy', $guestbook_post->id), 'method' => 'delete')) !!}
-                                <a href="{!! action('GuestbookPostsController@edit', $guestbook_post->id) !!}" class="btn btn-primary" role="button">Bearbeiten</a>
+                                {!! Form::open(array('action' => array([App\Http\Controllers\GuestbookPostsController::class, 'destroy'], $guestbook_post->id), 'method' => 'delete')) !!}
+                                <a href="{!! action([App\Http\Controllers\GuestbookPostsController::class, 'edit'], $guestbook_post->id) !!}" class="btn btn-primary" role="button">Bearbeiten</a>
                                 {!! Form::submit('Löschen', array('class' => 'btn btn-danger')) !!}
                                 {!! Form::close() !!}
                             @endif

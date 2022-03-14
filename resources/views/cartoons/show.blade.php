@@ -18,7 +18,7 @@
                 @else
                     <p class="text-center">
                         Auflösung nächste Woche im
-                        <a href="{!! action('CartoonsController@showArchive') !!}">Archiv</a>.
+                        <a href="{!! action([App\Http\Controllers\CartoonsController::class, 'showArchive']) !!}">Archiv</a>.
                     </p>
                 @endif
             </div>

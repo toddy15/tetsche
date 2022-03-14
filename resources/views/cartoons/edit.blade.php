@@ -7,7 +7,7 @@
         <img class="center-block img-responsive" src="{!! asset($cartoon->imagePath()) !!}" {!! $cartoon->imageSizeAndDescription() !!} />
     </div>
 
-    {!! Form::model($cartoon, ['action' => ['CartoonsController@update', $cartoon->id], 'method' => 'PUT']) !!}
+    {!! Form::model($cartoon, ['action' => [[App\Http\Controllers\CartoonsController::class, 'update'], $cartoon->id], 'method' => 'PUT']) !!}
 
     <div class="form-group">
         {!! Form::label('rebus', 'Lösung für den Rebus:', ['class' => 'control-label']) !!}
@@ -20,7 +20,7 @@
 
     {!! Form::close() !!}
 
-    {!! Form::open(['action' => ['CartoonsController@destroy', $cartoon->id], 'method' => 'DELETE']) !!}
+    {!! Form::open(['action' => [[App\Http\Controllers\CartoonsController::class, 'destroy'], $cartoon->id], 'method' => 'DELETE']) !!}
     {!! Form::submit('Cartoon löschen', ['class' => 'btn btn-danger']) !!}
     {!! Form::close() !!}
 @stop
