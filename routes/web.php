@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\CartoonsController;
+use App\Http\Controllers\GuestbookPostsController;
+use App\Http\Controllers\PagesController;
+use App\Http\Controllers\SpamController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -16,47 +20,46 @@ use Illuminate\Support\Facades\Route;
 
 // Authentication routes
 Auth::routes();
-Route::get('/logout', 'Auth\LoginController@logout');
 
 // Static pages
-Route::get('/', 'PagesController@homepage');
-Route::get('tetsche', 'PagesController@tetsche');
-Route::get('bücher', 'PagesController@buecher');
-Route::get('impressum', 'PagesController@impressum');
-Route::get('datenschutzerklärung', 'PagesController@datenschutzerklaerung');
+Route::get('/', [PagesController::class, 'homepage']);
+Route::get('tetsche', [PagesController::class, 'tetsche']);
+Route::get('bücher', [PagesController::class, 'buecher']);
+Route::get('impressum', [PagesController::class, 'impressum']);
+Route::get('datenschutzerklärung', [PagesController::class, 'datenschutzerklaerung']);
 
 // Guestbook
-Route::get('gästebuch', 'GuestbookPostsController@index');
-Route::get('gästebuch/neu', 'GuestbookPostsController@create');
-Route::post('gästebuch', 'GuestbookPostsController@store');
-Route::get('gästebuch/suche', 'GuestbookPostsController@search');
+Route::get('gästebuch', [GuestbookPostsController::class, 'index']);
+Route::get('gästebuch/neu', [GuestbookPostsController::class, 'create']);
+Route::post('gästebuch', [GuestbookPostsController::class, 'store']);
+Route::get('gästebuch/suche', [GuestbookPostsController::class, 'search']);
 
 // Cartoons
-Route::get('cartoon', 'CartoonsController@showCurrent');
-Route::get('archiv', 'CartoonsController@showArchive');
-Route::get('archiv/{date}', 'CartoonsController@show');
+Route::get('cartoon', [CartoonsController::class, 'showCurrent']);
+Route::get('archiv', [CartoonsController::class, 'showArchive']);
+Route::get('archiv/{date}', [CartoonsController::class, 'show']);
 
-Route::get('cartoons/checkIfCurrentIsLastCartoon', 'CartoonsController@checkIfCurrentIsLastCartoon');
+Route::get('cartoons/checkIfCurrentIsLastCartoon', [CartoonsController::class, 'checkIfCurrentIsLastCartoon']);
 
 // Protected routes
-Route::get('gästebuch/{id}/edit', ['middleware' => 'auth', 'uses' => 'GuestbookPostsController@edit'])
+Route::get('gästebuch/{id}/edit', ['middleware' => 'auth', 'uses' => [GuestbookPostsController::class, 'edit']])
     ->where('id', '[0-9]+');
-Route::put('gästebuch/{id}', ['middleware' => 'auth', 'uses' => 'GuestbookPostsController@update'])
+Route::put('gästebuch/{id}', ['middleware' => 'auth', 'uses' => [GuestbookPostsController::class, 'update']])
     ->where('id', '[0-9]+');
-Route::delete('gästebuch/{id}', ['middleware' => 'auth', 'uses' => 'GuestbookPostsController@destroy'])
+Route::delete('gästebuch/{id}', ['middleware' => 'auth', 'uses' => [GuestbookPostsController::class, 'destroy']])
     ->where('id', '[0-9]+');
 
-Route::get('spam', ['middleware' => 'auth', 'uses' => 'SpamController@index']);
-Route::get('spam/relearn', ['middleware' => 'auth', 'uses' => 'SpamController@relearn']);
-Route::get('spam/{category}', ['middleware' => 'auth', 'uses' => 'SpamController@showPosts']);
+Route::get('spam', ['middleware' => 'auth', 'uses' => [SpamController::class, 'index']]);
+Route::get('spam/relearn', ['middleware' => 'auth', 'uses' => [SpamController::class, 'relearn']]);
+Route::get('spam/{category}', ['middleware' => 'auth', 'uses' => [SpamController::class, 'showPosts']]);
 
-Route::get('cartoons', ['middleware' => 'auth', 'uses' => 'CartoonsController@index']);
-Route::get('cartoons/neu', ['middleware' => 'auth', 'uses' => 'CartoonsController@create']);
-Route::get('cartoons/forceNewCartoon', ['middleware' => 'auth', 'uses' => 'CartoonsController@forceNewCartoon']);
-Route::post('cartoons', ['middleware' => 'auth', 'uses' => 'CartoonsController@store']);
-Route::get('cartoons/{id}/edit', ['middleware' => 'auth', 'uses' => 'CartoonsController@edit'])
+Route::get('cartoons', ['middleware' => 'auth', 'uses' => [CartoonsController::class, 'index']]);
+Route::get('cartoons/neu', ['middleware' => 'auth', 'uses' => [CartoonsController::class, 'create']]);
+Route::get('cartoons/forceNewCartoon', ['middleware' => 'auth', 'uses' => [CartoonsController::class, 'forceNewCartoon']]);
+Route::post('cartoons', ['middleware' => 'auth', 'uses' => [CartoonsController::class, 'store']]);
+Route::get('cartoons/{id}/edit', ['middleware' => 'auth', 'uses' => [CartoonsController::class, 'edit']])
     ->where('id', '[0-9]+');
-Route::put('cartoons/{id}', ['middleware' => 'auth', 'uses' => 'CartoonsController@update'])
+Route::put('cartoons/{id}', ['middleware' => 'auth', 'uses' => [CartoonsController::class, 'update']])
     ->where('id', '[0-9]+');
-Route::delete('cartoons/{id}', ['middleware' => 'auth', 'uses' => 'CartoonsController@destroy'])
+Route::delete('cartoons/{id}', ['middleware' => 'auth', 'uses' => [CartoonsController::class, 'destroy']])
     ->where('id', '[0-9]+');
