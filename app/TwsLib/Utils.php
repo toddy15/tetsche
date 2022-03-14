@@ -43,7 +43,7 @@ class Utils
         $result = [];
         foreach ($smileys as $code => $info) {
             $result[$code] = '<img id="smiley-' . $info['filename'] . '" src="' .
-                asset(mix('images/guestbook/' . $info['filename'] . '.svg')) . '" ';
+                asset('images/guestbook/' . $info['filename'] . '.svg') . '" ';
             $result[$code] .= 'width="18" height="18" alt="' . $info['name'] . '" title="' . $info['name'] . '" />';
         }
 
