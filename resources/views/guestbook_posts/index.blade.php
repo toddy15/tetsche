@@ -6,7 +6,7 @@
 @section('content')
     <div class="row">
         <div class="col-xs-12 col-sm-8">
-            <h1>{{ $pagetitle or $title }}</h1>
+            <h1>{{ $pagetitle ?? $title }}</h1>
             <div class="row">
                 <div class="col-xs-12 col-sm-6">
                     <p><a href="{{ action([App\Http\Controllers\GuestbookPostsController::class, 'create']) }}" class="btn btn-primary" role="button">Neuer Eintrag</a></p>
