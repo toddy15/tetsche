@@ -52,9 +52,7 @@ Route::middleware('auth')->group(function () {
     Route::get('spam/{category}', [SpamController::class, 'showPosts']);
 
     Route::get('cartoons', [CartoonsController::class, 'index']);
-    Route::get('cartoons/neu', [CartoonsController::class, 'create']);
     Route::get('cartoons/forceNewCartoon', [CartoonsController::class, 'forceNewCartoon']);
-    Route::post('cartoons', [CartoonsController::class, 'store']);
     Route::get('cartoons/{id}/edit', [CartoonsController::class, 'edit'])
         ->where('id', '[0-9]+');
     Route::put('cartoons/{id}', [CartoonsController::class, 'update'])

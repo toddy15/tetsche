@@ -3,7 +3,6 @@
 @section('content')
     <h1>Übersicht aller Cartoons</h1>
     <p>
-        <a href="{!! action([App\Http\Controllers\CartoonsController::class, 'create']) !!}" class="btn btn-primary">Neuer Cartoon</a>
         <a href="{!! action([App\Http\Controllers\CartoonsController::class, 'forceNewCartoon']) !!}" class="btn btn-default">Zufällig neuer nächster Cartoon</a>
     </p>
 
