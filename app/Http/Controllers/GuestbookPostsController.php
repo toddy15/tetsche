@@ -192,11 +192,11 @@ class GuestbookPostsController extends Controller
             'spam_detection' => $post['spam_detection'],
         ];
 
+        // @TODO: subject('Neuer Eintrag im Tetsche-Gästebuch');
         Mail::to([
             (object)['name' => 'Toddy', 'email' => 'toddy@example.org'],
             (object)['name' => 'Tetsche', 'email' => 'tetsche@example.org'],
         ])->send(new NewGuestbookPost($new_post));
-//        subject('Neuer Eintrag im Tetsche-Gästebuch');
         $request->session()->flash('info', 'Der Eintrag wurde gespeichert.');
 
         return redirect(action([GuestbookPostsController::class, 'index']));
