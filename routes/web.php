@@ -25,7 +25,7 @@ Auth::routes();
 Route::get('/', [PagesController::class, 'homepage']);
 Route::get('tetsche', [PagesController::class, 'tetsche']);
 Route::get('bücher', [PagesController::class, 'buecher']);
-Route::get('impressum', [PagesController::class, 'impressum']);
+Route::get('impressum', [PagesController::class, 'impressum'])->name("impressum");
 Route::get('datenschutzerklärung', [PagesController::class, 'datenschutzerklaerung']);
 
 // Guestbook

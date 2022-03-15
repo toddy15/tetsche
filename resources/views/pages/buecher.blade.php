@@ -2,10 +2,10 @@
 
 @section('content')
 <div class="row">
-    <div class="col-xs-12 col-sm-6">
+    <div class="col-12 col-md-6">
         <a href="https://www.kjm-buchverlag.de/produkt/tetsche-open-air/">
-            <img class="center-block img-responsive" src="{{ asset('images/buecher/open-air-stade.jpg') }}"
-                 alt="Tetsche Open Air" title="Tetsche Open Air" width="480" height="652" />
+            <img class="d-block mx-auto img-fluid" src="{{ asset('images/buecher/open-air-stade.jpg') }}"
+                 alt="Tetsche Open Air" width="480" height="652" />
         </a>
     </div>
     <div class="col-md-6">
@@ -34,10 +34,10 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-xs-12 col-sm-6">
+    <div class="col-12 col-md-6">
         <a href="https://www.carlsen.de/hardcover/cartoons-und-andere-kostbarkeiten/96575">
-            <img class="center-block img-responsive" src="{{ asset('images/buecher/gesundheit.jpg') }}"
-                 alt="Tetsche &ndash; Cartoons und andere Kostbarkeiten" title="Tetsche &ndash; Cartoons und andere Kostbarkeiten" width="480" height="595" />
+            <img class="d-block mx-auto img-fluid" src="{{ asset('images/buecher/gesundheit.jpg') }}"
+                 alt="Tetsche &ndash; Cartoons und andere Kostbarkeiten" width="480" height="595" />
         </a>
     </div>
     <div class="col-md-6">
@@ -65,9 +65,9 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-xs-12 col-sm-6">
-        <img class="center-block img-responsive" src="{{ asset('images/buecher/platsch.jpg') }}"
-             alt="Platsch! Fridos Sprung ins Abenteuer" title="Platsch! Fridos Sprung ins Abenteuer" width="480" height="588" />
+    <div class="col-12 col-md-6">
+        <img class="d-block mx-auto img-fluid" src="{{ asset('images/buecher/platsch.jpg') }}"
+             alt="Platsch! Fridos Sprung ins Abenteuer" width="480" height="588" />
     </div>
     <div class="col-md-6">
         <h2>Platsch! Fridos Sprung ins Abenteuer</h2>
@@ -89,9 +89,9 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-xs-12 col-sm-6">
-        <img class="center-block img-responsive" src="{{ asset('images/buecher/hoffentlich-nichts-ernstes.jpg') }}"
-             alt="Hoffentlich ist es nichts Ernstes!" title="Hoffentlich ist es nichts Ernstes!" width="480" height="581" />
+    <div class="col-12 col-md-6">
+        <img class="d-block mx-auto img-fluid" src="{{ asset('images/buecher/hoffentlich-nichts-ernstes.jpg') }}"
+             alt="Hoffentlich ist es nichts Ernstes!" width="480" height="581" />
     </div>
     <div class="col-md-6">
         <h2>Hoffentlich ist es nichts Ernstes!</h2>
@@ -102,9 +102,9 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-xs-12 col-sm-6">
-        <img class="center-block img-responsive" src="{{ asset('images/buecher/beste-bilder.jpg') }}"
-             alt="Beste Bilder 8 (Deutscher Cartoonpreis)" title="Beste Bilder 8 (Deutscher Cartoonpreis)" width="480" height="581" />
+    <div class="col-12 col-md-6">
+        <img class="d-block mx-auto img-fluid" src="{{ asset('images/buecher/beste-bilder.jpg') }}"
+             alt="Beste Bilder 8 (Deutscher Cartoonpreis)" width="480" height="581" />
     </div>
     <div class="col-md-6">
         <h2>Beste Bilder 8 (Deutscher Cartoonpreis)</h2>
@@ -115,9 +115,9 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-xs-12 col-sm-6">
-        <img class="center-block img-responsive" src="{{ asset('images/buecher/alles-ueber-aerzte.jpg') }}"
-             alt="Alles über Ärzte" title="Alles über Ärzte" width="397" height="482" />
+    <div class="col-12 col-md-6">
+        <img class="d-block mx-auto img-fluid" src="{{ asset('images/buecher/alles-ueber-aerzte.jpg') }}"
+             alt="Alles über Ärzte" width="397" height="482" />
     </div>
     <div class="col-md-6">
         <h2>Alles über Ärzte</h2>
@@ -128,9 +128,9 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-xs-12 col-sm-6">
-        <img class="center-block img-responsive" src="{{ asset('images/buecher/roman.jpg') }}"
-             alt="Der abgeschlossene Roman" title="Der abgeschlossene Roman" width="397" height="482" />
+    <div class="col-12 col-md-6">
+        <img class="d-block mx-auto img-fluid" src="{{ asset('images/buecher/roman.jpg') }}"
+             alt="Der abgeschlossene Roman" width="397" height="482" />
     </div>
     <div class="col-md-6">
         <h2>Der abgeschlossene Roman</h2>
