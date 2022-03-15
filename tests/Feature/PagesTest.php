@@ -2,7 +2,6 @@
 
 namespace Tests\Feature;
 
-use App\Cartoon;
 use App\GuestbookPost;
 use App\PublicationDate;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -19,25 +18,25 @@ class PagesTest extends TestCase
      */
     public function test_static_pages()
     {
-        $response = $this->get('/');
-        $response->assertStatus(200);
-        $response->assertSeeText('Tetsche-Website');
+        $this->get('/')
+            ->assertOk()
+            ->assertSeeText('Tetsche-Website');
 
-        $response = $this->get('/tetsche');
-        $response->assertStatus(200);
-        $response->assertSeeText('Tetsche veröffentlichte seinen ersten Cartoon im zarten Alter');
+        $this->get('/tetsche')
+            ->assertOk()
+            ->assertSeeText('Tetsche veröffentlichte seinen ersten Cartoon im zarten Alter');
 
-        $response = $this->get('/bücher');
-        $response->assertStatus(200);
-        $response->assertSeeText('Bücher');
+        $this->get('/bücher')
+            ->assertOk()
+            ->assertSeeText('Bücher');
 
-        $response = $this->get('/impressum');
-        $response->assertStatus(200);
-        $response->assertSeeText('Impressum');
+        $this->get(route('impressum'))
+            ->assertOk()
+            ->assertSeeText('Impressum');
 
-        $response = $this->get('/datenschutzerklärung');
-        $response->assertStatus(200);
-        $response->assertSeeText('Datenschutzerklärung');
+        $this->get('/datenschutzerklärung')
+            ->assertOk()
+            ->assertSeeText('Datenschutzerklärung');
     }
 
     /**
@@ -49,17 +48,16 @@ class PagesTest extends TestCase
         // Ensure there are Cartoons
         PublicationDate::factory()->count(30)->create();
 
-        $response = $this->get('/cartoon');
-        $response->assertStatus(200);
-        // @TODO: figure out what's going on
-//        $response->assertSeeText('Cartoon der Woche . . . vom');
-        $response->assertSeeText('Die Rebus-Abbildungen ergeben zusammen einen neuen Begriff.');
-        $response->assertSeeText('Auflösung nächste Woche');
+        $this->get('/cartoon')
+            ->assertOk()
+            ->assertSeeText('Cartoon der Woche . . . vom')
+            ->assertSeeText('Die Rebus-Abbildungen ergeben zusammen einen neuen Begriff.')
+            ->assertSeeText('Auflösung nächste Woche');
 
         // @TODO: check archive with created dates above
-        $response = $this->get('/archiv');
-        $response->assertStatus(200);
-        $response->assertSeeText('Archiv');
+        $this->get('/archiv')
+            ->assertOk()
+            ->assertSeeText('Archiv');
     }
 
     /**
@@ -71,24 +69,28 @@ class PagesTest extends TestCase
         // Ensure there are entries
         GuestbookPost::factory()->count(20)->create();
 
-        $response = $this->get('/gästebuch');
-        $response->assertStatus(200);
-        $response->assertSeeText('Gästebuch');
-        $response->assertSeeText('Name');
-        $response->assertSeeText('Nachricht');
+        $this->get(route('gästebuch.index'))
+            ->assertOk()
+            ->assertSeeText('Gästebuch')
+            ->assertSeeText('Name')
+            ->assertSeeText('Nachricht');
 
         // There has to be at least one cartoon for the rebus spamcheck.
         PublicationDate::factory()->create();
 
-        $this->get('/gästebuch/neu')
+        $this->get(route('gästebuch.create'))
             ->assertOk()
             ->assertSeeText('Gästebuch: Neuer Eintrag');
 
-        $entry = GuestbookPost::factory()->raw();
+        $entry = GuestbookPost::factory()->raw([
+            'cheffe' => null,
+            'category' => 'unsure',
+            'spam_detection' => 'IP: 127.0.0.1, Browser: Symfony',
+        ]);
         $this->assertDatabaseMissing('guestbook_posts', $entry);
 
-        $this->post('/gästebuch', $entry)
-            ->assertOk();
+        $this->post(route('gästebuch.store'), $entry)
+            ->assertRedirect();
 
         $this->assertDatabaseHas('guestbook_posts', $entry);
     }
