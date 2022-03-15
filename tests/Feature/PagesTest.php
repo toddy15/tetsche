@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Cartoon;
 use App\GuestbookPost;
 use App\PublicationDate;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -76,6 +77,9 @@ class PagesTest extends TestCase
         $response->assertSeeText('Name');
         $response->assertSeeText('Nachricht');
 
+        // There has to be at least one cartoon for the rebus spamcheck.
+        PublicationDate::factory()->create();
+
         $this->get('/gästebuch/neu')
             ->assertOk()
             ->assertSeeText('Gästebuch: Neuer Eintrag');
@@ -83,7 +87,8 @@ class PagesTest extends TestCase
         $entry = GuestbookPost::factory()->raw();
         $this->assertDatabaseMissing('guestbook_posts', $entry);
 
-        $this->post('/gästebuch/neu', $entry);
+        $this->post('/gästebuch', $entry)
+            ->assertOk();
 
         $this->assertDatabaseHas('guestbook_posts', $entry);
     }
