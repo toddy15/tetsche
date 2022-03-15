@@ -4,7 +4,7 @@
     <h1>{{ $pagetitle ?? $title }}</h1>
 
     <img class="d-block mx-auto img-fluid"
-         src="{{ $cartoon->imagePath() }}" {!! $cartoon->imageSizeAndDescription() !!} />
+         src="{{ asset($cartoon->imagePath()) }}" {!! $cartoon->imageSizeAndDescription() !!} />
     @if ($cartoon->rebus)
         <div class="card text-dark bg-info">
             <div class="card-body">
@@ -14,7 +14,7 @@
                         {{-- @TODO: Make button work again --}}
                         <button id="btn-solution" type="button" class="btn btn-primary text-center">Lösung anzeigen
                         </button>
-                        <p id="solution" class="text-center hidden">{{ $cartoon->rebus }}</p>
+                        <p id="solution" class="text-center d-none">{{ $cartoon->rebus }}</p>
                     </div>
                 @else
                     <p class="text-center">

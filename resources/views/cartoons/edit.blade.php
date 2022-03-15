@@ -3,9 +3,7 @@
 @section('content')
     <h1>Cartoon bearbeiten</h1>
 
-    <div class="container-fluid">
-        <img class="center-block img-responsive" src="{!! asset($cartoon->imagePath()) !!}" {!! $cartoon->imageSizeAndDescription() !!} />
-    </div>
+    <img class="text-center img-fluid" src="{!! asset($cartoon->imagePath()) !!}" {!! $cartoon->imageSizeAndDescription() !!} />
 
     {!! Form::model($cartoon, ['action' => [[App\Http\Controllers\CartoonsController::class, 'update'], $cartoon->id], 'method' => 'PUT']) !!}
 

@@ -7,7 +7,7 @@
     </p>
 
     <div class="row">
-        <div class="col-sm-4">
+        <div class="col-4">
             <a href="{{ action([App\Http\Controllers\SpamController::class, 'showPosts'], ['manual_ham']) }}" class="btn btn-primary btn-block">Manuell als Ham gelernt</a>
             <a href="{{ action([App\Http\Controllers\SpamController::class, 'showPosts'], ['unsure']) }}" class="btn btn-primary btn-block">Keine Zuordnung</a>
             <a href="{{ action([App\Http\Controllers\SpamController::class, 'showPosts'], ['manual_spam']) }}" class="btn btn-primary btn-block">Manuell als Spam gelernt</a>
@@ -15,12 +15,15 @@
             <a href="{{ action([App\Http\Controllers\SpamController::class, 'showPosts'], ['autolearn_spam']) }}" class="btn btn-primary btn-block">Automatisch als Spam gelernt</a>
         </div>
     </div>
+    {{--
+    @TODO: The relearning has not work correctly for ages.
     <p>
         Mit diesem Knopf werden alle Texte neu analysiert. Das ist etwas zeitaufwändig.
     </p>
     <div class="row">
-        <div class="col-sm-4">
+        <div class="col-4">
             <a href="{{ action([App\Http\Controllers\SpamController::class, 'relearn']) }}" class="btn btn-primary btn-block">Alle Einträge neu lernen</a>
         </div>
     </div>
+    --}}
 @stop

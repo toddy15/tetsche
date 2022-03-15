@@ -42,7 +42,7 @@ class CartoonsController extends Controller
         }
         // Redirect to cartoon page for current date
         if ($date == $current_date) {
-            return redirect(action('CartoonsController@showCurrent'));
+            return redirect(action([CartoonsController::class, 'showCurrent']));
         }
         // Make sure no older cartoons than allowed are shown
         if ($date < $last_archived) {
