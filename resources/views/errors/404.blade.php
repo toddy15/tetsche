@@ -1,7 +1,5 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="jumbotron alert-danger">
-        <h1>Seite nicht vorhanden</h1>
-    </div>
+    <h1 class="display-1">Seite nicht vorhanden</h1>
 @stop
