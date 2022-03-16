@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Cartoon;
-use App\PublicationDate;
-
+use App\Models\Cartoon;
+use App\Models\PublicationDate;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 

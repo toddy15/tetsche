@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\GuestbookPost;
+use App\Models\GuestbookPost;
 use App\TwsLib\Spamfilter;
 use Illuminate\Http\Request;
 

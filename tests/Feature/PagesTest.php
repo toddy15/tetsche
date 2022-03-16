@@ -2,8 +2,8 @@
 
 namespace Tests\Feature;
 
-use App\GuestbookPost;
-use App\PublicationDate;
+use App\Models\GuestbookPost;
+use App\Models\PublicationDate;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 

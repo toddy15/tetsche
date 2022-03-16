@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -21,7 +21,7 @@ class Cartoon extends Model
      */
     public function publicationDate()
     {
-        return $this->hasMany('App\PublicationDate')->orderBy('publish_on', 'DESC');
+        return $this->hasMany('App\Models\PublicationDate')->orderBy('publish_on', 'DESC');
     }
 
     /**

@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\GuestbookPost;
 use App\Mail\NewGuestbookPost;
-use App\PublicationDate;
+use App\Models\GuestbookPost;
+use App\Models\PublicationDate;
 use App\TwsLib\Spamfilter;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 
 class GuestbookPostsController extends Controller

@@ -2,9 +2,8 @@
 
 namespace App\Mail;
 
-use App\GuestbookPost;
+use App\Models\GuestbookPost;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 

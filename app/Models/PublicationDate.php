@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -19,6 +19,6 @@ class PublicationDate extends Model
      */
     public function cartoon()
     {
-        return $this->belongsTo('App\Cartoon');
+        return $this->belongsTo('App\Models\Cartoon');
     }
 }

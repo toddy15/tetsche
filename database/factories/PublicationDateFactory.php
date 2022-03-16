@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Cartoon;
+use App\Models\Cartoon;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class PublicationDateFactory extends Factory
