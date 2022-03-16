@@ -48,7 +48,7 @@
                     <tr>
                         <td>
                             {{ $guestbook_post->name }}<br />
-                            <span>{{ $guestbook_post->created_at->locale('de')->isoFormat('Do MMMM YYYY, hh:mm') }}</span>
+                            <span>{{ $guestbook_post->created_at->locale('de')->isoFormat('Do MMMM YYYY, HH:mm') }}</span>
                         </td>
                         <td>
                             <p>
