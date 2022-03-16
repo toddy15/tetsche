@@ -28,9 +28,6 @@ Route::get('datenschutzerklärung', [PagesController::class, 'datenschutzerklaer
 // Guestbook
 Route::resource('/gästebuch', GuestbookPostsController::class)
     ->only(['index', 'create', 'store']);
-//Route::get('gästebuch', [GuestbookPostsController::class, 'index']);
-//Route::get('gästebuch/neu', [GuestbookPostsController::class, 'create']);
-//Route::post('gästebuch', [GuestbookPostsController::class, 'store']);
 Route::get('gästebuch/suche', [GuestbookPostsController::class, 'search']);
 
 // Cartoons
@@ -44,12 +41,6 @@ Route::get('cartoons/checkIfCurrentIsLastCartoon', [CartoonsController::class, '
 Route::middleware('auth')->group(function () {
     Route::resource('/gästebuch', GuestbookPostsController::class)
         ->only(['edit', 'update', 'destroy']);
-//    Route::get('gästebuch/{id}/edit', [GuestbookPostsController::class, 'edit'])
-//        ->where('id', '[0-9]+');
-//    Route::put('gästebuch/{id}', [GuestbookPostsController::class, 'update'])
-//        ->where('id', '[0-9]+');
-//    Route::delete('gästebuch/{id}', [GuestbookPostsController::class, 'destroy'])
-//        ->where('id', '[0-9]+');
 
     Route::get('spam', [SpamController::class, 'index']);
     Route::get('spam/relearn', [SpamController::class, 'relearn']);
