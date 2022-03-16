@@ -41,7 +41,7 @@ Route::view('/impressum', 'pages.impressum', [
     'description' => 'Impressum, Kontaktadressen und Anbieterkennzeichnung der Tetsche-Website',
 ])->name("impressum");
 
-Route::view('/datenschutzerklärung', 'pages.datenschutzerklaerung', [
+Route::view('/datenschutz', 'pages.datenschutz', [
     'title' => 'Datenschutzerklärung',
     'keywords' => 'Datenschutzerklärung, Datenschutz, DSGVO',
     'description' => 'Datenschutzerklärung der Tetsche-Website',

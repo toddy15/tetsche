@@ -18,15 +18,15 @@ class PagesTest extends TestCase
      */
     public function test_static_pages()
     {
-        $this->get('/')
+        $this->get(route('homepage'))
             ->assertOk()
             ->assertSeeText('Tetsche-Website');
 
-        $this->get('/tetsche')
+        $this->get(route('tetsche'))
             ->assertOk()
             ->assertSeeText('Tetsche veröffentlichte seinen ersten Cartoon im zarten Alter');
 
-        $this->get('/bücher')
+        $this->get(route('buecher'))
             ->assertOk()
             ->assertSeeText('Bücher');
 
@@ -34,7 +34,7 @@ class PagesTest extends TestCase
             ->assertOk()
             ->assertSeeText('Impressum');
 
-        $this->get('/datenschutzerklärung')
+        $this->get(route('datenschutz'))
             ->assertOk()
             ->assertSeeText('Datenschutzerklärung');
     }

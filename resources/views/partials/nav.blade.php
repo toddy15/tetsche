@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-md navbar-light bg-danger shadow-sm">
     <div class="container">
-        <a class="navbar-brand" href="{{ url('/') }}">
+        <a class="navbar-brand" href="{{ route('homepage') }}">
             Home
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -11,9 +11,9 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <!-- Left Side Of Navbar -->
             <ul class="navbar-nav me-auto">
-                <li class="nav-item {{ Request::is('tetsche') ? 'active' : ''}}">
-                    <a class="nav-link {{ Request::is('tetsche') ? 'active' : '' }}"
-                       {!! Request::is('tetsche') ? 'aria-current="page"' : '' !!} href="{{ url('tetsche') }}">Tetsche</a>
+                <li class="nav-item {{ Route::is('tetsche') ? 'active' : ''}}">
+                    <a class="nav-link {{ Route::is('tetsche') ? 'active' : '' }}"
+                       {!! Route::is('tetsche') ? 'aria-current="page"' : '' !!} href="{{ route('tetsche') }}">Tetsche</a>
                 </li>
                 <li class="nav-item {{ Request::is('cartoon') ? 'active' : ''}}">
                     <a class="nav-link {{ Request::is('cartoon') ? 'active' : '' }}"
@@ -23,21 +23,21 @@
                     <a class="nav-link {{ Request::is('archiv') ? 'active' : '' }}"
                        {!! Request::is('archiv') ? 'aria-current="page"' : '' !!} href="{{ url('archiv') }}">Archiv</a>
                 </li>
-                <li class="nav-item {{ Request::is('bücher') ? 'active' : ''}}">
-                    <a class="nav-link {{ Request::is('bücher') ? 'active' : '' }}"
-                       {!! Request::is('bücher') ? 'aria-current="page"' : '' !!} href="{{ url('bücher') }}">Bücher</a>
+                <li class="nav-item {{ Route::is('buecher') ? 'active' : ''}}">
+                    <a class="nav-link {{ Route::is('buecher') ? 'active' : '' }}"
+                       {!! Route::is('buecher') ? 'aria-current="page"' : '' !!} href="{{ route('buecher') }}">Bücher</a>
                 </li>
                 <li class="nav-item {{ Request::is('gästebuch') ? 'active' : ''}}">
                     <a class="nav-link {{ Request::is('gästebuch') ? 'active' : '' }}"
                        {!! Request::is('gästebuch') ? 'aria-current="page"' : '' !!} href="{{ url('gästebuch') }}">Gästebuch</a>
                 </li>
-                <li class="nav-item {{ Request::is('impressum') ? 'active' : ''}}">
-                    <a class="nav-link {{ Request::is('impressum') ? 'active' : '' }}"
-                       {!! Request::is('impressum') ? 'aria-current="page"' : '' !!} href="{{ url('impressum') }}">Impressum</a>
+                <li class="nav-item {{ Route::is('impressum') ? 'active' : ''}}">
+                    <a class="nav-link {{ Route::is('impressum') ? 'active' : '' }}"
+                       {!! Route::is('impressum') ? 'aria-current="page"' : '' !!} href="{{ route('impressum') }}">Impressum</a>
                 </li>
-                <li class="nav-item {{ Request::is('datenschutzerklärung') ? 'active' : ''}}">
-                    <a class="nav-link {{ Request::is('datenschutzerklärung') ? 'active' : '' }}"
-                       {!! Request::is('datenschutzerklärung') ? 'aria-current="page"' : '' !!} href="{{ url('datenschutzerklärung') }}">Datenschutzerklärung</a>
+                <li class="nav-item {{ Route::is('datenschutz') ? 'active' : ''}}">
+                    <a class="nav-link {{ Route::is('datenschutz') ? 'active' : '' }}"
+                       {!! Route::is('datenschutz') ? 'aria-current="page"' : '' !!} href="{{ route('datenschutz') }}">Datenschutz</a>
                 </li>
             </ul>
 
