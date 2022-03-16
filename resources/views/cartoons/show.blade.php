@@ -12,9 +12,15 @@
                 @if ($cartoon->showRebusSolution)
                     <div class="text-center">
                         {{-- @TODO: Make button work again --}}
-                        <button id="btn-solution" type="button" class="btn btn-primary text-center">Lösung anzeigen
+                        <button class="btn btn-primary text-center" onclick="showSolution()">Lösung anzeigen
                         </button>
-                        <p id="solution" class="text-center d-none">{{ $cartoon->rebus }}</p>
+                        <p id="solution" class="text-center d-none mt-4">{{ $cartoon->rebus }}</p>
+                        <script>
+                            function showSolution() {
+                                var solution = document.getElementById("solution");
+                                solution.classList.toggle("d-none");
+                            }
+                        </script>
                     </div>
                 @else
                     <p class="text-center">
