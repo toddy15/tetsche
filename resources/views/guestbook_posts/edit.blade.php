@@ -40,7 +40,7 @@
     {!! Form::close() !!}
 
     <div class="form-group text-center">
-        {!! Form::open(['action' => ['GuestbookPostsController@destroy', $guestbook_post->id], 'method' => 'delete']) !!}
+        {!! Form::open(['action' => [[GuestbookPostsController::class, 'destroy'], $guestbook_post->id], 'method' => 'delete']) !!}
         {!! Form::submit('Löschen', ['class' => 'btn btn-danger']) !!}
         {!! Form::close() !!}
     </div>
