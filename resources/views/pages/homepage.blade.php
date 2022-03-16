@@ -11,7 +11,7 @@
     --}}
     <p class="lead text-center">
         Es gibt ein neues Buch!<br>
-        Alles über die sensationelle Open Air Ausstellung im Stader Hansehafen<br>
+        Alles über die sensationelle Open-Air-Ausstellung im Stader Hansehafen<br>
         ISBN 978-3-96194-173-5
     </p>
     <div class="text-center">
