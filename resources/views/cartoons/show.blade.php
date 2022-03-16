@@ -11,14 +11,20 @@
                 <p class="card-text text-center">Die Rebus-Abbildungen ergeben zusammen einen neuen Begriff.</p>
                 @if ($cartoon->showRebusSolution)
                     <div class="text-center">
-                        {{-- @TODO: Make button work again --}}
-                        <button class="btn btn-primary text-center" onclick="showSolution()">Lösung anzeigen
+                        <button id="solution-button" class="btn btn-primary text-center" onclick="showSolution()">
+                            Lösung anzeigen
                         </button>
                         <p id="solution" class="text-center d-none mt-4">{{ $cartoon->rebus }}</p>
                         <script>
                             function showSolution() {
                                 var solution = document.getElementById("solution");
                                 solution.classList.toggle("d-none");
+                                var button = document.getElementById("solution-button");
+                                if (button.innerText === "Lösung anzeigen") {
+                                    button.innerText = "Lösung verstecken";
+                                } else {
+                                    button.innerText = "Lösung anzeigen";
+                                }
                             }
                         </script>
                     </div>
