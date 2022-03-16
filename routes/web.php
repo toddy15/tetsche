@@ -19,41 +19,64 @@ use Illuminate\Support\Facades\Route;
 */
 
 // Static pages
-Route::get('/', [PagesController::class, 'homepage']);
-Route::get('tetsche', [PagesController::class, 'tetsche']);
-Route::get('bücher', [PagesController::class, 'buecher']);
-Route::get('impressum', [PagesController::class, 'impressum'])->name("impressum");
-Route::get('datenschutzerklärung', [PagesController::class, 'datenschutzerklaerung']);
+Route::view('/', 'pages.homepage', [
+    'description' => 'Tetsche-Website',
+])->name('homepage');
+
+Route::view('/tetsche', 'pages.tetsche', [
+    'title' => 'Über Tetsche',
+    'keywords' => 'Informationen, Information',
+    'description' => 'Informationen über Tetsche',
+])->name('tetsche');
+
+Route::view('/bücher', 'pages.buecher', [
+    'title' => 'Bücher',
+    'keywords' => 'Buch, Bücher, Buchveröffentlichung',
+    'description' => 'Bücher von Tetsche',
+])->name('buecher');
+
+Route::view('/impressum', 'pages.impressum', [
+    'title' => 'Impressum',
+    'keywords' => 'Impressum, Kontakt, Anbieterkennzeichnung',
+    'description' => 'Impressum, Kontaktadressen und Anbieterkennzeichnung der Tetsche-Website',
+])->name("impressum");
+
+Route::view('/datenschutzerklärung', 'pages.datenschutzerklaerung', [
+    'title' => 'Datenschutzerklärung',
+    'keywords' => 'Datenschutzerklärung, Datenschutz, DSGVO',
+    'description' => 'Datenschutzerklärung der Tetsche-Website',
+])->name('datenschutz');
 
 // Guestbook
 Route::resource('/gästebuch', GuestbookPostsController::class)
     ->only(['index', 'create', 'store']);
-Route::get('gästebuch/suche', [GuestbookPostsController::class, 'search']);
+Route::get('/gästebuch/suche', [GuestbookPostsController::class, 'search']);
 
 // Cartoons
-Route::get('cartoon', [CartoonsController::class, 'showCurrent']);
-Route::get('archiv', [CartoonsController::class, 'showArchive']);
-Route::get('archiv/{date}', [CartoonsController::class, 'show']);
+Route::get('/cartoon', [CartoonsController::class, 'showCurrent']);
+Route::get('/archiv', [CartoonsController::class, 'showArchive']);
+Route::get('/archiv/{date}', [CartoonsController::class, 'show']);
 
-Route::get('cartoons/checkIfCurrentIsLastCartoon', [CartoonsController::class, 'checkIfCurrentIsLastCartoon']);
+Route::get('/cartoons/checkIfCurrentIsLastCartoon', [CartoonsController::class, 'checkIfCurrentIsLastCartoon']);
 
 // Protected routes
 Route::middleware('auth')->group(function () {
     Route::resource('/gästebuch', GuestbookPostsController::class)
         ->only(['edit', 'update', 'destroy']);
 
-    Route::get('spam', [SpamController::class, 'index']);
-    Route::get('spam/relearn', [SpamController::class, 'relearn']);
-    Route::get('spam/{category}', [SpamController::class, 'showPosts']);
+    Route::get('/spam', [SpamController::class, 'index']);
+    Route::get('/spam/relearn', [SpamController::class, 'relearn']);
+    Route::get('/spam/{category}', [SpamController::class, 'showPosts']);
 
-    Route::get('cartoons', [CartoonsController::class, 'index']);
-    Route::get('cartoons/forceNewCartoon', [CartoonsController::class, 'forceNewCartoon']);
-    Route::get('cartoons/{id}/edit', [CartoonsController::class, 'edit'])
+    Route::get('/cartoons', [CartoonsController::class, 'index']);
+    Route::get('/cartoons/forceNewCartoon', [CartoonsController::class, 'forceNewCartoon']);
+    Route::get('/cartoons/{id}/edit', [CartoonsController::class, 'edit'])
         ->where('id', '[0-9]+');
-    Route::put('cartoons/{id}', [CartoonsController::class, 'update'])
+    Route::put('/cartoons/{id}', [CartoonsController::class, 'update'])
         ->where('id', '[0-9]+');
-    Route::delete('cartoons/{id}', [CartoonsController::class, 'destroy'])
+    Route::delete('/cartoons/{id}', [CartoonsController::class, 'destroy'])
         ->where('id', '[0-9]+');
 });
 
-Auth::routes();
+// Close registration
+Auth::routes(['register' => false]);

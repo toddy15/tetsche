@@ -29,15 +29,6 @@ class PagesController extends Controller
         ]);
     }
 
-    public function impressum()
-    {
-        return view('pages.impressum', [
-            'title' => 'Impressum',
-            'keywords' => 'Impressum, Kontakt, Anbieterkennzeichnung',
-            'description' => 'Impressum, Kontaktadressen und Anbieterkennzeichnung der Tetsche-Website',
-        ]);
-    }
-
     public function datenschutzerklaerung()
     {
         return view('pages.datenschutzerklaerung', [
