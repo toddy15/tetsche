@@ -17,18 +17,18 @@
     <title>{{ isset($title) ? $title . ' | ': '' }}Tetsche</title>
 
     <link rel="canonical" href="{!! urldecode(Request::url()) !!}"/>
-    <link rel="shortcut icon" href="{{ asset('theme/images/favicon.ico') }}">
-    <link rel="icon" sizes="192x192" href="{{ asset('theme/images/puempel-192x192.png') }}">
-    @foreach ([180, 152, 144, 120, 114, 76, 72, 60, 57] as $res)
-        <link rel="apple-touch-icon" sizes="{{ $res }}x{{ $res }}"
-              href="{{ asset('theme/images/puempel-' . $res . 'x' . $res . '.png') }}">
-@endforeach
 
-<!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset(mix('apple-touch-icon.png')) }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset(mix('favicon-32x32.png')) }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset(mix('favicon-16x16.png')) }}">
+    <link rel="manifest" href="{{ asset(mix('site.webmanifest')) }}">
+    <link rel="mask-icon" href="{{ asset(mix('safari-pinned-tab.svg')) }}" color="#5bbad5">
+    <link rel="shortcut icon" href="{{ asset(mix('favicon.ico')) }}">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
 
-    <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <script src="{{ asset(mix('js/app.js')) }}" defer></script>
+    <link href="{{ asset(mix('css/app.css')) }}" rel="stylesheet">
 </head>
 <body>
 <div id="app">
