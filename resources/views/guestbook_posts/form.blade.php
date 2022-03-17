@@ -11,7 +11,7 @@
 
 <div class="mb-4">
     <label class="form-label" for="message">Nachricht:</label>
-    <textarea class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}" id="message" name="message"
+    <textarea class="form-control {{ $errors->has('message') ? 'is-invalid' : '' }}" id="message" name="message"
               placeholder="Ihre Nachricht" rows="10"
               cols="50">{{ old("message") }}</textarea>
     @error('message')
@@ -22,8 +22,15 @@
 <!-- Images Input  -->
 <div class="text-center">
     <ul class="list-inline">
-        @foreach ($utils->getSmileysImages() as $image)
-            <li class="list-inline-item">{!! $image !!}</li>
+        @foreach ($utils->getSmileysButtons() as $button)
+            <li class="list-inline-item">{!! $button !!}</li>
         @endforeach
     </ul>
 </div>
+
+<script>
+function insert(code) {
+   var text = document.getElementById("message");
+   text.innerHTML += code;
+}
+</script>

@@ -9,9 +9,8 @@
 
         @include('guestbook_posts.form')
 
-        <div class="form-group text-center">
+        <div class="text-center">
             <button type="submit" class="btn btn-default btn-primary">Speichern</button>
         </div>
-
     </form>
 @stop
