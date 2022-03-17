@@ -68,10 +68,10 @@
                 @endforeach
             </tbody>
         </table>
-        @if (isset($query))
-            {!! str_replace('/?', '?', $guestbook_posts->appends(['q' => $query])->render()) !!}
+        @empty($query)
+            {!! $guestbook_posts->render() !!}
         @else
-            {!! str_replace('/?', '?', $guestbook_posts->render()) !!}
+            {!! $guestbook_posts->appends(['q' => $query])->render() !!}
         @endif
     @else
         <p>
