@@ -58,8 +58,8 @@
                                 <p class="text-danger">{!! $utils->replaceSmileys($guestbook_post->cheffe) !!}</p>
                             @endif
                             @if (Auth::check())
-                                {!! Form::open(['action' => [[App\Http\Controllers\GuestbookPostsController::class, 'destroy'], $guestbook_post->id], 'method' => 'delete']) !!}
-                                <a href="{!! action([App\Http\Controllers\GuestbookPostsController::class, 'edit'], $guestbook_post->id) !!}" class="btn btn-primary" role="button">Bearbeiten</a>
+                                {!! Form::open(['route' => ['gästebuch.destroy', $guestbook_post->id], 'method' => 'delete']) !!}
+                                <a href="{!! route('gästebuch.edit', $guestbook_post) !!}" class="btn btn-primary">Bearbeiten</a>
                                 {!! Form::submit('Löschen', array('class' => 'btn btn-danger')) !!}
                                 {!! Form::close() !!}
                             @endif

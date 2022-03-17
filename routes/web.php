@@ -2,8 +2,8 @@
 
 use App\Http\Controllers\CartoonsController;
 use App\Http\Controllers\GuestbookPostsController;
-use App\Http\Controllers\PagesController;
 use App\Http\Controllers\SpamController;
+use App\Http\Middleware\Authenticate;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -60,7 +60,7 @@ Route::get('/archiv/{date}', [CartoonsController::class, 'show']);
 Route::get('/cartoons/checkIfCurrentIsLastCartoon', [CartoonsController::class, 'checkIfCurrentIsLastCartoon']);
 
 // Protected routes
-Route::middleware('auth')->group(function () {
+Route::middleware(Authenticate::class)->group(function () {
     Route::resource('/gästebuch', GuestbookPostsController::class)
         ->only(['edit', 'update', 'destroy']);
 
