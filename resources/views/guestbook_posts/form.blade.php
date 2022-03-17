@@ -1,22 +1,29 @@
 @inject ('utils', 'App\TwsLib\Utils')
 
-<!-- Name Form Input  -->
-<div class="form-group {{ $errors->has('name') ? 'has-error has-feedback' : '' }}">
-    <label for="name">Name:</label>
-    <input type="text" class="form-control" id="name" name="name" placeholder="Ihr Name" autofocus value="{{ old("name") }}">
+<div class="mb-4">
+    <label class="form-label" for="name">Name:</label>
+    <input type="text" class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}" id="name" name="name"
+           placeholder="Ihr Name" autofocus value="{{ old("name") }}">
+    @error('name')
+    <div class="invalid-feedback">{{ $message }}</div>
+    @enderror
 </div>
 
-<!-- Message Form Input  -->
-<div class="form-group {{ $errors->has('message') ? 'has-error has-feedback' : '' }}">
-    <label for="message">Nachricht:</label>
-    <textarea class="form-control" id="message" name="message" placeholder="Ihre Nachricht" rows="10" cols="50">{{ old("name") }}</textarea>
+<div class="mb-4">
+    <label class="form-label" for="message">Nachricht:</label>
+    <textarea class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}" id="message" name="message"
+              placeholder="Ihre Nachricht" rows="10"
+              cols="50">{{ old("message") }}</textarea>
+    @error('message')
+    <div class="invalid-feedback">{{ $message }}</div>
+    @enderror
 </div>
 
 <!-- Images Input  -->
 <div class="text-center">
     <ul class="list-inline">
         @foreach ($utils->getSmileysImages() as $image)
-            <li>{!! $image !!}</li>
+            <li class="list-inline-item">{!! $image !!}</li>
         @endforeach
     </ul>
 </div>
