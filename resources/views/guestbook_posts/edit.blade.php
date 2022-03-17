@@ -8,10 +8,10 @@
     @include('guestbook_posts.form')
 
     <div class="mb-4">
-    <label class="form-label" for="cheffe">Cheffe:</label>
-    <textarea class="form-control" id="cheffe" name="cheffe"
-              placeholder="Cheffes Kommentar" rows="10"
-              cols="50">{{ old("cheffe") }}</textarea>
+        <label class="form-label" for="cheffe">Cheffe:</label>
+        <textarea class="form-control" id="cheffe" name="cheffe"
+                  placeholder="Cheffes Kommentar" rows="10"
+                  cols="50">{{ old("cheffe") ?? $guestbook_post->cheffe }}</textarea>
     </div>
 
     <div class="mb-4">
