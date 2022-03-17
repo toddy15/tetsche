@@ -6,4 +6,4 @@ Identifikation: {!! $guestbook_post->spam_detection !!}
 
 {!! $guestbook_post->message !!}
 
-Bearbeiten: {!! route('gästebuch.edit', ['gästebuch' => $guestbook_post]) !!}
+Bearbeiten: {!! route('gaestebuch.edit', $guestbook_post) !!}

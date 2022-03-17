@@ -29,7 +29,7 @@ Route::view('/tetsche', 'pages.tetsche', [
     'description' => 'Informationen über Tetsche',
 ])->name('tetsche');
 
-Route::view('/bücher', 'pages.buecher', [
+Route::view('/buecher', 'pages.buecher', [
     'title' => 'Bücher',
     'keywords' => 'Buch, Bücher, Buchveröffentlichung',
     'description' => 'Bücher von Tetsche',
@@ -48,9 +48,9 @@ Route::view('/datenschutz', 'pages.datenschutz', [
 ])->name('datenschutz');
 
 // Guestbook
-Route::resource('/gästebuch', GuestbookPostsController::class)
+Route::resource('/gaestebuch', GuestbookPostsController::class)
     ->only(['index', 'create', 'store']);
-Route::get('/gästebuch/suche', [GuestbookPostsController::class, 'search']);
+Route::get('/gaestebuch/suche', [GuestbookPostsController::class, 'search']);
 
 // Cartoons
 Route::get('/cartoon', [CartoonsController::class, 'showCurrent']);
@@ -61,7 +61,7 @@ Route::get('/cartoons/checkIfCurrentIsLastCartoon', [CartoonsController::class, 
 
 // Protected routes
 Route::middleware(Authenticate::class)->group(function () {
-    Route::resource('/gästebuch', GuestbookPostsController::class)
+    Route::resource('/gaestebuch', GuestbookPostsController::class)
         ->only(['edit', 'update', 'destroy']);
 
     Route::get('/spam', [SpamController::class, 'index']);

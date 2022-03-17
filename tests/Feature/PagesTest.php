@@ -69,7 +69,7 @@ class PagesTest extends TestCase
         // Ensure there are entries
         GuestbookPost::factory()->count(5)->create();
 
-        $this->get(route('gästebuch.index'))
+        $this->get(route('gaestebuch.index'))
             ->assertOk()
             ->assertSeeText('Gästebuch')
             ->assertSeeText('Name')
@@ -78,7 +78,7 @@ class PagesTest extends TestCase
         // There has to be at least one PublicationDate for the rebus spamcheck.
         PublicationDate::factory()->create();
 
-        $this->get(route('gästebuch.create'))
+        $this->get(route('gaestebuch.create'))
             ->assertOk()
             ->assertSeeText('Gästebuch: Neuer Eintrag');
 
@@ -89,12 +89,12 @@ class PagesTest extends TestCase
         ]);
         $this->assertDatabaseMissing('guestbook_posts', $entry);
 
-        $this->post(route('gästebuch.store'), $entry)
+        $this->post(route('gaestebuch.store'), $entry)
             ->assertRedirect();
 
         $this->assertDatabaseHas('guestbook_posts', $entry);
 
-        $this->get(route('gästebuch.index'))
+        $this->get(route('gaestebuch.index'))
             ->assertSeeText($entry['name'])
             ->assertSeeText($entry['message']);
     }

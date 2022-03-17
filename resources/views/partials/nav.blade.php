@@ -27,9 +27,9 @@
                     <a class="nav-link {{ Route::is('buecher') ? 'active' : '' }}"
                        {!! Route::is('buecher') ? 'aria-current="page"' : '' !!} href="{{ route('buecher') }}">Bücher</a>
                 </li>
-                <li class="nav-item {{ Request::is('gästebuch') ? 'active' : ''}}">
-                    <a class="nav-link {{ Request::is('gästebuch') ? 'active' : '' }}"
-                       {!! Request::is('gästebuch') ? 'aria-current="page"' : '' !!} href="{{ url('gästebuch') }}">Gästebuch</a>
+                <li class="nav-item {{ Request::is('gaestebuch') ? 'active' : ''}}">
+                    <a class="nav-link {{ Request::is('gaestebuch') ? 'active' : '' }}"
+                       {!! Request::is('gaestebuch') ? 'aria-current="page"' : '' !!} href="{{ route('gaestebuch.index') }}">Gästebuch</a>
                 </li>
                 <li class="nav-item {{ Route::is('impressum') ? 'active' : ''}}">
                     <a class="nav-link {{ Route::is('impressum') ? 'active' : '' }}"
