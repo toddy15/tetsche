@@ -6,6 +6,7 @@ use App\Mail\NewGuestbookPost;
 use App\Models\GuestbookPost;
 use App\Models\PublicationDate;
 use App\TwsLib\Spamfilter;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
@@ -220,12 +221,11 @@ class GuestbookPostsController extends Controller
 
     /**
      * Update the specified resource in storage.
-     *
      * @param  Request  $request
-     * @param  int  $id
-     * @return Response
+     * @param $id
+     * @return RedirectResponse
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $id): RedirectResponse
     {
         $guestbook_post = GuestbookPost::findOrFail($id);
         // First, unlearn status.
@@ -241,7 +241,7 @@ class GuestbookPostsController extends Controller
         $spamfilter->learnStatus($guestbook_post);
         $request->session()->flash('info', 'Der Eintrag wurde geändert.');
 
-        return redirect(action('GuestbookPostsController@index'));
+        return redirect()->route('gaestebuch.index');
     }
 
     /**
@@ -249,9 +249,9 @@ class GuestbookPostsController extends Controller
      *
      * @param  Request  $request
      * @param  int  $id
-     * @return Response
+     * @return RedirectResponse
      */
-    public function destroy(Request $request, $id)
+    public function destroy(Request $request, $id): RedirectResponse
     {
         $guestbook_post = GuestbookPost::findOrFail($id);
         $spamfilter = new Spamfilter();
@@ -259,7 +259,7 @@ class GuestbookPostsController extends Controller
         GuestbookPost::destroy($id);
         $request->session()->flash('info', 'Der Eintrag wurde gelöscht.');
 
-        return redirect(action('GuestbookPostsController@index'));
+        return redirect()->route('gaestebuch.index');
     }
 
     /**
