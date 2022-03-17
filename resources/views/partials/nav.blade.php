@@ -41,8 +41,8 @@
                 </li>
             </ul>
 
-            <!-- Right Side Of Navbar -->
             @unless(Auth::guest())
+            <!-- Right Side Of Navbar -->
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
@@ -75,10 +75,8 @@
                             @csrf
                         </form>
                     </li>
-
-
-                    @endunless
                 </ul>
+            @endunless
         </div>
     </div>
 </nav>
