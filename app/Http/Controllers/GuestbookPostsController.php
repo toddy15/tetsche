@@ -283,7 +283,7 @@ class GuestbookPostsController extends Controller
             'title' => 'Gästebuch-Suche',
             'keywords' => 'Gästebuch, Suche',
             'description' => 'Gästebuch der Tetsche-Website',
-            'pagetitle' => 'Gästebuch&nbsp;&ndash; Suche nach »'.$query.'«',
+            'pagetitle' => 'Gästebuch – Suche nach »'.$query.'«',
             'query' => $query,
         ]);
     }
