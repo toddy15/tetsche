@@ -31,6 +31,6 @@
 <script>
 function insert(code) {
    var text = document.getElementById("message");
-   text.innerHTML += code;
+   text.value += code;
 }
 </script>
