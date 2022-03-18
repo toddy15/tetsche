@@ -216,12 +216,12 @@ class Spamfilter
             if (is_array($count)) {
                 // Update existing token.
                 \DB::table('filter_tokens')
-                    ->where('token', $token)
+                    ->where('token', (string) $token)
                     ->update(['count_ham' => $count['count_ham'], 'count_spam' => $count['count_spam']]);
             } else {
                 // New record.
                 \DB::table('filter_tokens')->insert([
-                    'token' => $token,
+                    'token' => (string) $token,
                     'count_ham' => $count,
                     'count_spam' => 0,
                 ]);
@@ -255,7 +255,7 @@ class Spamfilter
             if (is_array($count)) {
                 // Update existing token.
                 \DB::table('filter_tokens')
-                    ->where('token', $token)
+                    ->where('token', (string) $token)
                     ->update(['count_ham' => $count['count_ham'], 'count_spam' => $count['count_spam']]);
             }
         }
@@ -292,12 +292,12 @@ class Spamfilter
             if (is_array($count)) {
                 // Update existing token.
                 \DB::table('filter_tokens')
-                    ->where('token', $token)
+                    ->where('token', (string) $token)
                     ->update(['count_ham' => $count['count_ham'], 'count_spam' => $count['count_spam']]);
             } else {
                 // New record.
                 \DB::table('filter_tokens')->insert([
-                    'token' => $token,
+                    'token' => (string) $token,
                     'count_ham' => 0,
                     'count_spam' => $count,
                 ]);
@@ -331,7 +331,7 @@ class Spamfilter
             if (is_array($count)) {
                 // Update existing token.
                 \DB::table('filter_tokens')
-                    ->where('token', $token)
+                    ->where('token', (string) $token)
                     ->update(['count_ham' => $count['count_ham'], 'count_spam' => $count['count_spam']]);
             }
         }
