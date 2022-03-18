@@ -14,7 +14,7 @@
                 <div class="col-12 col-sm-6">
                     <form method="GET" action="{{ action([\App\Http\Controllers\GuestbookPostsController::class, 'search']) }}">
                     <div class="form-inline">
-                        {!! Form::label('search', 'Suche:', ['class' => 'sr-only control-label']) !!}
+                        {!! Form::label('search', 'Suche:', ['class' => 'visually-hidden control-label']) !!}
                         <div class="input-group">
                             {!! Form::input('search', 'q', null, ['class' => 'form-control', 'size' => 30, 'placeholder' => 'Suche ...']) !!}
                             <span class="input-group-btn">
@@ -31,7 +31,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-12 col-sm-4 text-right">
+        <div class="col-12 col-sm-4 text-end">
             {!! $images->getRandomImageForGuestbook() !!}
         </div>
     </div>
