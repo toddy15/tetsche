@@ -31,17 +31,15 @@
     <link href="{{ asset(mix('css/app.css')) }}" rel="stylesheet">
 </head>
 <body>
-<div id="app">
-    @include('partials.nav')
+@include('partials.nav')
 
-    <div class="container mt-4">
-        @include('partials.errors')
-        @include('partials.info')
+<div class="container mt-4">
+    @include('partials.errors')
+    @include('partials.info')
 
-        <main class="py-4">
-            @yield('content')
-        </main>
-    </div>
+    <main class="py-4">
+        @yield('content')
+    </main>
 </div>
 
 <!-- Matomo -->
