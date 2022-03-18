@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md navbar-dark bg-danger shadow-sm">
+<nav class="navbar navbar-expand-md navbar-dark bg-danger bg-gradient shadow-sm">
     <div class="container">
         <a class="navbar-brand" href="{{ route('homepage') }}">
             Home
