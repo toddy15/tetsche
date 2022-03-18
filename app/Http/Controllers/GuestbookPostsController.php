@@ -176,8 +176,6 @@ class GuestbookPostsController extends Controller
                 ->withInput();
         }
         // Store the post.
-        // @TODO: Do not truncate the category ...
-        $post['category'] = substr($post['category'], 0, 14);
         $new_post = GuestbookPost::create($post);
         // Learn status.
         $spamfilter->learnStatus($new_post);

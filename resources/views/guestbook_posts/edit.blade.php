@@ -22,11 +22,11 @@
     <div class="mb-4">
         {!! Form::label('category', 'Kategorie:', array('class' => 'control-label')) !!}
         {!! Form::select('category', [
+            'no_autolearn_h' => 'Automatisch akzeptiert',
             'manual_ham' => 'Akzeptieren',
             'unsure' => 'Keine Zuordnung',
             'manual_spam' => 'Als Spam ablehnen',
-            '-' => '------',
-            'ham' => 'Automatisch akzeptiert',
+            '-' => '',
             'autolearn_ham' => 'Automatisch akzeptiert und gelernt',
             'autolearn_spam' => 'Automatisch als Spam gelernt',
         ], $guestbook_post->category) !!}

@@ -179,7 +179,7 @@ class Spamfilter
             $category = 'autolearn_ham';
         }
         if ($score <= $this->threshold_no_autolearn_ham) {
-            $category = 'no_autolearn_ham';
+            $category = 'no_autolearn_h';
         }
         if ($score >= $this->threshold_spam) {
             $category = 'spam';
@@ -188,7 +188,7 @@ class Spamfilter
             $category = 'autolearn_spam';
         }
         if ($score >= $this->threshold_no_autolearn_spam) {
-            $category = 'no_autolearn_spam';
+            $category = 'no_autolearn_s';
         }
 
         return $category;
