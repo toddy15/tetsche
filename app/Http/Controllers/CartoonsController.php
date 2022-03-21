@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Cartoon;
 use App\Models\PublicationDate;
 use Carbon\Carbon;
+use DateInterval;
+use DateTime;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -110,7 +112,7 @@ class CartoonsController extends Controller
     /**
      * Display a listing of the archive.
      */
-    public function showArchive():View
+    public function showArchive(): View
     {
         $date = $this->getDateOfCurrentCartoon();
         $last_archived = $this->getDateOfLastArchivedCartoon();
@@ -170,11 +172,15 @@ class CartoonsController extends Controller
             // Next, get all available cartoon ids.
             $all_cartoon_ids = Cartoon::all()->pluck('id')->all();
 
+            // This is for cartoons which should not be shown again,
+            // e.g. because of contemporary events or similar.
+            $dont_show_again_ids = [320];
+
             // Define some ids for special cases:
             $weihnachten_ids = [49, 51, 52, 104, 157, 159, 216, 218, 276, 277, 331];
             $silvester_ids = [160, 219, 278];
             $neujahr_ids = [1, 53, 105, 161, 221, 279];
-            $ostern_ids = [];
+            $ostern_ids = [13, 68, 118, 176, 236, 291];
             $all_special_ids = array_merge(
                 $weihnachten_ids,
                 $silvester_ids,
@@ -204,9 +210,20 @@ class CartoonsController extends Controller
             }
 
             // Neujahr
-            $thursday_after_neujahr = $this->getThursday("last", ((int)date("Y") + 1) ."-01-07");
+            $thursday_after_neujahr = $this->getThursday("last", ((int)date("Y") + 1)."-01-07");
             if ($publish_on == $thursday_after_neujahr) {
                 $all_cartoon_ids = $neujahr_ids;
+                $all_special_ids = [];
+            }
+
+            // Ostern
+            $thursday_before_ostern = new DateTime(date("Y")."-03-21");
+            // Returns the number of days after March 21 on which Easter falls.
+            $thursday_before_ostern->add(new DateInterval('P'.easter_days().'D'));
+            $thursday_before_ostern = $thursday_before_ostern->format("Y-m-d");
+            $thursday_before_ostern = $this->getThursday("last", $thursday_before_ostern);
+            if ($publish_on == $thursday_before_ostern) {
+                $all_cartoon_ids = $ostern_ids;
                 $all_special_ids = [];
             }
 
@@ -219,7 +236,8 @@ class CartoonsController extends Controller
                 $random_id = mt_rand($min_number, $max_number);
                 if (in_array($random_id, $all_cartoon_ids)
                     and !in_array($random_id, $recent_cartoon_ids)
-                    and !in_array($random_id, $all_special_ids)) {
+                    and !in_array($random_id, $all_special_ids)
+                    and !in_array($random_id, $dont_show_again_ids)) {
                     break;
                 }
             }
