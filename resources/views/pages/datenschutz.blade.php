@@ -162,8 +162,9 @@
         und Nutzung Ihrer Daten bei einem erneuten Besuch unserer
         Seite wieder deaktivieren.
     </p>
+
     <iframe
-            style="border: 0; height: 300px; width: 600px;"
-            src="https://www.tetsche.de/matomo/index.php?module=CoreAdminHome&action=optOut&language=de&backgroundColor=ffffff&fontColor=000000&fontSize=18px&fontFamily=delicious-roman"
-    ></iframe>
+            style="border: 0; height: 200px; width: 600px;"
+            src="https://matomo.tetsche.de/index.php?module=CoreAdminHome&amp;action=optOut&amp;language=de&amp;backgroundColor=ffffff&amp;fontColor=000000&amp;fontSize=18px&amp;fontFamily=Assistant">
+    </iframe>
 @stop
