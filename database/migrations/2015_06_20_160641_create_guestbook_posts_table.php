@@ -18,6 +18,7 @@ return new class extends Migration
             $table->text('message');
             $table->text('cheffe')->nullable();
             $table->string('category', 14)->nullable();
+            $table->string('spam_detection')->nullable();
             $table->timestamps();
         });
     }
