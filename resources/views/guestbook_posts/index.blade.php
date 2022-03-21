@@ -60,7 +60,7 @@
                             @if (Auth::check())
                                 {!! Form::open(['route' => ['gaestebuch.destroy', $guestbook_post->id], 'method' => 'delete']) !!}
                                 <a href="{!! route('gaestebuch.edit', $guestbook_post) !!}" class="btn btn-primary">Bearbeiten</a>
-                                {!! Form::submit('Löschen', array('class' => 'btn btn-danger')) !!}
+                                {!! Form::submit('Löschen', ['class' => 'btn btn-danger']) !!}
                                 {!! Form::close() !!}
                             @endif
                         </td>

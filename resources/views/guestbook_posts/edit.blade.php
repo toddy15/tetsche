@@ -20,7 +20,7 @@
     </div>
 
     <div class="mb-4">
-        {!! Form::label('category', 'Kategorie:', array('class' => 'control-label')) !!}
+        {!! Form::label('category', 'Kategorie:', ['class' => 'control-label']) !!}
         {!! Form::select('category', [
             'no_autolearn_h' => 'Automatisch akzeptiert',
             'manual_ham' => 'Akzeptieren',
