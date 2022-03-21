@@ -57,12 +57,12 @@
                             @if ($guestbook_post->cheffe)
                                 <p class="text-danger">{!! $utils->replaceSmileys($guestbook_post->cheffe) !!}</p>
                             @endif
-                            @if (Auth::check())
+                            @auth
                                 {!! Form::open(['route' => ['gaestebuch.destroy', $guestbook_post->id], 'method' => 'delete']) !!}
                                 <a href="{!! route('gaestebuch.edit', $guestbook_post) !!}" class="btn btn-primary">Bearbeiten</a>
                                 {!! Form::submit('Löschen', ['class' => 'btn btn-danger']) !!}
                                 {!! Form::close() !!}
-                            @endif
+                            @endauth
                         </td>
                     </tr>
                 @endforeach
