@@ -3,45 +3,53 @@
 @section('content')
     <h1>Gästebuch: Eintrag bearbeiten</h1>
 
-    {!! Form::model($guestbook_post, ['method' => 'PUT', 'route' => ['gaestebuch.update', $guestbook_post->id]]) !!}
+    <form method="POST" action="{{ route('gaestebuch.update', $guestbook_post) }}">
+        @csrf
+        @method('PUT')
 
-    @include('guestbook_posts.form')
+        @include('guestbook_posts.form')
 
-    <div class="mb-4">
-        <label class="form-label" for="cheffe">Cheffe:</label>
-        <textarea class="form-control" id="cheffe" name="cheffe"
-                  placeholder="Cheffes Kommentar" rows="10"
-                  cols="50">{{ old("cheffe") ?? $guestbook_post->cheffe }}</textarea>
-    </div>
+        <div class="mb-4">
+            <label class="form-label" for="cheffe">Cheffe:</label>
+            <textarea class="form-control" id="cheffe" name="cheffe"
+                      placeholder="Cheffes Kommentar" rows="10"
+                      cols="50">{{ old("cheffe") ?? $guestbook_post->cheffe }}</textarea>
+        </div>
 
-    <div class="mb-4">
-        {!! Form::label('score', 'Wahrscheinlichkeit für Spam:', ['class' => 'control-label']) !!}
-        <p class="form-control-static">{!! $guestbook_post->score !!}%</p>
-    </div>
+        <div class="mb-4">
+            <label class="form-label" for="score">Wahrscheinlichkeit für Spam:</label>
+            <input type="text" readonly class="form-control-plaintext" id="score"
+                   value="{!! $guestbook_post->score !!}%">
+        </div>
 
-    <div class="mb-4">
-        {!! Form::label('category', 'Kategorie:', ['class' => 'control-label']) !!}
-        {!! Form::select('category', [
-            'no_autolearn_h' => 'Automatisch akzeptiert',
-            'manual_ham' => 'Akzeptieren',
-            'unsure' => 'Keine Zuordnung',
-            'manual_spam' => 'Als Spam ablehnen',
-            '-' => '',
-            'autolearn_ham' => 'Automatisch akzeptiert und gelernt',
-            'autolearn_spam' => 'Automatisch als Spam gelernt',
-        ], $guestbook_post->category) !!}
-    </div>
+        <div class="mb-4">
+            <label class="form-label" for="category">Kategorie:</label>
+            <select class="form-select" aria-label="Kategorie des Posts" id="category" name="category">
+                <option value="no_autolearn_h" @selected(old(
+                'category', $guestbook_post->category) == 'no_autolearn_h')>Automatisch akzeptiert</option>
+                <option value="manual_ham" @selected(old(
+                'category', $guestbook_post->category) == 'manual_ham')>Akzeptieren</option>
+                <option value="unsure" @selected(old(
+                'category', $guestbook_post->category) == 'unsure')>Keine Zuordnung</option>
+                <option value="manual_spam" @selected(old(
+                'category', $guestbook_post->category) == 'manual_spam')>Als Spam ablehnen</option>
+                <option value="-" @selected(old(
+                'category', $guestbook_post->category) == '-')>-</option>
+                <option value="autolearn_ham" @selected(old(
+                'category', $guestbook_post->category) == 'autolearn_ham')>Automatisch akzeptiert und gelernt</option>
+                <option value="autolearn_spam" @selected(old(
+                'category', $guestbook_post->category) == 'autolearn_spam')>Automatisch als Spam gelernt</option>
+            </select>
+        </div>
 
-    <!-- Submit Form Input  -->
-    <div class="text-center">
-        {!! Form::submit('Speichern', ['class' => 'btn btn-default btn-primary']) !!}
-    </div>
+        <div class="text-center">
+            <input type="submit" class="btn btn-default btn-primary" value="Speichern">
+        </div>
+    </form>
 
-    {!! Form::close() !!}
-
-    <div class="text-center">
-        {!! Form::open(['route' => ['gaestebuch.destroy', $guestbook_post->id], 'method' => 'delete']) !!}
-        {!! Form::submit('Löschen', ['class' => 'btn btn-danger']) !!}
-        {!! Form::close() !!}
-    </div>
+    <form method="POST" action="{{ route('gaestebuch.destroy', $guestbook_post) }}">
+        @csrf
+        @method('DELETE')
+        <input type="submit" class="btn btn-danger" value="Löschen">
+    </form>
 @stop
