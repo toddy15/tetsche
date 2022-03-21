@@ -103,7 +103,7 @@ class CartoonsController extends Controller
         return view('cartoons.show', [
             'title' => 'Cartoon der Woche',
             'pagetitle' => 'Cartoon der Woche . . . vom '.Carbon::parse($date)->locale('de')->isoFormat('Do MMMM YYYY'),
-            'keywords' => 'Tetsche, Kalauseite der Woche, Cartoon der Woche',
+            'keywords' => 'Tetsche, Cartoon der Woche',
             'description' => 'Tetsche - Cartoon der Woche',
             'cartoon' => $cartoon,
         ]);
@@ -122,8 +122,8 @@ class CartoonsController extends Controller
 
         return view('cartoons.archive', [
             'title' => 'Archiv',
-            'keywords' => 'Tetsche im »stern«, Kalauseite, Cartoon, Kalau-Archiv, Archiv',
-            'description' => 'Archiv - ältere Ausgaben',
+            'keywords' => 'Tetsche-Seite, Cartoon der Woche, Archiv',
+            'description' => 'Archiv – ältere Ausgaben',
             'dates' => $dates,
         ]);
     }
