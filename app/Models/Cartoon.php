@@ -31,7 +31,7 @@ class Cartoon extends Model
     public function imageSizeAndDescription()
     {
         $date = Carbon::parse($this->lastPublishOn())->locale('de')->isoFormat('Do MMMM YYYY');
-        $result = 'alt="Tetsche - Cartoon der Woche . . . vom '.$date.'" ';
+        $result = 'alt="Tetsche – Cartoon der Woche . . . vom '.$date.'" ';
         if (is_file(public_path().'/'.$this->imagePath())) {
             $size = getimagesize(public_path().'/'.$this->imagePath());
             $result .= $size[3];
@@ -68,8 +68,7 @@ class Cartoon extends Model
     public function thumbnailSizeAndDescription()
     {
         $date = Carbon::parse($this->lastPublishOn())->locale('de')->isoFormat('Do MMMM YYYY');
-        $result = 'alt="Tetsche - Cartoon der Woche . . . vom '.$date.'" ';
-        $result .= 'title="Tetsche - Cartoon der Woche . . . vom '.$date.'" ';
+        $result = 'alt="Tetsche – Cartoon der Woche . . . vom '.$date.'" ';
         if (is_file(public_path().'/'.$this->thumbnailPath())) {
             $size = getimagesize(public_path().'/'.$this->thumbnailPath());
             $result .= $size[3];
