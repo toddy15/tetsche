@@ -6,6 +6,7 @@ use App\Mail\NewGuestbookPost;
 use App\Models\GuestbookPost;
 use App\Models\PublicationDate;
 use App\TwsLib\Spamfilter;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -13,12 +14,7 @@ use Illuminate\Support\Facades\Validator;
 
 class GuestbookPostsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return Response
-     */
-    public function index()
+    public function index(): View
     {
         $guestbook_posts = GuestbookPost::whereNotIn('category', ['manual_spam', 'autolearn_spam'])
             ->latest()
@@ -33,23 +29,12 @@ class GuestbookPostsController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return Response
-     */
-    public function create()
+    public function create():View
     {
         return view('guestbook_posts.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  Request  $request
-     * @return Response
-     */
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
         $post = $request->all();
         $spamfilter = new Spamfilter();
@@ -190,11 +175,13 @@ class GuestbookPostsController extends Controller
             'spam_detection' => $post['spam_detection'],
         ];
 
-        // @TODO: subject('Neuer Eintrag im Tetsche-Gästebuch');
+        $mail = new NewGuestbookPost($new_post);
+        $mail->subject('Neuer Eintrag im Tetsche-Gästebuch');
         Mail::to([
             (object)['name' => 'Toddy', 'email' => 'toddy@example.org'],
             (object)['name' => 'Tetsche', 'email' => 'tetsche@example.org'],
-        ])->send(new NewGuestbookPost($new_post));
+        ])->send($mail);
+
         $request->session()->flash('info', 'Der Eintrag wurde gespeichert.');
 
         return redirect(action([GuestbookPostsController::class, 'index']));
@@ -204,9 +191,9 @@ class GuestbookPostsController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return Response
+     * @return View
      */
-    public function edit($id)
+    public function edit(int $id): View
     {
         $guestbook_post = GuestbookPost::findOrFail($id);
         // Calculate spam score
@@ -263,7 +250,7 @@ class GuestbookPostsController extends Controller
     /**
      * Filter guestbook by search string.
      */
-    public function search(Request $request)
+    public function search(Request $request): View|RedirectResponse
     {
         $query = $request->get('q');
         if (trim($query) == '') {

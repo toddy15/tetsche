@@ -19,7 +19,6 @@
     @enderror
 </div>
 
-<!-- Images Input  -->
 <div class="text-center">
     <ul class="list-inline">
         @foreach ($utils->getSmileysButtons() as $button)
