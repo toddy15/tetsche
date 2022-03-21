@@ -6,9 +6,6 @@
     RewriteEngine On
     RewriteBase /~toddy/tetsche/www/public/
 
-    # Add redirect for matomo folder
-    RewriteRule ^matomo/?$ /matomo/index.php [L]
-
     # Handle Authorization Header
     RewriteCond %{HTTP:Authorization} .
     RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
