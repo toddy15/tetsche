@@ -30,7 +30,7 @@
     <script src="{{ asset(mix('js/app.js')) }}" defer></script>
     <link href="{{ asset(mix('css/app.css')) }}" rel="stylesheet">
 </head>
-<body>
+<body class="bg-white">
 @include('partials.nav')
 
 <div class="container mt-4">
