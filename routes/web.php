@@ -67,4 +67,5 @@ Auth::routes(['register' => false]);
 // Redirect routes
 Route::permanentRedirect('/gästebuch', '/gaestebuch');
 Route::permanentRedirect('/bücher', '/buecher');
+Route::permanentRedirect('/datenschutzerklärung', '/datenschutz');
 Route::permanentRedirect('/auth/login', '/login');
