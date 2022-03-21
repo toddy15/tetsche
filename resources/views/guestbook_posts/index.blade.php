@@ -63,10 +63,12 @@
                             <p class="text-danger">{!! $utils->replaceSmileys($guestbook_post->cheffe) !!}</p>
                         @endif
                         @auth
-                            {!! Form::open(['route' => ['gaestebuch.destroy', $guestbook_post->id], 'method' => 'delete']) !!}
-                            <a href="{!! route('gaestebuch.edit', $guestbook_post) !!}" class="btn btn-primary">Bearbeiten</a>
-                            {!! Form::submit('Löschen', ['class' => 'btn btn-danger']) !!}
-                            {!! Form::close() !!}
+                            <form method="POST" action="{{ route('gaestebuch.destroy', $guestbook_post) }}">
+                                @csrf
+                                @method('delete')
+                                <a href="{!! route('gaestebuch.edit', $guestbook_post) !!}" class="btn btn-primary">Bearbeiten</a>
+                                <input type="submit" class="btn btn-danger" value="Löschen">
+                            </form>
                         @endauth
                     </td>
                 </tr>
