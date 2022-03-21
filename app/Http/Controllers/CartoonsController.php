@@ -5,16 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\Cartoon;
 use App\Models\PublicationDate;
 use Carbon\Carbon;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class CartoonsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return Response
-     */
-    public function index()
+    public function index(): View
     {
         $publication_dates = PublicationDate::orderBy('publish_on', 'desc')->simplePaginate(8);
 
@@ -28,10 +25,8 @@ class CartoonsController extends Controller
 
     /**
      * Display an archived cartoon.
-     *
-     * @return \Illuminate\View\View
      */
-    public function show($date)
+    public function show($date): View|RedirectResponse
     {
         $current_date = $this->getDateOfCurrentCartoon();
         $last_archived = $this->getDateOfLastArchivedCartoon();
@@ -50,14 +45,14 @@ class CartoonsController extends Controller
         // Search cartoon for the given date
         $cartoon = PublicationDate::where('publish_on', '=', $date)->first()->cartoon;
         // Show 404 if the cartoon is not found
-        if (! $cartoon) {
+        if (!$cartoon) {
             abort(404);
         }
         $cartoon->showRebusSolution = true;
 
         return view('cartoons.show', [
             'title' => 'Archiv',
-            'pagetitle' => 'Cartoon der Woche . . . vom ' . Carbon::parse($date)->locale('de')->isoFormat('Do MMMM YYYY'),
+            'pagetitle' => 'Cartoon der Woche . . . vom '.Carbon::parse($date)->locale('de')->isoFormat('Do MMMM YYYY'),
             'keywords' => 'Tetsche, Kalauseite, Cartoon, Kalau-Archiv, Archiv',
             'description' => 'Archiv - ältere Ausgaben',
             'cartoon' => $cartoon,
@@ -65,11 +60,39 @@ class CartoonsController extends Controller
     }
 
     /**
-     * Display the current cartoon.
-     *
-     * @return Response
+     * Helper method to determine the current cartoon.
      */
-    public function showCurrent()
+    private function getDateOfCurrentCartoon()
+    {
+        // Add 6 hours to the current time, so that the
+        // cartoon is published at 18:00 one day before.
+        $date = date('Y-m-d', time() + 6 * 60 * 60);
+        $current_cartoon = PublicationDate::where('publish_on', '<=', $date)
+            ->orderBy('publish_on', 'DESC')
+            ->first();
+
+        return $current_cartoon->publish_on;
+    }
+
+    /**
+     * Helper method to determine the last archived cartoon.
+     *
+     * There should be only 16 cartoons in the archive.
+     */
+    private function getDateOfLastArchivedCartoon()
+    {
+        $current = $this->getDateOfCurrentCartoon();
+
+        return PublicationDate::where('publish_on', '<=', $current)
+            ->orderBy('publish_on', 'desc')
+            ->skip(16)
+            ->value('publish_on');
+    }
+
+    /**
+     * Display the current cartoon.
+     */
+    public function showCurrent(): View
     {
         $date = $this->getDateOfCurrentCartoon();
         $cartoon = PublicationDate::where('publish_on', '=', $date)->first()->cartoon;
@@ -77,7 +100,7 @@ class CartoonsController extends Controller
 
         return view('cartoons.show', [
             'title' => 'Cartoon der Woche',
-            'pagetitle' => 'Cartoon der Woche . . . vom ' . Carbon::parse($date)->locale('de')->isoFormat('Do MMMM YYYY'),
+            'pagetitle' => 'Cartoon der Woche . . . vom '.Carbon::parse($date)->locale('de')->isoFormat('Do MMMM YYYY'),
             'keywords' => 'Tetsche, Kalauseite der Woche, Cartoon der Woche',
             'description' => 'Tetsche - Cartoon der Woche',
             'cartoon' => $cartoon,
@@ -86,10 +109,8 @@ class CartoonsController extends Controller
 
     /**
      * Display a listing of the archive.
-     *
-     * @return Response
      */
-    public function showArchive()
+    public function showArchive():View
     {
         $date = $this->getDateOfCurrentCartoon();
         $last_archived = $this->getDateOfLastArchivedCartoon();
@@ -105,56 +126,9 @@ class CartoonsController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function edit($id)
-    {
-        $cartoon = Cartoon::findOrFail($id);
-
-        return view('cartoons.edit', [
-            'title' => 'Cartoon bearbeiten',
-            'cartoon' => $cartoon,
-        ]);
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param Request $request
-     * @param  int $id
-     * @return Response
-     */
-    public function update(Request $request, $id)
-    {
-        $cartoon = Cartoon::findOrFail($id);
-        $cartoon->rebus = $request->input('rebus');
-        $cartoon->save();
-        $request->session()->flash('info', 'Die Rebuslösung wurde gespeichert.');
-
-        return redirect('cartoons');
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param Request $request
-     * @param  int $id
-     * @return Response
-     */
-    public function destroy(Request $request, $id)
-    {
-        $cartoon = Cartoon::findOrFail($id);
-        unlink($cartoon->imagePath());
-        unlink($cartoon->thumbnailPath());
-        $cartoon->delete();
-        $request->session()->flash('info', 'Der Cartoon wurde gelöscht.');
-
-        return redirect('cartoons');
-    }
+    ///////////////////////////////////
+    // Helper methods
+    ///////////////////////////////////
 
     /**
      * Force a new randomly selected cartoon for next thursday.
@@ -230,7 +204,7 @@ class CartoonsController extends Controller
             }
 
             // Neujahr
-            $thursday_after_neujahr = $this->getThursday("last", date("Y") + 1 . "-01-07");
+            $thursday_after_neujahr = $this->getThursday("last", date("Y") + 1 ."-01-07");
             if ($publish_on == $thursday_after_neujahr) {
                 $all_cartoon_ids = $neujahr_ids;
                 $all_special_ids = [];
@@ -244,15 +218,15 @@ class CartoonsController extends Controller
             while (true) {
                 $random_id = mt_rand($min_number, $max_number);
                 if (in_array($random_id, $all_cartoon_ids)
-                  and ! in_array($random_id, $recent_cartoon_ids)
-                  and ! in_array($random_id, $all_special_ids)) {
+                    and !in_array($random_id, $recent_cartoon_ids)
+                    and !in_array($random_id, $all_special_ids)) {
                     break;
                 }
             }
 
             // Ensure that the publication date does not yet exist.
             $date_exists = PublicationDate::where('publish_on', $publish_on)->first();
-            if (! $date_exists) {
+            if (!$date_exists) {
                 PublicationDate::create([
                     'publish_on' => $publish_on,
                     'cartoon_id' => $random_id,
@@ -260,12 +234,8 @@ class CartoonsController extends Controller
             }
         }
 
-        return redirect(action('CartoonsController@showCurrent'));
+        return redirect(action([CartoonsController::class, 'showCurrent']));
     }
-
-    ///////////////////////////////////
-    // Helper methods
-    ///////////////////////////////////
 
     /**
      * Helper method to determine the last or the next thursday.
@@ -292,35 +262,5 @@ class CartoonsController extends Controller
         $thursday = date("Y-m-d", mktime(0, 0, 0, $month, $day, $year));
 
         return $thursday;
-    }
-
-    /**
-     * Helper method to determine the current cartoon.
-     */
-    private function getDateOfCurrentCartoon()
-    {
-        // Add 6 hours to the current time, so that the
-        // cartoon is published at 18:00 one day before.
-        $date = date('Y-m-d', time() + 6 * 60 * 60);
-        $current_cartoon = PublicationDate::where('publish_on', '<=', $date)
-            ->orderBy('publish_on', 'DESC')
-            ->first();
-
-        return $current_cartoon->publish_on;
-    }
-
-    /**
-     * Helper method to determine the last archived cartoon.
-     *
-     * There should be only 16 cartoons in the archive.
-     */
-    private function getDateOfLastArchivedCartoon()
-    {
-        $current = $this->getDateOfCurrentCartoon();
-
-        return PublicationDate::where('publish_on', '<=', $current)
-            ->orderBy('publish_on', 'desc')
-            ->skip(16)
-            ->value('publish_on');
     }
 }

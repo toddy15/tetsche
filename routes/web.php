@@ -70,12 +70,12 @@ Route::middleware(Authenticate::class)->group(function () {
 
     Route::get('/cartoons', [CartoonsController::class, 'index']);
     Route::get('/cartoons/forceNewCartoon', [CartoonsController::class, 'forceNewCartoon']);
-    Route::get('/cartoons/{id}/edit', [CartoonsController::class, 'edit'])
-        ->where('id', '[0-9]+');
-    Route::put('/cartoons/{id}', [CartoonsController::class, 'update'])
-        ->where('id', '[0-9]+');
-    Route::delete('/cartoons/{id}', [CartoonsController::class, 'destroy'])
-        ->where('id', '[0-9]+');
+//    Route::get('/cartoons/{id}/edit', [CartoonsController::class, 'edit'])
+//        ->where('id', '[0-9]+');
+//    Route::put('/cartoons/{id}', [CartoonsController::class, 'update'])
+//        ->where('id', '[0-9]+');
+//    Route::delete('/cartoons/{id}', [CartoonsController::class, 'destroy'])
+//        ->where('id', '[0-9]+');
 });
 
 // Close registration
