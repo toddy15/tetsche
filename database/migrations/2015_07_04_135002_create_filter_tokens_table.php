@@ -13,7 +13,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('filter_tokens', function (Blueprint $table) {
-            $table->binary('token');
+            $table->string('token');
             $table->integer('count_ham')->unsigned();
             $table->integer('count_spam')->unsigned();
         });
