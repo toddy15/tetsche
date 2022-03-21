@@ -151,7 +151,7 @@ class CartoonsController extends Controller
      * If so, generate a new random number for the next
      * cartoon, and check for some special cases.
      */
-    public function checkIfCurrentIsLastCartoon()
+    public function checkIfCurrentIsLastCartoon(): RedirectResponse
     {
         $newest_cartoon = PublicationDate::orderBy('publish_on', 'desc')->first();
         $newest_cartoon_date = $newest_cartoon->publish_on;
@@ -204,7 +204,7 @@ class CartoonsController extends Controller
             }
 
             // Neujahr
-            $thursday_after_neujahr = $this->getThursday("last", date("Y") + 1 ."-01-07");
+            $thursday_after_neujahr = $this->getThursday("last", ((int)date("Y") + 1) ."-01-07");
             if ($publish_on == $thursday_after_neujahr) {
                 $all_cartoon_ids = $neujahr_ids;
                 $all_special_ids = [];
@@ -243,7 +243,7 @@ class CartoonsController extends Controller
      * @param $which string with either "next" or "last".
      * @param $date string with a date, defaults to current date.
      */
-    private function getThursday($which = "next", $date = "")
+    private function getThursday($which = "next", $date = ""): string
     {
         if ($date == "") {
             $date = date("Y-m-d");
