@@ -2,6 +2,8 @@
 
 namespace App\TwsLib;
 
+use Illuminate\Support\Facades\DB;
+
 class Spamfilter
 {
     private $threshold_no_autolearn_ham = 0.38;
@@ -16,10 +18,10 @@ class Spamfilter
      */
     public function initializeAll($texts)
     {
-        \DB::table('filter_texts')->delete();
-        \DB::table('filter_texts')->insert(['category' => 'ham', 'count_texts' => count($texts['ham'])]);
-        \DB::table('filter_texts')->insert(['category' => 'spam', 'count_texts' => count($texts['spam'])]);
-        \DB::table('filter_tokens')->delete();
+        DB::table('filter_texts')->delete();
+        DB::table('filter_texts')->insert(['category' => 'ham', 'count_texts' => count($texts['ham'])]);
+        DB::table('filter_texts')->insert(['category' => 'spam', 'count_texts' => count($texts['spam'])]);
+        DB::table('filter_tokens')->delete();
         $table_data = [];
         foreach ($texts as $category => $posts) {
             foreach ($posts as $post) {
@@ -41,7 +43,7 @@ class Spamfilter
         foreach ($table_data as $token => $counts) {
             $inserts[] = array_merge(['token' => $token], $counts);
         }
-        \DB::table('filter_tokens')->insert($inserts);
+        DB::table('filter_tokens')->insert($inserts);
     }
 
     /**
@@ -81,12 +83,12 @@ class Spamfilter
         // Add the additional spam detection, but do not parse it.
         $tokens[$spam_detection] = 1;
         // Get all known tokens for this text.
-        $known_tokens = \DB::table('filter_tokens')
+        $known_tokens = DB::table('filter_tokens')
             ->whereIn('token', array_keys($tokens))->get();
         // Get the sums for ham and spam messages.
         // Ensure that the count is not zero, to avoid a division by zero error.
-        $count_total_ham = max(1, \DB::table('filter_texts')->where('category', 'ham')->value('count_texts'));
-        $count_total_spam = max(1, \DB::table('filter_texts')->where('category', 'spam')->value('count_texts'));
+        $count_total_ham = max(1, DB::table('filter_texts')->where('category', 'ham')->value('count_texts'));
+        $count_total_spam = max(1, DB::table('filter_texts')->where('category', 'spam')->value('count_texts'));
         // Calculate probabilities for each known token
         $rating = [];
         $importance = [];
@@ -203,7 +205,7 @@ class Spamfilter
         // Add the additional spam detection, but do not parse it.
         $tokens[$spam_detection] = 1;
         // If the token is already known, sum up the current count.
-        $known_tokens = \DB::table('filter_tokens')
+        $known_tokens = DB::table('filter_tokens')
             ->whereIn('token', array_keys($tokens))->get();
         foreach ($known_tokens as $known_token) {
             $tokens[$known_token->token] = [
@@ -215,12 +217,12 @@ class Spamfilter
         foreach ($tokens as $token => $count) {
             if (is_array($count)) {
                 // Update existing token.
-                \DB::table('filter_tokens')
+                DB::table('filter_tokens')
                     ->where('token', (string) $token)
                     ->update(['count_ham' => $count['count_ham'], 'count_spam' => $count['count_spam']]);
             } else {
                 // New record.
-                \DB::table('filter_tokens')->insert([
+                DB::table('filter_tokens')->insert([
                     'token' => (string) $token,
                     'count_ham' => $count,
                     'count_spam' => 0,
@@ -228,7 +230,7 @@ class Spamfilter
             }
         }
         // Finally, increment the number of known texts
-        \DB::table('filter_texts')
+        DB::table('filter_texts')
             ->where('category', 'ham')
             ->increment('count_texts');
     }
@@ -242,7 +244,7 @@ class Spamfilter
         // Add the additional spam detection, but do not parse it.
         $tokens[$spam_detection] = 1;
         // Sum up the current count.
-        $known_tokens = \DB::table('filter_tokens')
+        $known_tokens = DB::table('filter_tokens')
             ->whereIn('token', array_keys($tokens))->get();
         foreach ($known_tokens as $known_token) {
             $tokens[$known_token->token] = [
@@ -254,17 +256,17 @@ class Spamfilter
         foreach ($tokens as $token => $count) {
             if (is_array($count)) {
                 // Update existing token.
-                \DB::table('filter_tokens')
+                DB::table('filter_tokens')
                     ->where('token', (string) $token)
                     ->update(['count_ham' => $count['count_ham'], 'count_spam' => $count['count_spam']]);
             }
         }
         // Decrement the number of known texts
-        \DB::table('filter_texts')
+        DB::table('filter_texts')
             ->where('category', 'ham')
             ->decrement('count_texts');
         // Clean up the table and remove words where both counts are zero
-        \DB::table('filter_tokens')
+        DB::table('filter_tokens')
             ->where('count_ham', 0)
             ->where('count_spam', 0)
             ->delete();
@@ -279,7 +281,7 @@ class Spamfilter
         // Add the additional spam detection, but do not parse it.
         $tokens[$spam_detection] = 1;
         // If the token is already known, sum up the current count.
-        $known_tokens = \DB::table('filter_tokens')
+        $known_tokens = DB::table('filter_tokens')
             ->whereIn('token', array_keys($tokens))->get();
         foreach ($known_tokens as $known_token) {
             $tokens[$known_token->token] = [
@@ -291,12 +293,12 @@ class Spamfilter
         foreach ($tokens as $token => $count) {
             if (is_array($count)) {
                 // Update existing token.
-                \DB::table('filter_tokens')
+                DB::table('filter_tokens')
                     ->where('token', (string) $token)
                     ->update(['count_ham' => $count['count_ham'], 'count_spam' => $count['count_spam']]);
             } else {
                 // New record.
-                \DB::table('filter_tokens')->insert([
+                DB::table('filter_tokens')->insert([
                     'token' => (string) $token,
                     'count_ham' => 0,
                     'count_spam' => $count,
@@ -304,7 +306,7 @@ class Spamfilter
             }
         }
         // Finally, increment the number of known texts
-        \DB::table('filter_texts')
+        DB::table('filter_texts')
             ->where('category', 'spam')
             ->increment('count_texts');
     }
@@ -318,7 +320,7 @@ class Spamfilter
         // Add the additional spam detection, but do not parse it.
         $tokens[$spam_detection] = 1;
         // Sum up the current count.
-        $known_tokens = \DB::table('filter_tokens')
+        $known_tokens = DB::table('filter_tokens')
             ->whereIn('token', array_keys($tokens))->get();
         foreach ($known_tokens as $known_token) {
             $tokens[$known_token->token] = [
@@ -330,17 +332,17 @@ class Spamfilter
         foreach ($tokens as $token => $count) {
             if (is_array($count)) {
                 // Update existing token.
-                \DB::table('filter_tokens')
+                DB::table('filter_tokens')
                     ->where('token', (string) $token)
                     ->update(['count_ham' => $count['count_ham'], 'count_spam' => $count['count_spam']]);
             }
         }
         // Decrement the number of known texts
-        \DB::table('filter_texts')
+        DB::table('filter_texts')
             ->where('category', 'spam')
             ->decrement('count_texts');
         // Clean up the table and remove words where both counts are zero
-        \DB::table('filter_tokens')
+        DB::table('filter_tokens')
             ->where('count_ham', 0)
             ->where('count_spam', 0)
             ->delete();
