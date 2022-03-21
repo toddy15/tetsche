@@ -9,7 +9,8 @@ use Illuminate\Queue\SerializesModels;
 
 class NewGuestbookPost extends Mailable
 {
-    use Queueable, SerializesModels;
+    use Queueable;
+    use SerializesModels;
 
     public GuestbookPost $guestbook_post;
 

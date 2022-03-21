@@ -29,7 +29,7 @@ class GuestbookPostsController extends Controller
         ]);
     }
 
-    public function create():View
+    public function create(): View
     {
         return view('guestbook_posts.create');
     }
@@ -44,7 +44,7 @@ class GuestbookPostsController extends Controller
         $spam_detection .= ", Browser: ".$request->server('HTTP_USER_AGENT');
         $post['score'] = $spamfilter->classify($text, $spam_detection);
         // @FIXME: Filter out the fuckheads, based on IP address
-        if (!$spamfilter->isSpam($post['score'])) {
+        if (! $spamfilter->isSpam($post['score'])) {
             $ip = explode('.', $request->ip());
             if (($ip[0] == 141) and ($ip[1] == 48)) {
                 $post['score'] = $spamfilter->threshold_autolearn_spam;
@@ -110,7 +110,7 @@ class GuestbookPostsController extends Controller
                     'Der Eintrag wurde als Spam eingestuft und daher nicht gespeichert.'
                 );
                 // @FIXME: Remove this part if sending all spam mails is no longer necessary.
-                if (!$spamfilter->isAutolearnSpam($post['score'])) {
+                if (! $spamfilter->isAutolearnSpam($post['score'])) {
                     $data = [
                         'id' => 0,
                         'name' => $post['name'],

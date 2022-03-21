@@ -9,7 +9,6 @@ use DateInterval;
 use DateTime;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 
 class CartoonsController extends Controller
 {
@@ -47,7 +46,7 @@ class CartoonsController extends Controller
         // Search cartoon for the given date
         $cartoon = PublicationDate::where('publish_on', '=', $date)->first()->cartoon;
         // Show 404 if the cartoon is not found
-        if (!$cartoon) {
+        if (! $cartoon) {
             abort(404);
         }
         $cartoon->showRebusSolution = true;
@@ -235,16 +234,16 @@ class CartoonsController extends Controller
             while (true) {
                 $random_id = mt_rand($min_number, $max_number);
                 if (in_array($random_id, $all_cartoon_ids)
-                    and !in_array($random_id, $recent_cartoon_ids)
-                    and !in_array($random_id, $all_special_ids)
-                    and !in_array($random_id, $dont_show_again_ids)) {
+                    and ! in_array($random_id, $recent_cartoon_ids)
+                    and ! in_array($random_id, $all_special_ids)
+                    and ! in_array($random_id, $dont_show_again_ids)) {
                     break;
                 }
             }
 
             // Ensure that the publication date does not yet exist.
             $date_exists = PublicationDate::where('publish_on', $publish_on)->first();
-            if (!$date_exists) {
+            if (! $date_exists) {
                 PublicationDate::create([
                     'publish_on' => $publish_on,
                     'cartoon_id' => $random_id,
