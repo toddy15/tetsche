@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class PublicationDate extends Model
 {
@@ -17,8 +18,8 @@ class PublicationDate extends Model
     /**
      * Get the cartoon that has this publication date.
      */
-    public function cartoon()
+    public function cartoon(): BelongsTo
     {
-        return $this->belongsTo('App\Models\Cartoon');
+        return $this->belongsTo(Cartoon::class);
     }
 }

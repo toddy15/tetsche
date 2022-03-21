@@ -5,6 +5,7 @@ namespace App\Models;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Cartoon extends Model
 {
@@ -19,9 +20,9 @@ class Cartoon extends Model
     /**
      * Get the publication dates of the cartoon.
      */
-    public function publicationDate()
+    public function publicationDate(): HasMany
     {
-        return $this->hasMany('App\Models\PublicationDate')->orderBy('publish_on', 'DESC');
+        return $this->hasMany(PublicationDate::class)->orderBy('publish_on', 'DESC');
     }
 
     /**
