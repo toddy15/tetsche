@@ -162,18 +162,10 @@ class GuestbookPostsController extends Controller
         }
         // Store the post.
         $new_post = GuestbookPost::create($post);
+        $new_post->score = $post['score'];
+
         // Learn status.
         $spamfilter->learnStatus($new_post);
-        $data = [
-            'id' => $new_post->id,
-            'name' => $post['name'],
-            // Watch out: the variable message is automatically
-            // created, so we need to use another name.
-            'body' => $post['message'],
-            'score' => $post['score'],
-            'category' => $post['category'],
-            'spam_detection' => $post['spam_detection'],
-        ];
 
         $mail = new NewGuestbookPost($new_post);
         $mail->subject('Neuer Eintrag im Tetsche-Gästebuch');
