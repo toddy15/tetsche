@@ -15,5 +15,7 @@ return [
 
     'previous' => '&laquo; Previous',
     'next' => 'Next &raquo;',
+    'pagination.previous' => '&laquo; Previous',
+    'pagination.next' => 'Next &raquo;',
 
 ];
