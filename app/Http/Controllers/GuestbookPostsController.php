@@ -111,48 +111,29 @@ class GuestbookPostsController extends Controller
                 );
                 // @FIXME: Remove this part if sending all spam mails is no longer necessary.
                 if (! $spamfilter->isAutolearnSpam($post['score'])) {
-                    $data = [
-                        'id' => 0,
-                        'name' => $post['name'],
-                        // Watch out: the variable message is automatically
-                        // created, so we need to use another name.
-                        'body' => $post['message'],
-                        'score' => $post['score'],
-                        'category' => $post['category'],
-                        'spam_detection' => $post['spam_detection'],
-                    ];
-                    // @TODO: Implement mailable
-                    /*
-                    Mail::queue(['text' => 'emails.guestbook'], $data, function ($message) {
-                        $message->from('webmaster@tetsche.de', 'Gästebuch');
-                        $message->to('toddy@example.org', 'Toddy');
-                        $message->subject('Neuer Eintrag im Tetsche-Gästebuch (als Spam abgelehnt)');
-                    });
-                    */
+                    $new_post = GuestbookPost::make($post);
+                    $new_post->score = $post['score'];
+
+                    $mail = new NewGuestbookPost($new_post);
+                    $mail->subject('Neuer Eintrag im Tetsche-Gästebuch (als Spam abgelehnt)');
+                    Mail::to([
+                        (object)['name' => 'Toddy', 'email' => 'toddy@example.org'],
+                    ])->send($mail);
                 }
             }
             // Special case: autolearning spam
             if ($spamfilter->isAutolearnSpam($post['score'])) {
                 $new_post = GuestbookPost::create($post);
                 $spamfilter->learnStatus($new_post);
-                $data = [
-                    'id' => $new_post->id,
-                    'name' => $post['name'],
-                    // Watch out: the variable message is automatically
-                    // created, so we need to use another name.
-                    'body' => $post['message'],
-                    'score' => $post['score'],
-                    'category' => $post['category'],
-                    'spam_detection' => $post['spam_detection'],
-                ];
-                // @TODO: Implement mailable
-                /*
-                Mail::queue(['text' => 'emails.guestbook'], $data, function ($message) {
-                    $message->from('webmaster@tetsche.de', 'Gästebuch');
-                    $message->to('toddy@example.org', 'Toddy');
-                    $message->subject('Neuer Eintrag im Tetsche-Gästebuch (als Spam gelernt)');
-                });
-                */
+
+                $new_post = GuestbookPost::make($post);
+                $new_post->score = $post['score'];
+
+                $mail = new NewGuestbookPost($new_post);
+                $mail->subject('Neuer Eintrag im Tetsche-Gästebuch (als Spam gelernt)');
+                Mail::to([
+                    (object)['name' => 'Toddy', 'email' => 'toddy@example.org'],
+                ])->send($mail);
             }
         });
         if ($validator->fails()) {
