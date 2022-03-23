@@ -246,7 +246,7 @@ class GuestbookPostsController extends Controller
     {
         $query = $request->get('q');
         if (trim($query) == '') {
-            return redirect(action([GuestbookPostsController::class, 'index']));
+            return redirect()->route('gaestebuch.index');
         }
         $guestbook_posts = GuestbookPost::whereNotIn('category', ['manual_spam', 'autolearn_spam'])
             ->where(function ($sql) use ($query) {
