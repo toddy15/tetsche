@@ -20,5 +20,5 @@
     @endforeach
 
     {{-- @TODO: Center pagination --}}
-    {!! $dates->render() !!}
+    {{ $dates->links() }}
 @stop

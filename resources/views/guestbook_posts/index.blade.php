@@ -76,9 +76,9 @@
             </tbody>
         </table>
         @empty($query)
-            {!! $guestbook_posts->render() !!}
+            {{ $guestbook_posts->links() }}
         @else
-            {!! $guestbook_posts->appends(['q' => $query])->render() !!}
+            {{ $guestbook_posts->appends(['q' => $query])->links() }}
         @endif
     @else
         <p>
