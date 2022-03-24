@@ -53,3 +53,12 @@ it('contains expected dates', function () {
 });
 
 it('does not contain older dates');
+
+test('a guest can view an archived cartoon', function () {
+    get('/archiv/2022-03-03')
+        ->assertOk()
+        ->assertSeeText('Archiv')
+        ->assertSeeText('Cartoon der Woche . . . vom 3. März 2022')
+        ->assertSeeText('Die Rebus-Abbildungen ergeben zusammen einen neuen Begriff.')
+        ->assertSeeText('Lösung anzeigen');
+});
