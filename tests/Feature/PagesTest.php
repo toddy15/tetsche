@@ -12,27 +12,6 @@ class PagesTest extends TestCase
     use RefreshDatabase;
 
     /**
-     * Test cartoon
-     * @return void
-     */
-    public function test_cartoon_and_archive()
-    {
-        // Ensure there are Cartoons
-        PublicationDate::factory()->count(30)->create();
-
-        $this->get('/cartoon')
-            ->assertOk()
-            ->assertSeeText('Cartoon der Woche . . . vom')
-            ->assertSeeText('Die Rebus-Abbildungen ergeben zusammen einen neuen Begriff.')
-            ->assertSeeText('Auflösung nächste Woche');
-
-        // @TODO: check archive with created dates above
-        $this->get('/archiv')
-            ->assertOk()
-            ->assertSeeText('Archiv');
-    }
-
-    /**
      * Test gästebuch
      * @return void
      */
