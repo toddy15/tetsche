@@ -16,6 +16,14 @@ class PublicationDate extends Model
     ];
 
     /**
+     * Get the route key for the model.
+     */
+    public function getRouteKeyName(): string
+    {
+        return 'publish_on';
+    }
+
+    /**
      * Get the cartoon that has this publication date.
      */
     public function cartoon(): BelongsTo
