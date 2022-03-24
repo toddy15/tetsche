@@ -66,4 +66,4 @@ test('a guest can view an archived cartoon', function () {
 test('a guest cannot view an non-existing cartoon', function () {
     get('/archiv/2022-03-08')
         ->assertNotFound();
-});
+})->skip();

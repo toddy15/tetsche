@@ -67,7 +67,7 @@ class CartoonsController extends Controller
     {
         // Add 6 hours to the current time, so that the
         // cartoon is published at 18:00 one day before.
-        $date = date('Y-m-d', time() + 6 * 60 * 60);
+        $date = Carbon::now()->addHours(6)->format('Y-m-d');
         $current_cartoon = PublicationDate::where('publish_on', '<=', $date)
             ->orderBy('publish_on', 'DESC')
             ->first();
