@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\PublicationDate;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Carbon;
 
 class ArchiveController extends Controller
 {
@@ -23,7 +25,7 @@ class ArchiveController extends Controller
         ]);
     }
 
-    public function show(PublicationDate $publicationDate)
+    public function show(PublicationDate $publicationDate): View|RedirectResponse
     {
         $current_date = CartoonsController::getDateOfCurrentCartoon();
         $last_archived = CartoonsController::getDateOfLastArchivedCartoon();
@@ -40,7 +42,7 @@ class ArchiveController extends Controller
             abort(404);
         }
         // Search cartoon for the given date
-        $cartoon = $publicationDate->cartoon();
+        $cartoon = $publicationDate->cartoon()->first();
         $cartoon->showRebusSolution = true;
 
         return view('cartoons.show', [
