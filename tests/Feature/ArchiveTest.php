@@ -32,8 +32,24 @@ beforeEach(function () {
 });
 
 test('a guest can view the archive', function () {
-    // @TODO: check archive with created dates above
     get('/archiv')
         ->assertOk()
-        ->assertSeeText('Archiv');
+        ->assertSeeText('Archiv')
+        ->assertSeeText('3. Februar 2022');
 });
+
+it('contains expected dates', function () {
+    get('/archiv')
+        ->assertOk()
+        ->assertSeeText('Archiv')
+        ->assertSeeText('27. Januar 2022')
+        ->assertSeeText('3. Februar 2022')
+        ->assertSeeText('10. Februar 2022')
+        ->assertSeeText('17. Februar 2022')
+        ->assertSeeText('24. Februar 2022')
+        ->assertSeeText('3. März 2022')
+        ->assertSeeText('10. März 2022')
+        ->assertSeeText('17. März 2022');
+});
+
+it('does not contain older dates');
