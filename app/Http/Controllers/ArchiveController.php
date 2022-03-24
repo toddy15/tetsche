@@ -27,22 +27,24 @@ class ArchiveController extends Controller
 
     public function show(PublicationDate $publicationDate): View|RedirectResponse
     {
-        $current_date = CartoonsController::getDateOfCurrentCartoon();
+        $current = PublicationDate::getCurrent();
+        // Redirect to cartoon page for current date
+        if ($publicationDate->is($current)) {
+            return redirect(action([CartoonsController::class, 'showCurrent']));
+        }
+
+        $current_date = $current->publish_on;
         $last_archived = CartoonsController::getDateOfLastArchivedCartoon();
         // Make sure that no unpublished cartoons get shown
         if ($publicationDate->publish_on > $current_date) {
             abort(404);
         }
-        // Redirect to cartoon page for current date
-        if ($publicationDate->publish_on == $current_date) {
-            return redirect(action([CartoonsController::class, 'showCurrent']));
-        }
         // Make sure no older cartoons than allowed are shown
         if ($publicationDate->publish_on < $last_archived) {
             abort(404);
         }
-        // Search cartoon for the given date
-        $cartoon = $publicationDate->cartoon()->first();
+        // Get cartoon for the given date
+        $cartoon = $publicationDate->cartoon;
         $cartoon->showRebusSolution = true;
 
         return view('cartoons.show', [
