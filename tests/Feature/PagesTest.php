@@ -12,34 +12,6 @@ class PagesTest extends TestCase
     use RefreshDatabase;
 
     /**
-     * Test static pages.
-     *
-     * @return void
-     */
-    public function test_static_pages()
-    {
-        $this->get(route('homepage'))
-            ->assertOk()
-            ->assertSeeText('Tetsche-Website');
-
-        $this->get(route('tetsche'))
-            ->assertOk()
-            ->assertSeeText('Tetsche veröffentlichte seinen ersten Cartoon im zarten Alter');
-
-        $this->get(route('buecher'))
-            ->assertOk()
-            ->assertSeeText('Bücher');
-
-        $this->get(route('impressum'))
-            ->assertOk()
-            ->assertSeeText('Impressum');
-
-        $this->get(route('datenschutz'))
-            ->assertOk()
-            ->assertSeeText('Datenschutzerklärung');
-    }
-
-    /**
      * Test cartoon
      * @return void
      */
