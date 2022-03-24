@@ -62,3 +62,8 @@ test('a guest can view an archived cartoon', function () {
         ->assertSeeText('Die Rebus-Abbildungen ergeben zusammen einen neuen Begriff.')
         ->assertSeeText('Lösung anzeigen');
 });
+
+test('a guest cannot view an non-existing cartoon', function () {
+    get('/archiv/2022-03-08')
+        ->assertNotFound();
+});
