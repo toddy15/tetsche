@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ArchiveController;
 use App\Http\Controllers\CartoonsController;
 use App\Http\Controllers\GuestbookPostsController;
 use App\Http\Controllers\SpamController;
@@ -43,10 +44,11 @@ Route::get('/gaestebuch/suche', [GuestbookPostsController::class, 'search']);
 
 // Cartoons
 Route::get('/cartoon', [CartoonsController::class, 'showCurrent']);
-Route::get('/archiv', [CartoonsController::class, 'showArchive']);
-Route::get('/archiv/{date}', [CartoonsController::class, 'show']);
-
 Route::get('/cartoons/checkIfCurrentIsLastCartoon', [CartoonsController::class, 'checkIfCurrentIsLastCartoon']);
+
+// Archive
+Route::resource('/archiv', ArchiveController::class)
+    ->only(['index', 'show']);
 
 // Protected routes
 Route::middleware(Authenticate::class)->group(function () {

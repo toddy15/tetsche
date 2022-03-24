@@ -25,45 +25,9 @@ class CartoonsController extends Controller
     }
 
     /**
-     * Display an archived cartoon.
-     */
-    public function show($date): View|RedirectResponse
-    {
-        $current_date = $this->getDateOfCurrentCartoon();
-        $last_archived = $this->getDateOfLastArchivedCartoon();
-        // Make sure that no unpublished cartoons get shown
-        if ($date > $current_date) {
-            abort(404);
-        }
-        // Redirect to cartoon page for current date
-        if ($date == $current_date) {
-            return redirect(action([CartoonsController::class, 'showCurrent']));
-        }
-        // Make sure no older cartoons than allowed are shown
-        if ($date < $last_archived) {
-            abort(404);
-        }
-        // Search cartoon for the given date
-        $cartoon = PublicationDate::where('publish_on', '=', $date)->first()->cartoon;
-        // Show 404 if the cartoon is not found
-        if (! $cartoon) {
-            abort(404);
-        }
-        $cartoon->showRebusSolution = true;
-
-        return view('cartoons.show', [
-            'title' => 'Archiv',
-            'pagetitle' => 'Cartoon der Woche . . . vom '.Carbon::parse($date)->locale('de')->isoFormat('Do MMMM YYYY'),
-            'keywords' => 'Tetsche, Kalauseite, Cartoon, Kalau-Archiv, Archiv',
-            'description' => 'Archiv - ältere Ausgaben',
-            'cartoon' => $cartoon,
-        ]);
-    }
-
-    /**
      * Helper method to determine the current cartoon.
      */
-    private function getDateOfCurrentCartoon()
+    public static function getDateOfCurrentCartoon()
     {
         // Add 6 hours to the current time, so that the
         // cartoon is published at 18:00 one day before.
@@ -80,9 +44,9 @@ class CartoonsController extends Controller
      *
      * There should be only 16 cartoons in the archive.
      */
-    private function getDateOfLastArchivedCartoon()
+    public static function getDateOfLastArchivedCartoon()
     {
-        $current = $this->getDateOfCurrentCartoon();
+        $current = CartoonsController::getDateOfCurrentCartoon();
 
         return PublicationDate::where('publish_on', '<=', $current)
             ->orderBy('publish_on', 'desc')
@@ -95,7 +59,7 @@ class CartoonsController extends Controller
      */
     public function showCurrent(): View
     {
-        $date = $this->getDateOfCurrentCartoon();
+        $date = CartoonsController::getDateOfCurrentCartoon();
         $cartoon = PublicationDate::where('publish_on', '=', $date)->first()->cartoon;
         $cartoon->showRebusSolution = false;
 
@@ -108,24 +72,6 @@ class CartoonsController extends Controller
         ]);
     }
 
-    /**
-     * Display a listing of the archive.
-     */
-    public function showArchive(): View
-    {
-        $date = $this->getDateOfCurrentCartoon();
-        $last_archived = $this->getDateOfLastArchivedCartoon();
-        $dates = PublicationDate::where('publish_on', '<', $date)
-            ->where('publish_on', '>=', $last_archived)
-            ->orderBy('publish_on', 'desc')->simplePaginate(8);
-
-        return view('cartoons.archive', [
-            'title' => 'Archiv',
-            'keywords' => 'Tetsche-Seite, Cartoon der Woche, Archiv',
-            'description' => 'Archiv – ältere Ausgaben',
-            'dates' => $dates,
-        ]);
-    }
 
     ///////////////////////////////////
     // Helper methods
@@ -138,7 +84,7 @@ class CartoonsController extends Controller
     {
         $newest_cartoon = PublicationDate::orderBy('publish_on', 'desc')->first();
         $newest_cartoon_date = $newest_cartoon->publish_on;
-        $current_date = $this->getDateOfCurrentCartoon();
+        $current_date = CartoonsController::getDateOfCurrentCartoon();
         if ($newest_cartoon_date > $current_date) {
             $newest_cartoon->delete();
             $this->checkIfCurrentIsLastCartoon();
@@ -156,7 +102,7 @@ class CartoonsController extends Controller
     {
         $newest_cartoon = PublicationDate::orderBy('publish_on', 'desc')->first();
         $newest_cartoon_date = $newest_cartoon->publish_on;
-        $current_date = $this->getDateOfCurrentCartoon();
+        $current_date = CartoonsController::getDateOfCurrentCartoon();
         // If there are no more cartoons for next week,
         // generate a "random" number.
         if ($current_date >= $newest_cartoon_date) {
