@@ -25,36 +25,6 @@ class CartoonsController extends Controller
     }
 
     /**
-     * Helper method to determine the current cartoon.
-     */
-    public static function getDateOfCurrentCartoon()
-    {
-        // Add 6 hours to the current time, so that the
-        // cartoon is published at 18:00 one day before.
-        $date = Carbon::now()->addHours(6)->format('Y-m-d');
-        $current_cartoon = PublicationDate::where('publish_on', '<=', $date)
-            ->orderBy('publish_on', 'DESC')
-            ->first();
-
-        return $current_cartoon->publish_on;
-    }
-
-    /**
-     * Helper method to determine the last archived cartoon.
-     *
-     * There should be only 16 cartoons in the archive.
-     */
-    public static function getDateOfLastArchivedCartoon()
-    {
-        $current = CartoonsController::getDateOfCurrentCartoon();
-
-        return PublicationDate::where('publish_on', '<=', $current)
-            ->orderBy('publish_on', 'desc')
-            ->skip(16)
-            ->value('publish_on');
-    }
-
-    /**
      * Display the current cartoon.
      */
     public function show(): View
@@ -82,10 +52,9 @@ class CartoonsController extends Controller
      */
     public function forceNewCartoon()
     {
-        $newest_cartoon = PublicationDate::orderBy('publish_on', 'desc')->first();
-        $newest_cartoon_date = $newest_cartoon->publish_on;
-        $current_date = CartoonsController::getDateOfCurrentCartoon();
-        if ($newest_cartoon_date > $current_date) {
+        $newest_cartoon = PublicationDate::latest('publish_on')->first();
+        $current = PublicationDate::getCurrent();
+        if ($newest_cartoon->isNot($current)) {
             $newest_cartoon->delete();
             $this->checkIfCurrentIsLastCartoon();
         }
@@ -102,10 +71,10 @@ class CartoonsController extends Controller
     {
         $newest_cartoon = PublicationDate::orderBy('publish_on', 'desc')->first();
         $newest_cartoon_date = $newest_cartoon->publish_on;
-        $current_date = CartoonsController::getDateOfCurrentCartoon();
+        $current_date = PublicationDate::getCurrent();
         // If there are no more cartoons for next week,
         // generate a "random" number.
-        if ($current_date >= $newest_cartoon_date) {
+        if ($current_date->publish_on >= $newest_cartoon_date) {
             // First, get all cartoon ids which have been shown
             // less than two years ago, so they can be omitted.
             $two_years_ago = date("Y-m-d", time() - 2 * 365 * 24 * 60 * 60);
