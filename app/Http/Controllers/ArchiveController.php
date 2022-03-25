@@ -30,7 +30,7 @@ class ArchiveController extends Controller
         // Redirect to cartoon page for current date
         $current = PublicationDate::getCurrent();
         if ($date->is($current)) {
-            return redirect(action([CartoonsController::class, 'showCurrent']));
+            return redirect(action([CartoonsController::class, 'show']));
         }
 
         abort_unless($date->isArchived(), 404);

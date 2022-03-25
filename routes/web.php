@@ -43,7 +43,7 @@ Route::resource('/gaestebuch', GuestbookPostsController::class)
 Route::get('/gaestebuch/suche', [GuestbookPostsController::class, 'search']);
 
 // Cartoons
-Route::get('/cartoon', [CartoonsController::class, 'showCurrent']);
+Route::get('/cartoon', [CartoonsController::class, 'show']);
 Route::get('/cartoons/checkIfCurrentIsLastCartoon', [CartoonsController::class, 'checkIfCurrentIsLastCartoon']);
 
 // Archive

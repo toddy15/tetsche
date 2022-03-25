@@ -57,7 +57,7 @@ class CartoonsController extends Controller
     /**
      * Display the current cartoon.
      */
-    public function showCurrent(): View
+    public function show(): View
     {
         $date = PublicationDate::getCurrent();
 
@@ -197,7 +197,7 @@ class CartoonsController extends Controller
             }
         }
 
-        return redirect(action([CartoonsController::class, 'showCurrent']));
+        return redirect(action([CartoonsController::class, 'show']));
     }
 
     /**
