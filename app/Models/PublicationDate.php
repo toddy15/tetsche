@@ -34,7 +34,7 @@ class PublicationDate extends Model
     /**
      * Scope the query to archived dates.
      */
-    public static function scopeArchived(Builder $query): Builder
+    public function scopeArchived(Builder $query): Builder
     {
         $current = self::getCurrent();
         return $query->where('publish_on', '<', $current->publish_on)

@@ -57,7 +57,7 @@ test('a guest cannot view the third page of the archive', function () {
         ->assertSeeText('Archiv')
         ->assertDontSeeText('3. Februar 2022')
         ->assertDontSeeText('9. Dezember 2021')
-        ->assertDontSeeText('18. November 2021');
+        ->assertDontSeeText('25. November 2021');
 });
 
 it('contains expected dates on the first page', function () {
