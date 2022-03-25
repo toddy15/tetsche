@@ -3,12 +3,12 @@
 use App\Models\PublicationDate;
 
 use function Pest\Laravel\get;
+use function Spatie\PestPluginTestTime\testTime;
 
 beforeEach(function () {
     $publicationDates = [
-        '2021-11-18', // not available anymore
-        '2021-11-25', // oldest date in the archive
-        '2021-12-02',
+        '2021-11-25', // not available anymore
+        '2021-12-02', // oldest date in the archive
         '2021-12-09',
         '2021-12-16',
         '2021-12-23',
@@ -22,14 +22,17 @@ beforeEach(function () {
         '2022-02-17',
         '2022-02-24',
         '2022-03-03',
-        '2022-03-10', // newest date in the archive
-        '2022-03-17', // current
-        '2022-03-24', // future cartoon
+        '2022-03-10',
+        '2022-03-17', // newest date in the archive
+        '2022-03-24', // current
+        '2022-03-31', // future cartoon
     ];
 
     foreach ($publicationDates as $publicationDate) {
         PublicationDate::factory()->create(['publish_on' => $publicationDate]);
     }
+
+    testTime()->freeze('2022-03-26 14:30:00');
 });
 
 test('a guest can view the first page of the archive', function () {
@@ -80,10 +83,31 @@ test('a guest can view an archived cartoon', function () {
         ->assertSeeText('Lösung anzeigen');
 });
 
-it('does show the oldest archived cartoon');
-it('does not show older cartoons which are no longer in the archive');
+it('does show the oldest archived cartoon', function () {
+    get('/archiv/2021-12-02')
+        ->assertOk()
+        ->assertSeeText('Archiv')
+        ->assertSeeText('Cartoon der Woche . . . vom 2. Dezember 2021')
+        ->assertSeeText('Die Rebus-Abbildungen ergeben zusammen einen neuen Begriff.')
+        ->assertSeeText('Lösung anzeigen');
+});
+
+it('does not show older cartoons which are no longer in the archive', function () {
+    get('/archiv/2021-11-25')
+        ->assertNotFound();
+});
+
+it('does not show future cartoons', function () {
+    get('/archiv/2022-03-31')
+        ->assertNotFound();
+});
+
+it('redirects to the current cartoon', function () {
+    get('/archiv/2022-03-24')
+        ->assertRedirect("/cartoon");
+});
 
 test('a guest cannot view a non-existing cartoon', function () {
     get('/archiv/2022-03-08')
         ->assertNotFound();
-})->skip();
+});
