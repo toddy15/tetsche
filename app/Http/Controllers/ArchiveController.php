@@ -35,18 +35,14 @@ class ArchiveController extends Controller
 
         abort_unless($date->isArchived(), 404);
 
-        // Get cartoon for the given date
-        $cartoon = $date->cartoon;
-        $cartoon->showRebusSolution = true;
-
-        return view('cartoons.show', [
+        return view('archive.show', [
             'title' => 'Archiv',
             'pagetitle' => 'Cartoon der Woche . . . vom '.Carbon::parse($date->publish_on)->locale('de')->isoFormat(
                     'Do MMMM YYYY'
                 ),
-            'keywords' => 'Tetsche, Kalauseite, Cartoon, Kalau-Archiv, Archiv',
-            'description' => 'Archiv - ältere Ausgaben',
-            'cartoon' => $cartoon,
+            'keywords' => 'Tetsche-Seite, Cartoon der Woche, Archiv',
+            'description' => 'Archiv – ältere Ausgaben',
+            'date' => $date,
         ]);
     }
 }
