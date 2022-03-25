@@ -3,6 +3,7 @@
 use App\Http\Controllers\ArchiveController;
 use App\Http\Controllers\CartoonsController;
 use App\Http\Controllers\GuestbookPostsController;
+use App\Http\Controllers\PublicationDateController;
 use App\Http\Controllers\SpamController;
 use App\Http\Middleware\Authenticate;
 use Illuminate\Support\Facades\Auth;
@@ -62,8 +63,10 @@ Route::middleware(Authenticate::class)->group(function () {
     Route::get('/spam/relearn', [SpamController::class, 'relearn']);
     Route::get('/spam/{category}', [SpamController::class, 'showPosts']);
 
-    Route::get('/cartoons', [CartoonsController::class, 'index']);
-    Route::get('/cartoons/forceNewCartoon', [CartoonsController::class, 'forceNewCartoon']);
+    Route::resource('/publication_dates', PublicationDateController::class)
+        ->except(['create', 'store', 'show', 'destroy']);
+    // @TODO: Use other controller
+    Route::get('/publication_dates/forceNewCartoon', [CartoonsController::class, 'forceNewCartoon']);
 });
 
 // Close registration

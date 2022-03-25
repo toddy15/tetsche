@@ -7,14 +7,16 @@
            class="btn btn-primary">Zufällig neuer nächster Cartoon</a>
     </p>
 
-    @foreach (array_chunk($publication_dates->all(), 4) as $row)
+    @foreach (array_chunk($dates->all(), 4) as $row)
         <div class="row">
-            @foreach ($row as $publication_date)
+            @foreach ($row as $date)
                 <div class="col-12 col-sm-6 col-lg-3 text-center mb-4">
-                    <img class="img-thumbnail img-fluid mb-2"
-                         src="{!! asset($publication_date->cartoon->thumbnailPath()) !!}" {!! $publication_date->cartoon->thumbnailSizeAndDescription() !!} />
+                    <a href="{{ route('publication_dates.edit', $date) }}">
+                        <img class="img-thumbnail img-fluid mb-2"
+                             src="{{ asset($date->cartoon->thumbnailPath()) }}" {!! $date->cartoon->thumbnailSizeAndDescription() !!} />
+                    </a>
                     <p class="text-center">
-                        {!! Carbon\Carbon::parse($publication_date->publish_on)->locale('de')->isoFormat('Do MMMM YYYY') !!}
+                        {{ Carbon\Carbon::parse($date->publish_on)->locale('de')->isoFormat('Do MMMM YYYY') }}
                     </p>
                 </div>
             @endforeach
@@ -22,5 +24,5 @@
     @endforeach
 
     {{-- @TODO: Center pagination --}}
-    {!! $publication_dates->render() !!}
+    {{ $dates->links() }}
 @stop

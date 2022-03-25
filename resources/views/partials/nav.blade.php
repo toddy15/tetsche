@@ -58,7 +58,7 @@
                                 </a>
                             </li>
                             <li><a class="dropdown-item"
-                                   href="{{ action([App\Http\Controllers\CartoonsController::class, 'index']) }}">Administration
+                                   href="{{ route('publication_dates.index') }}">Administration
                                     der Cartoons</a></li>
                             <li>
                                 <hr class="dropdown-divider">

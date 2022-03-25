@@ -59,7 +59,7 @@ class CartoonsController extends Controller
             $this->checkIfCurrentIsLastCartoon();
         }
 
-        return redirect('cartoons');
+        return redirect()->route('publication_dates.index');
     }
 
     /**
