@@ -38,10 +38,11 @@ class PublicationDate extends Model
     public function scopeArchived(Builder $query): Builder
     {
         $current = self::getCurrent();
+        $oldest = self::getOldestArchived();
 
         return $query->where('publish_on', '<', $current->publish_on)
-            ->latest('publish_on')
-            ->take(16);
+            ->where('publish_on', '>=', $oldest->publish_on)
+            ->latest('publish_on');
     }
 
     /**
@@ -54,7 +55,20 @@ class PublicationDate extends Model
         $date = Carbon::now()->addHours(6)->format('Y-m-d');
 
         return PublicationDate::where('publish_on', '<=', $date)
-            ->orderBy('publish_on', 'DESC')
+            ->latest('publish_on')
+            ->first();
+    }
+
+    /**
+     * Return the oldest archived PublicationDate.
+     */
+    public static function getOldestArchived()
+    {
+        $current = self::getCurrent();
+
+        return PublicationDate::where('publish_on', '<', $current->publish_on)
+            ->latest('publish_on')
+            ->skip(15)
             ->first();
     }
 
