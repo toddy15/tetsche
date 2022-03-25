@@ -6,7 +6,8 @@ use function Pest\Laravel\get;
 
 beforeEach(function () {
     $publicationDates = [
-        '2021-11-25',
+        '2021-11-18', // not available anymore
+        '2021-11-25', // oldest date in the archive
         '2021-12-02',
         '2021-12-09',
         '2021-12-16',
@@ -21,9 +22,9 @@ beforeEach(function () {
         '2022-02-17',
         '2022-02-24',
         '2022-03-03',
-        '2022-03-10',
-        '2022-03-17',
-        '2022-03-24',
+        '2022-03-10', // newest date in the archive
+        '2022-03-17', // current
+        '2022-03-24', // future cartoon
     ];
 
     foreach ($publicationDates as $publicationDate) {
@@ -31,14 +32,32 @@ beforeEach(function () {
     }
 });
 
-test('a guest can view the archive', function () {
+test('a guest can view the first page of the archive', function () {
     get('/archiv')
         ->assertOk()
         ->assertSeeText('Archiv')
-        ->assertSeeText('3. Februar 2022');
+        ->assertSeeText('3. Februar 2022')
+        ->assertDontSeeText('9. Dezember 2021');
 });
 
-it('contains expected dates', function () {
+test('a guest can view the second page of the archive', function () {
+    get('/archiv?page=2')
+        ->assertOk()
+        ->assertSeeText('Archiv')
+        ->assertDontSeeText('3. Februar 2022')
+        ->assertSeeText('9. Dezember 2021');
+});
+
+test('a guest cannot view the third page of the archive', function () {
+    get('/archiv?page=3')
+        ->assertOk()
+        ->assertSeeText('Archiv')
+        ->assertDontSeeText('3. Februar 2022')
+        ->assertDontSeeText('9. Dezember 2021')
+        ->assertDontSeeText('18. November 2021');
+});
+
+it('contains expected dates on the first page', function () {
     get('/archiv')
         ->assertOk()
         ->assertSeeText('Archiv')
@@ -52,8 +71,6 @@ it('contains expected dates', function () {
         ->assertSeeText('17. März 2022');
 });
 
-it('does not contain older dates');
-
 test('a guest can view an archived cartoon', function () {
     get('/archiv/2022-03-03')
         ->assertOk()
@@ -63,7 +80,10 @@ test('a guest can view an archived cartoon', function () {
         ->assertSeeText('Lösung anzeigen');
 });
 
-test('a guest cannot view an non-existing cartoon', function () {
+it('does show the oldest archived cartoon');
+it('does not show older cartoons which are no longer in the archive');
+
+test('a guest cannot view a non-existing cartoon', function () {
     get('/archiv/2022-03-08')
         ->assertNotFound();
 })->skip();
