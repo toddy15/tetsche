@@ -25,31 +25,31 @@ class ArchiveController extends Controller
         ]);
     }
 
-    public function show(PublicationDate $publicationDate): View|RedirectResponse
+    public function show(PublicationDate $date): View|RedirectResponse
     {
         $current = PublicationDate::getCurrent();
         // Redirect to cartoon page for current date
-        if ($publicationDate->is($current)) {
+        if ($date->is($current)) {
             return redirect(action([CartoonsController::class, 'showCurrent']));
         }
 
         $current_date = $current->publish_on;
         $last_archived = CartoonsController::getDateOfLastArchivedCartoon();
         // Make sure that no unpublished cartoons get shown
-        if ($publicationDate->publish_on > $current_date) {
+        if ($date->publish_on > $current_date) {
             abort(404);
         }
         // Make sure no older cartoons than allowed are shown
-        if ($publicationDate->publish_on < $last_archived) {
+        if ($date->publish_on < $last_archived) {
             abort(404);
         }
         // Get cartoon for the given date
-        $cartoon = $publicationDate->cartoon;
+        $cartoon = $date->cartoon;
         $cartoon->showRebusSolution = true;
 
         return view('cartoons.show', [
             'title' => 'Archiv',
-            'pagetitle' => 'Cartoon der Woche . . . vom '.Carbon::parse($publicationDate->publish_on)->locale('de')->isoFormat('Do MMMM YYYY'),
+            'pagetitle' => 'Cartoon der Woche . . . vom '.Carbon::parse($date->publish_on)->locale('de')->isoFormat('Do MMMM YYYY'),
             'keywords' => 'Tetsche, Kalauseite, Cartoon, Kalau-Archiv, Archiv',
             'description' => 'Archiv - ältere Ausgaben',
             'cartoon' => $cartoon,

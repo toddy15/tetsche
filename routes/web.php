@@ -49,7 +49,7 @@ Route::get('/cartoons/checkIfCurrentIsLastCartoon', [CartoonsController::class, 
 // Archive
 Route::resource('/archiv', ArchiveController::class)
     ->parameters([
-        'archiv' => 'publicationDate',
+        'archiv' => 'date:publish_on',
     ])
     ->only(['index', 'show']);
 
