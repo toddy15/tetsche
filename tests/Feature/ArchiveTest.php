@@ -6,7 +6,7 @@ use function Pest\Laravel\get;
 use function Spatie\PestPluginTestTime\testTime;
 
 beforeEach(function () {
-    $publicationDates = [
+    $dates = [
         '2021-11-25', // not available anymore
         '2021-12-02', // oldest date in the archive
         '2021-12-09',
@@ -28,8 +28,8 @@ beforeEach(function () {
         '2022-03-31', // future cartoon
     ];
 
-    foreach ($publicationDates as $publicationDate) {
-        PublicationDate::factory()->create(['publish_on' => $publicationDate]);
+    foreach ($dates as $date) {
+        PublicationDate::factory()->create(['publish_on' => $date]);
     }
 
     testTime()->freeze('2022-03-26 14:30:00');

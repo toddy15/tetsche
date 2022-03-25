@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -17,11 +18,28 @@ class PublicationDate extends Model
     ];
 
     /**
-     * Get the cartoon that has this publication date.
+     * Check if the PublicationDate is currently in the archive.
      */
-    public function cartoon(): BelongsTo
+    public function isArchived(): bool
     {
-        return $this->belongsTo(Cartoon::class);
+        $archived = self::archived()->get();
+        foreach ($archived as $a) {
+            if ($this->publish_on === $a->publish_on) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Scope the query to archived dates.
+     */
+    public static function scopeArchived(Builder $query): Builder
+    {
+        $current = self::getCurrent();
+        return $query->where('publish_on', '<', $current->publish_on)
+            ->latest('publish_on')
+            ->take(16);
     }
 
     /**
@@ -36,5 +54,13 @@ class PublicationDate extends Model
         return PublicationDate::where('publish_on', '<=', $date)
             ->orderBy('publish_on', 'DESC')
             ->first();
+    }
+
+    /**
+     * Get the cartoon that has this publication date.
+     */
+    public function cartoon(): BelongsTo
+    {
+        return $this->belongsTo(Cartoon::class);
     }
 }
