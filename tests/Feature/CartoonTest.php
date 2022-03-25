@@ -6,6 +6,8 @@ use function Pest\Laravel\get;
 use function Spatie\PestPluginTestTime\testTime;
 
 test('a guest can view the current cartoon', function () {
+    testTime()->freeze('2022-03-14 14:30:00');
+
     // Ensure there is a PublicationDate
     PublicationDate::factory()->create(['publish_on' => '2022-03-11']);
 
@@ -17,6 +19,8 @@ test('a guest can view the current cartoon', function () {
 });
 
 test('a guest can view the next current cartoon', function () {
+    testTime()->freeze('2022-03-20 14:30:00');
+
     // Ensure there are PublicationDates
     PublicationDate::factory()->create(['publish_on' => '2022-03-11']);
     PublicationDate::factory()->create(['publish_on' => '2022-03-17']);
@@ -28,9 +32,8 @@ test('a guest can view the next current cartoon', function () {
         ->assertSeeText('Auflösung nächste Woche');
 });
 
-// @TODO: Refactor CartoonController to use Carbon for time testing
 test('a guest cannot view a future cartoon', function () {
-    testTime()->freeze('2022-03-17 14:30:00');
+    testTime()->freeze('2022-03-22 14:30:00');
 
     // Ensure there are PublicationDates
     PublicationDate::factory()->create(['publish_on' => '2022-03-11']);
@@ -42,4 +45,4 @@ test('a guest cannot view a future cartoon', function () {
         ->assertSeeText('Cartoon der Woche . . . vom 17. März 2022')
         ->assertSeeText('Die Rebus-Abbildungen ergeben zusammen einen neuen Begriff.')
         ->assertSeeText('Auflösung nächste Woche');
-})->skip();
+});
