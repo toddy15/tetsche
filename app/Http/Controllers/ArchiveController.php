@@ -17,7 +17,7 @@ class ArchiveController extends Controller
             ->where('publish_on', '>=', $last_archived)
             ->orderBy('publish_on', 'desc')->simplePaginate(8);
 
-        return view('cartoons.archive', [
+        return view('archive.index', [
             'title' => 'Archiv',
             'keywords' => 'Tetsche-Seite, Cartoon der Woche, Archiv',
             'description' => 'Archiv – ältere Ausgaben',
