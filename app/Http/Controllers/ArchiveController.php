@@ -11,11 +11,7 @@ class ArchiveController extends Controller
 {
     public function index(): View
     {
-        $date = CartoonsController::getDateOfCurrentCartoon();
-        $last_archived = CartoonsController::getDateOfLastArchivedCartoon();
-        $dates = PublicationDate::where('publish_on', '<', $date)
-            ->where('publish_on', '>=', $last_archived)
-            ->orderBy('publish_on', 'desc')->simplePaginate(8);
+        $dates = PublicationDate::archived()->simplePaginate(8);
 
         return view('archive.index', [
             'title' => 'Archiv',
