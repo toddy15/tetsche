@@ -28,6 +28,7 @@ class PublicationDate extends Model
                 return true;
             }
         }
+
         return false;
     }
 
@@ -37,6 +38,7 @@ class PublicationDate extends Model
     public function scopeArchived(Builder $query): Builder
     {
         $current = self::getCurrent();
+
         return $query->where('publish_on', '<', $current->publish_on)
             ->latest('publish_on')
             ->take(16);

@@ -59,16 +59,16 @@ class CartoonsController extends Controller
      */
     public function showCurrent(): View
     {
-        $date = CartoonsController::getDateOfCurrentCartoon();
-        $cartoon = PublicationDate::where('publish_on', '=', $date)->first()->cartoon;
-        $cartoon->showRebusSolution = false;
+        $date = PublicationDate::getCurrent();
 
         return view('cartoons.show', [
             'title' => 'Cartoon der Woche',
-            'pagetitle' => 'Cartoon der Woche . . . vom '.Carbon::parse($date)->locale('de')->isoFormat('Do MMMM YYYY'),
+            'pagetitle' => 'Cartoon der Woche . . . vom '.Carbon::parse($date->publish_on)->locale('de')->isoFormat(
+                'Do MMMM YYYY'
+            ),
             'keywords' => 'Tetsche, Cartoon der Woche',
             'description' => 'Tetsche - Cartoon der Woche',
-            'cartoon' => $cartoon,
+            'date' => $date,
         ]);
     }
 
