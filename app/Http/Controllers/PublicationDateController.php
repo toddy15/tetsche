@@ -4,13 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\PublicationDate;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class PublicationDateController extends Controller
 {
     public function index(): View
     {
-        $dates = PublicationDate::orderBy('publish_on', 'desc')->simplePaginate(8);
+        $dates = PublicationDate::latest('publish_on')->simplePaginate(8);
 
         return view('publication_dates.index', [
             'title' => 'Übersicht',
@@ -27,7 +28,7 @@ class PublicationDateController extends Controller
         ]);
     }
 
-    public function update(Request $request, PublicationDate $publicationDate)
+    public function update(Request $request, PublicationDate $publicationDate): RedirectResponse
     {
         $publicationDate->cartoon->rebus = $request->input('rebus');
         $publicationDate->cartoon->save();
