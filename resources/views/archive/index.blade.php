@@ -19,6 +19,7 @@
         </div>
     @endforeach
 
-    {{-- @TODO: Center pagination --}}
-    {{ $dates->links() }}
+    <div class="d-flex justify-content-center">
+        {{ $dates->links() }}
+    </div>
 @stop

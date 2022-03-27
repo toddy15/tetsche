@@ -75,11 +75,13 @@
             @endforeach
             </tbody>
         </table>
+        <div class="d-flex justify-content-center">
         @empty($query)
             {{ $guestbook_posts->links() }}
         @else
             {{ $guestbook_posts->appends(['q' => $query])->links() }}
         @endif
+        </div>
     @else
         <p>
             Keine Einträge gefunden.
