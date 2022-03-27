@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Mail\NewGuestbookPost;
 use App\Models\GuestbookPost;
 use App\Models\PublicationDate;
-use App\TwsLib\Spamfilter;
+use App\Services\Spamfilter;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;

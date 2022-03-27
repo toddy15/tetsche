@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
-@inject('utils', 'App\TwsLib\Utils')
-@inject('images', 'App\TwsLib\Images')
+@inject('utils', 'App\Services\Utils')
+@inject('images', 'App\Services\Images')
 
 @section('content')
     <div class="row">

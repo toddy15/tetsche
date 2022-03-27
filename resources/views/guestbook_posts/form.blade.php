@@ -1,4 +1,4 @@
-@inject ('utils', 'App\TwsLib\Utils')
+@inject ('utils', 'App\Services\Utils')
 
 <div class="mb-4">
     <label class="form-label" for="name">Name:</label>

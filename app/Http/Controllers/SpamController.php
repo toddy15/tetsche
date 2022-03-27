@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\GuestbookPost;
-use App\TwsLib\Spamfilter;
+use App\Services\Spamfilter;
 use Illuminate\Http\Request;
 
 class SpamController extends Controller
