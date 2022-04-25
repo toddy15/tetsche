@@ -15,7 +15,7 @@ class CartoonFactory extends Factory
     {
         return [
             'publish_on' => $this->faker->date(),
-            'random_number' => sprintf("%05d", rand(0, 99999)),
+            'random_number' => sprintf('%05d', rand(0, 99999)),
             'rebus' => $this->faker->sentence(3),
         ];
     }

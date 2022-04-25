@@ -19,16 +19,25 @@ class Spamfilter
     public function initializeAll($texts)
     {
         DB::table('filter_texts')->delete();
-        DB::table('filter_texts')->insert(['category' => 'ham', 'count_texts' => count($texts['ham'])]);
-        DB::table('filter_texts')->insert(['category' => 'spam', 'count_texts' => count($texts['spam'])]);
+        DB::table('filter_texts')->insert([
+            'category' => 'ham',
+            'count_texts' => count($texts['ham']),
+        ]);
+        DB::table('filter_texts')->insert([
+            'category' => 'spam',
+            'count_texts' => count($texts['spam']),
+        ]);
         DB::table('filter_tokens')->delete();
         $table_data = [];
         foreach ($texts as $category => $posts) {
             foreach ($posts as $post) {
                 $tokens = $this->parse($post);
                 foreach ($tokens as $token => $count) {
-                    if (! isset($table_data[$token])) {
-                        $table_data[$token] = ['count_ham' => 0, 'count_spam' => 0];
+                    if (!isset($table_data[$token])) {
+                        $table_data[$token] = [
+                            'count_ham' => 0,
+                            'count_spam' => 0,
+                        ];
                     }
                     if ($category == 'ham') {
                         $table_data[$token]['count_ham']++;
@@ -63,7 +72,10 @@ class Spamfilter
      */
     public function isAutolearnSpam($score)
     {
-        if ($score >= $this->threshold_autolearn_spam and $score < $this->threshold_no_autolearn_spam) {
+        if (
+            $score >= $this->threshold_autolearn_spam and
+            $score < $this->threshold_no_autolearn_spam
+        ) {
             return true;
         }
 
@@ -84,25 +96,41 @@ class Spamfilter
         $tokens[$spam_detection] = 1;
         // Get all known tokens for this text.
         $known_tokens = DB::table('filter_tokens')
-            ->whereIn('token', array_keys($tokens))->get();
+            ->whereIn('token', array_keys($tokens))
+            ->get();
         // Get the sums for ham and spam messages.
         // Ensure that the count is not zero, to avoid a division by zero error.
-        $count_total_ham = max(1, DB::table('filter_texts')->where('category', 'ham')->value('count_texts'));
-        $count_total_spam = max(1, DB::table('filter_texts')->where('category', 'spam')->value('count_texts'));
+        $count_total_ham = max(
+            1,
+            DB::table('filter_texts')
+                ->where('category', 'ham')
+                ->value('count_texts'),
+        );
+        $count_total_spam = max(
+            1,
+            DB::table('filter_texts')
+                ->where('category', 'spam')
+                ->value('count_texts'),
+        );
         // Calculate probabilities for each known token
         $rating = [];
         $importance = [];
         foreach ($known_tokens as $known_token) {
             $prob_spam = $known_token->count_spam / $count_total_spam;
             $prob_ham = $known_token->count_ham / $count_total_ham;
-            $rating[$known_token->token] = $prob_spam / ($prob_spam + $prob_ham);
+            $rating[$known_token->token] =
+                $prob_spam / ($prob_spam + $prob_ham);
             // Calculate the better probability proposed by Gary Robinson.
             // This handles the case of rare words much better.
             $total_count = $known_token->count_ham + $known_token->count_spam;
-            $rating[$known_token->token] = ((0.3 * 0.5) + ($total_count * $rating[$known_token->token])) / (0.3 + $total_count);
+            $rating[$known_token->token] =
+                (0.3 * 0.5 + $total_count * $rating[$known_token->token]) /
+                (0.3 + $total_count);
             // The "importance" is used to extract the most meaningful
             // tokens, i.e. those which are towards 0 or 1.
-            $importance[$known_token->token] = abs(0.5 - $rating[$known_token->token]);
+            $importance[$known_token->token] = abs(
+                0.5 - $rating[$known_token->token],
+            );
         }
         // Reverse sorting of array, maintaining key association
         arsort($importance);
@@ -122,7 +150,7 @@ class Spamfilter
         $hamminess = 1;
         $spamminess = 1;
         foreach ($relevant_tokens as $token => $rating) {
-            $hamminess *= (1 - $rating);
+            $hamminess *= 1 - $rating;
             $spamminess *= $rating;
         }
         if ($hamminess == 1 and $spamminess == 1) {
@@ -145,10 +173,16 @@ class Spamfilter
     {
         $text = $post->name . ' ' . $post->message;
         $spam_detection = $post->spam_detection;
-        if (($post->category == 'manual_spam') or ($post->category == 'autolearn_spam')) {
+        if (
+            $post->category == 'manual_spam' or
+            $post->category == 'autolearn_spam'
+        ) {
             $this->addSpam($text, $spam_detection);
         }
-        if (($post->category == 'manual_ham') or ($post->category == 'autolearn_ham')) {
+        if (
+            $post->category == 'manual_ham' or
+            $post->category == 'autolearn_ham'
+        ) {
             $this->addHam($text, $spam_detection);
         }
     }
@@ -160,10 +194,16 @@ class Spamfilter
     {
         $text = $post->name . ' ' . $post->message;
         $spam_detection = $post->spam_detection;
-        if (($post->category == 'manual_spam') or ($post->category == 'autolearn_spam')) {
+        if (
+            $post->category == 'manual_spam' or
+            $post->category == 'autolearn_spam'
+        ) {
             $this->removeSpam($text, $spam_detection);
         }
-        if (($post->category == 'manual_ham') or ($post->category == 'autolearn_ham')) {
+        if (
+            $post->category == 'manual_ham' or
+            $post->category == 'autolearn_ham'
+        ) {
             $this->removeHam($text, $spam_detection);
         }
     }
@@ -206,7 +246,8 @@ class Spamfilter
         $tokens[$spam_detection] = 1;
         // If the token is already known, sum up the current count.
         $known_tokens = DB::table('filter_tokens')
-            ->whereIn('token', array_keys($tokens))->get();
+            ->whereIn('token', array_keys($tokens))
+            ->get();
         foreach ($known_tokens as $known_token) {
             $tokens[$known_token->token] = [
                 'count_ham' => $known_token->count_ham + 1,
@@ -219,7 +260,10 @@ class Spamfilter
                 // Update existing token.
                 DB::table('filter_tokens')
                     ->where('token', (string) $token)
-                    ->update(['count_ham' => $count['count_ham'], 'count_spam' => $count['count_spam']]);
+                    ->update([
+                        'count_ham' => $count['count_ham'],
+                        'count_spam' => $count['count_spam'],
+                    ]);
             } else {
                 // New record.
                 DB::table('filter_tokens')->insert([
@@ -245,7 +289,8 @@ class Spamfilter
         $tokens[$spam_detection] = 1;
         // Sum up the current count.
         $known_tokens = DB::table('filter_tokens')
-            ->whereIn('token', array_keys($tokens))->get();
+            ->whereIn('token', array_keys($tokens))
+            ->get();
         foreach ($known_tokens as $known_token) {
             $tokens[$known_token->token] = [
                 'count_ham' => max($known_token->count_ham - 1, 0),
@@ -258,7 +303,10 @@ class Spamfilter
                 // Update existing token.
                 DB::table('filter_tokens')
                     ->where('token', (string) $token)
-                    ->update(['count_ham' => $count['count_ham'], 'count_spam' => $count['count_spam']]);
+                    ->update([
+                        'count_ham' => $count['count_ham'],
+                        'count_spam' => $count['count_spam'],
+                    ]);
             }
         }
         // Decrement the number of known texts
@@ -282,7 +330,8 @@ class Spamfilter
         $tokens[$spam_detection] = 1;
         // If the token is already known, sum up the current count.
         $known_tokens = DB::table('filter_tokens')
-            ->whereIn('token', array_keys($tokens))->get();
+            ->whereIn('token', array_keys($tokens))
+            ->get();
         foreach ($known_tokens as $known_token) {
             $tokens[$known_token->token] = [
                 'count_ham' => $known_token->count_ham,
@@ -295,7 +344,10 @@ class Spamfilter
                 // Update existing token.
                 DB::table('filter_tokens')
                     ->where('token', (string) $token)
-                    ->update(['count_ham' => $count['count_ham'], 'count_spam' => $count['count_spam']]);
+                    ->update([
+                        'count_ham' => $count['count_ham'],
+                        'count_spam' => $count['count_spam'],
+                    ]);
             } else {
                 // New record.
                 DB::table('filter_tokens')->insert([
@@ -321,7 +373,8 @@ class Spamfilter
         $tokens[$spam_detection] = 1;
         // Sum up the current count.
         $known_tokens = DB::table('filter_tokens')
-            ->whereIn('token', array_keys($tokens))->get();
+            ->whereIn('token', array_keys($tokens))
+            ->get();
         foreach ($known_tokens as $known_token) {
             $tokens[$known_token->token] = [
                 'count_ham' => $known_token->count_ham,
@@ -334,7 +387,10 @@ class Spamfilter
                 // Update existing token.
                 DB::table('filter_tokens')
                     ->where('token', (string) $token)
-                    ->update(['count_ham' => $count['count_ham'], 'count_spam' => $count['count_spam']]);
+                    ->update([
+                        'count_ham' => $count['count_ham'],
+                        'count_spam' => $count['count_spam'],
+                    ]);
             }
         }
         // Decrement the number of known texts
@@ -379,12 +435,17 @@ class Spamfilter
     public function parseHTML($text)
     {
         // Ensure an array as input
-        if (! is_array($text)) {
+        if (!is_array($text)) {
             $text = [$text];
         }
         $result = [];
         foreach ($text as $part) {
-            $tokens = preg_split('/(<[^>]+?>)/', $part, null, PREG_SPLIT_DELIM_CAPTURE);
+            $tokens = preg_split(
+                '/(<[^>]+?>)/',
+                $part,
+                null,
+                PREG_SPLIT_DELIM_CAPTURE,
+            );
             foreach ($tokens as $token) {
                 $token = trim($token);
                 if ($token == '') {
@@ -404,11 +465,16 @@ class Spamfilter
     {
         $result = [];
         // Ensure an array as input
-        if (! is_array($text)) {
+        if (!is_array($text)) {
             $text = [$text];
         }
         foreach ($text as $part) {
-            $tokens = preg_split('/(\[[^[\]]+?])/', $part, null, PREG_SPLIT_DELIM_CAPTURE);
+            $tokens = preg_split(
+                '/(\[[^[\]]+?])/',
+                $part,
+                null,
+                PREG_SPLIT_DELIM_CAPTURE,
+            );
             foreach ($tokens as $token) {
                 $token = trim($token);
                 if ($token == '') {

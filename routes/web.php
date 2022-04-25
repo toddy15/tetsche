@@ -29,8 +29,9 @@ Route::view('/buecher', 'pages.buecher', [
 Route::view('/impressum', 'pages.impressum', [
     'title' => 'Impressum',
     'keywords' => 'Impressum, Kontakt, Anbieterkennzeichnung',
-    'description' => 'Impressum, Kontaktadressen und Anbieterkennzeichnung der Tetsche-Website',
-])->name("impressum");
+    'description' =>
+        'Impressum, Kontaktadressen und Anbieterkennzeichnung der Tetsche-Website',
+])->name('impressum');
 
 Route::view('/datenschutz', 'pages.datenschutz', [
     'title' => 'Datenschutzerklärung',
@@ -39,13 +40,19 @@ Route::view('/datenschutz', 'pages.datenschutz', [
 ])->name('datenschutz');
 
 // Guestbook
-Route::resource('/gaestebuch', GuestbookPostsController::class)
-    ->only(['index', 'create', 'store']);
+Route::resource('/gaestebuch', GuestbookPostsController::class)->only([
+    'index',
+    'create',
+    'store',
+]);
 Route::get('/gaestebuch/suche', [GuestbookPostsController::class, 'search']);
 
 // Cartoons
 Route::get('/cartoon', [CartoonsController::class, 'show']);
-Route::get('/cartoons/checkIfCurrentIsLastCartoon', [CartoonsController::class, 'checkIfCurrentIsLastCartoon']);
+Route::get('/cartoons/checkIfCurrentIsLastCartoon', [
+    CartoonsController::class,
+    'checkIfCurrentIsLastCartoon',
+]);
 
 // Archive
 Route::resource('/archiv', ArchiveController::class)
@@ -56,17 +63,25 @@ Route::resource('/archiv', ArchiveController::class)
 
 // Protected routes
 Route::middleware(Authenticate::class)->group(function () {
-    Route::resource('/gaestebuch', GuestbookPostsController::class)
-        ->only(['edit', 'update', 'destroy']);
+    Route::resource('/gaestebuch', GuestbookPostsController::class)->only([
+        'edit',
+        'update',
+        'destroy',
+    ]);
 
     Route::get('/spam', [SpamController::class, 'index']);
     Route::get('/spam/relearn', [SpamController::class, 'relearn']);
     Route::get('/spam/{category}', [SpamController::class, 'showPosts']);
 
-    Route::resource('/publication_dates', PublicationDateController::class)
-        ->except(['create', 'store', 'show', 'destroy']);
+    Route::resource(
+        '/publication_dates',
+        PublicationDateController::class,
+    )->except(['create', 'store', 'show', 'destroy']);
     // @TODO: Use other controller
-    Route::get('/publication_dates/forceNewCartoon', [CartoonsController::class, 'forceNewCartoon']);
+    Route::get('/publication_dates/forceNewCartoon', [
+        CartoonsController::class,
+        'forceNewCartoon',
+    ]);
 });
 
 // Close registration

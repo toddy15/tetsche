@@ -33,9 +33,11 @@ class ArchiveController extends Controller
 
         return view('archive.show', [
             'title' => 'Archiv',
-            'pagetitle' => 'Cartoon der Woche . . . vom '.Carbon::parse($date->publish_on)->locale('de')->isoFormat(
-                'Do MMMM YYYY'
-            ),
+            'pagetitle' =>
+                'Cartoon der Woche . . . vom ' .
+                Carbon::parse($date->publish_on)
+                    ->locale('de')
+                    ->isoFormat('Do MMMM YYYY'),
             'keywords' => 'Tetsche-Seite, Cartoon der Woche, Archiv',
             'description' => 'Archiv – ältere Ausgaben',
             'date' => $date,

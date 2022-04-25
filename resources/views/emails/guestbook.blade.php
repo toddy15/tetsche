@@ -7,5 +7,5 @@ Identifikation: {!! $guestbook_post->spam_detection !!}
 {!! $guestbook_post->message !!}
 
 @isset($guestbook_post->id)
-Bearbeiten: {!! route('gaestebuch.edit', $guestbook_post) !!}
+    Bearbeiten: {!! route('gaestebuch.edit', $guestbook_post) !!}
 @endisset

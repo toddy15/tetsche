@@ -11,24 +11,20 @@ var elixir = require('laravel-elixir');
  |
  */
 
-elixir(function(mix) {
-    mix.styles([
-        'fonts.css',
-        'bootstrap.min.css',
-        'bootstrap-theme.min.css'
-    ], 'public/theme/css');
-    mix.scripts([
-        'jquery.min.js',
-        'bootstrap.min.js'
-    ], 'public/theme/js');
-    mix.copy('resources/assets/images/guestbook', 'public/images/guestbook');
-    mix.copy('resources/assets/images/gb_animals', 'public/images/gb_animals');
-    mix.version([
-        'theme/css/all.css',
-        'theme/js/all.js',
-        'images/guestbook/*.svg',
-        'images/gb_animals/*.png'
-    ]);
-    mix.copy('resources/assets/fonts', 'public/build/theme/fonts');
-    mix.copy('resources/assets/images/icons', 'public/theme/images');
+elixir(function (mix) {
+  mix.styles(
+    ['fonts.css', 'bootstrap.min.css', 'bootstrap-theme.min.css'],
+    'public/theme/css'
+  );
+  mix.scripts(['jquery.min.js', 'bootstrap.min.js'], 'public/theme/js');
+  mix.copy('resources/assets/images/guestbook', 'public/images/guestbook');
+  mix.copy('resources/assets/images/gb_animals', 'public/images/gb_animals');
+  mix.version([
+    'theme/css/all.css',
+    'theme/js/all.js',
+    'images/guestbook/*.svg',
+    'images/gb_animals/*.png',
+  ]);
+  mix.copy('resources/assets/fonts', 'public/build/theme/fonts');
+  mix.copy('resources/assets/images/icons', 'public/theme/images');
 });

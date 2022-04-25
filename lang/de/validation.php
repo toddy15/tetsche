@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Validation Language Lines
@@ -17,7 +16,8 @@ return [
     'active_url' => ':attribute ist keine gültige Internet-Adresse.',
     'after' => ':attribute muss ein Datum nach dem :date sein.',
     'alpha' => ':attribute darf nur aus Buchstaben bestehen.',
-    'alpha_dash' => ':attribute darf nur aus Buchstaben, Zahlen, Binde- und Unterstrichen bestehen. Umlaute (ä, ö, ü) und Eszett (ß) sind nicht erlaubt.',
+    'alpha_dash' =>
+        ':attribute darf nur aus Buchstaben, Zahlen, Binde- und Unterstrichen bestehen. Umlaute (ä, ö, ü) und Eszett (ß) sind nicht erlaubt.',
     'alpha_num' => ':attribute darf nur aus Buchstaben und Zahlen bestehen.',
     'array' => ':attribute muss ein Array sein.',
     'before' => ':attribute muss ein Datum vor dem :date sein.',
@@ -30,7 +30,8 @@ return [
     'boolean' => ':attribute muss wahr oder falsch sein.',
     'confirmed' => ':attribute stimmt nicht mit der Bestätigung überein.',
     'date' => ':attribute muss ein gültiges Datum sein.',
-    'date_format' => ':attribute entspricht nicht dem gültigen Format für :format.',
+    'date_format' =>
+        ':attribute entspricht nicht dem gültigen Format für :format.',
     'different' => ':attribute und :other müssen sich unterscheiden.',
     'digits' => ':attribute muss :digits Stellen haben.',
     'digits_between' => ':attribute muss zwischen :min und :max Stellen haben.',
@@ -59,10 +60,14 @@ return [
     'regex' => ':attribute Format ist ungültig.',
     'required' => ':attribute muss ausgefüllt sein.',
     'required_if' => ':attribute muss ausgefüllt sein, wenn :other :value ist.',
-    'required_with' => ':attribute muss angegeben werden, wenn :values ausgefüllt wurde.',
-    'required_with_all' => ':attribute muss angegeben werden, wenn :values ausgefüllt wurde.',
-    'required_without' => ':attribute muss angegeben werden, wenn :values nicht ausgefüllt wurde.',
-    'required_without_all' => ':attribute muss angegeben werden, wenn keines der Felder :values ausgefüllt wurde.',
+    'required_with' =>
+        ':attribute muss angegeben werden, wenn :values ausgefüllt wurde.',
+    'required_with_all' =>
+        ':attribute muss angegeben werden, wenn :values ausgefüllt wurde.',
+    'required_without' =>
+        ':attribute muss angegeben werden, wenn :values nicht ausgefüllt wurde.',
+    'required_without_all' =>
+        ':attribute muss angegeben werden, wenn keines der Felder :values ausgefüllt wurde.',
     'same' => ':attribute und :other müssen übereinstimmen.',
     'size' => [
         'numeric' => ':attribute muss gleich :size sein.',
@@ -109,5 +114,4 @@ return [
         'email' => 'E-Mail',
         'password' => 'Passwort',
     ],
-
 ];

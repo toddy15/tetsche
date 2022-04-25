@@ -79,7 +79,9 @@ test('a guest can view an archived cartoon', function () {
         ->assertOk()
         ->assertSeeText('Archiv')
         ->assertSeeText('Cartoon der Woche . . . vom 3. März 2022')
-        ->assertSeeText('Die Rebus-Abbildungen ergeben zusammen einen neuen Begriff.')
+        ->assertSeeText(
+            'Die Rebus-Abbildungen ergeben zusammen einen neuen Begriff.',
+        )
         ->assertSeeText('Lösung anzeigen');
 });
 
@@ -88,26 +90,27 @@ it('does show the oldest archived cartoon', function () {
         ->assertOk()
         ->assertSeeText('Archiv')
         ->assertSeeText('Cartoon der Woche . . . vom 2. Dezember 2021')
-        ->assertSeeText('Die Rebus-Abbildungen ergeben zusammen einen neuen Begriff.')
+        ->assertSeeText(
+            'Die Rebus-Abbildungen ergeben zusammen einen neuen Begriff.',
+        )
         ->assertSeeText('Lösung anzeigen');
 });
 
-it('does not show older cartoons which are no longer in the archive', function () {
-    get('/archiv/2021-11-25')
-        ->assertNotFound();
-});
+it(
+    'does not show older cartoons which are no longer in the archive',
+    function () {
+        get('/archiv/2021-11-25')->assertNotFound();
+    },
+);
 
 it('does not show future cartoons', function () {
-    get('/archiv/2022-03-31')
-        ->assertNotFound();
+    get('/archiv/2022-03-31')->assertNotFound();
 });
 
 it('redirects to the current cartoon', function () {
-    get('/archiv/2022-03-24')
-        ->assertRedirect("/cartoon");
+    get('/archiv/2022-03-24')->assertRedirect('/cartoon');
 });
 
 test('a guest cannot view a non-existing cartoon', function () {
-    get('/archiv/2022-03-08')
-        ->assertNotFound();
+    get('/archiv/2022-03-08')->assertNotFound();
 });

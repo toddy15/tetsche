@@ -16,7 +16,10 @@ class GuestbookPostsController extends Controller
 {
     public function index(): View
     {
-        $guestbook_posts = GuestbookPost::whereNotIn('category', ['manual_spam', 'autolearn_spam'])
+        $guestbook_posts = GuestbookPost::whereNotIn('category', [
+            'manual_spam',
+            'autolearn_spam',
+        ])
             ->latest()
             ->simplePaginate(10);
 
@@ -38,45 +41,45 @@ class GuestbookPostsController extends Controller
     {
         $post = $request->all();
         $spamfilter = new Spamfilter();
-        $text = $post['name'].' '.$post['message'];
+        $text = $post['name'] . ' ' . $post['message'];
         // Use IP address and browser identification for more robust spam detection
-        $spam_detection = "IP: ".$request->ip();
-        $spam_detection .= ", Browser: ".$request->server('HTTP_USER_AGENT');
+        $spam_detection = 'IP: ' . $request->ip();
+        $spam_detection .= ', Browser: ' . $request->server('HTTP_USER_AGENT');
         $post['score'] = $spamfilter->classify($text, $spam_detection);
         // @FIXME: Filter out the fuckheads, based on IP address
-        if (! $spamfilter->isSpam($post['score'])) {
+        if (!$spamfilter->isSpam($post['score'])) {
             $ip = explode('.', $request->ip());
-            if (($ip[0] == 141) and ($ip[1] == 48)) {
+            if ($ip[0] == 141 and $ip[1] == 48) {
                 $post['score'] = $spamfilter->threshold_autolearn_spam;
             }
-            if (($ip[0] == 80) and ($ip[1] == 187)) {
+            if ($ip[0] == 80 and $ip[1] == 187) {
                 $post['score'] = $spamfilter->threshold_autolearn_spam;
             }
-            if (($ip[0] == 217) and ($ip[1] == 240) and ($ip[2] == 29)) {
+            if ($ip[0] == 217 and $ip[1] == 240 and $ip[2] == 29) {
                 $post['score'] = $spamfilter->threshold_autolearn_spam;
             }
-            if (($ip[0] == 194) and ($ip[1] == 230) and ($ip[2] == 77)) {
+            if ($ip[0] == 194 and $ip[1] == 230 and $ip[2] == 77) {
                 $post['score'] = $spamfilter->threshold_autolearn_spam;
             }
-            if (($ip[0] == 36) and ($ip[1] == 80)) {
+            if ($ip[0] == 36 and $ip[1] == 80) {
                 $post['score'] = $spamfilter->threshold_autolearn_spam;
             }
-            if (($ip[0] == 93) and ($ip[1] == 214) and ($ip[2] == 118)) {
+            if ($ip[0] == 93 and $ip[1] == 214 and $ip[2] == 118) {
                 $post['score'] = $spamfilter->threshold_autolearn_spam;
             }
-            if (($ip[0] == 93) and ($ip[1] == 207)) {
+            if ($ip[0] == 93 and $ip[1] == 207) {
                 $post['score'] = $spamfilter->threshold_autolearn_spam;
             }
-            if (($ip[0] == 79) and ($ip[1] == 232) and ($ip[2] == 145)) {
+            if ($ip[0] == 79 and $ip[1] == 232 and $ip[2] == 145) {
                 $post['score'] = $spamfilter->threshold_autolearn_spam;
             }
-            if (($ip[0] == 212) and ($ip[1] == 6) and ($ip[2] == 125)) {
+            if ($ip[0] == 212 and $ip[1] == 6 and $ip[2] == 125) {
                 $post['score'] = $spamfilter->threshold_autolearn_spam;
             }
-            if (($ip[0] == 112) and ($ip[1] == 206) and ($ip[2] == 2)) {
+            if ($ip[0] == 112 and $ip[1] == 206 and $ip[2] == 2) {
                 $post['score'] = $spamfilter->threshold_autolearn_spam;
             }
-            if (($ip[0] == 109) and ($ip[1] == 43) and ($ip[2] == 113)) {
+            if ($ip[0] == 109 and $ip[1] == 43 and $ip[2] == 113) {
                 $post['score'] = $spamfilter->threshold_autolearn_spam;
             }
         }
@@ -89,7 +92,7 @@ class GuestbookPostsController extends Controller
         $cartoon = PublicationDate::where(
             'publish_on',
             '=',
-            $current_cartoon->publish_on
+            $current_cartoon->publish_on,
         )->first()->cartoon;
         // Compare case insensitive for better results
         if (stripos($text, $cartoon->rebus) !== false) {
@@ -105,19 +108,26 @@ class GuestbookPostsController extends Controller
         // Add the spam check
         $validator->after(function ($validator) use ($post, $spamfilter) {
             if ($spamfilter->isSpam($post['score'])) {
-                $validator->errors()->add(
-                    'message',
-                    'Der Eintrag wurde als Spam eingestuft und daher nicht gespeichert.'
-                );
+                $validator
+                    ->errors()
+                    ->add(
+                        'message',
+                        'Der Eintrag wurde als Spam eingestuft und daher nicht gespeichert.',
+                    );
                 // @FIXME: Remove this part if sending all spam mails is no longer necessary.
-                if (! $spamfilter->isAutolearnSpam($post['score'])) {
+                if (!$spamfilter->isAutolearnSpam($post['score'])) {
                     $new_post = GuestbookPost::make($post);
                     $new_post->score = $post['score'];
 
                     $mail = new NewGuestbookPost($new_post);
-                    $mail->subject('Neuer Eintrag im Tetsche-Gästebuch (als Spam abgelehnt)');
+                    $mail->subject(
+                        'Neuer Eintrag im Tetsche-Gästebuch (als Spam abgelehnt)',
+                    );
                     Mail::to([
-                        (object)['name' => 'Toddy', 'email' => 'toddy@example.org'],
+                        (object) [
+                            'name' => 'Toddy',
+                            'email' => 'toddy@example.org',
+                        ],
                     ])->send($mail);
                 }
             }
@@ -130,9 +140,14 @@ class GuestbookPostsController extends Controller
                 $new_post->score = $post['score'];
 
                 $mail = new NewGuestbookPost($new_post);
-                $mail->subject('Neuer Eintrag im Tetsche-Gästebuch (als Spam gelernt)');
+                $mail->subject(
+                    'Neuer Eintrag im Tetsche-Gästebuch (als Spam gelernt)',
+                );
                 Mail::to([
-                    (object)['name' => 'Toddy', 'email' => 'toddy@example.org'],
+                    (object) [
+                        'name' => 'Toddy',
+                        'email' => 'toddy@example.org',
+                    ],
                 ])->send($mail);
             }
         });
@@ -151,8 +166,8 @@ class GuestbookPostsController extends Controller
         $mail = new NewGuestbookPost($new_post);
         $mail->subject('Neuer Eintrag im Tetsche-Gästebuch');
         Mail::to([
-            (object)['name' => 'Toddy', 'email' => 'toddy@example.org'],
-            (object)['name' => 'Tetsche', 'email' => 'tetsche@example.org'],
+            (object) ['name' => 'Toddy', 'email' => 'toddy@example.org'],
+            (object) ['name' => 'Tetsche', 'email' => 'tetsche@example.org'],
         ])->send($mail);
 
         $request->session()->flash('info', 'Der Eintrag wurde gespeichert.');
@@ -171,8 +186,11 @@ class GuestbookPostsController extends Controller
         $guestbook_post = GuestbookPost::findOrFail($id);
         // Calculate spam score
         $spamfilter = new Spamfilter();
-        $text = $guestbook_post->name.' '.$guestbook_post->message;
-        $guestbook_post->score = round($spamfilter->classify($text, $guestbook_post->spam_detection) * 100, 1);
+        $text = $guestbook_post->name . ' ' . $guestbook_post->message;
+        $guestbook_post->score = round(
+            $spamfilter->classify($text, $guestbook_post->spam_detection) * 100,
+            1,
+        );
 
         return view('guestbook_posts.edit', compact('guestbook_post'));
     }
@@ -229,7 +247,10 @@ class GuestbookPostsController extends Controller
         if (trim($query) == '') {
             return redirect()->route('gaestebuch.index');
         }
-        $guestbook_posts = GuestbookPost::whereNotIn('category', ['manual_spam', 'autolearn_spam'])
+        $guestbook_posts = GuestbookPost::whereNotIn('category', [
+            'manual_spam',
+            'autolearn_spam',
+        ])
             ->where(function ($sql) use ($query) {
                 $sql->where('name', 'LIKE', "%$query%")
                     ->orWhere('message', 'LIKE', "%$query%")
@@ -243,7 +264,7 @@ class GuestbookPostsController extends Controller
             'title' => 'Gästebuch-Suche',
             'keywords' => 'Gästebuch, Suche',
             'description' => 'Gästebuch der Tetsche-Website',
-            'pagetitle' => 'Gästebuch – Suche nach »'.$query.'«',
+            'pagetitle' => 'Gästebuch – Suche nach »' . $query . '«',
             'query' => $query,
         ]);
     }

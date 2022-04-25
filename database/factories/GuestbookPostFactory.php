@@ -16,7 +16,7 @@ class GuestbookPostFactory extends Factory
         return [
             'name' => $this->faker->name(),
             'message' => $this->faker->paragraph(3),
-            'cheffe' => (rand(0, 10) <= 3 ? $this->faker->sentence(5) : ''),
+            'cheffe' => rand(0, 10) <= 3 ? $this->faker->sentence(5) : '',
             'category' => 'no_autolearn_h',
             'spam_detection' => $this->faker->userAgent(),
         ];

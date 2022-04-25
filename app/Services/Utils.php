@@ -31,7 +31,10 @@ class Utils
         $smileys = $this->getSmileysImageHTML(true);
         $result = [];
         foreach ($smileys as $code => $image) {
-            $html = '<button type="button" class="btn btn-light" onclick="insert(\'' . $code . '\')">';
+            $html =
+                '<button type="button" class="btn btn-light" onclick="insert(\'' .
+                $code .
+                '\')">';
             $html .= $image;
             $html .= '</button>';
             $result[] = $html;
@@ -56,9 +59,14 @@ class Utils
         $smileys = $this->getSmileys($unique);
         $result = [];
         foreach ($smileys as $code => $info) {
-            $result[$code] = '<img id="smiley-' . $info['filename'] . '" src="' .
-                asset('images/guestbook/' . $info['filename'] . '.svg') . '" ';
-            $result[$code] .= 'width="18" height="18" alt="' . $info['name'] . '"/>';
+            $result[$code] =
+                '<img id="smiley-' .
+                $info['filename'] .
+                '" src="' .
+                asset('images/guestbook/' . $info['filename'] . '.svg') .
+                '" ';
+            $result[$code] .=
+                'width="18" height="18" alt="' . $info['name'] . '"/>';
         }
 
         return $result;
@@ -97,14 +105,14 @@ class Utils
                 continue;
             }
             $filename = strtolower($name);
-            $filename = str_replace("ä", "ae", $filename);
-            $filename = str_replace("ö", "oe", $filename);
-            $filename = str_replace("ü", "ue", $filename);
-            $filename = str_replace("Ä", "Ae", $filename);
-            $filename = str_replace("Ö", "Oe", $filename);
-            $filename = str_replace("Ü", "Ue", $filename);
-            $filename = str_replace("ß", "ss", $filename);
-            $filename = str_replace("!", "", $filename);
+            $filename = str_replace('ä', 'ae', $filename);
+            $filename = str_replace('ö', 'oe', $filename);
+            $filename = str_replace('ü', 'ue', $filename);
+            $filename = str_replace('Ä', 'Ae', $filename);
+            $filename = str_replace('Ö', 'Oe', $filename);
+            $filename = str_replace('Ü', 'Ue', $filename);
+            $filename = str_replace('ß', 'ss', $filename);
+            $filename = str_replace('!', '', $filename);
             $result[$code] = ['filename' => $filename, 'name' => $name];
         }
 

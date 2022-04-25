@@ -14,7 +14,9 @@ test('a guest can view the current cartoon', function () {
     get('/cartoon')
         ->assertOk()
         ->assertSeeText('Cartoon der Woche . . . vom 11. März 2022')
-        ->assertSeeText('Die Rebus-Abbildungen ergeben zusammen einen neuen Begriff.')
+        ->assertSeeText(
+            'Die Rebus-Abbildungen ergeben zusammen einen neuen Begriff.',
+        )
         ->assertSeeText('Auflösung nächste Woche');
 });
 
@@ -28,7 +30,9 @@ test('a guest can view the next current cartoon', function () {
     get('/cartoon')
         ->assertOk()
         ->assertSeeText('Cartoon der Woche . . . vom 17. März 2022')
-        ->assertSeeText('Die Rebus-Abbildungen ergeben zusammen einen neuen Begriff.')
+        ->assertSeeText(
+            'Die Rebus-Abbildungen ergeben zusammen einen neuen Begriff.',
+        )
         ->assertSeeText('Auflösung nächste Woche');
 });
 
@@ -43,7 +47,9 @@ test('a guest cannot view a future cartoon', function () {
     get('/cartoon')
         ->assertOk()
         ->assertSeeText('Cartoon der Woche . . . vom 17. März 2022')
-        ->assertSeeText('Die Rebus-Abbildungen ergeben zusammen einen neuen Begriff.')
+        ->assertSeeText(
+            'Die Rebus-Abbildungen ergeben zusammen einen neuen Begriff.',
+        )
         ->assertSeeText('Auflösung nächste Woche');
 });
 
@@ -58,7 +64,9 @@ test('a guest can view the next cartoon at the correct time', function () {
     get('/cartoon')
         ->assertOk()
         ->assertSeeText('Cartoon der Woche . . . vom 17. März 2022')
-        ->assertSeeText('Die Rebus-Abbildungen ergeben zusammen einen neuen Begriff.')
+        ->assertSeeText(
+            'Die Rebus-Abbildungen ergeben zusammen einen neuen Begriff.',
+        )
         ->assertSeeText('Auflösung nächste Woche');
 
     testTime()->freeze('2022-03-23 18:00:00');
@@ -66,6 +74,8 @@ test('a guest can view the next cartoon at the correct time', function () {
     get('/cartoon')
         ->assertOk()
         ->assertSeeText('Cartoon der Woche . . . vom 24. März 2022')
-        ->assertSeeText('Die Rebus-Abbildungen ergeben zusammen einen neuen Begriff.')
+        ->assertSeeText(
+            'Die Rebus-Abbildungen ergeben zusammen einen neuen Begriff.',
+        )
         ->assertSeeText('Auflösung nächste Woche');
 });

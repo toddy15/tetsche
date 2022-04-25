@@ -8,7 +8,9 @@ use function Pest\Laravel\post;
 
 test('a guest can view the guestbook page', function () {
     // Ensure there are entries
-    GuestbookPost::factory()->count(5)->create();
+    GuestbookPost::factory()
+        ->count(5)
+        ->create();
 
     get(route('gaestebuch.index'))
         ->assertOk()
@@ -19,7 +21,9 @@ test('a guest can view the guestbook page', function () {
 
 test('a guest can post a new entry', function () {
     // Ensure there are entries
-    GuestbookPost::factory()->count(5)->create();
+    GuestbookPost::factory()
+        ->count(5)
+        ->create();
 
     // There has to be at least one PublicationDate for the rebus spamcheck.
     PublicationDate::factory()->create();
@@ -35,8 +39,7 @@ test('a guest can post a new entry', function () {
     ]);
     $this->assertDatabaseMissing('guestbook_posts', $entry);
 
-    post(route('gaestebuch.store'), $entry)
-        ->assertRedirect();
+    post(route('gaestebuch.store'), $entry)->assertRedirect();
 
     $this->assertDatabaseHas('guestbook_posts', $entry);
 

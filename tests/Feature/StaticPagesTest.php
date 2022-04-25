@@ -11,7 +11,9 @@ it('has a homepage', function () {
 it('has an about page', function () {
     get(route('tetsche'))
         ->assertOk()
-        ->assertSeeText('Tetsche veröffentlichte seinen ersten Cartoon im zarten Alter');
+        ->assertSeeText(
+            'Tetsche veröffentlichte seinen ersten Cartoon im zarten Alter',
+        );
 });
 
 it('has a buecher page', function () {

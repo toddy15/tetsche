@@ -28,8 +28,10 @@ class PublicationDateController extends Controller
         ]);
     }
 
-    public function update(Request $request, PublicationDate $publicationDate): RedirectResponse
-    {
+    public function update(
+        Request $request,
+        PublicationDate $publicationDate,
+    ): RedirectResponse {
         $publicationDate->cartoon->rebus = $request->input('rebus');
         $publicationDate->cartoon->save();
 

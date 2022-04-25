@@ -110,11 +110,13 @@
         sowie ein Recht auf Berichtigung, Sperrung oder Löschung
         dieser Daten. Hierzu sowie zu weiteren Fragen zum Thema
         personenbezogene Daten können Sie sich jederzeit unter
-        der im <a href="{{ route("impressum") }}">Impressum</a> angegebenen
+        der im <a href="{{ route('impressum') }}">Impressum</a> angegebenen
         Adresse an uns wenden.
     </p>
     <div class="card text-dark bg-info">
-        <div class="card-header"><h2>Widerspruchsrecht</h2></div>
+        <div class="card-header">
+            <h2>Widerspruchsrecht</h2>
+        </div>
         <div class="card-body">
             <p class="card-text">
                 Sie haben jederzeit das Recht, gegen die Verarbeitung
@@ -163,8 +165,7 @@
         Seite wieder deaktivieren.
     </p>
 
-    <iframe
-            style="border: 0; height: 200px; width: 600px;"
-            src="https://matomo.tetsche.de/index.php?module=CoreAdminHome&amp;action=optOut&amp;language=de&amp;backgroundColor=ffffff&amp;fontColor=000000&amp;fontSize=18px&amp;fontFamily=Assistant">
+    <iframe style="border: 0; height: 200px; width: 600px;"
+        src="https://matomo.tetsche.de/index.php?module=CoreAdminHome&amp;action=optOut&amp;language=de&amp;backgroundColor=ffffff&amp;fontColor=000000&amp;fontSize=18px&amp;fontFamily=Assistant">
     </iframe>
 @stop

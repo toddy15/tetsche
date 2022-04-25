@@ -74,7 +74,7 @@ class Images
         $filename = str_replace(
             ['ae', 'oe', 'ue', 'Ae', 'Oe', 'Ue', '_'],
             ['ä', 'ö', 'ü', 'Ä', 'Ö', 'Ü', ' '],
-            $filename
+            $filename,
         );
 
         return ucwords($filename);

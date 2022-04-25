@@ -3,7 +3,7 @@
 @section('content')
     <div class="mb-4 text-center">
         <img class="img-fluid" src="{{ asset('images/tetsche-2019.jpg') }}" alt="Foto von Tetsche" width="400"
-             height="469"/>
+            height="469" />
     </div>
     <div class="row">
         <div class="col-12 col-md-6">

@@ -26,19 +26,27 @@ class SpamController extends Controller
             'ham' => [],
             'spam' => [],
         ];
-        $posts = GuestbookPost::whereIn('category', ['manual_ham', 'autolearn_ham'])->get();
+        $posts = GuestbookPost::whereIn('category', [
+            'manual_ham',
+            'autolearn_ham',
+        ])->get();
         foreach ($posts as $post) {
             $text = $post->name . ' ' . $post->message;
             $texts['ham'][] = $text;
         }
-        $posts = GuestbookPost::whereIn('category', ['manual_spam', 'autolearn_spam'])->get();
+        $posts = GuestbookPost::whereIn('category', [
+            'manual_spam',
+            'autolearn_spam',
+        ])->get();
         foreach ($posts as $post) {
             $text = $post->name . ' ' . $post->message;
             $texts['spam'][] = $text;
         }
         $spamfilter = new Spamfilter();
         $spamfilter->initializeAll($texts);
-        $request->session()->flash('info', 'Alle Ham- und Spamtexte wurden neu gelernt.');
+        $request
+            ->session()
+            ->flash('info', 'Alle Ham- und Spamtexte wurden neu gelernt.');
 
         return redirect('spam');
     }

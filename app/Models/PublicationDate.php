@@ -12,10 +12,7 @@ class PublicationDate extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'cartoon_id',
-        'publish_on',
-    ];
+    protected $fillable = ['cartoon_id', 'publish_on'];
 
     /**
      * Check if the PublicationDate is currently in the archive.
@@ -40,7 +37,8 @@ class PublicationDate extends Model
         $current = self::getCurrent();
         $oldest = self::getOldestArchived();
 
-        return $query->where('publish_on', '<', $current->publish_on)
+        return $query
+            ->where('publish_on', '<', $current->publish_on)
             ->where('publish_on', '>=', $oldest->publish_on)
             ->latest('publish_on');
     }
@@ -52,7 +50,9 @@ class PublicationDate extends Model
     {
         // Add 6 hours to the current time, so that the
         // cartoon is published at 18:00 one day before.
-        $date = Carbon::now()->addHours(6)->format('Y-m-d');
+        $date = Carbon::now()
+            ->addHours(6)
+            ->format('Y-m-d');
 
         return PublicationDate::where('publish_on', '<=', $date)
             ->latest('publish_on')
