@@ -117,17 +117,18 @@ test('a user can edit and update a cartoon', closure: function () {
     $id = 13;
     $rebus = PublicationDate::find($id)->cartoon->rebus;
 
-    get("/publication_dates/$id/edit")
+    get(route('publication_dates.edit', $id))
         ->assertOk()
         ->assertSeeText("Cartoon bearbeiten")
         ->assertSeeText("10. Februar 2022")
         ->assertSee($rebus)
         ->assertDontSee("New rebus text");
 
-    put("/publication_dates/$id", ['rebus' => 'New rebus text'])
-        ->assertRedirect(route('publication_dates.index'));
+    put(route('publication_dates.update',
+        ['publication_date' => $id, 'rebus' => 'New rebus text'])
+    )->assertRedirect(route('publication_dates.index'));
 
-    get("/publication_dates/$id/edit")
+    get(route("publication_dates.edit", $id))
         ->assertOk()
         ->assertSeeText('Cartoon bearbeiten')
         ->assertSeeText("10. Februar 2022")
