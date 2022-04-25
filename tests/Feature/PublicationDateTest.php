@@ -88,27 +88,14 @@ test(
             '/publication_dates',
         );
 
-        // Current should not have been changed
+        // Current should not have been changed ...
         expect($current)->toEqual(PublicationDate::getCurrent());
+        // ... but the latest cartoon should have changed
         expect($latest)->not->toEqual(
             PublicationDate::latest('publish_on')->first(),
         );
-
-        // @TODO: Check that another cartoon has been selected
     },
 );
-
-test(
-    'a user can force a new cartoon for the next publication date',
-    function () {
-        actingAs(User::factory()->create());
-        get('/publication_dates?page=3')
-            ->assertOk()
-            ->assertDontSeeText('31. März 2022')
-            ->assertDontSeeText('3. Februar 2022')
-            ->assertSeeText('18. November 2021');
-    },
-)->skip();
 
 test('a guest cannot edit or update a cartoon', function () {
     get('/publication_dates/13/edit')->assertRedirect(route('login'));
