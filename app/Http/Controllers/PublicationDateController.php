@@ -35,6 +35,6 @@ class PublicationDateController extends Controller
         $publicationDate->cartoon->rebus = $request->input('rebus');
         $publicationDate->cartoon->save();
 
-        return redirect()->route('publication_dates.index');
+        return to_route('publication_dates.index');
     }
 }

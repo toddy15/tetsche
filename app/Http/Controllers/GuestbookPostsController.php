@@ -217,7 +217,7 @@ class GuestbookPostsController extends Controller
         $spamfilter->learnStatus($guestbook_post);
         $request->session()->flash('info', 'Der Eintrag wurde geändert.');
 
-        return redirect()->route('gaestebuch.index');
+        return to_route('gaestebuch.index');
     }
 
     /**
@@ -235,7 +235,7 @@ class GuestbookPostsController extends Controller
         GuestbookPost::destroy($id);
         $request->session()->flash('info', 'Der Eintrag wurde gelöscht.');
 
-        return redirect()->route('gaestebuch.index');
+        return to_route('gaestebuch.index');
     }
 
     /**
@@ -245,7 +245,7 @@ class GuestbookPostsController extends Controller
     {
         $query = $request->get('q');
         if (trim($query) == '') {
-            return redirect()->route('gaestebuch.index');
+            return to_route('gaestebuch.index');
         }
         $guestbook_posts = GuestbookPost::whereNotIn('category', [
             'manual_spam',
