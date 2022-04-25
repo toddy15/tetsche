@@ -12,16 +12,13 @@ class NewGuestbookPost extends Mailable
     use Queueable;
     use SerializesModels;
 
-    public GuestbookPost $guestbook_post;
-
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct(GuestbookPost $guestbook_post)
+    public function __construct(public GuestbookPost $guestbook_post)
     {
-        $this->guestbook_post = $guestbook_post;
     }
 
     /**
