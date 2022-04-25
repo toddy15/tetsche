@@ -5,6 +5,7 @@ use App\Models\User;
 
 use function Pest\Laravel\actingAs;
 use function Pest\Laravel\get;
+use function Pest\Laravel\put;
 use function Spatie\PestPluginTestTime\testTime;
 
 
@@ -102,3 +103,34 @@ test('a user can force a new cartoon for the next publication date', function ()
         ->assertDontSeeText("3. Februar 2022")
         ->assertSeeText("18. November 2021");
 })->skip();
+
+test('a guest cannot edit or update a cartoon', function () {
+    get('/publication_dates/13/edit')
+        ->assertRedirect(route('login'));
+    put('/publication_dates/13', ['rebus' => 'New rebus text'])
+        ->assertRedirect(route('login'));
+});
+
+test('a user can edit and update a cartoon', closure: function () {
+    actingAs(User::factory()->create());
+
+    $id = 13;
+    $rebus = PublicationDate::find($id)->cartoon->rebus;
+
+    get("/publication_dates/$id/edit")
+        ->assertOk()
+        ->assertSeeText("Cartoon bearbeiten")
+        ->assertSeeText("10. Februar 2022")
+        ->assertSee($rebus)
+        ->assertDontSee("New rebus text");
+
+    put("/publication_dates/$id", ['rebus' => 'New rebus text'])
+        ->assertRedirect(route('publication_dates.index'));
+
+    get("/publication_dates/$id/edit")
+        ->assertOk()
+        ->assertSeeText('Cartoon bearbeiten')
+        ->assertSeeText("10. Februar 2022")
+        ->assertDontSee($rebus)
+        ->assertSee("New rebus text");
+});
