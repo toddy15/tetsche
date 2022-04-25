@@ -87,7 +87,7 @@ class GuestbookPostsController extends Controller
         // @todo: This code is copied from CartoonController, remove duplication.
         $date = date('Y-m-d', time() + 6 * 60 * 60);
         $current_cartoon = PublicationDate::where('publish_on', '<=', $date)
-            ->orderBy('publish_on', 'DESC')
+            ->latest('publish_on')
             ->first();
         $cartoon = PublicationDate::where(
             'publish_on',

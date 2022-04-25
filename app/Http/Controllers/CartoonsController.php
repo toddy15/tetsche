@@ -91,7 +91,7 @@ class CartoonsController extends Controller
                 $newest_cartoon_date,
             )
                 ->where('publish_on', '>=', $two_years_ago)
-                ->orderBy('publish_on', 'DESC')
+                ->latest('publish_on')
                 ->get()
                 ->pluck('cartoon_id')
                 ->all();

@@ -84,7 +84,7 @@ class SpamController extends Controller
                 return redirect(action('GuestbookPostsController@index'));
         }
         $guestbook_posts = GuestbookPost::where('category', $category)
-            ->orderBy('created_at', 'desc')
+            ->latest()
             ->simplePaginate(10);
 
         return view('guestbook_posts.index', [
