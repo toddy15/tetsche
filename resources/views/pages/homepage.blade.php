@@ -8,16 +8,14 @@
              height="361"/>
     </div> --}}
     <p class="lead text-center">
-        Es gibt ein neues Buch!<br>
-        Alles über die sensationelle Open-Air-Ausstellung im Stader Hansehafen<br>
-        ISBN 978-3-96194-173-5
+        Saukomische Tetsche-Ausstellung im
+        <a href="http://www.sommerpalais-greiz.de/ausstellung/tetsche-saukomisch">Sommerpalais Greiz</a><br>
+        11. Juni 22&nbsp;–&nbsp;16. Oktober 22
     </p>
     <div class="text-center">
-        <a href="https://www.kjm-buchverlag.de/produkt/tetsche-open-air/">
-            <img class="img-fluid" src="{{ asset('images/open-air-buch.webp') }}" width="1024" height="690" srcset="{{ asset('images/open-air-buch-small.webp') }} 512w,
-                         {{ asset('images/open-air-buch-medium.webp') }} 768w,
-                         {{ asset('images/open-air-buch.webp') }} 1024w" sizes="(min-width: 1024px) 1024px, 100vw"
-                alt="Buch über die Open-Air-Ausstellung in Stade" />
+        <a href="http://www.sommerpalais-greiz.de/ausstellung/tetsche-saukomisch">
+            <img class="img-fluid" src="{{ asset('images/greiz.webp') }}" width="961" height="1062"
+                alt="Poster für Tetsche-Ausstellung im Sommerpalais Greiz" />
         </a>
     </div>
 @stop
