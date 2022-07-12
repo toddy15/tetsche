@@ -28,8 +28,7 @@
     <meta name="msapplication-TileColor" content="#da532c">
     <meta name="theme-color" content="#ffffff">
 
-    <script src="{{ asset(mix('js/app.js')) }}" defer></script>
-    <link href="{{ asset(mix('css/app.css')) }}" rel="stylesheet">
+    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
 
 <body class="bg-white">
