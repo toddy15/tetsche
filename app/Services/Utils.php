@@ -32,8 +32,8 @@ class Utils
         $result = [];
         foreach ($smileys as $code => $image) {
             $html =
-                '<button type="button" class="btn btn-light" onclick="insert(\'' .
-                $code .
+                '<button type="button" class="btn btn-light" onclick="insert(\''.
+                $code.
                 '\')">';
             $html .= $image;
             $html .= '</button>';
@@ -60,13 +60,13 @@ class Utils
         $result = [];
         foreach ($smileys as $code => $info) {
             $result[$code] =
-                '<img id="smiley-' .
-                $info['filename'] .
-                '" src="' .
-                asset('images/guestbook/' . $info['filename'] . '.svg') .
+                '<img id="smiley-'.
+                $info['filename'].
+                '" src="'.
+                asset('images/guestbook/'.$info['filename'].'.svg').
                 '" ';
             $result[$code] .=
-                'width="18" height="18" alt="' . $info['name'] . '"/>';
+                'width="18" height="18" alt="'.$info['name'].'"/>';
         }
 
         return $result;

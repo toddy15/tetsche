@@ -1,7 +1,6 @@
 <?php
 
 use App\Models\PublicationDate;
-
 use function Pest\Laravel\get;
 use function Spatie\PestPluginTestTime\testTime;
 

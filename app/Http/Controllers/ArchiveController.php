@@ -33,8 +33,7 @@ class ArchiveController extends Controller
 
         return view('archive.show', [
             'title' => 'Archiv',
-            'pagetitle' =>
-                'Cartoon der Woche . . . vom ' .
+            'pagetitle' => 'Cartoon der Woche . . . vom '.
                 Carbon::parse($date->publish_on)
                     ->locale('de')
                     ->isoFormat('Do MMMM YYYY'),

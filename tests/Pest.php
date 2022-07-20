@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Foundation\Testing\LazilyRefreshDatabase;
+
 /*
 |--------------------------------------------------------------------------
 | Test Case
@@ -22,7 +23,7 @@ uses(Tests\TestCase::class, LazilyRefreshDatabase::class)->in('Feature');
 | to assert different things. Of course, you may extend the Expectation API at any time.
 |
 */
-expect()->extend('toBeOne', fn() => $this->toBe(1));
+expect()->extend('toBeOne', fn () => $this->toBe(1));
 /*
 |--------------------------------------------------------------------------
 | Functions

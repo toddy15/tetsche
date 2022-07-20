@@ -7,10 +7,15 @@ use Illuminate\Support\Facades\DB;
 class Spamfilter
 {
     private $threshold_no_autolearn_ham = 0.38;
+
     private $threshold_autolearn_ham = 0.48;
+
     private $threshold_ham = 0.48;
+
     private $threshold_spam = 0.55;
+
     public $threshold_autolearn_spam = 0.55;
+
     private $threshold_no_autolearn_spam = 0.9;
 
     /**
@@ -33,7 +38,7 @@ class Spamfilter
             foreach ($posts as $post) {
                 $tokens = $this->parse($post);
                 foreach ($tokens as $token => $count) {
-                    if (!isset($table_data[$token])) {
+                    if (! isset($table_data[$token])) {
                         $table_data[$token] = [
                             'count_ham' => 0,
                             'count_spam' => 0,
@@ -171,7 +176,7 @@ class Spamfilter
      */
     public function learnStatus($post)
     {
-        $text = $post->name . ' ' . $post->message;
+        $text = $post->name.' '.$post->message;
         $spam_detection = $post->spam_detection;
         if (
             $post->category == 'manual_spam' or
@@ -192,7 +197,7 @@ class Spamfilter
      */
     public function unlearnStatus($post)
     {
-        $text = $post->name . ' ' . $post->message;
+        $text = $post->name.' '.$post->message;
         $spam_detection = $post->spam_detection;
         if (
             $post->category == 'manual_spam' or
@@ -435,7 +440,7 @@ class Spamfilter
     public function parseHTML($text)
     {
         // Ensure an array as input
-        if (!is_array($text)) {
+        if (! is_array($text)) {
             $text = [$text];
         }
         $result = [];
@@ -465,7 +470,7 @@ class Spamfilter
     {
         $result = [];
         // Ensure an array as input
-        if (!is_array($text)) {
+        if (! is_array($text)) {
             $text = [$text];
         }
         foreach ($text as $part) {

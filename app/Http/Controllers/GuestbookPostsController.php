@@ -41,13 +41,13 @@ class GuestbookPostsController extends Controller
     {
         $post = $request->all();
         $spamfilter = new Spamfilter();
-        $text = $post['name'] . ' ' . $post['message'];
+        $text = $post['name'].' '.$post['message'];
         // Use IP address and browser identification for more robust spam detection
-        $spam_detection = 'IP: ' . $request->ip();
-        $spam_detection .= ', Browser: ' . $request->server('HTTP_USER_AGENT');
+        $spam_detection = 'IP: '.$request->ip();
+        $spam_detection .= ', Browser: '.$request->server('HTTP_USER_AGENT');
         $post['score'] = $spamfilter->classify($text, $spam_detection);
         // @FIXME: Filter out the fuckheads, based on IP address
-        if (!$spamfilter->isSpam($post['score'])) {
+        if (! $spamfilter->isSpam($post['score'])) {
             $ip = explode('.', $request->ip());
             if ($ip[0] == 141 and $ip[1] == 48) {
                 $post['score'] = $spamfilter->threshold_autolearn_spam;
@@ -115,7 +115,7 @@ class GuestbookPostsController extends Controller
                         'Der Eintrag wurde als Spam eingestuft und daher nicht gespeichert.',
                     );
                 // @FIXME: Remove this part if sending all spam mails is no longer necessary.
-                if (!$spamfilter->isAutolearnSpam($post['score'])) {
+                if (! $spamfilter->isAutolearnSpam($post['score'])) {
                     $new_post = GuestbookPost::make($post);
                     $new_post->score = $post['score'];
 
@@ -186,7 +186,7 @@ class GuestbookPostsController extends Controller
         $guestbook_post = GuestbookPost::findOrFail($id);
         // Calculate spam score
         $spamfilter = new Spamfilter();
-        $text = $guestbook_post->name . ' ' . $guestbook_post->message;
+        $text = $guestbook_post->name.' '.$guestbook_post->message;
         $guestbook_post->score = round(
             $spamfilter->classify($text, $guestbook_post->spam_detection) * 100,
             1,
@@ -197,6 +197,7 @@ class GuestbookPostsController extends Controller
 
     /**
      * Update the specified resource in storage.
+     *
      * @param  Request  $request
      * @param $id
      * @return RedirectResponse
@@ -264,7 +265,7 @@ class GuestbookPostsController extends Controller
             'title' => 'Gästebuch-Suche',
             'keywords' => 'Gästebuch, Suche',
             'description' => 'Gästebuch der Tetsche-Website',
-            'pagetitle' => 'Gästebuch – Suche nach »' . $query . '«',
+            'pagetitle' => 'Gästebuch – Suche nach »'.$query.'«',
             'query' => $query,
         ]);
     }

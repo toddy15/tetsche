@@ -6,8 +6,6 @@ namespace App\Services;
  * Class Images
  *
  * Various functions for rotating a random image.
- *
- * @package App\TwsLib
  */
 class Images
 {
@@ -20,12 +18,12 @@ class Images
     {
         $directory = 'images/gb_animals';
         $image = $this->getRandomImage($directory);
-        $size = getimagesize(public_path() . '/' . $image);
+        $size = getimagesize(public_path().'/'.$image);
         $url = asset($image);
         $name = $this->getNameFromFilename($image);
-        $result = '<img src="' . $url . '" ';
+        $result = '<img src="'.$url.'" ';
         $result .= $size[3];
-        $result .= ' alt="' . $name . '" title="' . $name . '" />';
+        $result .= ' alt="'.$name.'" title="'.$name.'" />';
 
         return $result;
     }
@@ -38,10 +36,10 @@ class Images
      */
     private function getRandomImage($directory)
     {
-        $images = $this->getImagesInDirectory(public_path() . '/' . $directory);
+        $images = $this->getImagesInDirectory(public_path().'/'.$directory);
         $num = mt_rand(0, count($images) - 1);
 
-        return $directory . '/' . $images[$num];
+        return $directory.'/'.$images[$num];
     }
 
     /**
@@ -56,7 +54,7 @@ class Images
         $dir = opendir($directory);
         while (false !== ($file = readdir($dir))) {
             // Strip ., .., and subdirs
-            if (is_file($directory . '/' . $file)) {
+            if (is_file($directory.'/'.$file)) {
                 $images[] = $file;
             }
         }

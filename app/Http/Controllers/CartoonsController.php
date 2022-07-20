@@ -36,8 +36,7 @@ class CartoonsController extends Controller
 
         return view('cartoons.show', [
             'title' => 'Cartoon der Woche',
-            'pagetitle' =>
-                'Cartoon der Woche . . . vom ' .
+            'pagetitle' => 'Cartoon der Woche . . . vom '.
                 Carbon::parse($date->publish_on)
                     ->locale('de')
                     ->isoFormat('Do MMMM YYYY'),
@@ -159,7 +158,7 @@ class CartoonsController extends Controller
             // Neujahr
             $thursday_after_neujahr = $this->getThursday(
                 'last',
-                (int) date('Y') + 1 . '-01-07',
+                (int) date('Y') + 1 .'-01-07',
             );
             if ($publish_on == $thursday_after_neujahr) {
                 $all_cartoon_ids = $neujahr_ids;
@@ -167,10 +166,10 @@ class CartoonsController extends Controller
             }
 
             // Ostern
-            $thursday_before_ostern = new DateTime(date('Y') . '-03-21');
+            $thursday_before_ostern = new DateTime(date('Y').'-03-21');
             // Returns the number of days after March 21 on which Easter falls.
             $thursday_before_ostern->add(
-                new DateInterval('P' . easter_days() . 'D'),
+                new DateInterval('P'.easter_days().'D'),
             );
             $thursday_before_ostern = $thursday_before_ostern->format('Y-m-d');
             $thursday_before_ostern = $this->getThursday(
@@ -191,9 +190,9 @@ class CartoonsController extends Controller
                 $random_id = mt_rand($min_number, $max_number);
                 if (
                     in_array($random_id, $all_cartoon_ids) and
-                    !in_array($random_id, $recent_cartoon_ids) and
-                    !in_array($random_id, $all_special_ids) and
-                    !in_array($random_id, $dont_show_again_ids)
+                    ! in_array($random_id, $recent_cartoon_ids) and
+                    ! in_array($random_id, $all_special_ids) and
+                    ! in_array($random_id, $dont_show_again_ids)
                 ) {
                     break;
                 }
@@ -204,7 +203,7 @@ class CartoonsController extends Controller
                 'publish_on',
                 $publish_on,
             )->first();
-            if (!$date_exists) {
+            if (! $date_exists) {
                 PublicationDate::create([
                     'publish_on' => $publish_on,
                     'cartoon_id' => $random_id,

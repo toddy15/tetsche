@@ -29,8 +29,7 @@ Route::view('/buecher', 'pages.buecher', [
 Route::view('/impressum', 'pages.impressum', [
     'title' => 'Impressum',
     'keywords' => 'Impressum, Kontakt, Anbieterkennzeichnung',
-    'description' =>
-        'Impressum, Kontaktadressen und Anbieterkennzeichnung der Tetsche-Website',
+    'description' => 'Impressum, Kontaktadressen und Anbieterkennzeichnung der Tetsche-Website',
 ])->name('impressum');
 
 Route::view('/datenschutz', 'pages.datenschutz', [

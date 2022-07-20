@@ -31,7 +31,7 @@ class SpamController extends Controller
             'autolearn_ham',
         ])->get();
         foreach ($posts as $post) {
-            $text = $post->name . ' ' . $post->message;
+            $text = $post->name.' '.$post->message;
             $texts['ham'][] = $text;
         }
         $posts = GuestbookPost::whereIn('category', [
@@ -39,7 +39,7 @@ class SpamController extends Controller
             'autolearn_spam',
         ])->get();
         foreach ($posts as $post) {
-            $text = $post->name . ' ' . $post->message;
+            $text = $post->name.' '.$post->message;
             $texts['spam'][] = $text;
         }
         $spamfilter = new Spamfilter();
@@ -89,9 +89,9 @@ class SpamController extends Controller
 
         return view('guestbook_posts.index', [
             'guestbook_posts' => $guestbook_posts,
-            'title' => 'Gästebuch - ' . $description,
-            'keywords' => 'Gästebuch - ' . $description,
-            'description' => 'Gästebuch der Tetsche-Website - ' . $description,
+            'title' => 'Gästebuch - '.$description,
+            'keywords' => 'Gästebuch - '.$description,
+            'description' => 'Gästebuch der Tetsche-Website - '.$description,
         ]);
     }
 }
