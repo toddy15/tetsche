@@ -10,7 +10,7 @@
     <p class="lead text-center">
         Saukomische Tetsche-Ausstellung im
         <a href="http://www.sommerpalais-greiz.de/ausstellung/tetsche-saukomisch">Sommerpalais Greiz</a><br>
-        11. Juni 22&nbsp;–&nbsp;16. Oktober 22
+        11. Juni 22&nbsp;–&nbsp;31. Oktober 22
     </p>
     <div class="text-center">
         <a href="http://www.sommerpalais-greiz.de/ausstellung/tetsche-saukomisch">
