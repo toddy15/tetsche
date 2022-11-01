@@ -12,6 +12,11 @@ use Illuminate\Support\Facades\Route;
 // Static pages
 Route::view('/', 'pages.homepage', [
     'description' => 'Tetsche-Website',
+    'image_name' => [
+        'bonzo-lachend.webp',
+        'bonzo-schutzengel.webp',
+        'bonzo-traurig.webp',
+    ][rand(0,2)],
 ])->name('homepage');
 
 Route::view('/tetsche', 'pages.tetsche', [
