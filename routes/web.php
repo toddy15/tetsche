@@ -17,6 +17,7 @@ Route::view('/', 'pages.homepage', [
         'bonzo-schutzengel.webp',
         'bonzo-traurig.webp',
     ][rand(0,2)],
+    'image_name' => 'bonzo-ball.webp',
 ])->name('homepage');
 
 Route::view('/tetsche', 'pages.tetsche', [
