@@ -13,11 +13,10 @@ use Illuminate\Support\Facades\Route;
 Route::view('/', 'pages.homepage', [
     'description' => 'Tetsche-Website',
     'image_name' => [
-        'bonzo-ball.webp',
         'bonzo-lachend.webp',
         'bonzo-schutzengel.webp',
         'bonzo-traurig.webp',
-    ][rand(0,3)],
+    ][rand(0,2)],
 ])->name('homepage');
 
 Route::view('/tetsche', 'pages.tetsche', [
