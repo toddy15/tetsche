@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use App\Models\PublicationDate;
 use function Pest\Laravel\get;
 use function Spatie\PestPluginTestTime\testTime;
