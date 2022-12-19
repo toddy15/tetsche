@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use App\Http\Controllers\ArchiveController;
 use App\Http\Controllers\CartoonsController;
 use App\Http\Controllers\GuestbookPostsController;
