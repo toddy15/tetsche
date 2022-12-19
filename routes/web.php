@@ -16,7 +16,7 @@ Route::view('/', 'pages.homepage', [
         'bonzo-lachend.webp',
         'bonzo-schutzengel.webp',
         'bonzo-traurig.webp',
-    ][rand(0,2)],
+    ][rand(0, 2)],
 ])->name('homepage');
 
 Route::view('/tetsche', 'pages.tetsche', [
