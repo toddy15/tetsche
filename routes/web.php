@@ -3,6 +3,7 @@
 use App\Http\Controllers\ArchiveController;
 use App\Http\Controllers\CartoonsController;
 use App\Http\Controllers\GuestbookPostsController;
+use App\Http\Controllers\GuestBookSearchController;
 use App\Http\Controllers\PublicationDateController;
 use App\Http\Controllers\SpamController;
 use App\Http\Middleware\Authenticate;
@@ -49,7 +50,7 @@ Route::resource('/gaestebuch', GuestbookPostsController::class)->only([
     'create',
     'store',
 ]);
-Route::get('/gaestebuch/suche', [GuestbookPostsController::class, 'search']);
+Route::get('/gaestebuch/suche', GuestBookSearchController::class);
 
 // Cartoons
 Route::get('/cartoon', [CartoonsController::class, 'show']);

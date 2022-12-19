@@ -238,35 +238,4 @@ class GuestbookPostsController extends Controller
 
         return to_route('gaestebuch.index');
     }
-
-    /**
-     * Filter guestbook by search string.
-     */
-    public function search(Request $request): View|RedirectResponse
-    {
-        $query = $request->get('q');
-        if (trim($query) == '') {
-            return to_route('gaestebuch.index');
-        }
-        $guestbook_posts = GuestbookPost::whereNotIn('category', [
-            'manual_spam',
-            'autolearn_spam',
-        ])
-            ->where(function ($sql) use ($query) {
-                $sql->where('name', 'LIKE', "%$query%")
-                    ->orWhere('message', 'LIKE', "%$query%")
-                    ->orWhere('cheffe', 'LIKE', "%$query%");
-            })
-            ->latest()
-            ->simplePaginate(10);
-
-        return view('guestbook_posts.index', [
-            'guestbook_posts' => $guestbook_posts,
-            'title' => 'Gästebuch-Suche',
-            'keywords' => 'Gästebuch, Suche',
-            'description' => 'Gästebuch der Tetsche-Website',
-            'pagetitle' => 'Gästebuch – Suche nach »'.$query.'«',
-            'query' => $query,
-        ]);
-    }
 }
