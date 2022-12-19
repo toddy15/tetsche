@@ -81,7 +81,7 @@ class SpamController extends Controller
 
                 break;
             default:
-                return redirect(action('GuestbookPostsController@index'));
+                return redirect(action([\App\Http\Controllers\GuestbookPostsController::class, 'index']));
         }
         $guestbook_posts = GuestbookPost::where('category', $category)
             ->latest()
