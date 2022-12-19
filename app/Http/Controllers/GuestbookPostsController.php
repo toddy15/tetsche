@@ -152,7 +152,7 @@ class GuestbookPostsController extends Controller
             }
         });
         if ($validator->fails()) {
-            return redirect(action([GuestbookPostsController::class, 'create']))
+            return redirect()->action([GuestbookPostsController::class, 'create'])
                 ->withErrors($validator)
                 ->withInput();
         }
@@ -172,7 +172,7 @@ class GuestbookPostsController extends Controller
 
         $request->session()->flash('info', 'Der Eintrag wurde gespeichert.');
 
-        return redirect(action([GuestbookPostsController::class, 'index']));
+        return redirect()->action([GuestbookPostsController::class, 'index']);
     }
 
     /**

@@ -48,7 +48,7 @@ class SpamController extends Controller
             ->session()
             ->flash('info', 'Alle Ham- und Spamtexte wurden neu gelernt.');
 
-        return redirect('spam');
+        return redirect()->to('spam');
     }
 
     /**
@@ -81,7 +81,7 @@ class SpamController extends Controller
 
                 break;
             default:
-                return redirect(action([\App\Http\Controllers\GuestbookPostsController::class, 'index']));
+                return redirect()->action([\App\Http\Controllers\GuestbookPostsController::class, 'index']);
         }
         $guestbook_posts = GuestbookPost::where('category', $category)
             ->latest()
