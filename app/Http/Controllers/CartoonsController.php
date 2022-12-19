@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers;
 
 use App\Models\Cartoon;
@@ -231,13 +233,11 @@ class CartoonsController extends Controller
             $offset = -1;
         }
         [$year, $month, $day] = explode('-', $date);
-        while (date('w', mktime(0, 0, 0, $month, $day, $year)) != 4) {
+        while (date('w', mktime(0, 0, 0, (int) $month, (int) $day, (int) $year)) != 4) {
             $day = $day + $offset;
         }
         // Construct and explode the date again to cope with
         // overflows (e.g. 2015-03-35) and get a valid date
-        $thursday = date('Y-m-d', mktime(0, 0, 0, $month, $day, $year));
-
-        return $thursday;
+        return date('Y-m-d', mktime(0, 0, 0, (int) $month, (int) $day, (int) $year));
     }
 }

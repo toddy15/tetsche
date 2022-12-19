@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Services;
 
 use Illuminate\Support\Facades\DB;
@@ -448,7 +450,7 @@ class Spamfilter
             $tokens = preg_split(
                 '/(<[^>]+?>)/',
                 $part,
-                null,
+                -1,
                 PREG_SPLIT_DELIM_CAPTURE,
             );
             foreach ($tokens as $token) {
@@ -477,7 +479,7 @@ class Spamfilter
             $tokens = preg_split(
                 '/(\[[^[\]]+?])/',
                 $part,
-                null,
+                -1,
                 PREG_SPLIT_DELIM_CAPTURE,
             );
             foreach ($tokens as $token) {
