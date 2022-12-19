@@ -4,7 +4,7 @@
     </IfModule>
 
     RewriteEngine On
-    RewriteBase /~toddy/tetsche/www/public/
+    RewriteBase /~toddy/tetsche/public/
 
     # Handle Authorization Header
     RewriteCond %{HTTP:Authorization} .
