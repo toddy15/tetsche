@@ -6,7 +6,7 @@ namespace App\Services;
 
 class Utils
 {
-    public function replaceSmileys($text)
+    public function replaceSmileys(string $text): string
     {
         $text = nl2br(htmlspecialchars($text));
         $smileys = $this->getSmileysImageHTML();
@@ -17,7 +17,7 @@ class Utils
         return $text;
     }
 
-    public function getSmileysImages()
+    public function getSmileysImages(): array
     {
         $smileys = $this->getSmileysImageHTML(true);
         $result = [];
@@ -28,7 +28,7 @@ class Utils
         return $result;
     }
 
-    public function getSmileysButtons()
+    public function getSmileysButtons(): array
     {
         $smileys = $this->getSmileysImageHTML(true);
         $result = [];
@@ -45,7 +45,7 @@ class Utils
         return $result;
     }
 
-    public function getSmileysIDsAndText()
+    public function getSmileysIDsAndText(): array
     {
         $smileys = $this->getSmileys(true);
         $result = [];
@@ -56,7 +56,7 @@ class Utils
         return $result;
     }
 
-    private function getSmileysImageHTML($unique = false)
+    private function getSmileysImageHTML(bool $unique = false): array
     {
         $smileys = $this->getSmileys($unique);
         $result = [];
@@ -74,7 +74,7 @@ class Utils
         return $result;
     }
 
-    private function getSmileys($unique = false)
+    private function getSmileys(bool $unique = false): array
     {
         $smileys = [
             ':-)' => 'Smile',

@@ -14,21 +14,6 @@ use Illuminate\Http\RedirectResponse;
 
 class CartoonsController extends Controller
 {
-    public function index(): View
-    {
-        $publication_dates = PublicationDate::orderBy(
-            'publish_on',
-            'desc',
-        )->simplePaginate(8);
-
-        return view('cartoons.index', [
-            'title' => 'Übersicht',
-            'keywords' => 'Tetsche, Kalauseite, Cartoon',
-            'description' => 'Alle Ausgaben',
-            'publication_dates' => $publication_dates,
-        ]);
-    }
-
     /**
      * Display the current cartoon.
      */
