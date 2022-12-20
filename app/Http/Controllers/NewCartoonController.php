@@ -6,39 +6,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Cartoon;
 use App\Models\PublicationDate;
+use Carbon\Carbon;
 use DateInterval;
 use DateTime;
 use Illuminate\Http\RedirectResponse;
 
 class NewCartoonController extends Controller
 {
-    /**
-     * Helper method to determine the last or the next thursday.
-     *
-     * @param $which string with either "next" or "last".
-     * @param $date string with a date, defaults to current date.
-     */
-    private function getThursday($which = 'next', string $date = ''): string
-    {
-        if ($date == '') {
-            $date = date('Y-m-d');
-        }
-
-        $offset = 1;
-        if ($which == 'last') {
-            $offset = -1;
-        }
-        [$year, $month, $day] = explode('-', $date);
-        while (date('w', mktime(0, 0, 0, (int) $month, (int) $day, (int) $year))
-            != 4) {
-            $day = $day + $offset;
-        }
-        // Construct and explode the date again to cope with
-        // overflows (e.g. 2015-03-35) and get a valid date
-        return date('Y-m-d',
-            mktime(0, 0, 0, (int) $month, (int) $day, (int) $year));
-    }
-
     /**
      * Force a new randomly selected cartoon for next thursday.
      */
@@ -61,10 +35,7 @@ class NewCartoonController extends Controller
      */
     public function checkIfCurrentIsLastCartoon(): RedirectResponse
     {
-        $newest_cartoon = PublicationDate::orderBy(
-            'publish_on',
-            'desc',
-        )->first();
+        $newest_cartoon = PublicationDate::latest('publish_on')->first();
         $newest_cartoon_date = $newest_cartoon->publish_on;
         $current_date = PublicationDate::getCurrent();
         // If there are no more cartoons for next week,
@@ -72,14 +43,10 @@ class NewCartoonController extends Controller
         if ($current_date->publish_on >= $newest_cartoon_date) {
             // First, get all cartoon ids which have been shown
             // less than two years ago, so they can be omitted.
-            $two_years_ago = date('Y-m-d', time() - 2 * 365 * 24 * 60 * 60);
-            $recent_cartoon_ids = PublicationDate::where(
-                'publish_on',
-                '<=',
-                $newest_cartoon_date,
-            )
-                ->where('publish_on', '>=', $two_years_ago)
-                ->latest('publish_on')
+            $two_years_ago = Carbon::now()
+                ->subYears(2)
+                ->format('Y-m-d');
+            $recent_cartoon_ids = PublicationDate::where('publish_on', '>=', $two_years_ago)
                 ->get()
                 ->pluck('cartoon_id')
                 ->all();
@@ -201,5 +168,32 @@ class NewCartoonController extends Controller
         }
 
         return redirect()->action(CartoonsController::class);
+    }
+
+    /**
+     * Helper method to determine the last or the next thursday.
+     *
+     * @param $which string with either "next" or "last".
+     * @param $date string with a date, defaults to current date.
+     */
+    private function getThursday(string $which = 'next', string $date = ''): string
+    {
+        if ($date == '') {
+            $date = date('Y-m-d');
+        }
+
+        $offset = 1;
+        if ($which == 'last') {
+            $offset = -1;
+        }
+        [$year, $month, $day] = explode('-', $date);
+        while (date('w', mktime(0, 0, 0, (int) $month, (int) $day, (int) $year))
+            != 4) {
+            $day = $day + $offset;
+        }
+        // Construct and explode the date again to cope with
+        // overflows (e.g. 2015-03-35) and get a valid date
+        return date('Y-m-d',
+            mktime(0, 0, 0, (int) $month, (int) $day, (int) $year));
     }
 }
