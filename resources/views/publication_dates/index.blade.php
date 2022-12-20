@@ -3,7 +3,7 @@
 @section('content')
     <h1>Übersicht aller Cartoons</h1>
     <p>
-        <a href="{!! action([App\Http\Controllers\CartoonsController::class, 'forceNewCartoon']) !!}" class="btn btn-primary">Zufällig neuer nächster Cartoon</a>
+        <a href="{!! action([App\Http\Controllers\NewCartoonController::class, 'forceNewCartoon']) !!}" class="btn btn-primary">Zufällig neuer nächster Cartoon</a>
     </p>
 
     @foreach (array_chunk($dates->all(), 4) as $row)

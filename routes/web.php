@@ -6,6 +6,7 @@ use App\Http\Controllers\ArchiveController;
 use App\Http\Controllers\CartoonsController;
 use App\Http\Controllers\GuestbookPostsController;
 use App\Http\Controllers\GuestBookSearchController;
+use App\Http\Controllers\NewCartoonController;
 use App\Http\Controllers\PublicationDateController;
 use App\Http\Controllers\SpamController;
 use App\Http\Middleware\Authenticate;
@@ -56,8 +57,9 @@ Route::get('/gaestebuch/suche', GuestBookSearchController::class);
 
 // Cartoons
 Route::get('/cartoon', [CartoonsController::class, 'show']);
+// @todo: Choose better route
 Route::get('/cartoons/checkIfCurrentIsLastCartoon', [
-    CartoonsController::class,
+    NewCartoonController::class,
     'checkIfCurrentIsLastCartoon',
 ]);
 
@@ -86,7 +88,7 @@ Route::middleware(Authenticate::class)->group(function () {
     )->except(['create', 'store', 'show', 'destroy']);
     // @TODO: Use other controller
     Route::get('/publication_dates/forceNewCartoon', [
-        CartoonsController::class,
+        NewCartoonController::class,
         'forceNewCartoon',
     ]);
 });
