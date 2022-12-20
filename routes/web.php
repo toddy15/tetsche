@@ -56,7 +56,7 @@ Route::resource('/gaestebuch', GuestbookPostsController::class)->only([
 Route::get('/gaestebuch/suche', GuestBookSearchController::class);
 
 // Cartoons
-Route::get('/cartoon', [CartoonsController::class, 'show']);
+Route::get('/cartoon', CartoonsController::class);
 // @todo: Choose better route
 Route::get('/cartoons/checkIfCurrentIsLastCartoon', [
     NewCartoonController::class,

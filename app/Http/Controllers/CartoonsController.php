@@ -14,7 +14,7 @@ class CartoonsController extends Controller
     /**
      * Display the current cartoon.
      */
-    public function show(): View
+    public function __invoke(): View
     {
         $date = PublicationDate::getCurrent();
 

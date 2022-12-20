@@ -200,6 +200,6 @@ class NewCartoonController extends Controller
             }
         }
 
-        return redirect()->action([CartoonsController::class, 'show']);
+        return redirect()->action(CartoonsController::class);
     }
 }
