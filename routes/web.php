@@ -25,25 +25,21 @@ Route::view('/', 'pages.homepage', [
 
 Route::view('/tetsche', 'pages.tetsche', [
     'title' => 'Über Tetsche',
-    'keywords' => 'Informationen, Information',
     'description' => 'Informationen über Tetsche',
 ])->name('tetsche');
 
 Route::view('/buecher', 'pages.buecher', [
     'title' => 'Bücher',
-    'keywords' => 'Buch, Bücher, Buchveröffentlichung',
     'description' => 'Bücher von Tetsche',
 ])->name('buecher');
 
 Route::view('/impressum', 'pages.impressum', [
     'title' => 'Impressum',
-    'keywords' => 'Impressum, Kontakt, Anbieterkennzeichnung',
     'description' => 'Impressum, Kontaktadressen und Anbieterkennzeichnung der Tetsche-Website',
 ])->name('impressum');
 
 Route::view('/datenschutz', 'pages.datenschutz', [
     'title' => 'Datenschutzerklärung',
-    'keywords' => 'Datenschutzerklärung, Datenschutz, DSGVO',
     'description' => 'Datenschutzerklärung der Tetsche-Website',
 ])->name('datenschutz');
 

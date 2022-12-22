@@ -92,7 +92,6 @@ class SpamController extends Controller
         return view('guestbook_posts.index', [
             'guestbook_posts' => $guestbook_posts,
             'title' => 'Gästebuch - '.$description,
-            'keywords' => 'Gästebuch - '.$description,
             'description' => 'Gästebuch der Tetsche-Website - '.$description,
         ]);
     }

@@ -9,9 +9,6 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <meta name="author" content="Tetsche">
-    @if (isset($keywords))
-        <meta name="keywords" lang="de" content="{{ $keywords }}">
-    @endif
     @if (isset($description))
         <meta name="description" lang="de" content="{{ $description }}">
     @endif

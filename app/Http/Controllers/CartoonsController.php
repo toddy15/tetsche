@@ -24,7 +24,6 @@ class CartoonsController extends Controller
                 Carbon::parse($date->publish_on)
                     ->locale('de')
                     ->isoFormat('Do MMMM YYYY'),
-            'keywords' => 'Tetsche, Cartoon der Woche',
             'description' => 'Tetsche - Cartoon der Woche',
             'date' => $date,
         ]);

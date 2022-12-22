@@ -35,7 +35,6 @@ class GuestBookSearchController extends Controller
         return view('guestbook_posts.index', [
             'guestbook_posts' => $guestbook_posts,
             'title' => 'Gästebuch-Suche',
-            'keywords' => 'Gästebuch, Suche',
             'description' => 'Gästebuch der Tetsche-Website',
             'pagetitle' => 'Gästebuch – Suche nach »'.$query.'«',
             'query' => $query,

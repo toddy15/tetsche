@@ -17,7 +17,6 @@ class PublicationDateController extends Controller
 
         return view('publication_dates.index', [
             'title' => 'Übersicht',
-            'keywords' => 'Tetsche, Kalauseite, Cartoon',
             'description' => 'Alle Ausgaben',
             'dates' => $dates,
         ]);

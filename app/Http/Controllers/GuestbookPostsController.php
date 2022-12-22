@@ -28,7 +28,6 @@ class GuestbookPostsController extends Controller
         return view('guestbook_posts.index', [
             'guestbook_posts' => $guestbook_posts,
             'title' => 'Gästebuch',
-            'keywords' => 'Gästebuch',
             'description' => 'Gästebuch der Tetsche-Website',
             'query' => '',
         ]);
