@@ -102,6 +102,7 @@ class Utils
             '[Knochen]' => 'Knochen',
         ];
         $skip = [':)', ';)', ':(', ':D', ':P', ':-p', ':p', ':-o'];
+        $result = [];
         foreach ($smileys as $code => $name) {
             if ($unique and in_array($code, $skip)) {
                 continue;
