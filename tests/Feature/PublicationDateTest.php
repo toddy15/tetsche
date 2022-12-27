@@ -110,10 +110,10 @@ test(
     closure: function () {
         actingAs(User::factory()->create());
 
-        $id = 13;
-        $rebus = PublicationDate::find($id)->cartoon->rebus;
+        $publication_date = PublicationDate::where("publish_on", "2022-02-10")->first();
+        $rebus = $publication_date->cartoon->rebus;
 
-        get(route('publication_dates.edit', $id))
+        get(route('publication_dates.edit', $publication_date))
             ->assertOk()
             ->assertSeeText('Cartoon bearbeiten')
             ->assertSeeText('10. Februar 2022')
@@ -122,12 +122,12 @@ test(
 
         put(
             route('publication_dates.update', [
-                'publication_date' => $id,
+                'publication_date' => $publication_date,
                 'rebus' => 'New rebus text',
             ]),
         )->assertRedirect(route('publication_dates.index'));
 
-        get(route('publication_dates.edit', $id))
+        get(route('publication_dates.edit', $publication_date))
             ->assertOk()
             ->assertSeeText('Cartoon bearbeiten')
             ->assertSeeText('10. Februar 2022')
