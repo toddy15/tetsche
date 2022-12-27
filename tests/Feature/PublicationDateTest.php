@@ -110,7 +110,7 @@ test(
     closure: function () {
         actingAs(User::factory()->create());
 
-        $publication_date = PublicationDate::where("publish_on", "2022-02-10")->first();
+        $publication_date = PublicationDate::where('publish_on', '2022-02-10')->first();
         $rebus = $publication_date->cartoon->rebus;
 
         get(route('publication_dates.edit', $publication_date))
