@@ -15,7 +15,7 @@ jobs:
         image: mariadb:latest
         env:
           MARIADB_ALLOW_EMPTY_ROOT_PASSWORD: yes
-          MARIADB_DATABASE: test
+          MARIADB_DATABASE: laravel
         ports:
           - 3306:3306
         options: --health-cmd="mariadb-admin ping" --health-interval=10s --health-timeout=5s --health-retries=3
