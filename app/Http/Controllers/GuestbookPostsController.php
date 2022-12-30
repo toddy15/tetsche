@@ -117,7 +117,7 @@ class GuestbookPostsController extends Controller
                     );
                 // @FIXME: Remove this part if sending all spam mails is no longer necessary.
                 if (! $spamfilter->isAutolearnSpam($post['score'])) {
-                    $new_post = GuestbookPost::make($post);
+                    $new_post = new GuestbookPost($post);
                     $new_post->score = $post['score'];
 
                     $mail = new NewGuestbookPost($new_post);
@@ -136,8 +136,6 @@ class GuestbookPostsController extends Controller
             if ($spamfilter->isAutolearnSpam($post['score'])) {
                 $new_post = GuestbookPost::create($post);
                 $spamfilter->learnStatus($new_post);
-
-                $new_post = GuestbookPost::make($post);
                 $new_post->score = $post['score'];
 
                 $mail = new NewGuestbookPost($new_post);

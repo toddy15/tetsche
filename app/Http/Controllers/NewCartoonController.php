@@ -47,13 +47,11 @@ class NewCartoonController extends Controller
                 ->subYears(2)
                 ->format('Y-m-d');
             $recent_cartoon_ids = PublicationDate::where('publish_on', '>=', $two_years_ago)
-                ->get()
                 ->pluck('cartoon_id')
                 ->all();
 
             // Next, get all available cartoon ids.
-            $all_cartoon_ids = Cartoon::all()
-                ->pluck('id')
+            $all_cartoon_ids = Cartoon::pluck('id')
                 ->all();
 
             // This is for cartoons which should not be shown again,
