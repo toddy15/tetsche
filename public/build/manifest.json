@@ -9,12 +9,12 @@
     "isEntry": true
   },
   "node_modules/bootstrap/dist/js/bootstrap.esm.js": {
-    "file": "assets/bootstrap.esm-00bb6f32.js",
+    "file": "assets/bootstrap.esm-569b0032.js",
     "src": "node_modules/bootstrap/dist/js/bootstrap.esm.js",
     "isDynamicEntry": true
   },
   "resources/js/app.js": {
-    "file": "assets/app-6eddc97d.js",
+    "file": "assets/app-34684331.js",
     "src": "resources/js/app.js",
     "isEntry": true,
     "dynamicImports": [
