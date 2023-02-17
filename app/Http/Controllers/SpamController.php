@@ -56,7 +56,6 @@ class SpamController extends Controller
     /**
      * Show all posts of a category.
      *
-     * @param $category
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\View\View
      */
     public function showPosts($category)

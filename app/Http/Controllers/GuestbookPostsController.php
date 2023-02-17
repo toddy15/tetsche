@@ -176,9 +176,6 @@ class GuestbookPostsController extends Controller
 
     /**
      * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return View
      */
     public function edit(int $id): View
     {
@@ -196,10 +193,6 @@ class GuestbookPostsController extends Controller
 
     /**
      * Update the specified resource in storage.
-     *
-     * @param  Request  $request
-     * @param $id
-     * @return RedirectResponse
      */
     public function update(Request $request, $id): RedirectResponse
     {
@@ -223,9 +216,7 @@ class GuestbookPostsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  Request  $request
      * @param  int  $id
-     * @return RedirectResponse
      */
     public function destroy(Request $request, $id): RedirectResponse
     {
