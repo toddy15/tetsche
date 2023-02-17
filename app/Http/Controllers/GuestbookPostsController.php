@@ -218,7 +218,7 @@ class GuestbookPostsController extends Controller
      *
      * @param  int  $id
      */
-    public function destroy(Request $request, $id): RedirectResponse
+    public function destroy(Request $request, int $id): RedirectResponse
     {
         $guestbook_post = GuestbookPost::findOrFail($id);
         $spamfilter = new Spamfilter();

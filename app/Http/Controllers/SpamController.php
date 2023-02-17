@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use Illuminate\View\View;
+use Illuminate\Http\RedirectResponse;
 use App\Models\GuestbookPost;
 use App\Services\Spamfilter;
 use Illuminate\Http\Request;
@@ -13,7 +15,7 @@ class SpamController extends Controller
     /**
      * Show overview of possible actions.
      */
-    public function index()
+    public function index(): View
     {
         return view('admin.guestbook');
     }
@@ -21,7 +23,7 @@ class SpamController extends Controller
     /**
      * Relearn all ham and spam texts
      */
-    public function relearn(Request $request)
+    public function relearn(Request $request): RedirectResponse
     {
         // Initialize the arrays.
         $texts = [
