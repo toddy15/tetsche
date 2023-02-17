@@ -69,11 +69,43 @@ test('a guest can post a new entry', function () {
     ]);
     $this->assertDatabaseMissing('guestbook_posts', $entry);
 
-    post(route('gaestebuch.store'), $entry)->assertRedirect();
+    post(route('gaestebuch.store'), $entry)
+        ->assertSessionHasNoErrors()
+        ->assertRedirect();
 
     $this->assertDatabaseHas('guestbook_posts', $entry);
 
     get(route('gaestebuch.index'))
         ->assertSeeText($entry['name'])
         ->assertSeeText($entry['message']);
+});
+
+test('an entry must have a name', function () {
+    $entry = GuestbookPost::factory()->raw([
+        'name' => '',
+        'cheffe' => null,
+        'category' => 'unsure',
+        'spam_detection' => 'IP: 127.0.0.1, Browser: Symfony',
+    ]);
+    $this->assertDatabaseMissing('guestbook_posts', $entry);
+
+    post(route('gaestebuch.store'), $entry)
+        ->assertSessionHasErrors(['name']);
+
+    $this->assertDatabaseMissing('guestbook_posts', $entry);
+});
+
+test('an entry must have a message', function () {
+    $entry = GuestbookPost::factory()->raw([
+        'message' => '',
+        'cheffe' => null,
+        'category' => 'unsure',
+        'spam_detection' => 'IP: 127.0.0.1, Browser: Symfony',
+    ]);
+    $this->assertDatabaseMissing('guestbook_posts', $entry);
+
+    post(route('gaestebuch.store'), $entry)
+        ->assertSessionHasErrors(['message']);
+
+    $this->assertDatabaseMissing('guestbook_posts', $entry);
 });
