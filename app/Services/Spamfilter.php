@@ -410,7 +410,7 @@ class Spamfilter
     /**
      * Split a text into tokens, do not count multiple occurrences of words.
      */
-    private function parse(string $text): array
+    public function parse(string $text): array
     {
         $result = [];
         $text = [$text];

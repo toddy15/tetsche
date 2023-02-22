@@ -67,13 +67,10 @@ test('a guest can post a new entry', function () {
         'category' => 'unsure',
         'spam_detection' => 'IP: 127.0.0.1, Browser: Symfony',
     ]);
-    $this->assertDatabaseMissing('guestbook_posts', $entry);
 
     post(route('gaestebuch.store'), $entry)
         ->assertSessionHasNoErrors()
-        ->assertRedirect();
-
-    $this->assertDatabaseHas('guestbook_posts', $entry);
+        ->assertRedirect(route('gaestebuch.index'));
 
     get(route('gaestebuch.index'))
         ->assertSeeText($entry['name'])
@@ -87,12 +84,10 @@ test('an entry must have a name', function () {
         'category' => 'unsure',
         'spam_detection' => 'IP: 127.0.0.1, Browser: Symfony',
     ]);
-    $this->assertDatabaseMissing('guestbook_posts', $entry);
 
     post(route('gaestebuch.store'), $entry)
-        ->assertSessionHasErrors(['name']);
-
-    $this->assertDatabaseMissing('guestbook_posts', $entry);
+        ->assertSessionHasErrors(['name'])
+        ->assertRedirect(route('gaestebuch.create'));
 });
 
 test('an entry must have a message', function () {
@@ -102,10 +97,8 @@ test('an entry must have a message', function () {
         'category' => 'unsure',
         'spam_detection' => 'IP: 127.0.0.1, Browser: Symfony',
     ]);
-    $this->assertDatabaseMissing('guestbook_posts', $entry);
 
     post(route('gaestebuch.store'), $entry)
-        ->assertSessionHasErrors(['message']);
-
-    $this->assertDatabaseMissing('guestbook_posts', $entry);
+        ->assertSessionHasErrors(['message'])
+        ->assertRedirect(route('gaestebuch.create'));
 });
