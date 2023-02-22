@@ -88,7 +88,7 @@ class Spamfilter
     /**
      * Classify a text
      */
-    public function classify($text, $spam_detection): float
+    public function classify(string $text, string $spam_detection): float
     {
         // Make sure there is a text to rate, else return 0.5
         if (trim($text) == '') {
@@ -410,9 +410,10 @@ class Spamfilter
     /**
      * Split a text into tokens, do not count multiple occurrences of words.
      */
-    public function parse($text): array
+    private function parse(string $text): array
     {
         $result = [];
+        $text = [$text];
         // Extract possible HTML tags
         $text = $this->parseHTML($text);
         // Extract possible smileys
@@ -435,12 +436,8 @@ class Spamfilter
     /**
      * Split a text into HTML tags, if any.
      */
-    public function parseHTML($text): array
+    private function parseHTML(array $text): array
     {
-        // Ensure an array as input
-        if (! is_array($text)) {
-            $text = [$text];
-        }
         $result = [];
         foreach ($text as $part) {
             $tokens = preg_split(
@@ -464,13 +461,9 @@ class Spamfilter
     /**
      * Split smileys into own texts, even if written without delimiters.
      */
-    public function parseSmileys($text): array
+    private function parseSmileys(array $text): array
     {
         $result = [];
-        // Ensure an array as input
-        if (! is_array($text)) {
-            $text = [$text];
-        }
         foreach ($text as $part) {
             $tokens = preg_split(
                 '/(\[[^[\]]+?])/',
