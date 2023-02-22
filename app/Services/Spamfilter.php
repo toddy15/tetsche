@@ -8,17 +8,17 @@ use Illuminate\Support\Facades\DB;
 
 class Spamfilter
 {
-    private $threshold_no_autolearn_ham = 0.38;
+    private float $threshold_no_autolearn_ham = 0.38;
 
-    private $threshold_autolearn_ham = 0.48;
+    private float $threshold_autolearn_ham = 0.48;
 
-    private $threshold_ham = 0.48;
+    private float $threshold_ham = 0.48;
 
-    private $threshold_spam = 0.55;
+    private float $threshold_spam = 0.55;
 
-    public $threshold_autolearn_spam = 0.55;
+    public float $threshold_autolearn_spam = 0.55;
 
-    private $threshold_no_autolearn_spam = 0.9;
+    private float $threshold_no_autolearn_spam = 0.9;
 
     /**
      * Initialize the filter database
@@ -65,13 +65,9 @@ class Spamfilter
     /**
      * Check if the given score is spam
      */
-    public function isSpam($score): bool
+    public function isSpam(float $score): bool
     {
-        if ($score >= $this->threshold_spam) {
-            return true;
-        }
-
-        return false;
+        return $score >= $this->threshold_spam;
     }
 
     /**
@@ -246,7 +242,7 @@ class Spamfilter
     /**
      * Adds a text to the Ham database
      */
-    public function addHam($text, $spam_detection)
+    public function addHam($text, $spam_detection): void
     {
         $tokens = $this->parse($text);
         // Add the additional spam detection, but do not parse it.
@@ -289,7 +285,7 @@ class Spamfilter
     /**
      * Removes a text from the Ham database
      */
-    public function removeHam($text, $spam_detection)
+    public function removeHam($text, $spam_detection): void
     {
         $tokens = $this->parse($text);
         // Add the additional spam detection, but do not parse it.
@@ -330,7 +326,7 @@ class Spamfilter
     /**
      * Adds a text to the Spam database
      */
-    public function addSpam($text, $spam_detection)
+    public function addSpam($text, $spam_detection): void
     {
         $tokens = $this->parse($text);
         // Add the additional spam detection, but do not parse it.
@@ -373,7 +369,7 @@ class Spamfilter
     /**
      * Removes a text from the Spam database
      */
-    public function removeSpam($text, $spam_detection)
+    public function removeSpam($text, $spam_detection): void
     {
         $tokens = $this->parse($text);
         // Add the additional spam detection, but do not parse it.
@@ -412,7 +408,7 @@ class Spamfilter
     }
 
     /**
-     * Split a text into tokens, do not count multiple occurences of words.
+     * Split a text into tokens, do not count multiple occurrences of words.
      */
     public function parse($text): array
     {
