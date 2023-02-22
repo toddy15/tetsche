@@ -23,7 +23,7 @@ class Spamfilter
     /**
      * Initialize the filter database
      */
-    public function initializeAll($texts)
+    public function initializeAll($texts): void
     {
         DB::table('filter_texts')->delete();
         DB::table('filter_texts')->insert([
@@ -65,7 +65,7 @@ class Spamfilter
     /**
      * Check if the given score is spam
      */
-    public function isSpam($score)
+    public function isSpam($score): bool
     {
         if ($score >= $this->threshold_spam) {
             return true;
@@ -77,7 +77,7 @@ class Spamfilter
     /**
      * Check if the given score should be learned as spam
      */
-    public function isAutolearnSpam($score)
+    public function isAutolearnSpam($score): bool
     {
         if (
             $score >= $this->threshold_autolearn_spam and
@@ -92,7 +92,7 @@ class Spamfilter
     /**
      * Classify a text
      */
-    public function classify($text, $spam_detection)
+    public function classify($text, $spam_detection): float
     {
         // Make sure there is a text to rate, else return 0.5
         if (trim($text) == '') {
@@ -176,7 +176,7 @@ class Spamfilter
     /**
      * Learn status after update.
      */
-    public function learnStatus($post)
+    public function learnStatus($post): void
     {
         $text = $post->name.' '.$post->message;
         $spam_detection = $post->spam_detection;
@@ -197,7 +197,7 @@ class Spamfilter
     /**
      * Unlearn status after update.
      */
-    public function unlearnStatus($post)
+    public function unlearnStatus($post): void
     {
         $text = $post->name.' '.$post->message;
         $spam_detection = $post->spam_detection;
@@ -218,7 +218,7 @@ class Spamfilter
     /**
      * Calculate spam category
      */
-    public function calculateCategory($score)
+    public function calculateCategory($score): string
     {
         $category = 'unsure';
         if ($score <= $this->threshold_ham) {
@@ -414,7 +414,7 @@ class Spamfilter
     /**
      * Split a text into tokens, do not count multiple occurences of words.
      */
-    public function parse($text)
+    public function parse($text): array
     {
         $result = [];
         // Extract possible HTML tags
@@ -439,7 +439,7 @@ class Spamfilter
     /**
      * Split a text into HTML tags, if any.
      */
-    public function parseHTML($text)
+    public function parseHTML($text): array
     {
         // Ensure an array as input
         if (! is_array($text)) {
@@ -468,7 +468,7 @@ class Spamfilter
     /**
      * Split smileys into own texts, even if written without delimiters.
      */
-    public function parseSmileys($text)
+    public function parseSmileys($text): array
     {
         $result = [];
         // Ensure an array as input

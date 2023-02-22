@@ -2,7 +2,6 @@
 
 ## TODO
 
-* [ ] Convert Bootstrap to Tailwind
 * [ ] More testing
 * [ ] Implement "Dies und das"
 * [ ] Refactor spam handling
@@ -18,3 +17,4 @@
 ## Later
 * [ ] Infection testing
 * [ ] Use PHPStan
+* [ ] Convert Bootstrap to Tailwind
