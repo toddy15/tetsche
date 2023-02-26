@@ -1,24 +1,24 @@
 {
+  "node_modules/bootstrap/dist/js/bootstrap.esm.js": {
+    "file": "assets/bootstrap.esm-569b0032.js",
+    "isDynamicEntry": true,
+    "src": "node_modules/bootstrap/dist/js/bootstrap.esm.js"
+  },
   "resources/fonts/Assistant-VariableFont_wght.woff2": {
     "file": "assets/Assistant-VariableFont_wght-2687b38b.woff2",
     "src": "resources/fonts/Assistant-VariableFont_wght.woff2"
   },
-  "resources/sass/app.scss": {
-    "file": "assets/app-3d490b2c.css",
-    "src": "resources/sass/app.scss",
-    "isEntry": true
-  },
-  "node_modules/bootstrap/dist/js/bootstrap.esm.js": {
-    "file": "assets/bootstrap.esm-569b0032.js",
-    "src": "node_modules/bootstrap/dist/js/bootstrap.esm.js",
-    "isDynamicEntry": true
-  },
   "resources/js/app.js": {
-    "file": "assets/app-34684331.js",
-    "src": "resources/js/app.js",
-    "isEntry": true,
     "dynamicImports": [
       "node_modules/bootstrap/dist/js/bootstrap.esm.js"
-    ]
+    ],
+    "file": "assets/app-34684331.js",
+    "isEntry": true,
+    "src": "resources/js/app.js"
+  },
+  "resources/sass/app.scss": {
+    "file": "assets/app-3d490b2c.css",
+    "isEntry": true,
+    "src": "resources/sass/app.scss"
   }
 }
