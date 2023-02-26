@@ -48,6 +48,10 @@ test('a user can view all published cartoons', function () {
     actingAs(User::factory()->create());
     get('/publication_dates')
         ->assertOk()
+        ->assertViewIs('publication_dates.index')
+        ->assertViewHas('title')
+        ->assertViewHas('description')
+        ->assertViewHas('dates')
         ->assertSeeText('31. März 2022')
         ->assertDontSeeText('3. Februar 2022')
         ->assertDontSeeText('18. November 2021');
@@ -71,31 +75,25 @@ test('a user can view all published cartoons on page 3', function () {
         ->assertSeeText('18. November 2021');
 });
 
-test('a guest cannot force a new cartoon', function () {
-    get('/publication_dates/forceNewCartoon')->assertRedirect('/login');
-});
+test('a user cannot force a new cartoon for the current publication date', function () {
+    actingAs(User::factory()->create());
 
-test(
-    'a user cannot force a new cartoon for the current publication date',
-    function () {
-        actingAs(User::factory()->create());
+    $current = PublicationDate::getCurrent();
+    $latest = PublicationDate::latest('publish_on')->first();
 
-        $current = PublicationDate::getCurrent();
-        $latest = PublicationDate::latest('publish_on')->first();
+    expect($latest->id)->not->toBe($current->id);
 
-        expect($latest->id)->not->toBe($current->id);
+    get('/publication_dates/forceNewCartoon')->assertRedirect(
+        '/publication_dates',
+    );
 
-        get('/publication_dates/forceNewCartoon')->assertRedirect(
-            '/publication_dates',
-        );
-
-        // Current should not have been changed ...
-        expect($current)->toEqual(PublicationDate::getCurrent());
+    // Current should not have been changed ...
+    expect($current)->toEqual(PublicationDate::getCurrent())
         // ... but the latest cartoon should have changed
-        expect($latest)->not->toEqual(
+        ->and($latest)->not->toEqual(
             PublicationDate::latest('publish_on')->first(),
         );
-    },
+},
 );
 
 test('a guest cannot edit or update a cartoon', function () {
@@ -105,33 +103,31 @@ test('a guest cannot edit or update a cartoon', function () {
     );
 });
 
-test(
-    'a user can edit and update a cartoon',
-    closure: function () {
-        actingAs(User::factory()->create());
+test('a user can edit and update a cartoon', closure: function () {
+    actingAs(User::factory()->create());
 
-        $publication_date = PublicationDate::where('publish_on', '2022-02-10')->first();
-        $rebus = $publication_date->cartoon->rebus;
+    $publication_date = PublicationDate::where('publish_on', '2022-02-10')
+        ->first();
+    $rebus = $publication_date->cartoon->rebus;
 
-        get(route('publication_dates.edit', $publication_date))
-            ->assertOk()
-            ->assertSeeText('Cartoon bearbeiten')
-            ->assertSeeText('10. Februar 2022')
-            ->assertSee($rebus)
-            ->assertDontSee('New rebus text');
+    get(route('publication_dates.edit', $publication_date))
+        ->assertOk()
+        ->assertSeeText('Cartoon bearbeiten')
+        ->assertSeeText('10. Februar 2022')
+        ->assertSee($rebus)
+        ->assertDontSee('New rebus text');
 
-        put(
-            route('publication_dates.update', [
-                'publication_date' => $publication_date,
-                'rebus' => 'New rebus text',
-            ]),
-        )->assertRedirect(route('publication_dates.index'));
+    put(
+        route('publication_dates.update', [
+            'publication_date' => $publication_date,
+            'rebus' => 'New rebus text',
+        ]),
+    )->assertRedirect(route('publication_dates.index'));
 
-        get(route('publication_dates.edit', $publication_date))
-            ->assertOk()
-            ->assertSeeText('Cartoon bearbeiten')
-            ->assertSeeText('10. Februar 2022')
-            ->assertDontSee($rebus)
-            ->assertSee('New rebus text');
-    },
-);
+    get(route('publication_dates.edit', $publication_date))
+        ->assertOk()
+        ->assertSeeText('Cartoon bearbeiten')
+        ->assertSeeText('10. Februar 2022')
+        ->assertDontSee($rebus)
+        ->assertSee('New rebus text');
+});

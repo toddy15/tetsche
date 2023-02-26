@@ -36,6 +36,15 @@ beforeEach(function () {
     testTime()->freeze('2022-03-26 14:30:00');
 });
 
+test('index returns an ok response', function () {
+    get(route('archiv.index'))
+        ->assertOk()
+        ->assertViewIs('archive.index')
+        ->assertViewHas('title')
+        ->assertViewHas('description')
+        ->assertViewHas('dates');
+});
+
 test('a guest can view the first page of the archive', function () {
     get('/archiv')
         ->assertOk()

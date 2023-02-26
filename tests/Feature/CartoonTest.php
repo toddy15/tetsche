@@ -39,6 +39,11 @@ beforeEach(function () {
 test('a guest can view the current cartoon', function () {
     get('/cartoon')
         ->assertOk()
+        ->assertViewIs('cartoons.show')
+        ->assertViewHas('title')
+        ->assertViewHas('pagetitle')
+        ->assertViewHas('description')
+        ->assertViewHas('date')
         ->assertSeeText('Cartoon der Woche . . . vom 24. März 2022')
         ->assertSeeText(
             'Die Rebus-Abbildungen ergeben zusammen einen neuen Begriff.',
