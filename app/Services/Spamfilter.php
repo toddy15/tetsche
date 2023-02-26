@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services;
 
+use App\Models\GuestbookPost;
 use Illuminate\Support\Facades\DB;
 
 class Spamfilter
@@ -22,8 +23,10 @@ class Spamfilter
 
     /**
      * Initialize the filter database
+     *
+     * @param  array{'ham': array<int, string>, 'spam': array<int, string>}  $texts
      */
-    public function initializeAll($texts): void
+    public function initializeAll(array $texts): void
     {
         DB::table('filter_texts')->delete();
         DB::table('filter_texts')->insert([
@@ -73,7 +76,7 @@ class Spamfilter
     /**
      * Check if the given score should be learned as spam
      */
-    public function isAutolearnSpam($score): bool
+    public function isAutolearnSpam(float $score): bool
     {
         if (
             $score >= $this->threshold_autolearn_spam and
@@ -172,7 +175,7 @@ class Spamfilter
     /**
      * Learn status after update.
      */
-    public function learnStatus($post): void
+    public function learnStatus(GuestbookPost $post): void
     {
         $text = $post->name.' '.$post->message;
         $spam_detection = $post->spam_detection;
@@ -193,7 +196,7 @@ class Spamfilter
     /**
      * Unlearn status after update.
      */
-    public function unlearnStatus($post): void
+    public function unlearnStatus(GuestbookPost $post): void
     {
         $text = $post->name.' '.$post->message;
         $spam_detection = $post->spam_detection;
@@ -214,7 +217,7 @@ class Spamfilter
     /**
      * Calculate spam category
      */
-    public function calculateCategory($score): string
+    public function calculateCategory(float $score): string
     {
         $category = 'unsure';
         if ($score <= $this->threshold_ham) {
@@ -242,7 +245,7 @@ class Spamfilter
     /**
      * Adds a text to the Ham database
      */
-    public function addHam($text, $spam_detection): void
+    public function addHam(string $text, string $spam_detection): void
     {
         $tokens = $this->parse($text);
         // Add the additional spam detection, but do not parse it.
@@ -285,7 +288,7 @@ class Spamfilter
     /**
      * Removes a text from the Ham database
      */
-    public function removeHam($text, $spam_detection): void
+    public function removeHam(string $text, string $spam_detection): void
     {
         $tokens = $this->parse($text);
         // Add the additional spam detection, but do not parse it.
@@ -326,7 +329,7 @@ class Spamfilter
     /**
      * Adds a text to the Spam database
      */
-    public function addSpam($text, $spam_detection): void
+    public function addSpam(string $text, string $spam_detection): void
     {
         $tokens = $this->parse($text);
         // Add the additional spam detection, but do not parse it.
@@ -369,7 +372,7 @@ class Spamfilter
     /**
      * Removes a text from the Spam database
      */
-    public function removeSpam($text, $spam_detection): void
+    public function removeSpam(string $text, string $spam_detection): void
     {
         $tokens = $this->parse($text);
         // Add the additional spam detection, but do not parse it.
@@ -409,6 +412,8 @@ class Spamfilter
 
     /**
      * Split a text into tokens, do not count multiple occurrences of words.
+     *
+     * @return array<string, int>
      */
     public function parse(string $text): array
     {
@@ -435,6 +440,9 @@ class Spamfilter
 
     /**
      * Split a text into HTML tags, if any.
+     *
+     * @param  array<int, string>  $text
+     * @return array<int, string>
      */
     private function parseHTML(array $text): array
     {
@@ -460,6 +468,9 @@ class Spamfilter
 
     /**
      * Split smileys into own texts, even if written without delimiters.
+     *
+     * @param  array<int, string>  $text
+     * @return array<int, string>
      */
     private function parseSmileys(array $text): array
     {

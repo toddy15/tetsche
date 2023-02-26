@@ -48,7 +48,7 @@ class PublicationDate extends Model
     /**
      * Return the current PublicationDate.
      */
-    public static function getCurrent()
+    public static function getCurrent(): PublicationDate
     {
         // Add 6 hours to the current time, so that the
         // cartoon is published at 18:00 one day before.
@@ -64,7 +64,7 @@ class PublicationDate extends Model
     /**
      * Return the oldest archived PublicationDate.
      */
-    public static function getOldestArchived()
+    public static function getOldestArchived(): PublicationDate
     {
         $current = self::getCurrent();
 

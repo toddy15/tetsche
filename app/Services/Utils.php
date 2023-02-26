@@ -17,24 +17,31 @@ class Utils
         return $text;
     }
 
+    /**
+     * @return array<int, string>
+     */
     public function getSmileysImages(): array
     {
         $smileys = $this->getSmileysImageHTML(true);
         $result = [];
-        foreach ($smileys as $code => $image) {
+        foreach ($smileys as $image) {
             $result[] = $image;
         }
 
         return $result;
     }
 
+    /**
+     * @return array<int, string>
+     */
     public function getSmileysButtons(): array
     {
         $smileys = $this->getSmileysImageHTML(true);
         $result = [];
         foreach ($smileys as $code => $image) {
-            $html =
-                '<button type="button" class="btn btn-light" onclick="insert(\''.
+            $html
+                = '<button type="button" class="btn btn-light" onclick="insert(\''
+                .
                 $code.
                 '\')">';
             $html .= $image;
@@ -45,6 +52,9 @@ class Utils
         return $result;
     }
 
+    /**
+     * @return array<string, string>
+     */
     public function getSmileysIDsAndText(): array
     {
         $smileys = $this->getSmileys(true);
@@ -56,24 +66,30 @@ class Utils
         return $result;
     }
 
+    /**
+     * @return array<string, string>
+     */
     private function getSmileysImageHTML(bool $unique = false): array
     {
         $smileys = $this->getSmileys($unique);
         $result = [];
         foreach ($smileys as $code => $info) {
-            $result[$code] =
-                '<img id="smiley-'.
+            $result[$code]
+                = '<img id="smiley-'.
                 $info['filename'].
                 '" src="'.
                 asset('images/guestbook/'.$info['filename'].'.svg').
                 '" ';
-            $result[$code] .=
-                'width="18" height="18" alt="'.$info['name'].'"/>';
+            $result[$code]
+                .= 'width="18" height="18" alt="'.$info['name'].'"/>';
         }
 
         return $result;
     }
 
+    /**
+     * @return array<string, array{'filename': string, 'name': string}>
+     */
     private function getSmileys(bool $unique = false): array
     {
         $smileys = [

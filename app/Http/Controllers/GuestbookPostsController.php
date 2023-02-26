@@ -194,7 +194,7 @@ class GuestbookPostsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id): RedirectResponse
+    public function update(Request $request, int $id): RedirectResponse
     {
         $guestbook_post = GuestbookPost::findOrFail($id);
         // First, unlearn status.

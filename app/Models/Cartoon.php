@@ -29,7 +29,7 @@ class Cartoon extends Model
     /**
      * Return image size, alt and title attributes.
      */
-    public function imageSizeAndDescription()
+    public function imageSizeAndDescription(): string
     {
         $date = Carbon::parse($this->lastPublishOn())
             ->locale('de')
@@ -54,7 +54,7 @@ class Cartoon extends Model
     /**
      * Return the path to the image.
      */
-    public function imagePath()
+    public function imagePath(): string
     {
         $path = 'images/cartoons/';
         $path .= $this->publish_on;
@@ -68,7 +68,7 @@ class Cartoon extends Model
     /**
      * Return thumbnail size, alt and title attributes.
      */
-    public function thumbnailSizeAndDescription()
+    public function thumbnailSizeAndDescription(): string
     {
         $date = Carbon::parse($this->lastPublishOn())
             ->locale('de')
@@ -85,7 +85,7 @@ class Cartoon extends Model
     /**
      * Return the path to the thumbnail.
      */
-    public function thumbnailPath()
+    public function thumbnailPath(): string
     {
         $path = 'images/cartoons/';
         $path .= $this->publish_on;
