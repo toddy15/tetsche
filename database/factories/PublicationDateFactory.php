@@ -18,7 +18,7 @@ class PublicationDateFactory extends Factory
     {
         return [
             'cartoon_id' => Cartoon::factory()->create(),
-            'publish_on' => $this->faker->date(),
+            'publish_on' => fake()->date(),
         ];
     }
 }

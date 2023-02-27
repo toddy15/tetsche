@@ -16,11 +16,11 @@ class GuestbookPostFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => $this->faker->name(),
-            'message' => $this->faker->paragraph(3),
-            'cheffe' => rand(0, 10) <= 3 ? $this->faker->sentence(5) : '',
+            'name' => fake()->name(),
+            'message' => fake()->paragraph(3),
+            'cheffe' => rand(0, 10) <= 3 ? fake()->sentence(5) : '',
             'category' => 'no_autolearn_h',
-            'spam_detection' => $this->faker->userAgent(),
+            'spam_detection' => fake()->userAgent(),
         ];
     }
 }
