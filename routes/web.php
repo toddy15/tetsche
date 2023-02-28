@@ -6,6 +6,7 @@ use App\Http\Controllers\ArchiveController;
 use App\Http\Controllers\CartoonsController;
 use App\Http\Controllers\GuestbookPostsController;
 use App\Http\Controllers\GuestBookSearchController;
+use App\Http\Controllers\HomepageController;
 use App\Http\Controllers\NewCartoonController;
 use App\Http\Controllers\PublicationDateController;
 use App\Http\Controllers\SpamController;
@@ -14,15 +15,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 // Static pages
-Route::view('/', 'pages.homepage', [
-    'description' => 'Tetsche-Website',
-    'image_name' => [
-        'bonzo-lachend.webp',
-        'bonzo-schutzengel.webp',
-        'bonzo-traurig.webp',
-    ][rand(0, 2)],
-])->name('homepage');
-
 Route::view('/tetsche', 'pages.tetsche', [
     'title' => 'Über Tetsche',
     'description' => 'Informationen über Tetsche',
@@ -42,6 +34,9 @@ Route::view('/datenschutz', 'pages.datenschutz', [
     'title' => 'Datenschutzerklärung',
     'description' => 'Datenschutzerklärung der Tetsche-Website',
 ])->name('datenschutz');
+
+// Homepage
+Route::get('/', HomepageController::class)->name('homepage');
 
 // Guestbook
 Route::resource('/gaestebuch', GuestbookPostsController::class)->only([
