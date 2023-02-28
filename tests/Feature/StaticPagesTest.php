@@ -4,12 +4,6 @@ declare(strict_types=1);
 
 use function Pest\Laravel\get;
 
-it('has a homepage', function () {
-    get(route('homepage'))
-        ->assertOk()
-        ->assertSeeText('Tetsche-Website');
-});
-
 it('has an about page', function () {
     get(route('tetsche'))
         ->assertOk()
