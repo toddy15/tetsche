@@ -121,7 +121,7 @@ class GuestbookPostsController extends Controller
 
                     $mail = new NewGuestbookPost($new_post);
                     $mail->subject('Neuer Eintrag im Tetsche-Gästebuch (als Spam abgelehnt)');
-                    $toddy = User::find(1) ?? ['email' => "none@example.org"];
+                    $toddy = User::find(1) ?? ['email' => 'none@example.org'];
                     Mail::to($toddy)->send($mail);
                 }
             }
@@ -133,7 +133,7 @@ class GuestbookPostsController extends Controller
 
                 $mail = new NewGuestbookPost($new_post);
                 $mail->subject('Neuer Eintrag im Tetsche-Gästebuch (als Spam gelernt)');
-                $toddy = User::find(1) ?? ['email' => "none@example.org"];
+                $toddy = User::find(1) ?? ['email' => 'none@example.org'];
                 Mail::to($toddy)->send($mail);
             }
         });
@@ -154,8 +154,8 @@ class GuestbookPostsController extends Controller
         $mail = new NewGuestbookPost($new_post);
         $mail->subject('Neuer Eintrag im Tetsche-Gästebuch');
         // Send mail to first two users
-        $toddy = User::find(1) ?? ['email' => "none@example.org"];
-        $tetsche = User::find(2) ?? ['email' => "none@example.org"];
+        $toddy = User::find(1) ?? ['email' => 'none@example.org'];
+        $tetsche = User::find(2) ?? ['email' => 'none@example.org'];
         Mail::to([$toddy, $tetsche])->send($mail);
 
         $request->session()->flash('info', 'Der Eintrag wurde gespeichert.');
