@@ -7,6 +7,7 @@ namespace App\Http\Controllers;
 use App\Mail\NewGuestbookPost;
 use App\Models\GuestbookPost;
 use App\Models\PublicationDate;
+use App\Models\User;
 use App\Services\Spamfilter;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
@@ -109,27 +110,19 @@ class GuestbookPostsController extends Controller
         // Add the spam check
         $validator->after(function ($validator) use ($post, $spamfilter) {
             if ($spamfilter->isSpam($post['score'])) {
-                $validator
-                    ->errors()
-                    ->add(
-                        'message',
-                        'Der Eintrag wurde als Spam eingestuft und daher nicht gespeichert.',
-                    );
+                $validator->errors()->add(
+                    'message',
+                    'Der Eintrag wurde als Spam eingestuft und daher nicht gespeichert.',
+                );
                 // @FIXME: Remove this part if sending all spam mails is no longer necessary.
                 if (! $spamfilter->isAutolearnSpam($post['score'])) {
                     $new_post = new GuestbookPost($post);
                     $new_post->score = $post['score'];
 
                     $mail = new NewGuestbookPost($new_post);
-                    $mail->subject(
-                        'Neuer Eintrag im Tetsche-Gästebuch (als Spam abgelehnt)',
-                    );
-                    Mail::to([
-                        (object) [
-                            'name' => 'Toddy',
-                            'email' => 'toddy@example.org',
-                        ],
-                    ])->send($mail);
+                    $mail->subject('Neuer Eintrag im Tetsche-Gästebuch (als Spam abgelehnt)');
+                    $toddy = User::find(1) ?? ['email' => "none@example.org"];
+                    Mail::to($toddy)->send($mail);
                 }
             }
             // Special case: autolearning spam
@@ -139,19 +132,15 @@ class GuestbookPostsController extends Controller
                 $new_post->score = $post['score'];
 
                 $mail = new NewGuestbookPost($new_post);
-                $mail->subject(
-                    'Neuer Eintrag im Tetsche-Gästebuch (als Spam gelernt)',
-                );
-                Mail::to([
-                    (object) [
-                        'name' => 'Toddy',
-                        'email' => 'toddy@example.org',
-                    ],
-                ])->send($mail);
+                $mail->subject('Neuer Eintrag im Tetsche-Gästebuch (als Spam gelernt)');
+                $toddy = User::find(1) ?? ['email' => "none@example.org"];
+                Mail::to($toddy)->send($mail);
             }
         });
         if ($validator->fails()) {
-            return redirect()->action([GuestbookPostsController::class, 'create'])
+            return redirect()->action([
+                GuestbookPostsController::class, 'create',
+            ])
                 ->withErrors($validator)
                 ->withInput();
         }
@@ -164,10 +153,10 @@ class GuestbookPostsController extends Controller
 
         $mail = new NewGuestbookPost($new_post);
         $mail->subject('Neuer Eintrag im Tetsche-Gästebuch');
-        Mail::to([
-            (object) ['name' => 'Toddy', 'email' => 'toddy@example.org'],
-            (object) ['name' => 'Tetsche', 'email' => 'tetsche@example.org'],
-        ])->send($mail);
+        // Send mail to first two users
+        $toddy = User::find(1) ?? ['email' => "none@example.org"];
+        $tetsche = User::find(2) ?? ['email' => "none@example.org"];
+        Mail::to([$toddy, $tetsche])->send($mail);
 
         $request->session()->flash('info', 'Der Eintrag wurde gespeichert.');
 
