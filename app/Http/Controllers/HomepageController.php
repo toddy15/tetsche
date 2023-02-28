@@ -12,13 +12,14 @@ class HomepageController extends Controller
      */
     public function __invoke(Request $request): View
     {
-        $images = [
-            'bonzo-lachend.webp',
-            'bonzo-schutzengel.webp',
-            'bonzo-traurig.webp',
-        ];
-        $random_image = $images[rand(0, 2)];
+        $images = scandir(public_path("images/homepage"));
+        // Remove . and .. from list
+        $images = array_diff($images, [".", ".."]);
+        // Pick a random image
+        $index = array_rand($images);
+        $random_image = $images[$index];
 
+        // @TODO: Get width and height, create <img> tag
         return view('pages.homepage', [
             'description' => 'Tetsche-Website',
             'image_name' => $random_image,
