@@ -12,9 +12,9 @@ class HomepageController extends Controller
      */
     public function __invoke(Request $request): View
     {
-        $images = scandir(public_path("images/homepage"));
+        $images = scandir(public_path('images/homepage'));
         // Remove . and .. from list
-        $images = array_diff($images, [".", ".."]);
+        $images = array_diff($images, ['.', '..']);
         // Pick a random image
         $index = array_rand($images);
         $random_image = $images[$index];
