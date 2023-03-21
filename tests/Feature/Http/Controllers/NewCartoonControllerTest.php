@@ -6,9 +6,9 @@ use App\Http\Controllers\CartoonsController;
 use App\Models\Cartoon;
 use App\Models\PublicationDate;
 use App\Models\User;
+use Carbon\Carbon;
 use function Pest\Laravel\actingAs;
 use function Pest\Laravel\get;
-use function Spatie\PestPluginTestTime\testTime;
 
 beforeEach(function () {
     $dates = [
@@ -37,7 +37,7 @@ beforeEach(function () {
         PublicationDate::factory()->create(['publish_on' => $date]);
     }
 
-    testTime()->freeze('2022-03-26 14:30:00');
+    Carbon::setTestNow('2022-03-26 14:30:00');
 });
 
 test('check if current is last cartoon returns an ok response', function () {

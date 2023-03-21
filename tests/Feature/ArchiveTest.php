@@ -3,8 +3,8 @@
 declare(strict_types=1);
 
 use App\Models\PublicationDate;
+use Carbon\Carbon;
 use function Pest\Laravel\get;
-use function Spatie\PestPluginTestTime\testTime;
 
 beforeEach(function () {
     $dates = [
@@ -33,7 +33,7 @@ beforeEach(function () {
         PublicationDate::factory()->create(['publish_on' => $date]);
     }
 
-    testTime()->freeze('2022-03-26 14:30:00');
+    Carbon::setTestNow('2022-03-26 14:30:00');
 });
 
 test('index returns an ok response', function () {

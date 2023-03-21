@@ -3,8 +3,8 @@
 declare(strict_types=1);
 
 use App\Models\PublicationDate;
+use Carbon\Carbon;
 use function Pest\Laravel\get;
-use function Spatie\PestPluginTestTime\testTime;
 
 beforeEach(function () {
     $dates = [
@@ -33,7 +33,7 @@ beforeEach(function () {
         PublicationDate::factory()->create(['publish_on' => $date]);
     }
 
-    testTime()->freeze('2022-03-26 14:30:00');
+    Carbon::setTestNow('2022-03-26 14:30:00');
 });
 
 test('a guest can view the current cartoon', function () {
@@ -52,7 +52,7 @@ test('a guest can view the current cartoon', function () {
 });
 
 test('a guest can view the next current cartoon', function () {
-    testTime()->freeze('2022-04-01 14:30:00');
+    Carbon::setTestNow('2022-04-01 14:30:00');
 
     get('/cartoon')
         ->assertOk()
@@ -64,7 +64,7 @@ test('a guest can view the next current cartoon', function () {
 });
 
 test('a guest can view the next cartoon at the correct time', function () {
-    testTime()->freeze('2022-03-30 17:59:59');
+    Carbon::setTestNow('2022-03-30 17:59:59');
 
     get('/cartoon')
         ->assertOk()
@@ -74,7 +74,7 @@ test('a guest can view the next cartoon at the correct time', function () {
         )
         ->assertSeeText('Auflösung nächste Woche');
 
-    testTime()->freeze('2022-03-30 18:00:00');
+    Carbon::setTestNow('2022-03-30 18:00:00');
 
     get('/cartoon')
         ->assertOk()

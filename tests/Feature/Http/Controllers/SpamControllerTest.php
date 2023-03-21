@@ -5,9 +5,9 @@ declare(strict_types=1);
 use App\Http\Controllers\GuestbookPostsController;
 use App\Models\PublicationDate;
 use App\Models\User;
+use Carbon\Carbon;
 use function Pest\Laravel\actingAs;
 use function Pest\Laravel\get;
-use function Spatie\PestPluginTestTime\testTime;
 
 beforeEach(function () {
     $dates = [
@@ -37,7 +37,7 @@ beforeEach(function () {
         PublicationDate::factory()->create(['publish_on' => $date]);
     }
 
-    testTime()->freeze('2022-03-26 14:30:00');
+    Carbon::setTestNow('2022-03-26 14:30:00');
 });
 
 test('a guest cannot view the spam controller', function () {
