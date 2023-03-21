@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use Illuminate\Foundation\Testing\LazilyRefreshDatabase;
 
 /*
@@ -12,6 +14,7 @@ use Illuminate\Foundation\Testing\LazilyRefreshDatabase;
 | need to change it using the "uses()" function to bind a different classes or traits.
 |
 */
+
 uses(Tests\TestCase::class, LazilyRefreshDatabase::class)->in('Feature');
 
 /*
@@ -24,7 +27,10 @@ uses(Tests\TestCase::class, LazilyRefreshDatabase::class)->in('Feature');
 | to assert different things. Of course, you may extend the Expectation API at any time.
 |
 */
-//expect()->extend('toBeOne', fn () => $this->toBe(1));
+
+//expect()->extend('toBeOne', function () {
+//    return $this->toBe(1);
+//});
 
 /*
 |--------------------------------------------------------------------------
@@ -36,6 +42,7 @@ uses(Tests\TestCase::class, LazilyRefreshDatabase::class)->in('Feature');
 | global functions to help you to reduce the number of lines of code in your test files.
 |
 */
+
 //function something()
 //{
 //    // ..
