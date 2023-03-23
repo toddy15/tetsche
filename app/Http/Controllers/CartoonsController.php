@@ -17,13 +17,13 @@ class CartoonsController extends Controller
     public function __invoke(): View
     {
         $date = PublicationDate::getCurrent();
+        $carbonDate = new Carbon($date->publish_on);
+        $carbonDate->locale('de');
 
         return view('cartoons.show', [
             'title' => 'Cartoon der Woche',
             'pagetitle' => 'Cartoon der Woche . . . vom '.
-                Carbon::parse($date->publish_on)
-                    ->locale('de')
-                    ->isoFormat('Do MMMM YYYY'),
+                $carbonDate->isoFormat('Do MMMM YYYY'),
             'description' => 'Tetsche - Cartoon der Woche',
             'date' => $date,
         ]);

@@ -31,13 +31,13 @@ class ArchiveController extends Controller
         }
 
         abort_unless($date->isArchived(), 404);
+        $carbonDate = new Carbon($date->publish_on);
+        $carbonDate->locale('de');
 
         return view('archive.show', [
             'title' => 'Archiv',
             'pagetitle' => 'Cartoon der Woche . . . vom '.
-                Carbon::parse($date->publish_on)
-                    ->locale('de')
-                    ->isoFormat('Do MMMM YYYY'),
+                $carbonDate->isoFormat('Do MMMM YYYY'),
             'description' => 'Archiv – ältere Ausgaben',
             'date' => $date,
         ]);
