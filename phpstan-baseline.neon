@@ -1,9 +1,190 @@
 parameters:
 	ignoreErrors:
 		-
+			message: "#^Method App\\\\Http\\\\Controllers\\\\Auth\\\\RegisterController\\:\\:create\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: app/Http/Controllers/Auth/RegisterController.php
+
+		-
+			message: "#^Method App\\\\Http\\\\Controllers\\\\Auth\\\\RegisterController\\:\\:validator\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: app/Http/Controllers/Auth/RegisterController.php
+
+		-
+			message: "#^Binary operation \"\\.\" between 'Gästebuch – Suche…' and non\\-empty\\-array\\|non\\-falsy\\-string results in an error\\.$#"
+			count: 1
+			path: app/Http/Controllers/GuestBookSearchController.php
+
+		-
+			message: "#^Part \\$query \\(non\\-empty\\-array\\|non\\-falsy\\-string\\) of encapsed string cannot be cast to string\\.$#"
+			count: 3
+			path: app/Http/Controllers/GuestBookSearchController.php
+
+		-
 			message: "#^Access to an undefined property App\\\\Models\\\\GuestbookPost\\:\\:\\$score\\.$#"
 			count: 4
 			path: app/Http/Controllers/GuestbookPostsController.php
+
+		-
+			message: "#^Binary operation \"\\.\" between ', Browser\\: ' and array\\|string\\|null results in an error\\.$#"
+			count: 1
+			path: app/Http/Controllers/GuestbookPostsController.php
+
+		-
+			message: "#^Cannot access property \\$cartoon on App\\\\Models\\\\PublicationDate\\|null\\.$#"
+			count: 1
+			path: app/Http/Controllers/GuestbookPostsController.php
+
+		-
+			message: "#^Cannot access property \\$publish_on on App\\\\Models\\\\PublicationDate\\|null\\.$#"
+			count: 1
+			path: app/Http/Controllers/GuestbookPostsController.php
+
+		-
+			message: "#^Cannot access property \\$rebus on App\\\\Models\\\\Cartoon\\|null\\.$#"
+			count: 1
+			path: app/Http/Controllers/GuestbookPostsController.php
+
+		-
+			message: "#^Parameter \\#2 \\$spam_detection of method App\\\\Services\\\\Spamfilter\\:\\:classify\\(\\) expects string, string\\|null given\\.$#"
+			count: 1
+			path: app/Http/Controllers/GuestbookPostsController.php
+
+		-
+			message: "#^Parameter \\#2 \\$string of function explode expects string, string\\|null given\\.$#"
+			count: 1
+			path: app/Http/Controllers/GuestbookPostsController.php
+
+		-
+			message: "#^Parameter \\#1 \\$array of function array_diff expects array, array\\<int, string\\>\\|false given\\.$#"
+			count: 1
+			path: app/Http/Controllers/HomepageController.php
+
+		-
+			message: "#^Parameter \\#1 \\$min of function mt_rand expects int, mixed given\\.$#"
+			count: 1
+			path: app/Http/Controllers/NewCartoonController.php
+
+		-
+			message: "#^Parameter \\#2 \\$max of function mt_rand expects int, mixed given\\.$#"
+			count: 1
+			path: app/Http/Controllers/NewCartoonController.php
+
+		-
+			message: "#^Parameter \\#2 \\$timestamp of function date expects int\\|null, int\\|false given\\.$#"
+			count: 2
+			path: app/Http/Controllers/NewCartoonController.php
+
+		-
+			message: "#^Cannot access property \\$rebus on App\\\\Models\\\\Cartoon\\|null\\.$#"
+			count: 1
+			path: app/Http/Controllers/PublicationDateController.php
+
+		-
+			message: "#^Cannot call method save\\(\\) on App\\\\Models\\\\Cartoon\\|null\\.$#"
+			count: 1
+			path: app/Http/Controllers/PublicationDateController.php
+
+		-
+			message: "#^Cannot access offset 3 on array\\|false\\.$#"
+			count: 2
+			path: app/Models/Cartoon.php
+
+		-
+			message: "#^Cannot access property \\$publish_on on App\\\\Models\\\\PublicationDate\\|null\\.$#"
+			count: 1
+			path: app/Models/Cartoon.php
+
+		-
+			message: "#^Cannot call method isoFormat\\(\\) on Carbon\\\\Carbon\\|string\\.$#"
+			count: 2
+			path: app/Models/Cartoon.php
+
+		-
+			message: "#^Method App\\\\Models\\\\Cartoon\\:\\:publicationDate\\(\\) return type with generic class Illuminate\\\\Database\\\\Eloquent\\\\Relations\\\\HasMany does not specify its types\\: TRelatedModel$#"
+			count: 1
+			path: app/Models/Cartoon.php
+
+		-
+			message: "#^Method App\\\\Models\\\\PublicationDate\\:\\:cartoon\\(\\) return type with generic class Illuminate\\\\Database\\\\Eloquent\\\\Relations\\\\BelongsTo does not specify its types\\: TRelatedModel, TChildModel$#"
+			count: 1
+			path: app/Models/PublicationDate.php
+
+		-
+			message: "#^Method App\\\\Models\\\\PublicationDate\\:\\:getCurrent\\(\\) should return App\\\\Models\\\\PublicationDate but returns App\\\\Models\\\\PublicationDate\\|null\\.$#"
+			count: 1
+			path: app/Models/PublicationDate.php
+
+		-
+			message: "#^Method App\\\\Models\\\\PublicationDate\\:\\:getOldestArchived\\(\\) should return App\\\\Models\\\\PublicationDate but returns App\\\\Models\\\\PublicationDate\\|null\\.$#"
+			count: 1
+			path: app/Models/PublicationDate.php
+
+		-
+			message: "#^Method App\\\\Models\\\\PublicationDate\\:\\:scopeArchived\\(\\) has parameter \\$query with generic class Illuminate\\\\Database\\\\Eloquent\\\\Builder but does not specify its types\\: TModelClass$#"
+			count: 1
+			path: app/Models/PublicationDate.php
+
+		-
+			message: "#^Method App\\\\Models\\\\PublicationDate\\:\\:scopeArchived\\(\\) return type with generic class Illuminate\\\\Database\\\\Eloquent\\\\Builder does not specify its types\\: TModelClass$#"
+			count: 1
+			path: app/Models/PublicationDate.php
+
+		-
+			message: "#^Cannot access offset 3 on array\\|false\\.$#"
+			count: 1
+			path: app/Services/Images.php
+
+		-
+			message: "#^Parameter \\#1 \\$dir_handle of function closedir expects resource\\|null, resource\\|false given\\.$#"
+			count: 1
+			path: app/Services/Images.php
+
+		-
+			message: "#^Parameter \\#1 \\$dir_handle of function readdir expects resource\\|null, resource\\|false given\\.$#"
+			count: 1
+			path: app/Services/Images.php
+
+		-
+			message: "#^Argument of an invalid type array\\<int, string\\>\\|false supplied for foreach, only iterables are supported\\.$#"
+			count: 3
+			path: app/Services/Spamfilter.php
+
+		-
+			message: "#^Cannot access property \\$count_ham on mixed\\.$#"
+			count: 6
+			path: app/Services/Spamfilter.php
+
+		-
+			message: "#^Cannot access property \\$count_spam on mixed\\.$#"
+			count: 6
+			path: app/Services/Spamfilter.php
+
+		-
+			message: "#^Cannot access property \\$token on mixed\\.$#"
+			count: 9
+			path: app/Services/Spamfilter.php
+
+		-
+			message: "#^Parameter \\#2 \\$spam_detection of method App\\\\Services\\\\Spamfilter\\:\\:addHam\\(\\) expects string, string\\|null given\\.$#"
+			count: 1
+			path: app/Services/Spamfilter.php
+
+		-
+			message: "#^Parameter \\#2 \\$spam_detection of method App\\\\Services\\\\Spamfilter\\:\\:addSpam\\(\\) expects string, string\\|null given\\.$#"
+			count: 1
+			path: app/Services/Spamfilter.php
+
+		-
+			message: "#^Parameter \\#2 \\$spam_detection of method App\\\\Services\\\\Spamfilter\\:\\:removeHam\\(\\) expects string, string\\|null given\\.$#"
+			count: 1
+			path: app/Services/Spamfilter.php
+
+		-
+			message: "#^Parameter \\#2 \\$spam_detection of method App\\\\Services\\\\Spamfilter\\:\\:removeSpam\\(\\) expects string, string\\|null given\\.$#"
+			count: 1
+			path: app/Services/Spamfilter.php
+
 		-
 			message: "#^Access to an undefined property Illuminate\\\\Database\\\\Eloquent\\\\Model\\:\\:\\$category\\.$#"
 			count: 4
@@ -18,3 +199,28 @@ parameters:
 			message: "#^Access to an undefined property Illuminate\\\\Database\\\\Eloquent\\\\Model\\:\\:\\$name\\.$#"
 			count: 4
 			path: tests/Feature/GuestbookTest.php
+
+		-
+			message: "#^Parameter \\#1 \\$value of method Illuminate\\\\Testing\\\\TestResponse\\:\\:assertSeeText\\(\\) expects array\\|string, mixed given\\.$#"
+			count: 2
+			path: tests/Feature/GuestbookTest.php
+
+		-
+			message: "#^Unable to resolve the template type TValue in call to function expect$#"
+			count: 12
+			path: tests/Feature/GuestbookTest.php
+
+		-
+			message: "#^Cannot access property \\$cartoon on App\\\\Models\\\\PublicationDate\\|null\\.$#"
+			count: 1
+			path: tests/Feature/PublicationDateTest.php
+
+		-
+			message: "#^Cannot access property \\$id on App\\\\Models\\\\PublicationDate\\|null\\.$#"
+			count: 1
+			path: tests/Feature/PublicationDateTest.php
+
+		-
+			message: "#^Cannot access property \\$rebus on App\\\\Models\\\\Cartoon\\|null\\.$#"
+			count: 1
+			path: tests/Feature/PublicationDateTest.php
