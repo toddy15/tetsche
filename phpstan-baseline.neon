@@ -18,8 +18,3 @@ parameters:
 			message: "#^Access to an undefined property Illuminate\\\\Database\\\\Eloquent\\\\Model\\:\\:\\$name\\.$#"
 			count: 4
 			path: tests/Feature/GuestbookTest.php
-
-		-
-			message: "#^Undefined variable\\: \\$this$#"
-			count: 5
-			path: tests/Feature/GuestbookTest.php

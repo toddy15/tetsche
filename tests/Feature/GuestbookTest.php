@@ -5,6 +5,8 @@ declare(strict_types=1);
 use App\Models\GuestbookPost;
 use App\Models\User;
 use function Pest\Laravel\actingAs;
+use function Pest\Laravel\assertModelExists;
+use function Pest\Laravel\assertModelMissing;
 use function Pest\Laravel\delete;
 use function Pest\Laravel\get;
 use function Pest\Laravel\post;
@@ -16,7 +18,7 @@ test('a guest cannot edit an entry', function () {
     get(route('gaestebuch.edit', ['gaestebuch' => $guestbookPost]))
         ->assertRedirect(route('login'));
 
-    $this->assertModelExists($guestbookPost);
+    assertModelExists($guestbookPost);
 });
 
 test('a guest cannot update an entry', function () {
@@ -41,12 +43,12 @@ test('a guest cannot update an entry', function () {
 
 test('a guest cannot destroy an entry', function () {
     $guestbookPost = GuestbookPost::factory()->create();
-    $this->assertModelExists($guestbookPost);
+    assertModelExists($guestbookPost);
 
     delete(route('gaestebuch.destroy', ['gaestebuch' => $guestbookPost]))
         ->assertRedirect(route('login'));
 
-    $this->assertModelExists($guestbookPost);
+    assertModelExists($guestbookPost);
 });
 
 test('a user can edit an entry', function () {
@@ -87,12 +89,12 @@ test('a user can destroy an entry', function () {
     actingAs(User::factory()->create());
 
     $guestbookPost = GuestbookPost::factory()->create();
-    $this->assertModelExists($guestbookPost);
+    assertModelExists($guestbookPost);
 
     delete(route('gaestebuch.destroy', ['gaestebuch' => $guestbookPost]))
         ->assertRedirect(route('gaestebuch.index'));
 
-    $this->assertModelMissing($guestbookPost);
+    assertModelMissing($guestbookPost);
 });
 
 test('a guest can view the guestbook page', function () {
