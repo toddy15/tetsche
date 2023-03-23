@@ -46,7 +46,7 @@ class Cartoon extends Model
     /**
      * Get the publication dates of the cartoon.
      */
-    public function lastPublishOn()
+    public function lastPublishOn(): string
     {
         return $this->publicationDate->first()->publish_on;
     }

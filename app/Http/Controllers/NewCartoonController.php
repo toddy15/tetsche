@@ -19,6 +19,9 @@ class NewCartoonController extends Controller
     public function forceNewCartoon(): RedirectResponse
     {
         $newest_cartoon = PublicationDate::latest('publish_on')->first();
+        if ($newest_cartoon === null) {
+            return to_route('publication_dates.index');
+        }
         $current = PublicationDate::getCurrent();
         if ($newest_cartoon->isNot($current)) {
             $newest_cartoon->delete();
@@ -36,6 +39,9 @@ class NewCartoonController extends Controller
     public function checkIfCurrentIsLastCartoon(): RedirectResponse
     {
         $newest_cartoon = PublicationDate::latest('publish_on')->first();
+        if ($newest_cartoon === null) {
+            return redirect()->action(CartoonsController::class);
+        }
         $newest_cartoon_date = $newest_cartoon->publish_on;
         $current_date = PublicationDate::getCurrent();
         // If there are no more cartoons for next week,
