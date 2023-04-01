@@ -48,40 +48,9 @@ class GuestbookPostsController extends Controller
         $spam_detection = 'IP: '.$request->ip();
         $spam_detection .= ', Browser: '.$request->server('HTTP_USER_AGENT');
         $post['score'] = $spamfilter->classify($text, $spam_detection);
-        // @FIXME: Filter out the fuckheads, based on IP address
+        // Filter out the fuckheads, based on IP address
         if (! $spamfilter->isSpam($post['score'])) {
-            $ip = explode('.', $request->ip());
-            if ($ip[0] == 141 and $ip[1] == 48) {
-                $post['score'] = $spamfilter->threshold_autolearn_spam;
-            }
-            if ($ip[0] == 80 and $ip[1] == 187) {
-                $post['score'] = $spamfilter->threshold_autolearn_spam;
-            }
-            if ($ip[0] == 217 and $ip[1] == 240 and $ip[2] == 29) {
-                $post['score'] = $spamfilter->threshold_autolearn_spam;
-            }
-            if ($ip[0] == 194 and $ip[1] == 230 and $ip[2] == 77) {
-                $post['score'] = $spamfilter->threshold_autolearn_spam;
-            }
-            if ($ip[0] == 36 and $ip[1] == 80) {
-                $post['score'] = $spamfilter->threshold_autolearn_spam;
-            }
-            if ($ip[0] == 93 and $ip[1] == 214 and $ip[2] == 118) {
-                $post['score'] = $spamfilter->threshold_autolearn_spam;
-            }
-            if ($ip[0] == 93 and $ip[1] == 207) {
-                $post['score'] = $spamfilter->threshold_autolearn_spam;
-            }
-            if ($ip[0] == 79 and $ip[1] == 232 and $ip[2] == 145) {
-                $post['score'] = $spamfilter->threshold_autolearn_spam;
-            }
-            if ($ip[0] == 212 and $ip[1] == 6 and $ip[2] == 125) {
-                $post['score'] = $spamfilter->threshold_autolearn_spam;
-            }
-            if ($ip[0] == 112 and $ip[1] == 206 and $ip[2] == 2) {
-                $post['score'] = $spamfilter->threshold_autolearn_spam;
-            }
-            if ($ip[0] == 109 and $ip[1] == 43 and $ip[2] == 113) {
+            if ($spamfilter->isBlockedSubnet($request->ip())) {
                 $post['score'] = $spamfilter->threshold_autolearn_spam;
             }
         }

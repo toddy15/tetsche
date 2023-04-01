@@ -21,6 +21,20 @@ class Spamfilter
 
     private float $threshold_no_autolearn_spam = 0.9;
 
+    private array $blocked_ip_subnets = [
+        '141.48',
+        '80.187',
+        '217.240.29',
+        '194.230.77',
+        '36.80',
+        '93.214.118',
+        '93.207',
+        '79.232.145',
+        '212.6.125',
+        '112.206.2',
+        '109.43.113',
+    ];
+
     /**
      * Initialize the filter database
      *
@@ -83,6 +97,29 @@ class Spamfilter
             $score < $this->threshold_no_autolearn_spam
         ) {
             return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Check if the given IP address is part of a blocked subnet.
+     */
+    public function isBlockedSubnet(string $address): bool
+    {
+        $address_parts = explode('.', $address);
+        foreach ($this->blocked_ip_subnets as $subnet) {
+            $subnet_parts = explode('.', $subnet);
+            $found_match = true;
+            foreach ($subnet_parts as $index => $subnet_part) {
+                if ($subnet_part !== $address_parts[$index]) {
+                    $found_match = false;
+                    break;
+                }
+            }
+            if ($found_match) {
+                return true;
+            }
         }
 
         return false;

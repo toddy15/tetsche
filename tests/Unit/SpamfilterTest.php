@@ -28,3 +28,27 @@ it('can parse a text into tokens', function () {
         'words' => 1,
     ]);
 });
+
+it('recognizes certain IP addresses', function () {
+    $s = new Spamfilter();
+
+    // Test home
+    $result = $s->isBlockedSubnet('127.0.0.1');
+    expect($result)->toBe(false);
+
+    // Test 141.48
+    $result = $s->isBlockedSubnet('141.49.15.56');
+    expect($result)->toBe(false);
+    $result = $s->isBlockedSubnet('141.48.15.56');
+    expect($result)->toBe(true);
+    $result = $s->isBlockedSubnet('141.48.241.15');
+    expect($result)->toBe(true);
+
+    // Test 217.240.29
+    $result = $s->isBlockedSubnet('217.240.28.12');
+    expect($result)->toBe(false);
+    $result = $s->isBlockedSubnet('217.240.29.86');
+    expect($result)->toBe(true);
+    $result = $s->isBlockedSubnet('217.240.29.255');
+    expect($result)->toBe(true);
+})->only();
