@@ -51,4 +51,4 @@ it('recognizes certain IP addresses', function () {
     expect($result)->toBe(true);
     $result = $s->isBlockedSubnet('217.240.29.255');
     expect($result)->toBe(true);
-})->only();
+});
