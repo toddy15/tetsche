@@ -32,6 +32,10 @@ it('can parse a text into tokens', function () {
 it('recognizes certain IP addresses', function () {
     $s = new Spamfilter();
 
+    // Test empty string
+    $result = $s->isBlockedSubnet('');
+    expect($result)->toBe(false);
+
     // Test home
     $result = $s->isBlockedSubnet('127.0.0.1');
     expect($result)->toBe(false);

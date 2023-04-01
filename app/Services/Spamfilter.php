@@ -21,6 +21,9 @@ class Spamfilter
 
     private float $threshold_no_autolearn_spam = 0.9;
 
+    /**
+     * @var array<int, string>
+     */
     private array $blocked_ip_subnets = [
         '141.48',
         '80.187',
@@ -108,6 +111,9 @@ class Spamfilter
     public function isBlockedSubnet(string $address): bool
     {
         $address_parts = explode('.', $address);
+        if (count($address_parts) !== 4) {
+            return false;
+        }
         foreach ($this->blocked_ip_subnets as $subnet) {
             $subnet_parts = explode('.', $subnet);
             $found_match = true;

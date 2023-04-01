@@ -50,7 +50,7 @@ class GuestbookPostsController extends Controller
         $post['score'] = $spamfilter->classify($text, $spam_detection);
         // Filter out the fuckheads, based on IP address
         if (! $spamfilter->isSpam($post['score'])) {
-            if ($spamfilter->isBlockedSubnet($request->ip())) {
+            if ($spamfilter->isBlockedSubnet((string) $request->ip())) {
                 $post['score'] = $spamfilter->threshold_autolearn_spam;
             }
         }

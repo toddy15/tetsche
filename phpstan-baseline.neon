@@ -51,11 +51,6 @@ parameters:
 			path: app/Http/Controllers/GuestbookPostsController.php
 
 		-
-			message: "#^Parameter \\#2 \\$string of function explode expects string, string\\|null given\\.$#"
-			count: 1
-			path: app/Http/Controllers/GuestbookPostsController.php
-
-		-
 			message: "#^Parameter \\#1 \\$array of function array_diff expects array, array\\<int, string\\>\\|false given\\.$#"
 			count: 1
 			path: app/Http/Controllers/HomepageController.php
