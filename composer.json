@@ -20,7 +20,7 @@
         "laravel/pint": "^1.7",
         "laravel/sail": "^1.21.3",
         "mockery/mockery": "^1.5.1",
-        "nunomaduro/collision": "^7.3.3",
+        "nunomaduro/collision": "^7.4.0",
         "nunomaduro/larastan": "^2.5.1",
         "pestphp/pest": "^2.3.0",
         "pestphp/pest-plugin-laravel": "^2.0",
