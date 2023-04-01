@@ -1,6 +1,7 @@
 /.idea
 /node_modules
 /public/images/cartoons
+/public/images/homepage
 /vendor
 .env
 .phpunit.result.cache
