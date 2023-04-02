@@ -14,15 +14,20 @@ class HomepageController extends Controller
     {
         $path = 'images/homepage/';
         $images = scandir(public_path($path));
-        // Remove . and .. from list
-        $images = array_diff($images, ['.', '..']);
-        // Append the directories
-        $images = array_map(fn (string $filename): string => $path.$filename, $images);
-        // Pick a random image
-        $index = array_rand($images);
-        $random_image = $images[$index];
+        // Remove ., .., and .gitkeep from list
+        $images = array_filter($images,
+            fn (string $filename) => ! str_starts_with($filename, '.')
+        );
+        // Set a sensible default, if there are no images available.
+        $random_image = 'images/tetsche-2019.jpg';
+        if (count($images)) {
+            // Append the directories
+            $images = array_map(fn (string $filename): string => $path.$filename, $images);
+            // Pick a random image
+            $index = array_rand($images);
+            $random_image = $images[$index];
+        }
 
-        // @TODO: Get width and height, create <img> tag
         return view('pages.homepage', [
             'description' => 'Tetsche-Website',
             'image_name' => $random_image,
