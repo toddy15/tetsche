@@ -13,7 +13,8 @@ class HomepageController extends Controller
     public function __invoke(Request $request): View
     {
         $path = 'images/homepage/';
-        $images = scandir(public_path($path));
+        // Ensure an array, if scandir returned false
+        $images = scandir(public_path($path)) ?: [];
         // Remove ., .., and .gitkeep from list
         $images = array_filter($images,
             fn (string $filename) => ! str_starts_with($filename, '.')
