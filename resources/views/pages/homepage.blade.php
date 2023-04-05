@@ -2,6 +2,6 @@
 
 @section('content')
     <div class="text-center">
-        <x-image :src="$image_name" class="img-fluid" />
+        <x-image :src="$src" :width="$width" :height="$height" class="img-fluid" />
     </div>
 @stop

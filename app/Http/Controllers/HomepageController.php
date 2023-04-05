@@ -23,15 +23,22 @@ class HomepageController extends Controller
         $random_image = 'images/tetsche-2019.jpg';
         if (count($images)) {
             // Append the directories
-            $images = array_map(fn (string $filename): string => $path.$filename, $images);
+            $images = array_map(
+                fn (string $filename): string => $path.$filename,
+                $images
+            );
             // Pick a random image
             $index = array_rand($images);
             $random_image = $images[$index];
         }
+        // Get information for selected image
+        $imageinfo = (array) getimagesize(public_path($random_image));
 
         return view('pages.homepage', [
             'description' => 'Tetsche-Website',
-            'image_name' => $random_image,
+            'src' => $random_image,
+            'width' => $imageinfo[0],
+            'height' => $imageinfo[1],
         ]);
     }
 }
