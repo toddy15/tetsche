@@ -66,17 +66,7 @@ class NewCartoonController extends Controller
 
             // Define some ids for special cases:
             $weihnachten_ids = [
-                49,
-                51,
-                52,
-                104,
-                157,
-                159,
-                216,
-                218,
-                276,
-                277,
-                331,
+                49, 51, 52, 104, 157, 159, 216, 218, 276, 277, 331,
             ];
             $silvester_ids = [160, 219, 278];
             $neujahr_ids = [1, 53, 105, 161, 221, 279];
@@ -182,22 +172,15 @@ class NewCartoonController extends Controller
      */
     private function getThursday(string $which = 'next', string $date = ''): string
     {
-        if ($date == '') {
-            $date = date('Y-m-d');
+        $dt = new Carbon($date);
+        if ($dt->dayOfWeek !== Carbon::THURSDAY) {
+            if ($which === 'last') {
+                $dt->previous(Carbon::THURSDAY);
+            } else {
+                $dt->next(Carbon::THURSDAY);
+            }
         }
 
-        $offset = 1;
-        if ($which == 'last') {
-            $offset = -1;
-        }
-        [$year, $month, $day] = explode('-', $date);
-        while (date('w', mktime(0, 0, 0, (int) $month, (int) $day, (int) $year))
-            != 4) {
-            $day = $day + $offset;
-        }
-        // Construct and explode the date again to cope with
-        // overflows (e.g. 2015-03-35) and get a valid date
-        return date('Y-m-d',
-            mktime(0, 0, 0, (int) $month, (int) $day, (int) $year));
+        return $dt->format('Y-m-d');
     }
 }
