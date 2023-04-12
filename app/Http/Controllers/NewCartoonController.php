@@ -15,7 +15,7 @@ class NewCartoonController extends Controller
     /**
      * Force a new randomly selected cartoon for next thursday.
      */
-    public function forceNewCartoon(): RedirectResponse
+    public function forceNewCartoon(Cartoons $cartoons): RedirectResponse
     {
         $newest_cartoon = PublicationDate::latest('publish_on')->first();
         if ($newest_cartoon === null) {
@@ -24,7 +24,7 @@ class NewCartoonController extends Controller
         $current = PublicationDate::getCurrent();
         if ($newest_cartoon->isNot($current)) {
             $newest_cartoon->delete();
-            $this->checkIfCurrentIsLastCartoon();
+            $this->checkIfCurrentIsLastCartoon($cartoons);
         }
 
         return to_route('publication_dates.index');
