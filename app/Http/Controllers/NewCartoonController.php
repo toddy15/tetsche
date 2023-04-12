@@ -8,8 +8,6 @@ use App\Models\Cartoon;
 use App\Models\PublicationDate;
 use App\Services\Cartoons;
 use Carbon\Carbon;
-use DateInterval;
-use DateTime;
 use Illuminate\Http\RedirectResponse;
 
 class NewCartoonController extends Controller
@@ -37,7 +35,7 @@ class NewCartoonController extends Controller
      * If so, generate a new random number for the next
      * cartoon, and check for some special cases.
      */
-    public function checkIfCurrentIsLastCartoon(): RedirectResponse
+    public function checkIfCurrentIsLastCartoon(Cartoons $cartoons): RedirectResponse
     {
         $newest_cartoon = PublicationDate::latest('publish_on')->first();
         if ($newest_cartoon === null) {
@@ -81,15 +79,14 @@ class NewCartoonController extends Controller
             sort($all_special_ids);
 
             // Determine the next thursday
-            $publish_on = $this->getThursday();
+            $publish_on = $cartoons->getNextThursday();
 
             // Determine if any of the special ids should be chosen
             // instead of a normal cartoon.
 
             // Weihnachten
-            $thursday_before_weihnachten = $this->getThursday(
-                'last',
-                date('Y-12-24'),
+            $thursday_before_weihnachten = $cartoons->getLastThursday(
+                Carbon::createFromDate(null, 12, 24)->format('Y-m-d')
             );
             if ($publish_on == $thursday_before_weihnachten) {
                 $all_cartoon_ids = $weihnachten_ids;
@@ -97,9 +94,8 @@ class NewCartoonController extends Controller
             }
 
             // Silvester
-            $thursday_before_silvester = $this->getThursday(
-                'last',
-                date('Y-12-31'),
+            $thursday_before_silvester = $cartoons->getLastThursday(
+                Carbon::createFromDate(null, 12, 31)->format('Y-m-d')
             );
             if ($publish_on == $thursday_before_silvester) {
                 $all_cartoon_ids = $silvester_ids;
@@ -107,9 +103,8 @@ class NewCartoonController extends Controller
             }
 
             // Neujahr
-            $thursday_after_neujahr = $this->getThursday(
-                'last',
-                (int) date('Y') + 1 .'-01-07',
+            $thursday_after_neujahr = $cartoons->getLastThursday(
+                Carbon::createFromDate(null, 1, 7)->addYear()->format('Y-m-d')
             );
             if ($publish_on == $thursday_after_neujahr) {
                 $all_cartoon_ids = $neujahr_ids;
@@ -117,15 +112,11 @@ class NewCartoonController extends Controller
             }
 
             // Ostern
-            $thursday_before_ostern = new DateTime(date('Y').'-03-21');
             // Returns the number of days after March 21 on which Easter falls.
-            $thursday_before_ostern->add(
-                new DateInterval('P'.easter_days().'D'),
-            );
-            $thursday_before_ostern = $thursday_before_ostern->format('Y-m-d');
-            $thursday_before_ostern = $this->getThursday(
-                'last',
-                $thursday_before_ostern,
+            $thursday_before_ostern = $cartoons->getLastThursday(
+                Carbon::createFromDate(null, 3, 21)
+                    ->addDays(easter_days())
+                    ->format('Y-m-d')
             );
             if ($publish_on == $thursday_before_ostern) {
                 $all_cartoon_ids = $ostern_ids;
@@ -163,20 +154,5 @@ class NewCartoonController extends Controller
         }
 
         return redirect()->action(CartoonsController::class);
-    }
-
-    /**
-     * Helper method to determine the last or the next thursday.
-     *
-     * @param $which string with either "next" or "last".
-     * @param $date string with a date, defaults to current date.
-     */
-    private function getThursday(string $which = 'next', string $date = ''): string
-    {
-        if ($which === 'last') {
-            return (new Cartoons())->getLastThursday($date);
-        } else {
-            return (new Cartoons())->getNextThursday($date);
-        }
     }
 }
