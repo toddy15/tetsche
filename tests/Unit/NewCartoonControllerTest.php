@@ -2,12 +2,11 @@
 
 declare(strict_types=1);
 
-use App\Http\Controllers\NewCartoonController;
+use App\Services\Cartoons;
 
 it('returns the next thursday for a given date', function (string $date, string $thursday) {
-    $method = new ReflectionMethod('\App\Http\Controllers\NewCartoonController', 'getThursday');
-    $result = $method->invoke(new NewCartoonController(), 'next', $date);
-    expect($result)->toBe($thursday);
+    $c = new Cartoons();
+    expect($c->getNextThursday($date))->toBe($thursday);
 })->with([
     ['2023-03-15', '2023-03-16'],
     ['2023-03-16', '2023-03-16'],
@@ -22,9 +21,8 @@ it('returns the next thursday for a given date', function (string $date, string 
 ]);
 
 it('returns the last thursday for a given date', function (string $date, string $thursday) {
-    $method = new ReflectionMethod('\App\Http\Controllers\NewCartoonController', 'getThursday');
-    $result = $method->invoke(new NewCartoonController(), 'last', $date);
-    expect($result)->toBe($thursday);
+    $c = new Cartoons();
+    expect($c->getLastThursday($date))->toBe($thursday);
 })->with([
     ['2023-03-15', '2023-03-09'],
     ['2023-03-16', '2023-03-16'],
@@ -38,9 +36,8 @@ it('returns the last thursday for a given date', function (string $date, string 
 ]);
 
 it('returns the last thursday for special dates', function (string $date, string $thursday) {
-    $method = new ReflectionMethod('\App\Http\Controllers\NewCartoonController', 'getThursday');
-    $result = $method->invoke(new NewCartoonController(), 'last', $date);
-    expect($result)->toBe($thursday);
+    $c = new Cartoons();
+    expect($c->getLastThursday($date))->toBe($thursday);
 })->with([
     // easter
     ['2023-04-09', '2023-04-06'],

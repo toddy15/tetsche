@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Cartoon;
 use App\Models\PublicationDate;
+use App\Services\Cartoons;
 use Carbon\Carbon;
 use DateInterval;
 use DateTime;
@@ -172,15 +173,10 @@ class NewCartoonController extends Controller
      */
     private function getThursday(string $which = 'next', string $date = ''): string
     {
-        $dt = new Carbon($date);
-        if ($dt->dayOfWeek !== Carbon::THURSDAY) {
-            if ($which === 'last') {
-                $dt->previous(Carbon::THURSDAY);
-            } else {
-                $dt->next(Carbon::THURSDAY);
-            }
+        if ($which === 'last') {
+            return (new Cartoons())->getLastThursday($date);
+        } else {
+            return (new Cartoons())->getNextThursday($date);
         }
-
-        return $dt->format('Y-m-d');
     }
 }
