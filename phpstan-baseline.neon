@@ -61,11 +61,6 @@ parameters:
 			path: app/Http/Controllers/NewCartoonController.php
 
 		-
-			message: "#^Parameter \\#2 \\$timestamp of function date expects int\\|null, int\\|false given\\.$#"
-			count: 2
-			path: app/Http/Controllers/NewCartoonController.php
-
-		-
 			message: "#^Cannot access property \\$rebus on App\\\\Models\\\\Cartoon\\|null\\.$#"
 			count: 1
 			path: app/Http/Controllers/PublicationDateController.php
