@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-use App\Http\Controllers\GuestbookPostsController;
 use App\Models\User;
 use function Pest\Laravel\actingAs;
 use function Pest\Laravel\get;
@@ -38,9 +37,9 @@ it('can relearn texts', function () {
 
 test('show posts returns an ok response', function () {
     actingAs(User::factory()->create());
-    get('spam/{category}')
-        ->assertRedirect(action([
-            GuestbookPostsController::class, 'index',
-        ]));
+    get('spam/manual_ham')
+        ->assertOk()
+        ->assertSeeText('Manuell als Ham gelernt')
+        ->assertViewIs('guestbook_posts.index');
     // TODO: perform additional assertions
 });

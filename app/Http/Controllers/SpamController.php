@@ -58,40 +58,25 @@ class SpamController extends Controller
     /**
      * Show all posts of a category.
      */
-    public function showPosts(string $category): View|RedirectResponse
+    public function showPosts(string $category): View
     {
-        switch ($category) {
-            case 'manual_ham':
-                $description = 'Manuell als Ham gelernt';
+        $description = match ($category) {
+            'manual_ham' => 'Manuell als Ham gelernt',
+            'unsure' => 'Keine Zuordnung',
+            'manual_spam' => 'Manuell als Spam gelernt',
+            'autolearn_ham' => 'Automatisch als Ham gelernt',
+            'autolearn_spam' => 'Automatisch als Spam gelernt',
+            default => 'Kategorie nicht erkannt',
+        };
 
-                break;
-            case 'unsure':
-                $description = 'Keine Zuordnung';
-
-                break;
-            case 'manual_spam':
-                $description = 'Manuell als Spam gelernt';
-
-                break;
-            case 'autolearn_ham':
-                $description = 'Automatisch als Ham gelernt';
-
-                break;
-            case 'autolearn_spam':
-                $description = 'Automatisch als Spam gelernt';
-
-                break;
-            default:
-                return redirect()->action([\App\Http\Controllers\GuestbookPostsController::class, 'index']);
-        }
         $guestbook_posts = GuestbookPost::where('category', $category)
             ->latest()
             ->simplePaginate(10);
 
         return view('guestbook_posts.index', [
             'guestbook_posts' => $guestbook_posts,
-            'title' => 'Gästebuch - '.$description,
-            'description' => 'Gästebuch der Tetsche-Website - '.$description,
+            'title' => 'Gästebuch – '.$description,
+            'description' => 'Gästebuch der Tetsche-Website – '.$description,
         ]);
     }
 }
