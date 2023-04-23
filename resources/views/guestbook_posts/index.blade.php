@@ -39,51 +39,45 @@
             {!! $images->getRandomImageForGuestbook() !!}
         </div>
     </div>
-    @if ($guestbook_posts->count())
-        <table class="table table-striped">
-            <thead>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th class="col-4">Name</th>
+            <th class="col-8">Nachricht</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach ($guestbook_posts as $guestbook_post)
             <tr>
-                <th class="col-4">Name</th>
-                <th class="col-8">Nachricht</th>
+                <td>
+                    {{ $guestbook_post->name }}<br />
+                    <span>{{ $guestbook_post->created_at->locale('de')->isoFormat('Do MMMM YYYY, HH:mm') }}</span>
+                </td>
+                <td>
+                    <p>
+                        {!! $guestbook_post->message !!}
+                    </p>
+                    @if ($guestbook_post->cheffe)
+                        <p class="text-danger">{!! $guestbook_post->cheffe !!}</p>
+                    @endif
+                    @auth
+                        <form method="POST" action="{{ route('gaestebuch.destroy', $guestbook_post) }}">
+                            @csrf
+                            @method('delete')
+                            <a href="{!! route('gaestebuch.edit', $guestbook_post) !!}" class="btn btn-primary">Bearbeiten</a>
+                            <input type="submit" class="btn btn-danger" value="Löschen">
+                        </form>
+                    @endauth
+                </td>
             </tr>
-            </thead>
-            <tbody>
-            @foreach ($guestbook_posts as $guestbook_post)
-                <tr>
-                    <td>
-                        {{ $guestbook_post->name }}<br />
-                        <span>{{ $guestbook_post->created_at->locale('de')->isoFormat('Do MMMM YYYY, HH:mm') }}</span>
-                    </td>
-                    <td>
-                        <p>
-                            {!! $guestbook_post->message !!}
-                        </p>
-                        @if ($guestbook_post->cheffe)
-                            <p class="text-danger">{!! $guestbook_post->cheffe !!}</p>
-                        @endif
-                        @auth
-                            <form method="POST" action="{{ route('gaestebuch.destroy', $guestbook_post) }}">
-                                @csrf
-                                @method('delete')
-                                <a href="{!! route('gaestebuch.edit', $guestbook_post) !!}" class="btn btn-primary">Bearbeiten</a>
-                                <input type="submit" class="btn btn-danger" value="Löschen">
-                            </form>
-                        @endauth
-                    </td>
-                </tr>
-            @endforeach
-            </tbody>
-        </table>
-        <div class="d-flex justify-content-center">
-            @empty($query)
-                {{ $guestbook_posts->links() }}
-            @else
-                {{ $guestbook_posts->appends(['q' => $query])->links() }}
-            @endif
-        </div>
-    @else
-        <p>
-            Keine Einträge gefunden.
-        </p>
-    @endif
+        @endforeach
+        </tbody>
+    </table>
+    <div class="d-flex justify-content-center">
+        @empty($query)
+            {{ $guestbook_posts->links() }}
+        @else
+            {{ $guestbook_posts->appends(['q' => $query])->links() }}
+        @endif
+    </div>
 @stop
