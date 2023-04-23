@@ -1,7 +1,5 @@
 @extends('layouts.app')
 
-@inject('images', 'App\Services\Images')
-
 @section('content')
     <div class="row">
         <div class="col-12 col-sm-8">
@@ -36,7 +34,7 @@
             </div>
         </div>
         <div class="col-12 col-sm-4 text-end">
-            {!! $images->getRandomImageForGuestbook() !!}
+            {!! $image !!}
         </div>
     </div>
     <table class="table table-striped">

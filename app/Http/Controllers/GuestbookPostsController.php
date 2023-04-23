@@ -8,6 +8,7 @@ use App\Mail\NewGuestbookPost;
 use App\Models\GuestbookPost;
 use App\Models\PublicationDate;
 use App\Models\User;
+use App\Services\Images;
 use App\Services\Spamfilter;
 use App\Services\Utils;
 use Illuminate\Contracts\View\View;
@@ -28,8 +29,8 @@ class GuestbookPostsController extends Controller
             ->simplePaginate(10);
 
         // Convert the smileys
-        $guestbook_posts->transform(function (GuestbookPost $post) {
-            $utils = new Utils;
+        $utils = new Utils;
+        $guestbook_posts->transform(function (GuestbookPost $post) use ($utils) {
             $post->message = $utils->replaceSmileys($post->message);
             if ($post->cheffe) {
                 $post->cheffe = $utils->replaceSmileys($post->cheffe);
@@ -38,11 +39,16 @@ class GuestbookPostsController extends Controller
             return $post;
         });
 
+        // Choose a random image
+        $image = new Images();
+        $guestbook_image = $image->getRandomImageForGuestbook();
+
         return view('guestbook_posts.index', [
             'guestbook_posts' => $guestbook_posts,
             'title' => 'Gästebuch',
             'description' => 'Gästebuch der Tetsche-Website',
             'query' => '',
+            'image' => $guestbook_image,
         ]);
     }
 
