@@ -1,6 +1,5 @@
 @extends('layouts.app')
 
-@inject('utils', 'App\Services\Utils')
 @inject('images', 'App\Services\Images')
 
 @section('content')
@@ -9,7 +8,7 @@
             <h1>{{ $pagetitle ?? $title }}</h1>
             <div class="row">
                 <div class="col-12 col-sm-6">
-                    <p><a href="{{ action([App\Http\Controllers\GuestbookPostsController::class, 'create']) }}"
+                    <p><a href="{{ route('gaestebuch.create') }}"
                           class="btn btn-primary" role="button">Neuer Eintrag</a></p>
                 </div>
                 <div class="col-12 col-sm-6">
@@ -57,10 +56,10 @@
                     </td>
                     <td>
                         <p>
-                            {!! $utils->replaceSmileys($guestbook_post->message) !!}
+                            {!! $guestbook_post->message !!}
                         </p>
                         @if ($guestbook_post->cheffe)
-                            <p class="text-danger">{!! $utils->replaceSmileys($guestbook_post->cheffe) !!}</p>
+                            <p class="text-danger">{!! $guestbook_post->cheffe !!}</p>
                         @endif
                         @auth
                             <form method="POST" action="{{ route('gaestebuch.destroy', $guestbook_post) }}">

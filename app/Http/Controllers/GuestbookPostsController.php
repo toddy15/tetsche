@@ -9,6 +9,7 @@ use App\Models\GuestbookPost;
 use App\Models\PublicationDate;
 use App\Models\User;
 use App\Services\Spamfilter;
+use App\Services\Utils;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -25,6 +26,17 @@ class GuestbookPostsController extends Controller
         ])
             ->latest()
             ->simplePaginate(10);
+
+        // Convert the smileys
+        $guestbook_posts->transform(function (GuestbookPost $post) {
+            $utils = new Utils;
+            $post->message = $utils->replaceSmileys($post->message);
+            if ($post->cheffe) {
+                $post->cheffe = $utils->replaceSmileys($post->cheffe);
+            }
+
+            return $post;
+        });
 
         return view('guestbook_posts.index', [
             'guestbook_posts' => $guestbook_posts,
