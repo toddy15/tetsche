@@ -54,7 +54,9 @@ class GuestbookPostsController extends Controller
 
     public function create(): View
     {
-        return view('guestbook_posts.create');
+        return view('guestbook_posts.create', [
+            'buttons' => (new Utils())->getSmileysButtons(),
+        ]);
     }
 
     public function store(Request $request): RedirectResponse
@@ -164,7 +166,10 @@ class GuestbookPostsController extends Controller
             1,
         );
 
-        return view('guestbook_posts.edit', ['guestbook_post' => $guestbook_post]);
+        return view('guestbook_posts.edit', [
+            'guestbook_post' => $guestbook_post,
+            'buttons' => (new Utils())->getSmileysButtons(),
+        ]);
     }
 
     /**

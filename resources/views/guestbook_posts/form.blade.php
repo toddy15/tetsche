@@ -1,5 +1,3 @@
-@inject ('utils', 'App\Services\Utils')
-
 <div class="mb-4">
     <label class="form-label" for="name">Name:</label>
     <input type="text" class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}" id="name" name="name"
@@ -21,7 +19,7 @@
 
 <div class="text-center">
     <ul class="list-inline">
-        @foreach ($utils->getSmileysButtons() as $button)
+        @foreach ($buttons as $button)
             <li class="list-inline-item">{!! $button !!}</li>
         @endforeach
     </ul>
