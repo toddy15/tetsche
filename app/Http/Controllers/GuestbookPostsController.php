@@ -146,7 +146,7 @@ class GuestbookPostsController extends Controller
             1,
         );
 
-        return view('guestbook_posts.edit', compact('guestbook_post'));
+        return view('guestbook_posts.edit', ['guestbook_post' => $guestbook_post]);
     }
 
     /**
