@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use App\Models\GuestbookPost;
+use App\Services\Images;
 use App\Services\Spamfilter;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -73,10 +74,15 @@ class SpamController extends Controller
             ->latest()
             ->simplePaginate(10);
 
+        // Choose a random image
+        $image = new Images();
+        $guestbook_image = $image->getRandomImageForGuestbook();
+
         return view('guestbook_posts.index', [
             'guestbook_posts' => $guestbook_posts,
             'title' => 'Gästebuch – '.$description,
             'description' => 'Gästebuch der Tetsche-Website – '.$description,
+            'image' => $guestbook_image,
         ]);
     }
 }
