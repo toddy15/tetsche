@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Models\Cartoon;
 use App\Models\PublicationDate;
 use Carbon\Carbon;
 use Illuminate\Foundation\Testing\LazilyRefreshDatabase;
@@ -43,7 +44,14 @@ uses()->beforeEach(function () {
     ];
 
     foreach ($dates as $date) {
-        PublicationDate::factory()->create(['publish_on' => $date]);
+        // Keep the dates of Cartoon and PublicationDate in sync
+        $cartoon = Cartoon::factory()->create([
+            'publish_on' => $date,
+        ]);
+        PublicationDate::factory()->create([
+            'publish_on' => $date,
+            'cartoon_id' => $cartoon,
+        ]);
     }
 
     Carbon::setTestNow('2022-03-26 14:30:00');
