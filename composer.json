@@ -21,7 +21,7 @@
         "laravel/sail": "^1.22.0",
         "mockery/mockery": "^1.5.1",
         "nunomaduro/collision": "^7.5.2",
-        "nunomaduro/larastan": "^2.6.0",
+        "nunomaduro/larastan": "^2.6.1",
         "pestphp/pest": "^2.6.1",
         "pestphp/pest-plugin-laravel": "^2.0",
         "spatie/laravel-ignition": "^2.1.3"
