@@ -71,11 +71,6 @@ parameters:
 			path: app/Http/Controllers/PublicationDateController.php
 
 		-
-			message: "#^Cannot access offset 3 on array\\|false\\.$#"
-			count: 2
-			path: app/Models/Cartoon.php
-
-		-
 			message: "#^Cannot access property \\$publish_on on App\\\\Models\\\\PublicationDate\\|null\\.$#"
 			count: 1
 			path: app/Models/Cartoon.php
@@ -114,11 +109,6 @@ parameters:
 			message: "#^Method App\\\\Models\\\\PublicationDate\\:\\:scopeArchived\\(\\) return type with generic class Illuminate\\\\Database\\\\Eloquent\\\\Builder does not specify its types\\: TModelClass$#"
 			count: 1
 			path: app/Models/PublicationDate.php
-
-		-
-			message: "#^Cannot access offset 3 on array\\|false\\.$#"
-			count: 1
-			path: app/Services/Images.php
 
 		-
 			message: "#^Parameter \\#1 \\$dir_handle of function closedir expects resource\\|null, resource\\|false given\\.$#"

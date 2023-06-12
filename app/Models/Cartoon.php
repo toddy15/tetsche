@@ -37,7 +37,9 @@ class Cartoon extends Model
         $result = 'alt="Tetsche – Cartoon der Woche . . . vom '.$date.'" ';
         if (is_file(public_path().'/'.$this->imagePath())) {
             $size = getimagesize(public_path().'/'.$this->imagePath());
-            $result .= $size[3];
+            if (is_array($size)) {
+                $result .= $size[3];
+            }
         }
 
         return $result;
@@ -76,7 +78,9 @@ class Cartoon extends Model
         $result = 'alt="Tetsche – Cartoon der Woche . . . vom '.$date.'" ';
         if (is_file(public_path().'/'.$this->thumbnailPath())) {
             $size = getimagesize(public_path().'/'.$this->thumbnailPath());
-            $result .= $size[3];
+            if (is_array($size)) {
+                $result .= $size[3];
+            }
         }
 
         return $result;

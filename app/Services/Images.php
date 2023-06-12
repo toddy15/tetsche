@@ -22,7 +22,9 @@ class Images
         $url = asset($image);
         $name = $this->getNameFromFilename($image);
         $result = '<img src="'.$url.'" ';
-        $result .= $size[3];
+        if (is_array($size)) {
+            $result .= $size[3];
+        }
         $result .= ' alt="'.$name.'" title="'.$name.'" />';
 
         return $result;

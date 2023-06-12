@@ -32,13 +32,19 @@ class HomepageController extends Controller
             $random_image = $images[$index];
         }
         // Get information for selected image
-        $imageinfo = (array) getimagesize(public_path($random_image));
+        $imageinfo = getimagesize(public_path($random_image));
+        $width = '100';
+        $height = '100';
+        if (is_array($imageinfo)) {
+            $width = $imageinfo[0];
+            $height = $imageinfo[1];
+        }
 
         return view('pages.homepage', [
             'description' => 'Tetsche-Website',
             'src' => $random_image,
-            'width' => $imageinfo[0],
-            'height' => $imageinfo[1],
+            'width' => $width,
+            'height' => $height,
         ]);
     }
 }
