@@ -9,20 +9,20 @@
     "require": {
         "php": "^8.2",
         "guzzlehttp/guzzle": "^7.7.0",
-        "laravel/framework": "^10.13",
+        "laravel/framework": "^10.13.5",
         "laravel/sanctum": "^3.2.5",
         "laravel/tinker": "^2.8.1",
         "laravel/ui": "^4.2.2",
         "ext-calendar": "*"
     },
     "require-dev": {
-        "fakerphp/faker": "^1.22",
-        "laravel/pint": "^1.10",
+        "fakerphp/faker": "^1.23",
+        "laravel/pint": "^1.10.2",
         "laravel/sail": "^1.22.0",
-        "mockery/mockery": "^1.5.1",
+        "mockery/mockery": "^1.6.2",
         "nunomaduro/collision": "^7.5.2",
-        "nunomaduro/larastan": "^2.6.1",
-        "pestphp/pest": "^2.6.1",
+        "nunomaduro/larastan": "^2.6.2",
+        "pestphp/pest": "^2.6.3",
         "pestphp/pest-plugin-laravel": "^2.0",
         "spatie/laravel-ignition": "^2.1.3"
     },
