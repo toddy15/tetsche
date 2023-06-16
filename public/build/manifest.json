@@ -2,11 +2,13 @@
   "node_modules/bootstrap/dist/js/bootstrap.esm.js": {
     "file": "assets/bootstrap.esm-5ea4a862.js",
     "isDynamicEntry": true,
-    "src": "node_modules/bootstrap/dist/js/bootstrap.esm.js"
+    "src": "node_modules/bootstrap/dist/js/bootstrap.esm.js",
+    "integrity": "sha384-sHTE5f/TFjKdyCWQ7YcBcgzXC17wF1fM9AUmQ54noBie6fzJ0P0A7QpeJPc14v3T"
   },
   "resources/fonts/Assistant-VariableFont_wght.woff2": {
     "file": "assets/Assistant-VariableFont_wght-2687b38b.woff2",
-    "src": "resources/fonts/Assistant-VariableFont_wght.woff2"
+    "src": "resources/fonts/Assistant-VariableFont_wght.woff2",
+    "integrity": "sha384-dN6auA0sud6yVtwl+8P+5Sw44mtx4KmOwpGw9uL8RLdK6KILbxXrKO6gr9p48iWe"
   },
   "resources/js/app.js": {
     "dynamicImports": [
@@ -14,11 +16,13 @@
     ],
     "file": "assets/app-54480b4e.js",
     "isEntry": true,
-    "src": "resources/js/app.js"
+    "src": "resources/js/app.js",
+    "integrity": "sha384-VL+vjVwAPjwTumHQJ3aiXAyKlQF1ca6oWGjsXXmuYfMKXqx7CABOgFesWGEnlz4+"
   },
   "resources/sass/app.scss": {
     "file": "assets/app-2200a0b3.css",
     "isEntry": true,
-    "src": "resources/sass/app.scss"
+    "src": "resources/sass/app.scss",
+    "integrity": "sha384-7Dt2BsuzBVWr6e/JcBzezvMZbH+DFXCqTCyfiq1ZU3bQ38I/J7J8MmiXwDaeKJKq"
   }
 }
