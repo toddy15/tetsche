@@ -24,7 +24,7 @@
     </p>
     <h2>Cookies</h2>
     <p>
-        Die Internetseiten verwenden teilweise so genannte Cookies.
+        Die Internetseiten verwenden teilweise sogenannte Cookies.
         Cookies richten auf Ihrem Rechner keinen Schaden an und
         enthalten keine Viren. Cookies dienen dazu, unser Angebot
         nutzerfreundlicher, effektiver und sicherer zu machen.
@@ -32,43 +32,17 @@
         abgelegt werden und die Ihr Browser speichert.
     </p>
     <p>
-        Die meisten der von uns verwendeten Cookies sind so genannte
+        Die meisten der von uns verwendeten Cookies sind sogenannte
         »Session-Cookies«. Sie werden nach Ende Ihres Besuchs automatisch
         gelöscht. Andere Cookies bleiben auf Ihrem Endgerät gespeichert,
         bis Sie diese löschen. Diese Cookies ermöglichen es uns,
         Ihren Browser beim nächsten Besuch wiederzuerkennen.
     </p>
-    <p>
-        Sie können Ihren Browser so einstellen, dass Sie über das Setzen
-        von Cookies informiert werden und Cookies nur im Einzelfall
-        erlauben, die Annahme von Cookies für bestimmte Fälle oder
-        generell ausschließen sowie das automatische Löschen der Cookies
-        beim Schließen des Browser aktivieren. Bei der Deaktivierung von
-        Cookies kann die Funktionalität dieser Website eingeschränkt sein.
-    </p>
     <h2>Server-Log-Files</h2>
     <p>
-        Der Provider der Seiten erhebt und speichert automatisch
-        Informationen in so genannten Server-Log-Files, die Ihr Browser
-        automatisch an uns übermittelt. Dies sind:
-    </p>
-    <ul>
-        <li>Browsertyp und -version</li>
-        <li>Verwendetes Betriebssystem</li>
-        <li>Referrer-URL</li>
-        <li>Hostname des zugreifenden Rechners</li>
-        <li>Uhrzeit der Serveranfrage</li>
-    </ul>
-    <p>
-        IP-Adressen speichern wir über einen Zeitraum von maximal
-        sieben Tagen. Die Speicherung erfolgt aus Gründen der
-        Datensicherheit, um die Stabilität und die Betriebssicherheit
-        unseres Systems zu gewährleisten.
-        Diese Daten sind nicht bestimmten Personen zuzuordnen.
-        Eine Zusammenführung dieser Daten mit anderen Datenquellen
-        wird nicht vorgenommen. Wir behalten uns vor, diese Daten
-        nachträglich zu prüfen, wenn uns konkrete Anhaltspunkte für
-        eine rechtswidrige Nutzung bekannt werden.
+        Informationen, die Ihr Browser automatisch an uns übermittelt
+        (beispielsweise Browsertyp und -version, verwendetes
+        Betriebssystem etc.), speichern wir nicht.
     </p>
     <h2>Kommentarfunktion auf dieser Website</h2>
     <p>
@@ -134,38 +108,4 @@
         rechtliche Schritte im Falle der unverlangten Zusendung
         von Werbeinformationen, etwa durch Spam-E-Mails, vor.
     </p>
-    <h2>Matomo</h2>
-    <p>
-        Wir verwenden den Open-Source-Webanalysedienst Matomo.
-        Matomo benutzt so genannte »Cookies«. Das sind Textdateien,
-        die auf Ihrem Computer gespeichert werden und die eine
-        Analyse der Benutzung der Website durch Sie ermöglichen.
-        Dazu werden die durch den Cookie erzeugten Informationen über
-        die Benutzung dieser Website auf unserem Server gespeichert.
-        Die IP-Adresse wird vor der Speicherung anonymisiert.
-    </p>
-    <p>
-        Die durch den Cookie erzeugten Informationen über die Benutzung
-        dieser Website bleiben auf unserem Server und
-        werden nicht an Dritte weitergegeben. Sie können
-        die Speicherung der Cookies durch eine entsprechende Einstellung
-        Ihrer Browser-Software verhindern; wir weisen Sie jedoch darauf
-        hin, dass Sie in diesem Fall gegebenenfalls nicht sämtliche
-        Funktionen dieser Website vollumfänglich werden nutzen können.
-    </p>
-    <p>
-        Wenn Sie mit der Speicherung und Nutzung Ihrer Daten nicht
-        einverstanden sind, können Sie die Speicherung und Nutzung
-        hier deaktivieren. In diesem Fall wird in Ihrem Browser ein
-        »Deaktivierungs-Cookie« hinterlegt, der verhindert, dass Matomo
-        Nutzungsdaten speichert. Wenn Sie Ihre Cookies löschen, hat
-        dies zur Folge, dass auch der Matomo-Deaktivierungs-Cookie
-        gelöscht wird. In diesem Fall müssen Sie die Speicherung
-        und Nutzung Ihrer Daten bei einem erneuten Besuch unserer
-        Seite wieder deaktivieren.
-    </p>
-
-    <iframe style="border: 0; height: 200px; width: 600px;"
-        src="https://matomo.tetsche.de/index.php?module=CoreAdminHome&amp;action=optOut&amp;language=de&amp;backgroundColor=ffffff&amp;fontColor=000000&amp;fontSize=18px&amp;fontFamily=Assistant">
-    </iframe>
 @stop
