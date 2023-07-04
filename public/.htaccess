@@ -4,7 +4,10 @@
     </IfModule>
 
     RewriteEngine On
-    RewriteBase /~toddy/tetsche/public/
+
+    # Force www
+    RewriteCond %{HTTP_HOST} ^tetsche.de$ [NC]
+    RewriteRule ^(.*)$ https://www.tetsche.de/$1 [L,R=301,NC]
 
     # Handle Authorization Header
     RewriteCond %{HTTP:Authorization} .
