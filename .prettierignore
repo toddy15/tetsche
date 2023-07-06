@@ -6,6 +6,6 @@
 .env
 .env.backup
 .phpunit.result.cache
-composer.json
 composer.lock
+package-lock.json
 README.md
