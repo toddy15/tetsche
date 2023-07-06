@@ -41,7 +41,7 @@
                 </li>
             </ul>
 
-            @unless(Auth::guest())
+            @unless (Auth::guest())
                 <!-- Right Side Of Navbar -->
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item dropdown">
@@ -63,7 +63,8 @@
                                 <hr class="dropdown-divider">
                             </li>
                             <li>
-                                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                <a class="dropdown-item" href="{{ route('logout') }}"
+                                    onclick="event.preventDefault();
                                                              document.getElementById('logout-form').submit();">
                                     Abmelden
                                 </a>

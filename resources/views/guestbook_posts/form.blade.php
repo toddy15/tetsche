@@ -10,8 +10,7 @@
 <div class="mb-4">
     <label class="form-label" for="message">Nachricht:</label>
     <textarea class="form-control {{ $errors->has('message') ? 'is-invalid' : '' }}" id="message" name="message"
-        placeholder="Ihre Nachricht" rows="10"
-        cols="50">{{ old('message') ?? ($guestbook_post->message ?? '') }}</textarea>
+        placeholder="Ihre Nachricht" rows="10" cols="50">{{ old('message') ?? ($guestbook_post->message ?? '') }}</textarea>
     @error('message')
         <div class="invalid-feedback">{{ $message }}</div>
     @enderror
