@@ -9,22 +9,10 @@
             <div class="card-body">
                 <p class="card-text text-center">Die Rebus-Abbildungen ergeben zusammen einen neuen Begriff.</p>
                 <div class="text-center">
-                    <button id="solution-button" class="btn btn-primary text-center" onclick="showSolution()">
+                    <button id="solution-button" class="btn btn-primary text-center">
                         Lösung anzeigen
                     </button>
                     <p id="solution" class="text-center d-none mt-4">{{ $date->cartoon->rebus }}</p>
-                    <script>
-                        function showSolution() {
-                            var solution = document.getElementById("solution");
-                            solution.classList.toggle("d-none");
-                            var button = document.getElementById("solution-button");
-                            if (button.innerText === "Lösung anzeigen") {
-                                button.innerText = "Lösung verstecken";
-                            } else {
-                                button.innerText = "Lösung anzeigen";
-                            }
-                        }
-                    </script>
                 </div>
             </div>
         </div>
