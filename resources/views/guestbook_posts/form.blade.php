@@ -23,10 +23,3 @@
         @endforeach
     </ul>
 </div>
-
-<script>
-    function insert(code) {
-        var text = document.getElementById("message");
-        text.value += code;
-    }
-</script>

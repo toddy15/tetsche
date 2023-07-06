@@ -36,31 +36,16 @@ class Utils
      */
     public function getSmileysButtons(): array
     {
+        $smileys_ids = $this->getSmileys(true);
         $smileys = $this->getSmileysImageHTML(true);
         $result = [];
         foreach ($smileys as $code => $image) {
             $html
-                = '<button type="button" class="btn btn-light" onclick="insert(\''
-                .
-                $code.
-                '\')">';
+                = '<button type="button" class="btn btn-light" '
+                .'id="smiley-'.$smileys_ids[$code]['filename'].'">';
             $html .= $image;
             $html .= '</button>';
             $result[] = $html;
-        }
-
-        return $result;
-    }
-
-    /**
-     * @return array<string, string>
-     */
-    public function getSmileysIDsAndText(): array
-    {
-        $smileys = $this->getSmileys(true);
-        $result = [];
-        foreach ($smileys as $code => $info) {
-            $result[$code] = $info['filename'];
         }
 
         return $result;
@@ -75,9 +60,7 @@ class Utils
         $result = [];
         foreach ($smileys as $code => $info) {
             $result[$code]
-                = '<img id="smiley-'.
-                $info['filename'].
-                '" src="'.
+                = '<img src="'.
                 asset('images/guestbook/'.$info['filename'].'.svg').
                 '" ';
             $result[$code]
