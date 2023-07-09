@@ -11,6 +11,8 @@ class GuestbookPost extends Model
 {
     use HasFactory;
 
+    public float $score = 0;
+
     protected $fillable = [
         'name',
         'message',

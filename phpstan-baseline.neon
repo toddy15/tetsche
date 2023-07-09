@@ -21,11 +21,6 @@ parameters:
 			path: app/Http/Controllers/GuestBookSearchController.php
 
 		-
-			message: "#^Access to an undefined property App\\\\Models\\\\GuestbookPost\\:\\:\\$score\\.$#"
-			count: 4
-			path: app/Http/Controllers/GuestbookPostsController.php
-
-		-
 			message: "#^Binary operation \"\\.\" between ', Browser\\: ' and array\\|string\\|null results in an error\\.$#"
 			count: 1
 			path: app/Http/Controllers/GuestbookPostsController.php
