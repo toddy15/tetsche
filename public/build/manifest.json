@@ -20,9 +20,9 @@
     "integrity": "sha384-ykwYackWlRv/1O6fP6r0zcYOty726fygl22xnk8sLmjEiQc16pCVLFCK4slJG3m+"
   },
   "resources/sass/app.scss": {
-    "file": "assets/app-282d4dc7.css",
+    "file": "assets/app-2d6a1998.css",
     "isEntry": true,
     "src": "resources/sass/app.scss",
-    "integrity": "sha384-JXJ/fPqaaOIqjSZ5OeZy3eM/7lNFpge/DXUv2X1+K7KZj8conyZxatqEsQAUybks"
+    "integrity": "sha384-r+EDIERxmBQ8+Nck+jP612zR79I7HlgYPYS0zRIkcbpGY7DwzNPeK6okECFqND6U"
   }
 }
