@@ -36,7 +36,7 @@ class HomepageController extends Controller
             // Renumber array keys
             $images = array_values($images);
             // Pick one image a day from images
-            $index = (new Carbon)->dayOfYear() % count($images);
+            $index = (new Carbon)->dayOfYear % count($images);
             $random_image = $images[$index];
         }
         // Get information for selected image
