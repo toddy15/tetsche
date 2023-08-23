@@ -15,7 +15,7 @@ class HomepageController extends Controller
     {
         $path = 'images/bad-mergentheim/';
         // Ensure an array, if scandir returned false
-        $images = scandir(public_path($path)) ?: [];
+        $images = @scandir(public_path($path)) ?: [];
         // Remove ., .., and .gitkeep from list
         $images = array_filter($images,
             fn (string $filename) => ! str_starts_with($filename, '.')
