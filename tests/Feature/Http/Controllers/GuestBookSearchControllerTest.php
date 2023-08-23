@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Models\GuestbookPost;
+
 use function Pest\Laravel\get;
 
 it('redirects without a query', function () {
