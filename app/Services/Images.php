@@ -50,7 +50,7 @@ class Images
     {
         $images = [];
         $dir = opendir($directory);
-        while (false !== ($file = readdir($dir))) {
+        while (($file = readdir($dir)) !== false) {
             // Strip ., .., and subdirs
             if (is_file($directory.'/'.$file)) {
                 $images[] = $file;
