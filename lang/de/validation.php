@@ -27,6 +27,7 @@ return [
         'array' => ':attribute muss zwischen :min und :max Elemente haben.',
     ],
     'boolean' => ':attribute muss wahr oder falsch sein.',
+    'can' => ':attribute enthält einen ungültigen Wert.',
     'confirmed' => ':attribute stimmt nicht mit der Bestätigung überein.',
     'date' => ':attribute muss ein gültiges Datum sein.',
     'date_format' => ':attribute entspricht nicht dem gültigen Format für :format.',
