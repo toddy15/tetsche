@@ -13,7 +13,7 @@ class Cartoon extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['publish_on', 'random_number', 'rebus'];
+    protected $fillable = ['filename', 'rebus'];
 
     /**
      * Get the publication dates of the cartoon.
@@ -35,8 +35,9 @@ class Cartoon extends Model
             ->locale('de')
             ->isoFormat('Do MMMM YYYY');
         $result = 'alt="Tetsche – Cartoon der Woche . . . vom '.$date.'" ';
-        if (is_file(public_path().'/'.$this->imagePath())) {
-            $size = getimagesize(public_path().'/'.$this->imagePath());
+        $path = public_path().'/'.$this->filename;
+        if (is_file($path)) {
+            $size = getimagesize($path);
             if (is_array($size)) {
                 $result .= $size[3];
             }
@@ -54,20 +55,6 @@ class Cartoon extends Model
     }
 
     /**
-     * Return the path to the image.
-     */
-    public function imagePath(): string
-    {
-        $path = 'images/cartoons/';
-        $path .= $this->publish_on;
-        $path .= '.cartoon.';
-        $path .= $this->random_number;
-        $path .= '.jpg';
-
-        return $path;
-    }
-
-    /**
      * Return thumbnail size, alt and title attributes.
      */
     public function thumbnailSizeAndDescription(): string
@@ -76,8 +63,9 @@ class Cartoon extends Model
             ->locale('de')
             ->isoFormat('Do MMMM YYYY');
         $result = 'alt="Tetsche – Cartoon der Woche . . . vom '.$date.'" ';
-        if (is_file(public_path().'/'.$this->thumbnailPath())) {
-            $size = getimagesize(public_path().'/'.$this->thumbnailPath());
+        $path = public_path().'/'.$this->thumbnailPath();
+        if (is_file($path)) {
+            $size = getimagesize($path);
             if (is_array($size)) {
                 $result .= $size[3];
             }
@@ -91,12 +79,6 @@ class Cartoon extends Model
      */
     public function thumbnailPath(): string
     {
-        $path = 'images/cartoons/';
-        $path .= $this->publish_on;
-        $path .= '.thumbnail.';
-        $path .= $this->random_number;
-        $path .= '.jpg';
-
-        return $path;
+        return str_replace('.cartoon.', '.thumbnail.', $this->filename);
     }
 }

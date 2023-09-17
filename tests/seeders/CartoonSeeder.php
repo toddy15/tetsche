@@ -38,13 +38,9 @@ class CartoonSeeder extends Seeder
         ];
 
         foreach ($dates as $date) {
-            // Keep the dates of Cartoon and PublicationDate in sync
-            $cartoon = Cartoon::factory()->create([
-                'publish_on' => $date,
-            ]);
             PublicationDate::factory()->create([
                 'publish_on' => $date,
-                'cartoon_id' => $cartoon,
+                'cartoon_id' => Cartoon::factory()->create(),
             ]);
         }
     }

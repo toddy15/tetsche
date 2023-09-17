@@ -4,7 +4,7 @@
     <h1>Cartoon bearbeiten</h1>
     <h2>{{ \Carbon\Carbon::parse($date->publish_on)->locale('de')->isoFormat('Do MMMM YYYY') }}</h2>
 
-    <img class="d-block mx-auto img-fluid" src="{{ asset($date->cartoon->imagePath()) }}" {!! $date->cartoon->imageSizeAndDescription() !!} />
+    <img class="d-block mx-auto img-fluid" src="{{ asset($date->cartoon->filename) }}" {!! $date->cartoon->imageSizeAndDescription() !!} />
 
     <form method="POST" action="{{ route('publication_dates.update', $date) }}">
         @csrf

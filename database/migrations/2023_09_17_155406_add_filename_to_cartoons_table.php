@@ -26,6 +26,11 @@ return new class extends Migration
                 ".jpg"
             )'
         );
+
+        Schema::table('cartoons', function (Blueprint $table) {
+            $table->dropColumn('publish_on');
+            $table->dropColumn('random_number');
+        });
     }
 
     /**
@@ -35,6 +40,8 @@ return new class extends Migration
     {
         Schema::table('cartoons', function (Blueprint $table) {
             $table->dropColumn('filename');
+            $table->date('publish_on');
+            $table->string('random_number');
         });
     }
 };
