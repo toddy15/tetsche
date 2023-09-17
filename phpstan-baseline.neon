@@ -194,8 +194,3 @@ parameters:
 			message: "#^Cannot access property \\$rebus on App\\\\Models\\\\Cartoon\\|null\\.$#"
 			count: 1
 			path: tests/Feature/PublicationDateTest.php
-
-		-
-			message: "#^Call to an undefined method Pest\\\\PendingCalls\\\\TestCall\\|Pest\\\\Support\\\\HigherOrderTapProxy::skip\\(\\)\\.$#"
-			count: 1
-			path: tests/Feature/Http/Controllers/HomepageControllerTest.php
