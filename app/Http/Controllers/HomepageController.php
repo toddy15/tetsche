@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -13,7 +12,7 @@ class HomepageController extends Controller
      */
     public function __invoke(Request $request): View
     {
-        $path = 'images/bad-mergentheim/';
+        $path = 'images/homepage/';
         // Ensure an array, if scandir returned false
         $images = @scandir(public_path($path)) ?: [];
         // Remove ., .., and .gitkeep from list
@@ -29,14 +28,7 @@ class HomepageController extends Controller
                 $images
             );
             // Pick a random image
-            //            $index = array_rand($images);
-            // Remove the first image with exhibition data
-            $key = array_search('images/bad-mergentheim/aus01.webp', $images);
-            unset($images[$key]);
-            // Renumber array keys
-            $images = array_values($images);
-            // Pick one image a day from images
-            $index = (new Carbon)->dayOfYear % count($images);
+            $index = array_rand($images);
             $random_image = $images[$index];
         }
         // Get information for selected image
@@ -50,7 +42,6 @@ class HomepageController extends Controller
 
         return view('pages.homepage', [
             'description' => 'Tetsche-Website',
-            'initial_image' => 'images/bad-mergentheim/aus01.webp',
             'src' => $random_image,
             'width' => $width,
             'height' => $height,

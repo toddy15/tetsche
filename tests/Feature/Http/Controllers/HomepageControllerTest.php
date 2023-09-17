@@ -11,4 +11,4 @@ test('the homepage returns ok', function () {
         ->assertViewHas('src')
         ->assertViewHas('width')
         ->assertViewHas('height');
-})->skip();
+});
