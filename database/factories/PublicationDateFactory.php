@@ -16,9 +16,11 @@ class PublicationDateFactory extends Factory
      */
     public function definition(): array
     {
+        $cartoon = Cartoon::factory()->create();
+
         return [
-            'cartoon_id' => Cartoon::factory()->create(),
-            'publish_on' => fake()->date(),
+            'cartoon_id' => $cartoon->id,
+            'publish_on' => $cartoon->publish_on,
         ];
     }
 }

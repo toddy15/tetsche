@@ -3,8 +3,15 @@
 declare(strict_types=1);
 
 use Carbon\Carbon;
+use Tests\Seeders\CartoonSeeder;
 
 use function Pest\Laravel\get;
+use function Pest\Laravel\seed;
+
+uses()->beforeEach(function () {
+    seed(CartoonSeeder::class);
+    Carbon::setTestNow('2022-03-26 14:30:00');
+});
 
 test('a guest can view the current cartoon', function () {
     get('/cartoon')

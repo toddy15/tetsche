@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 use App\Models\GuestbookPost;
 use App\Models\User;
+use Carbon\Carbon;
+use Tests\Seeders\CartoonSeeder;
 
 use function Pest\Laravel\actingAs;
 use function Pest\Laravel\assertModelExists;
@@ -12,6 +14,12 @@ use function Pest\Laravel\delete;
 use function Pest\Laravel\get;
 use function Pest\Laravel\post;
 use function Pest\Laravel\put;
+use function Pest\Laravel\seed;
+
+uses()->beforeEach(function () {
+    seed(CartoonSeeder::class);
+    Carbon::setTestNow('2022-03-26 14:30:00');
+});
 
 test('a guest cannot edit an entry', function () {
     $guestbookPost = GuestbookPost::factory()->create();

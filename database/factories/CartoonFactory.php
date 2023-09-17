@@ -16,7 +16,7 @@ class CartoonFactory extends Factory
     public function definition(): array
     {
         return [
-            'publish_on' => fake()->date(),
+            'publish_on' => fake()->unique()->date(),
             'random_number' => sprintf('%05d', rand(0, 99999)),
             'rebus' => fake()->sentence(3),
         ];

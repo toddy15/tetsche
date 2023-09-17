@@ -4,10 +4,18 @@ declare(strict_types=1);
 
 use App\Models\PublicationDate;
 use App\Models\User;
+use Carbon\Carbon;
+use Tests\Seeders\CartoonSeeder;
 
 use function Pest\Laravel\actingAs;
 use function Pest\Laravel\get;
 use function Pest\Laravel\put;
+use function Pest\Laravel\seed;
+
+uses()->beforeEach(function () {
+    seed(CartoonSeeder::class);
+    Carbon::setTestNow('2022-03-26 14:30:00');
+});
 
 test('a guest cannot view all published cartoons', function () {
     get('/publication_dates')->assertRedirect('/login');
