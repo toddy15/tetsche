@@ -63,8 +63,7 @@ class Cartoon extends Model
             ->locale('de')
             ->isoFormat('Do MMMM YYYY');
         $result = 'alt="Tetsche – Cartoon der Woche . . . vom '.$date.'" ';
-        $thumbnail = str_replace('.cartoon.', '.thumbnail.', $this->filename);
-        $path = public_path().'/'.$thumbnail;
+        $path = public_path().'/'.$this->thumbnailPath();
         if (is_file($path)) {
             $size = getimagesize($path);
             if (is_array($size)) {
@@ -73,5 +72,13 @@ class Cartoon extends Model
         }
 
         return $result;
+    }
+
+    /**
+     * Return the path to the thumbnail.
+     */
+    public function thumbnailPath(): string
+    {
+        return str_replace('.cartoon.', '.thumbnail.', $this->filename);
     }
 }
