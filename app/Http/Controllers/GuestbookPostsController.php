@@ -63,7 +63,7 @@ class GuestbookPostsController extends Controller
     public function store(Request $request): RedirectResponse
     {
         // Emergency fix: Set a timeout of 30 seconds between entries
-        $lastPost = GuestbookPost::latest()->first();
+        $lastPost = GuestbookPost::latest()->firstOrFail();
         if (Carbon::now()->diffInSeconds($lastPost->created_at) < 30) {
             return redirect()->action([
                 GuestbookPostsController::class, 'index',
