@@ -11,6 +11,7 @@ use App\Models\User;
 use App\Services\Images;
 use App\Services\Spamfilter;
 use App\Services\Utils;
+use Carbon\Carbon;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -61,6 +62,14 @@ class GuestbookPostsController extends Controller
 
     public function store(Request $request): RedirectResponse
     {
+        // Emergency fix: Set a timeout of 30 seconds between entries
+        $lastPost = GuestbookPost::latest()->first();
+        if (Carbon::now()->diffInSeconds($lastPost->created_at) < 30) {
+            return redirect()->action([
+                GuestbookPostsController::class, 'index',
+            ]);
+        }
+
         $post = $request->all();
         $spamfilter = new Spamfilter();
         $text = $post['name'].' '.$post['message'];
@@ -103,16 +112,6 @@ class GuestbookPostsController extends Controller
                     'message',
                     'Der Eintrag wurde als Spam eingestuft und daher nicht gespeichert.',
                 );
-                // @FIXME: Remove this part if sending all spam mails is no longer necessary.
-                if (! $spamfilter->isAutolearnSpam($post['score'])) {
-                    $new_post = new GuestbookPost($post);
-                    $new_post->score = $post['score'];
-
-                    $mail = new NewGuestbookPost($new_post);
-                    $mail->subject('Neuer Eintrag im Tetsche-Gästebuch (als Spam abgelehnt)');
-                    $toddy = User::find(1) ?? ['email' => 'none@example.org'];
-                    Mail::to($toddy)->send($mail);
-                }
             }
             // Special case: autolearning spam
             if ($spamfilter->isAutolearnSpam($post['score'])) {
