@@ -62,12 +62,25 @@ class GuestbookPostsController extends Controller
 
     public function store(Request $request): RedirectResponse
     {
-        // Emergency fix: Set a timeout of 30 seconds between entries
-        $lastPost = GuestbookPost::latest()->firstOrFail();
-        if (Carbon::now()->diffInSeconds($lastPost->created_at) < 30) {
-            return redirect()->action([
-                GuestbookPostsController::class, 'index',
-            ]);
+        // Set a timeout between entries from the same IP
+        $lastPost = GuestbookPost::query()
+            ->where('spam_detection', 'LIKE', '%'.$request->ip().'%')
+            ->latest()
+            ->first();
+        if ($lastPost !== null) {
+            $remainingTime = Carbon::now()->diffInSeconds($lastPost->created_at);
+            if ($remainingTime < 60) {
+                $request->session()
+                    ->flash(
+                        'error',
+                        'Zu viele Einträge in zu kurzer Zeit. Bitte probieren Sie es nachher nochmal.'
+                    );
+
+                return redirect()->action([
+                    GuestbookPostsController::class, 'create',
+                ])
+                    ->withInput();
+            }
         }
 
         $post = $request->all();
