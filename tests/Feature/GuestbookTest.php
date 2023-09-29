@@ -224,3 +224,5 @@ it('creates a new entry after the timeout has expired', function () {
         ->assertSessionMissing('error')
         ->assertRedirect(route('gaestebuch.index'));
 });
+
+todo('lets two different guests create new entries before the timeout has expired');
