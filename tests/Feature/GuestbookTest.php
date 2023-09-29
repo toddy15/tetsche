@@ -175,3 +175,52 @@ test('an entry must have a message', function () {
         ->assertSessionHasErrors(['message'])
         ->assertRedirect(route('gaestebuch.create'));
 });
+
+it('sets a timeout between posts', function () {
+    $entry_a = GuestbookPost::factory()->raw([
+        'cheffe' => null,
+        'category' => 'unsure',
+        'spam_detection' => 'IP: 127.0.0.1, Browser: Symfony',
+    ]);
+    $entry_b = GuestbookPost::factory()->raw([
+        'cheffe' => null,
+        'category' => 'unsure',
+        'spam_detection' => 'IP: 127.0.0.1, Browser: Symfony',
+    ]);
+
+    Carbon::setTestNow('2023-09-29 10:00:00');
+    post(route('gaestebuch.store'), $entry_a)
+        ->assertSessionHasNoErrors()
+        ->assertSessionMissing('error')
+        ->assertRedirect(route('gaestebuch.index'));
+
+    Carbon::setTestNow('2023-09-29 10:00:59');
+    post(route('gaestebuch.store'), $entry_b)
+        ->assertSessionHas('error')
+        ->assertRedirect(route('gaestebuch.create'));
+});
+
+it('creates a new entry after the timeout has expired', function () {
+    $entry_a = GuestbookPost::factory()->raw([
+        'cheffe' => null,
+        'category' => 'unsure',
+        'spam_detection' => 'IP: 127.0.0.1, Browser: Symfony',
+    ]);
+    $entry_b = GuestbookPost::factory()->raw([
+        'cheffe' => null,
+        'category' => 'unsure',
+        'spam_detection' => 'IP: 127.0.0.1, Browser: Symfony',
+    ]);
+
+    Carbon::setTestNow('2023-09-29 10:00:00');
+    post(route('gaestebuch.store'), $entry_a)
+        ->assertSessionHasNoErrors()
+        ->assertSessionMissing('error')
+        ->assertRedirect(route('gaestebuch.index'));
+
+    Carbon::setTestNow('2023-09-29 10:01:00');
+    post(route('gaestebuch.store'), $entry_b)
+        ->assertSessionHasNoErrors()
+        ->assertSessionMissing('error')
+        ->assertRedirect(route('gaestebuch.index'));
+});
