@@ -30,7 +30,7 @@ class GuestbookPostsController extends Controller
             ->simplePaginate(10);
 
         // Convert the smileys
-        $utils = new Utils;
+        $utils = new Utils();
         $guestbook_posts->transform(function (GuestbookPost $post) use ($utils) {
             $post->message = $utils->replaceSmileys($post->message);
             if ($post->cheffe) {
@@ -68,7 +68,8 @@ class GuestbookPostsController extends Controller
             ->latest()
             ->first();
         if ($lastPost !== null) {
-            $remainingTime = Carbon::now()->diffInSeconds($lastPost->created_at);
+            $remainingTime = Carbon::now()
+                ->diffInSeconds($lastPost->created_at);
             if ($remainingTime < 60) {
                 $request->session()
                     ->flash(
