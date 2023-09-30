@@ -15,6 +15,7 @@ use function Pest\Laravel\get;
 use function Pest\Laravel\post;
 use function Pest\Laravel\put;
 use function Pest\Laravel\seed;
+use function Pest\Laravel\withServerVariables;
 
 uses()->beforeEach(function () {
     seed(CartoonSeeder::class);
@@ -225,4 +226,29 @@ it('creates a new entry after the timeout has expired', function () {
         ->assertRedirect(route('gaestebuch.index'));
 });
 
-todo('lets two different guests create new entries before the timeout has expired');
+it('lets two different guests create new entries before the timeout has expired', function () {
+    $entry_guest_a = GuestbookPost::factory()->raw([
+        'cheffe' => null,
+        'category' => 'unsure',
+        'spam_detection' => 'IP: 127.0.0.1, Browser: Symfony',
+    ]);
+    $entry_guest_b = GuestbookPost::factory()->raw([
+        'cheffe' => null,
+        'category' => 'unsure',
+        'spam_detection' => 'IP: 127.0.0.2, Browser: Symfony',
+    ]);
+
+    Carbon::setTestNow('2023-09-29 10:00:00');
+    withServerVariables(['REMOTE_ADDR' => '127.0.0.1'])
+        ->post(route('gaestebuch.store'), $entry_guest_a)
+        ->assertSessionHasNoErrors()
+        ->assertSessionMissing('error')
+        ->assertRedirect(route('gaestebuch.index'));
+
+    Carbon::setTestNow('2023-09-29 10:00:10');
+    withServerVariables(['REMOTE_ADDR' => '127.0.0.2'])
+        ->post(route('gaestebuch.store'), $entry_guest_b)
+        ->assertSessionHasNoErrors()
+        ->assertSessionMissing('error')
+        ->assertRedirect(route('gaestebuch.index'));
+});
