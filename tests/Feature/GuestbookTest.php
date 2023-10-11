@@ -219,7 +219,7 @@ it('lets two different guests create new entries before the timeout has expired'
         ->assertRedirect(route('gaestebuch.index'));
 });
 
-it('ensures a maximum number of posts in a given interval', function () {
+it('ensures a maximum number of post in a given interval', function () {
     Carbon::setTestNow('2023-10-11 10:00:00');
     // Insert 29 entries
     GuestbookPost::factory()->count(29)->create();
