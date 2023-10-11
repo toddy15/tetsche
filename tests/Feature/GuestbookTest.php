@@ -218,3 +218,32 @@ it('lets two different guests create new entries before the timeout has expired'
         ->assertSessionMissing('error')
         ->assertRedirect(route('gaestebuch.index'));
 });
+
+it('ensures a maximum number of post in a given interval', function () {
+    Carbon::setTestNow('2023-10-11 10:00:00');
+    // Insert 29 entries
+    GuestbookPost::factory()->count(29)->create();
+
+    // Insert another entry
+    Carbon::setTestNow('2023-10-11 10:05:00');
+    $entry = GuestbookPost::factory()->raw();
+    post(route('gaestebuch.store'), $entry)
+        ->assertSessionHasNoErrors()
+        ->assertSessionMissing('error')
+        ->assertRedirect(route('gaestebuch.index'));
+
+    // This entry should be rejected
+    Carbon::setTestNow('2023-10-11 11:00:00');
+    $entry = GuestbookPost::factory()->raw();
+    post(route('gaestebuch.store'), $entry)
+        ->assertSessionHas('error')
+        ->assertRedirect(route('gaestebuch.create'));
+
+    // This entry should be allowed again
+    Carbon::setTestNow('2023-10-11 11:00:01');
+    $entry = GuestbookPost::factory()->raw();
+    post(route('gaestebuch.store'), $entry)
+        ->assertSessionHasNoErrors()
+        ->assertSessionMissing('error')
+        ->assertRedirect(route('gaestebuch.index'));
+});
