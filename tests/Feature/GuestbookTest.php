@@ -136,11 +136,7 @@ test('a guest can post a new entry', function () {
         ->assertViewIs('guestbook_posts.create')
         ->assertSeeText('Gästebuch: Neuer Eintrag');
 
-    $entry = GuestbookPost::factory()->raw([
-        'cheffe' => null,
-        'category' => 'unsure',
-        'spam_detection' => 'IP: 127.0.0.1, Browser: Symfony',
-    ]);
+    $entry = GuestbookPost::factory()->raw();
 
     post(route('gaestebuch.store'), $entry)
         ->assertSessionHasNoErrors()
@@ -154,9 +150,6 @@ test('a guest can post a new entry', function () {
 test('an entry must have a name', function () {
     $entry = GuestbookPost::factory()->raw([
         'name' => '',
-        'cheffe' => null,
-        'category' => 'unsure',
-        'spam_detection' => 'IP: 127.0.0.1, Browser: Symfony',
     ]);
 
     post(route('gaestebuch.store'), $entry)
@@ -167,9 +160,6 @@ test('an entry must have a name', function () {
 test('an entry must have a message', function () {
     $entry = GuestbookPost::factory()->raw([
         'message' => '',
-        'cheffe' => null,
-        'category' => 'unsure',
-        'spam_detection' => 'IP: 127.0.0.1, Browser: Symfony',
     ]);
 
     post(route('gaestebuch.store'), $entry)
@@ -178,16 +168,8 @@ test('an entry must have a message', function () {
 });
 
 it('sets a timeout between posts', function () {
-    $entry_a = GuestbookPost::factory()->raw([
-        'cheffe' => null,
-        'category' => 'unsure',
-        'spam_detection' => 'IP: 127.0.0.1, Browser: Symfony',
-    ]);
-    $entry_b = GuestbookPost::factory()->raw([
-        'cheffe' => null,
-        'category' => 'unsure',
-        'spam_detection' => 'IP: 127.0.0.1, Browser: Symfony',
-    ]);
+    $entry_a = GuestbookPost::factory()->raw();
+    $entry_b = GuestbookPost::factory()->raw();
 
     Carbon::setTestNow('2023-09-29 10:00:00');
     post(route('gaestebuch.store'), $entry_a)
@@ -202,16 +184,8 @@ it('sets a timeout between posts', function () {
 });
 
 it('creates a new entry after the timeout has expired', function () {
-    $entry_a = GuestbookPost::factory()->raw([
-        'cheffe' => null,
-        'category' => 'unsure',
-        'spam_detection' => 'IP: 127.0.0.1, Browser: Symfony',
-    ]);
-    $entry_b = GuestbookPost::factory()->raw([
-        'cheffe' => null,
-        'category' => 'unsure',
-        'spam_detection' => 'IP: 127.0.0.1, Browser: Symfony',
-    ]);
+    $entry_a = GuestbookPost::factory()->raw();
+    $entry_b = GuestbookPost::factory()->raw();
 
     Carbon::setTestNow('2023-09-29 10:00:00');
     post(route('gaestebuch.store'), $entry_a)
@@ -227,16 +201,8 @@ it('creates a new entry after the timeout has expired', function () {
 });
 
 it('lets two different guests create new entries before the timeout has expired', function () {
-    $entry_guest_a = GuestbookPost::factory()->raw([
-        'cheffe' => null,
-        'category' => 'unsure',
-        'spam_detection' => 'IP: 127.0.0.1, Browser: Symfony',
-    ]);
-    $entry_guest_b = GuestbookPost::factory()->raw([
-        'cheffe' => null,
-        'category' => 'unsure',
-        'spam_detection' => 'IP: 127.0.0.2, Browser: Symfony',
-    ]);
+    $entry_guest_a = GuestbookPost::factory()->raw();
+    $entry_guest_b = GuestbookPost::factory()->raw();
 
     Carbon::setTestNow('2023-09-29 10:00:00');
     withServerVariables(['REMOTE_ADDR' => '127.0.0.1'])
