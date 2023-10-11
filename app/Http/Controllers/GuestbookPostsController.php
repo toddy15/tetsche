@@ -63,7 +63,6 @@ class GuestbookPostsController extends Controller
     public function store(Request $request): RedirectResponse
     {
         // Set a timeout between entries from the same IP
-        $timeoutReached = false;
         $lastPost = GuestbookPost::query()
             ->where('spam_detection', 'LIKE', '%'.$request->ip().'%')
             ->latest()
@@ -72,29 +71,17 @@ class GuestbookPostsController extends Controller
             $remainingTime = Carbon::now()
                 ->diffInSeconds($lastPost->created_at);
             if ($remainingTime < 60) {
-                $timeoutReached = true;
+                $request->session()
+                    ->flash(
+                        'error',
+                        'Zu viele Einträge in zu kurzer Zeit. Bitte probieren Sie es nachher nochmal.'
+                    );
+
+                return redirect()->action([
+                    GuestbookPostsController::class, 'create',
+                ])
+                    ->withInput();
             }
-        }
-
-        // Set a timeout for cumulative entries
-        $postsInTheLastHour = GuestbookPost::query()
-            ->whereTime('created_at', '>=', Carbon::now()->subHour())
-            ->count();
-        if ($postsInTheLastHour >= 30) {
-            $timeoutReached = true;
-        }
-
-        if ($timeoutReached) {
-            $request->session()
-                ->flash(
-                    'error',
-                    'Zu viele Einträge in zu kurzer Zeit. Bitte probieren Sie es nachher nochmal.'
-                );
-
-            return redirect()->action([
-                GuestbookPostsController::class, 'create',
-            ])
-                ->withInput();
         }
 
         $post = $request->all();
