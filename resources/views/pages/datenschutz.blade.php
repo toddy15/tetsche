@@ -24,7 +24,7 @@
     </p>
     <h2>Cookies</h2>
     <p>
-        Die Internetseiten verwenden teilweise sogenannte Cookies.
+        Die Internetseiten verwenden Cookies.
         Cookies richten auf Ihrem Rechner keinen Schaden an und
         enthalten keine Viren. Cookies dienen dazu, unser Angebot
         nutzerfreundlicher, effektiver und sicherer zu machen.
@@ -32,11 +32,9 @@
         abgelegt werden und die Ihr Browser speichert.
     </p>
     <p>
-        Die meisten der von uns verwendeten Cookies sind sogenannte
+        Alle von uns verwendeten Cookies sind technisch notwendige
         »Session-Cookies«. Sie werden nach Ende Ihres Besuchs automatisch
-        gelöscht. Andere Cookies bleiben auf Ihrem Endgerät gespeichert,
-        bis Sie diese löschen. Diese Cookies ermöglichen es uns,
-        Ihren Browser beim nächsten Besuch wiederzuerkennen.
+        gelöscht.
     </p>
     <h2>Server-Log-Files</h2>
     <p>
