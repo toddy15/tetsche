@@ -251,7 +251,11 @@ it('ensures a maximum number of posts in a given interval', function () {
 it('does not count posts at the same time on another day', function () {
     // Insert 30 entries at the same time on different days
     $start = Carbon::createFromFormat('Y-m-d H:i:s', '2023-10-06 10:30:00');
+    expect($start)->toBeInstanceOf(Carbon::class);
     for ($day = 6; $day <= 9; $day++) {
+        // The expect() call is not recognized by PHPStan
+        // to ensure $start is not false.
+        // @phpstan-ignore-next-line
         Carbon::setTestNow($start->setDay($day));
         GuestbookPost::factory()->count(30)->create();
     }
