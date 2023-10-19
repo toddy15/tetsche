@@ -28,8 +28,8 @@ updates:
       timezone: 'Europe/Berlin'
     versioning-strategy: increase
 
-  - package-ecosystem: "github-actions"
-    directory: "/"
+  - package-ecosystem: 'github-actions'
+    directory: '/'
     schedule:
-      interval: "weekly"
+      interval: 'weekly'
     versioning-strategy: increase
