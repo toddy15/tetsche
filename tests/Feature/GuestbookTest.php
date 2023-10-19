@@ -247,3 +247,20 @@ it('ensures a maximum number of posts in a given interval', function () {
         ->assertSessionMissing('error')
         ->assertRedirect(route('gaestebuch.index'));
 });
+
+it('does not count posts at the same time on another day', function () {
+    // Insert 30 entries at the same time on different days
+    $start = Carbon::createFromFormat('Y-m-d H:i:s', '2023-10-06 10:30:00');
+    for ($day = 6; $day <= 9; $day++) {
+        Carbon::setTestNow($start->setDay($day));
+        GuestbookPost::factory()->count(30)->create();
+    }
+
+    // This entry should now be allowed
+    Carbon::setTestNow('2023-10-10 10:05:00');
+    $entry = GuestbookPost::factory()->raw();
+    post(route('gaestebuch.store'), $entry)
+        ->assertSessionHasNoErrors()
+        ->assertSessionMissing('error')
+        ->assertRedirect(route('gaestebuch.index'));
+});
