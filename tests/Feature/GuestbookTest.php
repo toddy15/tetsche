@@ -179,8 +179,7 @@ it('sets a timeout between posts', function () {
 
     Carbon::setTestNow('2023-09-29 10:00:59');
     post(route('gaestebuch.store'), $entry_b)
-        ->assertSessionHas('error')
-        ->assertRedirect(route('gaestebuch.create'));
+        ->assertTooManyRequests();
 });
 
 it('creates a new entry after the timeout has expired', function () {
@@ -220,48 +219,26 @@ it('lets two different guests create new entries before the timeout has expired'
 });
 
 it('ensures a maximum number of posts in a given interval', function () {
-    Carbon::setTestNow('2023-10-11 10:00:00');
-    // Insert 29 entries
-    GuestbookPost::factory()->count(29)->create();
-
-    // Insert last allowed entry
-    Carbon::setTestNow('2023-10-11 10:05:00');
-    $entry = GuestbookPost::factory()->raw();
-    post(route('gaestebuch.store'), $entry)
-        ->assertSessionHasNoErrors()
-        ->assertSessionMissing('error')
-        ->assertRedirect(route('gaestebuch.index'));
-
-    // This entry should be rejected
-    Carbon::setTestNow('2023-10-11 11:00:00');
-    $entry = GuestbookPost::factory()->raw();
-    post(route('gaestebuch.store'), $entry)
-        ->assertSessionHas('error')
-        ->assertRedirect(route('gaestebuch.create'));
-
-    // This entry should be allowed again
-    Carbon::setTestNow('2023-10-11 11:00:01');
-    $entry = GuestbookPost::factory()->raw();
-    post(route('gaestebuch.store'), $entry)
-        ->assertSessionHasNoErrors()
-        ->assertSessionMissing('error')
-        ->assertRedirect(route('gaestebuch.index'));
-});
-
-it('does not count posts at the same time on another day', function () {
-    // Insert 30 entries at the same time on different days
-    $start = Carbon::createFromFormat('Y-m-d H:i:s', '2023-10-06 10:30:00');
-    expect($start)->toBeInstanceOf(Carbon::class);
-    for ($day = 6; $day <= 9; $day++) {
-        // The expect() call is not recognized by PHPStan
-        // to ensure $start is not false.
-        // @phpstan-ignore-next-line
-        Carbon::setTestNow($start->setDay($day));
-        GuestbookPost::factory()->count(30)->create();
+    // Insert 30 entries
+    $time = Carbon::createFromTimeString('2023-10-11 10:00:00');
+    for ($count = 1; $count <= 30; $count++) {
+        Carbon::setTestNow($time);
+        $entry = GuestbookPost::factory()->raw();
+        post(route('gaestebuch.store'), $entry)
+            ->assertSessionHasNoErrors()
+            ->assertSessionMissing('error')
+            ->assertRedirect(route('gaestebuch.index'));
+        $time->addMinute();
     }
 
-    // This entry should now be allowed
-    Carbon::setTestNow('2023-10-10 10:05:00');
+    // This entry should be rejected
+    Carbon::setTestNow('2023-10-11 10:59:59');
+    $entry = GuestbookPost::factory()->raw();
+    post(route('gaestebuch.store'), $entry)
+        ->assertTooManyRequests();
+
+    // This entry should be allowed again
+    Carbon::setTestNow('2023-10-11 11:00:00');
     $entry = GuestbookPost::factory()->raw();
     post(route('gaestebuch.store'), $entry)
         ->assertSessionHasNoErrors()

@@ -36,5 +36,13 @@ class RouteServiceProvider extends ServiceProvider
             Route::middleware('web')
                 ->group(base_path('routes/web.php'));
         });
+
+        // Allow 30 posts per hour, but only one per minute from the same IP
+        RateLimiter::for('public_comment', function (Request $request) {
+            return [
+                Limit::perHour(30),
+                Limit::perMinute(1)->by($request->ip()),
+            ];
+        });
     }
 }

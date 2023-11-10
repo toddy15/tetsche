@@ -42,8 +42,11 @@ Route::get('/', HomepageController::class)->name('homepage');
 Route::resource('/gaestebuch', GuestbookPostsController::class)->only([
     'index',
     'create',
-    'store',
 ]);
+// Use rate limiting only for storing new entries: 30 entries in 60 minutes
+Route::resource('/gaestebuch', GuestbookPostsController::class)->only([
+    'store',
+])->middleware('throttle:public_comment');
 Route::get('/gaestebuch/suche', GuestBookSearchController::class);
 
 // Cartoons
