@@ -14,10 +14,10 @@
     "dynamicImports": [
       "node_modules/bootstrap/dist/js/bootstrap.esm.js"
     ],
-    "file": "assets/app-eb6e0cb9.js",
+    "file": "assets/app-9916be17.js",
     "isEntry": true,
     "src": "resources/js/app.js",
-    "integrity": "sha384-YSzRRrS5qPAw23oTfLt/PAc8fQGU0PyQCo2ObiXh6uYJI6CN02L7ilq7AgRU76Yj"
+    "integrity": "sha384-4LwKrUhp9S+m8V6/l/vAYXH5FWTH4gJYY2QI7GQRttNOLBYdO+VsGXDoMzB6I6ex"
   },
   "resources/sass/app.scss": {
     "file": "assets/app-7c3c7d6f.css",
