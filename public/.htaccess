@@ -65,6 +65,8 @@
 
 # Use some privacy enhancing headers according to
 # https://observatory.mozilla.org/
+# and
+# https://dri.es/headers
 <IfModule mod_headers.c>
     # Block site from being framed with X-Frame-Options and CSP
     #Header add Content-Security-Policy "frame-ancestors 'none'"
@@ -82,4 +84,7 @@
 
     # Disable referrers for all browsers
     Header add Referrer-Policy "no-referrer"
+
+    # Disable access to device features like the camera, microphone, location, accelerometer and much more.
+    Header add Permissions-Policy "accelerometer=(), camera=(), geolocation=(), gyroscope=(), microphone=(), payment=(), usb=()"
 </IfModule>
