@@ -1,5 +1,8 @@
 import './bootstrap';
 
+// Handle static assets with vite
+import.meta.glob(['../images/suche.svg']);
+
 // Function for archive to show the solution
 const solutionButton = document.querySelector('#solution-button');
 if (solutionButton !== null) {
