@@ -8,6 +8,7 @@
 
 ## TODO
 
+* [ ] Get rid of mix() calls in views
 * [ ] Enable FormRequest for GuestbookPostsController.php
 * [ ] Implement "Dies und das"
 * [ ] Refactor spam handling
