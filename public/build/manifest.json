@@ -10,6 +10,11 @@
     "src": "resources/fonts/Assistant-VariableFont_wght.woff2",
     "integrity": "sha384-dN6auA0sud6yVtwl+8P+5Sw44mtx4KmOwpGw9uL8RLdK6KILbxXrKO6gr9p48iWe"
   },
+  "resources/images/suche.svg": {
+    "file": "assets/suche-CYNzKRbu.svg",
+    "src": "resources/images/suche.svg",
+    "integrity": "sha384-01DG+tIAqJ+GnupLUpeapL/0g1EbAvCac55AA5sR+5FjeNIm8AGJv+7aZxpNurJc"
+  },
   "resources/js/app.js": {
     "file": "assets/app-BATAXhzO.js",
     "src": "resources/js/app.js",
