@@ -10,7 +10,6 @@ use App\Http\Controllers\HomepageController;
 use App\Http\Controllers\NewCartoonController;
 use App\Http\Controllers\PublicationDateController;
 use App\Http\Controllers\SpamController;
-use App\Http\Middleware\Authenticate;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -65,7 +64,7 @@ Route::resource('/archiv', ArchiveController::class)
     ->only(['index', 'show']);
 
 // Protected routes
-Route::middleware(Authenticate::class)->group(function () {
+Route::middleware('auth')->group(function () {
     Route::resource('/gaestebuch', GuestbookPostsController::class)->only([
         'edit',
         'update',
