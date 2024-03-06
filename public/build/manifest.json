@@ -22,7 +22,7 @@
     "dynamicImports": [
       "node_modules/bootstrap/dist/js/bootstrap.esm.js"
     ],
-    "integrity": "sha384-x9KY75tGzzuZp+gzLskWAJ86gzS/YHd1xyuczgSNOqZ6OvbjtJiCkTC7Gj/f7Y6C"
+    "integrity": "sha384-w2mayeiWVPhJ3rDi4OiEecqhgL1hah6LHnOkgZZA0N8LpAqzTyw6/O8pxzlynQK1"
   },
   "resources/sass/app.scss": {
     "file": "assets/app-DeykALfE.css",
