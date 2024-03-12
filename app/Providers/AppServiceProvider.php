@@ -44,8 +44,6 @@ class AppServiceProvider extends ServiceProvider
             return Limit::perMinute(60)->by($request->user()?->id ?: $request->ip());
         });
 
-
-
         // Allow 30 posts per hour, but only one per minute from the same IP
         RateLimiter::for('public_comment', function (Request $request) {
             return [
