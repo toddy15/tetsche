@@ -1,6 +1,7 @@
 {
   "node_modules/bootstrap/dist/js/bootstrap.esm.js": {
     "file": "assets/bootstrap.esm-DrZxKEFm.js",
+    "name": "bootstrap.esm",
     "src": "node_modules/bootstrap/dist/js/bootstrap.esm.js",
     "isDynamicEntry": true,
     "integrity": "sha384-oCu7A8SdhsC3std+9yJmu8VebJ9wNsDXHCxgVNidCrBdlIYttwH89tQ1oHsYimRp"
@@ -16,13 +17,14 @@
     "integrity": "sha384-01DG+tIAqJ+GnupLUpeapL/0g1EbAvCac55AA5sR+5FjeNIm8AGJv+7aZxpNurJc"
   },
   "resources/js/app.js": {
-    "file": "assets/app-DFwVM4Qw.js",
+    "file": "assets/app-D_uzenYA.js",
+    "name": "app",
     "src": "resources/js/app.js",
     "isEntry": true,
     "dynamicImports": [
       "node_modules/bootstrap/dist/js/bootstrap.esm.js"
     ],
-    "integrity": "sha384-w2mayeiWVPhJ3rDi4OiEecqhgL1hah6LHnOkgZZA0N8LpAqzTyw6/O8pxzlynQK1"
+    "integrity": "sha384-alTnv+bHYxVoELr9BoxE3j09xcJT+v4pqjfe/FfyFEuw5kXqGrazRYu4kRo0a09C"
   },
   "resources/sass/app.scss": {
     "file": "assets/app-DeykALfE.css",
