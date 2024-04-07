@@ -3,6 +3,50 @@
 @section('content')
     <div class="row">
         <div class="col-12 col-md-6">
+            <a href="https://www.carlsen.de/hardcover/tetsche-prallvoll/978-3-8303-3691-4">
+                <img class="d-block mx-auto img-fluid" src="{{ asset('images/buecher/prallvoll.webp') }}"
+                    alt="Tetsche – Prallvoll!" width="480" height="585" />
+            </a>
+        </div>
+        <div class="col-md-6">
+            <h2>Tetsche – Prallvoll!</h2>
+            <p>
+                Jahrzehntelang hatte Tetsche eine eigene Seite im Magazin stern.
+                Mit seinen unverwechselbaren Cartoons und Rebussen und seiner
+                unbändigen Freude an Wortspielen und Kalauern wurde er zu einem
+                der bekanntesten deutschen Cartoonisten. Inzwischen arbeitet er
+                an Cartoons, Grafiken und Skulpturen, die in vielen Ausstellungen
+                deutschlandweit zu sehen sind. In diesem Buch ist das Neueste
+                und Beste aus den letzten Jahren versammelt.
+            </p>
+            <p>
+                Mit Texten über Tetsche und sein Werk von Piet Klocke,
+                Til Mette und Hasnain Kazim.</p>
+            <p>
+                Lappan<br />
+                ISBN 978-3-8303-3691-4
+            </p>
+            <p>
+                <a href="https://www.carlsen.de/hardcover/tetsche-prallvoll/978-3-8303-3691-4" class="btn btn-danger">Carlsen
+                    Buchverlag</a>
+            </p>
+            <p>
+                <a href="https://www.hugendubel.de/de/buch_gebunden/tetsche-tetsche_prallvoll-47047812-produkt-details.html"
+                    class="btn btn-danger">Bei Hugendubel ansehen</a>
+            </p>
+            <p>
+                <a href="https://www.thalia.de/shop/home/artikeldetails/A1069847139" class="btn btn-danger">Bei Thalia
+                    ansehen</a>
+            </p>
+            <p>
+                <a href="https://www.amazon.de/Tetsche-Prallvoll-Cartoons-Rebusse-Installationen/dp/3830336918"
+                    class="btn btn-danger">Bei
+                    Amazon ansehen</a>
+            </p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-md-6">
             <a href="https://www.kjm-buchverlag.de/produkt/tetsche-open-air/">
                 <img class="d-block mx-auto img-fluid" src="{{ asset('images/buecher/open-air-stade.jpg') }}"
                     alt="Tetsche Open Air" width="480" height="652" />
