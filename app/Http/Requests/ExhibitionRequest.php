@@ -11,7 +11,7 @@ class ExhibitionRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return auth()->check();
     }
 
     /**
@@ -22,7 +22,10 @@ class ExhibitionRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'title' => ['required'],
+            'description' => ['required'],
+            'image' => ['required'],
+            'show_until' => ['required'],
         ];
     }
 }

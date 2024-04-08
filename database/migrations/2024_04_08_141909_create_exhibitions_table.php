@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('exhibitions', function (Blueprint $table) {
             $table->id();
+            $table->string('title');
+            $table->text('description');
+            $table->string('image');
+            $table->dateTime('show_until');
             $table->timestamps();
         });
     }

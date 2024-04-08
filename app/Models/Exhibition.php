@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Exhibition extends Model
 {
     use HasFactory;
+
+    public $fillable = [
+        'title',
+        'description',
+        'image',
+        'show_until',
+    ];
 }
