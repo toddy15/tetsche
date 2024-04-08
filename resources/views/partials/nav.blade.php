@@ -31,6 +31,10 @@
                     <a class="nav-link {{ Request::is('gaestebuch') ? 'active' : '' }}" {!! Request::is('gaestebuch') ? 'aria-current="page"' : '' !!}
                         href="{{ route('gaestebuch.index') }}">Gästebuch</a>
                 </li>
+                <li class="nav-item {{ Request::is('ausstellungen') ? 'active' : '' }}">
+                    <a class="nav-link {{ Request::is('ausstellungen') ? 'active' : '' }}" {!! Request::is('ausstellungen') ? 'aria-current="page"' : '' !!}
+                        href="{{ route('ausstellungen.index') }}">Ausstellungen</a>
+                </li>
                 <li class="nav-item {{ Route::is('impressum') ? 'active' : '' }}">
                     <a class="nav-link {{ Route::is('impressum') ? 'active' : '' }}" {!! Route::is('impressum') ? 'aria-current="page"' : '' !!}
                         href="{{ route('impressum') }}">Impressum</a>
