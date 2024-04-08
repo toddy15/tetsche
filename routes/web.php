@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use App\Http\Controllers\ArchiveController;
 use App\Http\Controllers\CartoonsController;
+use App\Http\Controllers\ExhibitionsController;
 use App\Http\Controllers\GuestbookPostsController;
 use App\Http\Controllers\GuestBookSearchController;
 use App\Http\Controllers\HomepageController;
@@ -65,6 +66,10 @@ Route::resource('/archiv', ArchiveController::class)
     ])
     ->only(['index', 'show']);
 
+// Exhibitions
+Route::resource('/ausstellungen', ExhibitionsController::class)
+    ->only(['index']);
+
 // Protected routes
 Route::middleware('auth')->group(function () {
     Route::resource('/gaestebuch', GuestbookPostsController::class)->only([
@@ -86,6 +91,10 @@ Route::middleware('auth')->group(function () {
         NewCartoonController::class,
         'forceNewCartoon',
     ]);
+
+    // Exhibitions
+    Route::resource('/ausstellungen', ExhibitionsController::class)
+        ->except(['index', 'show']);
 });
 
 // Close registration

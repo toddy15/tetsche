@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('title');
             $table->text('description');
             $table->string('image');
-            $table->dateTime('show_until');
+            $table->date('show_until');
             $table->timestamps();
         });
     }
