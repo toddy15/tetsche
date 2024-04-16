@@ -18,8 +18,8 @@
 
 <div class="mb-4">
     <label class="form-label" for="image">Bild:</label>
-    <input type="text" class="form-control {{ $errors->has('image') ? 'is-invalid' : '' }}" id="image" name="image"
-        placeholder="Bild" required value="{{ old('image') ?? ($exhibition->image ?? '') }}">
+    <input type="text" class="form-control {{ $errors->has('image') ? 'is-invalid' : '' }}" id="image"
+        name="image" placeholder="Bild" required value="{{ old('image') ?? ($exhibition->image ?? '') }}">
     @error('image')
         <div class="invalid-feedback">{{ $message }}</div>
     @enderror
@@ -27,8 +27,9 @@
 
 <div class="mb-4">
     <label class="form-label" for="show_until">Bis:</label>
-    <input type="text" class="form-control {{ $errors->has('show_until') ? 'is-invalid' : '' }}" id="show_until" name="show_until"
-        placeholder="Bild" required value="{{ old('show_until') ?? ($exhibition->show_until ?? '') }}">
+    <input type="text" class="form-control {{ $errors->has('show_until') ? 'is-invalid' : '' }}" id="show_until"
+        name="show_until" placeholder="Bild" required
+        value="{{ old('show_until') ?? ($exhibition->show_until ?? '') }}">
     @error('show_until')
         <div class="invalid-feedback">{{ $message }}</div>
     @enderror

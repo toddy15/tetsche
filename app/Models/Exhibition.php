@@ -15,4 +15,19 @@ class Exhibition extends Model
         'image',
         'show_until',
     ];
+
+    public function image_width()
+    {
+        $size = getimagesize(public_path().'/images/exhibitions/'
+            .$this->image);
+
+        return $size ? $size[0] : 0;
+    }
+
+    public function image_height()
+    {
+        $size = getimagesize(public_path().'/images/exhibitions/'.$this->image);
+
+        return $size ? $size[1] : 0;
+    }
 }
