@@ -66,7 +66,7 @@ class ExhibitionsController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Exhibition $ausstellungen)
+    public function destroy(Exhibition $ausstellungen): RedirectResponse
     {
         $ausstellungen->delete();
 
