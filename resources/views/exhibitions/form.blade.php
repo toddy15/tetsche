@@ -19,7 +19,7 @@
 <div class="mb-4">
     <label class="form-label" for="image">Bild:</label>
     <input type="text" class="form-control {{ $errors->has('image') ? 'is-invalid' : '' }}" id="image"
-        name="image" placeholder="Bild" required value="{{ old('image') ?? ($exhibition->image ?? '') }}">
+        name="image" placeholder="Bild" value="{{ old('image') ?? ($exhibition->image ?? '') }}">
     @error('image')
         <div class="invalid-feedback">{{ $message }}</div>
     @enderror

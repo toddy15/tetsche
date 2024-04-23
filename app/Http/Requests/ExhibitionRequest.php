@@ -24,8 +24,8 @@ class ExhibitionRequest extends FormRequest
         return [
             'title' => ['required'],
             'description' => ['required'],
-            'image' => ['required'],
-            'show_until' => ['required'],
+            'image' => ['nullable', 'image', 'mimes:jpeg,jpg,webp'],
+            'show_until' => ['required', 'date'],
         ];
     }
 }

@@ -7,10 +7,12 @@
         <div class="text-center">
             <h2>{{ $exhibition->title }}</h2>
             <div>
-                {{ $exhibition->description }}
+                {!! $exhibition->description !!}
             </div>
-            <img src="{{ asset($exhibition->image) }}" class="img-fluid" width="{{ $exhibition->image_width }}"
-                height="{{ $exhibition->image_height }}" alt="Bild der Ausstellung" />
+            @isset($exhibition->image)
+                <img src="{{ asset($exhibition->image) }}" class="img-fluid" width="{{ $exhibition->image_width }}"
+                     height="{{ $exhibition->image_height }}" alt="Bild der Ausstellung" />
+            @endisset
         </div>
     @empty
         <p>

@@ -63,6 +63,8 @@
                             </li>
                             <li><a class="dropdown-item" href="{{ route('publication_dates.index') }}">Administration
                                     der Cartoons</a></li>
+                            <li><a class="dropdown-item" href="{{ route('ausstellungen.create') }}">Administration
+                                    der Ausstellungen</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
