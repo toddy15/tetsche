@@ -6,9 +6,10 @@ use function Pest\Laravel\get;
 
 test('the homepage returns ok', function () {
     get(route('homepage'))
-        ->assertOk()
-        ->assertViewIs('pages.homepage')
-        ->assertViewHas('src')
-        ->assertViewHas('width')
-        ->assertViewHas('height');
-})->skip();
+        ->assertOk();
+        // @ TODO reenable after sonderseite has been deactivated
+        // ->assertViewIs('pages.homepage')
+        // ->assertViewHas('src')
+        // ->assertViewHas('width')
+        // ->assertViewHas('height');
+});
