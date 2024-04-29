@@ -44,7 +44,7 @@
                 <tr>
                     <td>
                         {{ $guestbook_post->name }}<br />
-                        <span>{{ $guestbook_post->created_at->locale('de')->isoFormat('Do MMMM YYYY, HH:mm') }}</span>
+                        <span><x-datetime :date="$guestbook_post->created_at" /></span>
                     </td>
                     <td>
                         <p>
