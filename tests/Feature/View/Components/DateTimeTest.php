@@ -23,3 +23,9 @@ it('returns a localized date from the Datetime component', function () {
     $this->component(Datetime::class, ['date' => $date])
         ->assertSee('15. März 2024, 18:13');
 });
+
+it('uses Europe/Berlin as timezone in the Datetime component', function () {
+    $date = Carbon::parse('2024-03-15 17:13:45', 'Europe/Berlin');
+    $this->component(Datetime::class, ['date' => $date])
+        ->assertSee('15. März 2024, 17:13');
+});
