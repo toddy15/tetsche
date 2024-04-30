@@ -194,3 +194,8 @@ parameters:
 			message: "#^Cannot access property \\$rebus on App\\\\Models\\\\Cartoon\\|null\\.$#"
 			count: 1
 			path: tests/Feature/PublicationDateTest.php
+
+		-
+			message: "#^Undefined variable\\: \\$this$#"
+			count: 4
+			path: tests/Feature/View/Components/DateTimeTest.php
