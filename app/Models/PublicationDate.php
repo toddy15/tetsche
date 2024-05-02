@@ -53,6 +53,7 @@ class PublicationDate extends Model
         // Add 6 hours to the current time, so that the
         // cartoon is published at 18:00 one day before.
         $date = Carbon::now()
+            ->timezone('Europe/Berlin')
             ->addHours(6)
             ->format('Y-m-d');
 

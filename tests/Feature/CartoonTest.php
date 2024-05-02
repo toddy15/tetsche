@@ -41,7 +41,8 @@ test('a guest can view the next current cartoon', function () {
 });
 
 test('a guest can view the next cartoon at the correct time', function () {
-    Carbon::setTestNow('2022-03-30 17:59:59');
+    // The given time is UTC -> convert to 17:59:59 CEST
+    Carbon::setTestNow('2022-03-30 15:59:59');
 
     get('/cartoon')
         ->assertOk()
@@ -51,7 +52,8 @@ test('a guest can view the next cartoon at the correct time', function () {
         )
         ->assertSeeText('Auflösung nächste Woche');
 
-    Carbon::setTestNow('2022-03-30 18:00:00');
+    // The given time is UTC -> convert to 18:00:00 CEST
+    Carbon::setTestNow('2022-03-30 16:00:00');
 
     get('/cartoon')
         ->assertOk()
