@@ -1,9 +1,16 @@
 includes:
-    - ./vendor/larastan/larastan/extension.neon
     - phpstan-baseline.neon
+    - vendor/larastan/larastan/extension.neon
+    - vendor/tomasvotruba/type-coverage/config/extension.neon
 
 parameters:
-	level: max
-	paths:
-		- app
-		- tests
+    level: max
+    paths:
+        - app
+        - tests
+    type_coverage:
+        return: 100
+        param: 95
+        property: 70
+        constant: 100
+        declare: 68
