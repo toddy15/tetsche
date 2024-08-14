@@ -5,12 +5,12 @@ declare(strict_types=1);
 use App\Services\Spamfilter;
 
 it('can get a spamfilter instance', function () {
-    $s = new Spamfilter();
+    $s = new Spamfilter;
     expect($s)->toBeInstanceOf(Spamfilter::class);
 });
 
 it('can parse a text into tokens', function () {
-    $s = new Spamfilter();
+    $s = new Spamfilter;
 
     $result = $s->parse('Those are words');
     expect($result)->toBe([
@@ -30,7 +30,7 @@ it('can parse a text into tokens', function () {
 });
 
 it('recognizes certain IP addresses', function () {
-    $s = new Spamfilter();
+    $s = new Spamfilter;
 
     // Test empty string
     $result = $s->isBlockedSubnet('');

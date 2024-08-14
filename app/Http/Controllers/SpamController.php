@@ -47,7 +47,7 @@ class SpamController extends Controller
             $text = $post->name.' '.$post->message;
             $texts['spam'][] = $text;
         }
-        $spamfilter = new Spamfilter();
+        $spamfilter = new Spamfilter;
         $spamfilter->initializeAll($texts);
         $request
             ->session()
@@ -75,7 +75,7 @@ class SpamController extends Controller
             ->simplePaginate(10);
 
         // Choose a random image
-        $image = new Images();
+        $image = new Images;
         $guestbook_image = $image->getRandomImageForGuestbook();
 
         return view('guestbook_posts.index', [

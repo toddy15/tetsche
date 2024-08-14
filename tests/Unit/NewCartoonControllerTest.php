@@ -5,7 +5,7 @@ declare(strict_types=1);
 use App\Services\Cartoons;
 
 it('returns the next thursday for a given date', function (string $date, string $thursday) {
-    $c = new Cartoons();
+    $c = new Cartoons;
     expect($c->getNextThursday($date))->toBe($thursday);
 })->with([
     ['2023-03-15', '2023-03-16'],
@@ -21,7 +21,7 @@ it('returns the next thursday for a given date', function (string $date, string 
 ]);
 
 it('returns the last thursday for a given date', function (string $date, string $thursday) {
-    $c = new Cartoons();
+    $c = new Cartoons;
     expect($c->getLastThursday($date))->toBe($thursday);
 })->with([
     ['2023-03-15', '2023-03-09'],
@@ -36,7 +36,7 @@ it('returns the last thursday for a given date', function (string $date, string 
 ]);
 
 it('returns the last thursday for special dates', function (string $date, string $thursday) {
-    $c = new Cartoons();
+    $c = new Cartoons;
     expect($c->getLastThursday($date))->toBe($thursday);
 })->with([
     // easter

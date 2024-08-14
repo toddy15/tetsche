@@ -19,9 +19,7 @@ class NewGuestbookPost extends Mailable
      *
      * @return void
      */
-    public function __construct(public GuestbookPost $guestbook_post)
-    {
-    }
+    public function __construct(public GuestbookPost $guestbook_post) {}
 
     /**
      * Build the message.

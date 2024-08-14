@@ -29,7 +29,7 @@ class GuestbookPostsController extends Controller
             ->simplePaginate(10);
 
         // Convert the smileys
-        $utils = new Utils();
+        $utils = new Utils;
         $guestbook_posts->transform(function (GuestbookPost $post) use ($utils) {
             $post->message = $utils->replaceSmileys($post->message);
             if ($post->cheffe) {
@@ -40,7 +40,7 @@ class GuestbookPostsController extends Controller
         });
 
         // Choose a random image
-        $image = new Images();
+        $image = new Images;
         $guestbook_image = $image->getRandomImageForGuestbook();
 
         return view('guestbook_posts.index', [
@@ -55,14 +55,14 @@ class GuestbookPostsController extends Controller
     public function create(): View
     {
         return view('guestbook_posts.create', [
-            'buttons' => (new Utils())->getSmileysButtons(),
+            'buttons' => (new Utils)->getSmileysButtons(),
         ]);
     }
 
     public function store(Request $request): RedirectResponse
     {
         $post = $request->all();
-        $spamfilter = new Spamfilter();
+        $spamfilter = new Spamfilter;
         $text = $post['name'].' '.$post['message'];
         // Use IP address and browser identification for more robust spam detection
         $spam_detection = 'IP: '.$request->ip();
@@ -149,7 +149,7 @@ class GuestbookPostsController extends Controller
     {
         $guestbook_post = GuestbookPost::findOrFail($id);
         // Calculate spam score
-        $spamfilter = new Spamfilter();
+        $spamfilter = new Spamfilter;
         $text = $guestbook_post->name.' '.$guestbook_post->message;
         $guestbook_post->score = round(
             $spamfilter->classify($text, $guestbook_post->spam_detection) * 100,
@@ -158,7 +158,7 @@ class GuestbookPostsController extends Controller
 
         return view('guestbook_posts.edit', [
             'guestbook_post' => $guestbook_post,
-            'buttons' => (new Utils())->getSmileysButtons(),
+            'buttons' => (new Utils)->getSmileysButtons(),
         ]);
     }
 
@@ -169,7 +169,7 @@ class GuestbookPostsController extends Controller
     {
         $guestbook_post = GuestbookPost::findOrFail($id);
         // First, unlearn status.
-        $spamfilter = new Spamfilter();
+        $spamfilter = new Spamfilter;
         $spamfilter->unlearnStatus($guestbook_post);
         $new_data = $request->all();
         // Add a safety net for accidentally choosing the wrong category
@@ -190,7 +190,7 @@ class GuestbookPostsController extends Controller
     public function destroy(Request $request, int $id): RedirectResponse
     {
         $guestbook_post = GuestbookPost::findOrFail($id);
-        $spamfilter = new Spamfilter();
+        $spamfilter = new Spamfilter;
         $spamfilter->unlearnStatus($guestbook_post);
         GuestbookPost::destroy($id);
         $request->session()->flash('info', 'Der Eintrag wurde gelöscht.');
