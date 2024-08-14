@@ -5,12 +5,14 @@ declare(strict_types=1);
 namespace App\Models;
 
 use Carbon\Carbon;
+use Database\Factories\CartoonFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Cartoon extends Model
 {
+    /** @use HasFactory<CartoonFactory> */
     use HasFactory;
 
     protected $fillable = ['filename', 'rebus'];
