@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "73d9d461699bf60c892bcf94b87173e8",
+    "content-hash": "7f95d81bf6d80b0e72ecb0148aa3c4ba",
     "packages": [
         {
             "name": "brick/math",
@@ -7406,16 +7406,16 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "1.12.3",
+            "version": "1.12.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "0fcbf194ab63d8159bb70d9aa3e1350051632009"
+                "reference": "dc4d2f145a88ea7141ae698effd64d9df46527ae"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/0fcbf194ab63d8159bb70d9aa3e1350051632009",
-                "reference": "0fcbf194ab63d8159bb70d9aa3e1350051632009",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/dc4d2f145a88ea7141ae698effd64d9df46527ae",
+                "reference": "dc4d2f145a88ea7141ae698effd64d9df46527ae",
                 "shasum": ""
             },
             "require": {
@@ -7460,7 +7460,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-09-09T08:10:35+00:00"
+            "time": "2024-10-06T15:03:59+00:00"
         },
         {
             "name": "phpunit/php-code-coverage",
@@ -9421,16 +9421,16 @@
         },
         {
             "name": "tomasvotruba/type-coverage",
-            "version": "0.3.1",
+            "version": "1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/TomasVotruba/type-coverage.git",
-                "reference": "dd47f9506346d12b741b0ca6f98f9d748ca982d5"
+                "reference": "01498b5cef67fa433e2f9f38b696d0ecd5131dca"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/TomasVotruba/type-coverage/zipball/dd47f9506346d12b741b0ca6f98f9d748ca982d5",
-                "reference": "dd47f9506346d12b741b0ca6f98f9d748ca982d5",
+                "url": "https://api.github.com/repos/TomasVotruba/type-coverage/zipball/01498b5cef67fa433e2f9f38b696d0ecd5131dca",
+                "reference": "01498b5cef67fa433e2f9f38b696d0ecd5131dca",
                 "shasum": ""
             },
             "require": {
@@ -9462,7 +9462,7 @@
             ],
             "support": {
                 "issues": "https://github.com/TomasVotruba/type-coverage/issues",
-                "source": "https://github.com/TomasVotruba/type-coverage/tree/0.3.1"
+                "source": "https://github.com/TomasVotruba/type-coverage/tree/1.0.0"
             },
             "funding": [
                 {
@@ -9474,7 +9474,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-06-14T15:11:04+00:00"
+            "time": "2024-10-01T15:41:12+00:00"
         }
     ],
     "aliases": [],
