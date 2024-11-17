@@ -96,11 +96,6 @@ parameters:
 			path: app/Services/Images.php
 
 		-
-			message: "#^Argument of an invalid type array\\<int, string\\>\\|false supplied for foreach, only iterables are supported\\.$#"
-			count: 3
-			path: app/Services/Spamfilter.php
-
-		-
 			message: "#^Cannot access property \\$count_ham on mixed\\.$#"
 			count: 6
 			path: app/Services/Spamfilter.php
@@ -169,8 +164,3 @@ parameters:
 			message: "#^Cannot access property \\$rebus on App\\\\Models\\\\Cartoon\\|null\\.$#"
 			count: 1
 			path: tests/Feature/PublicationDateTest.php
-
-		-
-			message: "#^Undefined variable\\: \\$this$#"
-			count: 4
-			path: tests/Feature/View/Components/DateTimeTest.php
