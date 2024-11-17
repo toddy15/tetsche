@@ -35,6 +35,9 @@ class PublicationDate extends Model
 
     /**
      * Scope the query to archived dates.
+     *
+     * @param  Builder<PublicationDate>  $query
+     * @return Builder<PublicationDate>
      */
     public function scopeArchived(Builder $query): Builder
     {
@@ -79,6 +82,8 @@ class PublicationDate extends Model
 
     /**
      * Get the cartoon that has this publication date.
+     *
+     * @return BelongsTo<Cartoon, $this>
      */
     public function cartoon(): BelongsTo
     {

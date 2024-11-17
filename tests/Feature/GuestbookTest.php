@@ -142,9 +142,13 @@ test('a guest can post a new entry', function () {
         ->assertSessionHasNoErrors()
         ->assertRedirect(route('gaestebuch.index'));
 
+    $name = $entry['name'];
+    $message = $entry['message'];
+    settype($name, 'string');
+    settype($message, 'string');
     get(route('gaestebuch.index'))
-        ->assertSeeText($entry['name'])
-        ->assertSeeText($entry['message']);
+        ->assertSeeText($name)
+        ->assertSeeText($message);
 });
 
 test('an entry must have a name', function () {

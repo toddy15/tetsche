@@ -76,32 +76,12 @@ parameters:
 			path: app/Models/Cartoon.php
 
 		-
-			message: "#^Method App\\\\Models\\\\Cartoon\\:\\:publicationDate\\(\\) return type with generic class Illuminate\\\\Database\\\\Eloquent\\\\Relations\\\\HasMany does not specify its types\\: TRelatedModel$#"
-			count: 1
-			path: app/Models/Cartoon.php
-
-		-
-			message: "#^Method App\\\\Models\\\\PublicationDate\\:\\:cartoon\\(\\) return type with generic class Illuminate\\\\Database\\\\Eloquent\\\\Relations\\\\BelongsTo does not specify its types\\: TRelatedModel, TChildModel$#"
-			count: 1
-			path: app/Models/PublicationDate.php
-
-		-
 			message: "#^Method App\\\\Models\\\\PublicationDate\\:\\:getCurrent\\(\\) should return App\\\\Models\\\\PublicationDate but returns App\\\\Models\\\\PublicationDate\\|null\\.$#"
 			count: 1
 			path: app/Models/PublicationDate.php
 
 		-
 			message: "#^Method App\\\\Models\\\\PublicationDate\\:\\:getOldestArchived\\(\\) should return App\\\\Models\\\\PublicationDate but returns App\\\\Models\\\\PublicationDate\\|null\\.$#"
-			count: 1
-			path: app/Models/PublicationDate.php
-
-		-
-			message: "#^Method App\\\\Models\\\\PublicationDate\\:\\:scopeArchived\\(\\) has parameter \\$query with generic class Illuminate\\\\Database\\\\Eloquent\\\\Builder but does not specify its types\\: TModelClass$#"
-			count: 1
-			path: app/Models/PublicationDate.php
-
-		-
-			message: "#^Method App\\\\Models\\\\PublicationDate\\:\\:scopeArchived\\(\\) return type with generic class Illuminate\\\\Database\\\\Eloquent\\\\Builder does not specify its types\\: TModelClass$#"
 			count: 1
 			path: app/Models/PublicationDate.php
 
@@ -168,11 +148,6 @@ parameters:
 		-
 			message: "#^Access to an undefined property Illuminate\\\\Database\\\\Eloquent\\\\Model\\:\\:\\$name\\.$#"
 			count: 4
-			path: tests/Feature/GuestbookTest.php
-
-		-
-			message: "#^Parameter \\#1 \\$value of method Illuminate\\\\Testing\\\\TestResponse\\:\\:assertSeeText\\(\\) expects array\\|string, mixed given\\.$#"
-			count: 2
 			path: tests/Feature/GuestbookTest.php
 
 		-

@@ -19,6 +19,8 @@ class Cartoon extends Model
 
     /**
      * Get the publication dates of the cartoon.
+     *
+     * @return HasMany<PublicationDate, $this>
      */
     public function publicationDate(): HasMany
     {
