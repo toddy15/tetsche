@@ -96,21 +96,6 @@ parameters:
 			path: app/Services/Images.php
 
 		-
-			message: "#^Cannot access property \\$count_ham on mixed\\.$#"
-			count: 6
-			path: app/Services/Spamfilter.php
-
-		-
-			message: "#^Cannot access property \\$count_spam on mixed\\.$#"
-			count: 6
-			path: app/Services/Spamfilter.php
-
-		-
-			message: "#^Cannot access property \\$token on mixed\\.$#"
-			count: 9
-			path: app/Services/Spamfilter.php
-
-		-
 			message: "#^Parameter \\#2 \\$spam_detection of method App\\\\Services\\\\Spamfilter\\:\\:addHam\\(\\) expects string, string\\|null given\\.$#"
 			count: 1
 			path: app/Services/Spamfilter.php
