@@ -16,7 +16,7 @@
     "ext-calendar": "*"
   },
   "require-dev": {
-    "fakerphp/faker": "^1.24.0",
+    "fakerphp/faker": "^1.24.1",
     "larastan/larastan": "^3.0.0",
     "laravel/pint": "^1.18.2",
     "laravel/sail": "^1.38.0",
