@@ -17,14 +17,14 @@
     "integrity": "sha384-01DG+tIAqJ+GnupLUpeapL/0g1EbAvCac55AA5sR+5FjeNIm8AGJv+7aZxpNurJc"
   },
   "resources/js/app.js": {
-    "file": "assets/app-CI_o7ZI0.js",
+    "file": "assets/app-CrSXBfV0.js",
     "name": "app",
     "src": "resources/js/app.js",
     "isEntry": true,
     "dynamicImports": [
       "node_modules/bootstrap/dist/js/bootstrap.esm.js"
     ],
-    "integrity": "sha384-nAvwhTvfAHrZsveKWErvlwFvR3m+Y9eWH5pccjuPzcpeyqDLseAiWH9A2OQuzaGn"
+    "integrity": "sha384-IzzGfBwpArbG7zuRc12uK7+lruobk2Etp+ZIJVF8wwZAkQFLi0XIjingAep2Lboc"
   },
   "resources/sass/app.scss": {
     "file": "assets/app-B-JA7bLG.css",
