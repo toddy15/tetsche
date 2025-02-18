@@ -1,151 +1,307 @@
 parameters:
 	ignoreErrors:
 		-
-			message: "#^Method App\\\\Http\\\\Controllers\\\\Auth\\\\RegisterController\\:\\:create\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
+			message: '#^Method App\\Http\\Controllers\\Auth\\RegisterController\:\:create\(\) has parameter \$data with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
 			count: 1
 			path: app/Http/Controllers/Auth/RegisterController.php
 
 		-
-			message: "#^Method App\\\\Http\\\\Controllers\\\\Auth\\\\RegisterController\\:\\:validator\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
+			message: '#^Method App\\Http\\Controllers\\Auth\\RegisterController\:\:validator\(\) has parameter \$data with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
 			count: 1
 			path: app/Http/Controllers/Auth/RegisterController.php
 
 		-
-			message: "#^Binary operation \"\\.\" between 'Gästebuch – Suche…' and non\\-empty\\-array\\|non\\-falsy\\-string results in an error\\.$#"
+			message: '#^Parameter \#1 \$value of static method Illuminate\\Support\\Facades\\Hash\:\:make\(\) expects string, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Http/Controllers/Auth/RegisterController.php
+
+		-
+			message: '#^Binary operation "\." between ''Gästebuch – Suche…'' and non\-empty\-array\|non\-falsy\-string results in an error\.$#'
+			identifier: binaryOp.invalid
 			count: 1
 			path: app/Http/Controllers/GuestBookSearchController.php
 
 		-
-			message: "#^Part \\$query \\(non\\-empty\\-array\\|non\\-falsy\\-string\\) of encapsed string cannot be cast to string\\.$#"
+			message: '#^Binary operation "\." between mixed and ''«'' results in an error\.$#'
+			identifier: binaryOp.invalid
+			count: 1
+			path: app/Http/Controllers/GuestBookSearchController.php
+
+		-
+			message: '#^Part \$query \(non\-empty\-array\|non\-falsy\-string\) of encapsed string cannot be cast to string\.$#'
+			identifier: encapsedStringPart.nonString
 			count: 3
 			path: app/Http/Controllers/GuestBookSearchController.php
 
 		-
-			message: "#^Binary operation \"\\.\" between ', Browser\\: ' and array\\|string\\|null results in an error\\.$#"
+			message: '#^Binary operation "\." between '', Browser\: '' and array\|string\|null results in an error\.$#'
+			identifier: binaryOp.invalid
 			count: 1
 			path: app/Http/Controllers/GuestbookPostsController.php
 
 		-
-			message: "#^Cannot access property \\$cartoon on App\\\\Models\\\\PublicationDate\\|null\\.$#"
+			message: '#^Binary operation "\." between mixed and '' '' results in an error\.$#'
+			identifier: binaryOp.invalid
 			count: 1
 			path: app/Http/Controllers/GuestbookPostsController.php
 
 		-
-			message: "#^Cannot access property \\$publish_on on App\\\\Models\\\\PublicationDate\\|null\\.$#"
+			message: '#^Binary operation "\." between non\-falsy\-string and mixed results in an error\.$#'
+			identifier: binaryOp.invalid
 			count: 1
 			path: app/Http/Controllers/GuestbookPostsController.php
 
 		-
-			message: "#^Cannot access property \\$rebus on App\\\\Models\\\\Cartoon\\|null\\.$#"
+			message: '#^Binary operation "\.\=" between non\-falsy\-string and mixed results in an error\.$#'
+			identifier: assignOp.invalid
 			count: 1
 			path: app/Http/Controllers/GuestbookPostsController.php
 
 		-
-			message: "#^Parameter \\#2 \\$spam_detection of method App\\\\Services\\\\Spamfilter\\:\\:classify\\(\\) expects string, string\\|null given\\.$#"
+			message: '#^Cannot access property \$cartoon on App\\Models\\PublicationDate\|null\.$#'
+			identifier: property.nonObject
 			count: 1
 			path: app/Http/Controllers/GuestbookPostsController.php
 
 		-
-			message: "#^Parameter \\#1 \\$min of function mt_rand expects int, mixed given\\.$#"
+			message: '#^Cannot access property \$publish_on on App\\Models\\PublicationDate\|null\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: app/Http/Controllers/GuestbookPostsController.php
+
+		-
+			message: '#^Cannot access property \$rebus on App\\Models\\Cartoon\|null\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: app/Http/Controllers/GuestbookPostsController.php
+
+		-
+			message: '#^Cannot call method add\(\) on mixed\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Http/Controllers/GuestbookPostsController.php
+
+		-
+			message: '#^Cannot call method errors\(\) on mixed\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Http/Controllers/GuestbookPostsController.php
+
+		-
+			message: '#^Parameter \#1 \$attributes of method Illuminate\\Database\\Eloquent\\Model\:\:update\(\) expects array\<string, mixed\>, array given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Http/Controllers/GuestbookPostsController.php
+
+		-
+			message: '#^Parameter \#1 \$attributes of static method Illuminate\\Database\\Eloquent\\Builder\<App\\Models\\GuestbookPost\>\:\:create\(\) expects array\<string, mixed\>, array given\.$#'
+			identifier: argument.type
+			count: 2
+			path: app/Http/Controllers/GuestbookPostsController.php
+
+		-
+			message: '#^Parameter \#2 \$spam_detection of method App\\Services\\Spamfilter\:\:classify\(\) expects string, string\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Http/Controllers/GuestbookPostsController.php
+
+		-
+			message: '#^Parameter \#1 \$min of function mt_rand expects int, mixed given\.$#'
+			identifier: argument.type
 			count: 1
 			path: app/Http/Controllers/NewCartoonController.php
 
 		-
-			message: "#^Parameter \\#2 \\$max of function mt_rand expects int, mixed given\\.$#"
+			message: '#^Parameter \#1 \.\.\.\$arg1 of function max expects non\-empty\-array, array\<mixed\> given\.$#'
+			identifier: argument.type
 			count: 1
 			path: app/Http/Controllers/NewCartoonController.php
 
 		-
-			message: "#^Cannot access property \\$rebus on App\\\\Models\\\\Cartoon\\|null\\.$#"
+			message: '#^Parameter \#1 \.\.\.\$arg1 of function min expects non\-empty\-array, array\<mixed\> given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Http/Controllers/NewCartoonController.php
+
+		-
+			message: '#^Parameter \#2 \$max of function mt_rand expects int, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Http/Controllers/NewCartoonController.php
+
+		-
+			message: '#^Cannot access property \$rebus on App\\Models\\Cartoon\|null\.$#'
+			identifier: property.nonObject
 			count: 1
 			path: app/Http/Controllers/PublicationDateController.php
 
 		-
-			message: "#^Cannot call method save\\(\\) on App\\\\Models\\\\Cartoon\\|null\\.$#"
+			message: '#^Cannot call method save\(\) on App\\Models\\Cartoon\|null\.$#'
+			identifier: method.nonObject
 			count: 1
 			path: app/Http/Controllers/PublicationDateController.php
 
 		-
-			message: "#^Cannot access property \\$publish_on on App\\\\Models\\\\PublicationDate\\|null\\.$#"
+			message: '#^Cannot access property \$publish_on on App\\Models\\PublicationDate\|null\.$#'
+			identifier: property.nonObject
 			count: 1
 			path: app/Models/Cartoon.php
 
 		-
-			message: "#^Cannot call method isoFormat\\(\\) on Carbon\\\\Carbon\\|string\\.$#"
+			message: '#^Cannot call method isoFormat\(\) on Carbon\\Carbon\|string\.$#'
+			identifier: method.nonObject
 			count: 2
 			path: app/Models/Cartoon.php
 
 		-
-			message: "#^Method App\\\\Models\\\\PublicationDate\\:\\:getCurrent\\(\\) should return App\\\\Models\\\\PublicationDate but returns App\\\\Models\\\\PublicationDate\\|null\\.$#"
+			message: '#^Method App\\Models\\PublicationDate\:\:getCurrent\(\) should return App\\Models\\PublicationDate but returns App\\Models\\PublicationDate\|null\.$#'
+			identifier: return.type
 			count: 1
 			path: app/Models/PublicationDate.php
 
 		-
-			message: "#^Method App\\\\Models\\\\PublicationDate\\:\\:getOldestArchived\\(\\) should return App\\\\Models\\\\PublicationDate but returns App\\\\Models\\\\PublicationDate\\|null\\.$#"
+			message: '#^Method App\\Models\\PublicationDate\:\:getOldestArchived\(\) should return App\\Models\\PublicationDate but returns App\\Models\\PublicationDate\|null\.$#'
+			identifier: return.type
 			count: 1
 			path: app/Models/PublicationDate.php
 
 		-
-			message: "#^Parameter \\#1 \\$dir_handle of function closedir expects resource\\|null, resource\\|false given\\.$#"
+			message: '#^PHPDoc type array\<int, string\> of property App\\Models\\User\:\:\$fillable is not covariant with PHPDoc type list\<string\> of overridden property Illuminate\\Database\\Eloquent\\Model\:\:\$fillable\.$#'
+			identifier: property.phpDocType
+			count: 1
+			path: app/Models/User.php
+
+		-
+			message: '#^PHPDoc type array\<int, string\> of property App\\Models\\User\:\:\$hidden is not covariant with PHPDoc type list\<string\> of overridden property Illuminate\\Database\\Eloquent\\Model\:\:\$hidden\.$#'
+			identifier: property.phpDocType
+			count: 1
+			path: app/Models/User.php
+
+		-
+			message: '#^Parameter \#1 \$dir_handle of function closedir expects resource\|null, resource\|false given\.$#'
+			identifier: argument.type
 			count: 1
 			path: app/Services/Images.php
 
 		-
-			message: "#^Parameter \\#1 \\$dir_handle of function readdir expects resource\\|null, resource\\|false given\\.$#"
+			message: '#^Parameter \#1 \$dir_handle of function readdir expects resource\|null, resource\|false given\.$#'
+			identifier: argument.type
 			count: 1
 			path: app/Services/Images.php
 
 		-
-			message: "#^Parameter \\#2 \\$spam_detection of method App\\\\Services\\\\Spamfilter\\:\\:addHam\\(\\) expects string, string\\|null given\\.$#"
+			message: '#^Argument of an invalid type list\<string\>\|false supplied for foreach, only iterables are supported\.$#'
+			identifier: foreach.nonIterable
+			count: 3
+			path: app/Services/Spamfilter.php
+
+		-
+			message: '#^Binary operation "\+" between mixed and 1 results in an error\.$#'
+			identifier: binaryOp.invalid
+			count: 2
+			path: app/Services/Spamfilter.php
+
+		-
+			message: '#^Binary operation "\+" between mixed and mixed results in an error\.$#'
+			identifier: binaryOp.invalid
 			count: 1
 			path: app/Services/Spamfilter.php
 
 		-
-			message: "#^Parameter \\#2 \\$spam_detection of method App\\\\Services\\\\Spamfilter\\:\\:addSpam\\(\\) expects string, string\\|null given\\.$#"
+			message: '#^Binary operation "\-" between mixed and 1 results in an error\.$#'
+			identifier: binaryOp.invalid
+			count: 2
+			path: app/Services/Spamfilter.php
+
+		-
+			message: '#^Binary operation "/" between mixed and mixed results in an error\.$#'
+			identifier: binaryOp.invalid
+			count: 2
+			path: app/Services/Spamfilter.php
+
+		-
+			message: '#^Parameter \#2 \$spam_detection of method App\\Services\\Spamfilter\:\:addHam\(\) expects string, string\|null given\.$#'
+			identifier: argument.type
 			count: 1
 			path: app/Services/Spamfilter.php
 
 		-
-			message: "#^Parameter \\#2 \\$spam_detection of method App\\\\Services\\\\Spamfilter\\:\\:removeHam\\(\\) expects string, string\\|null given\\.$#"
+			message: '#^Parameter \#2 \$spam_detection of method App\\Services\\Spamfilter\:\:addSpam\(\) expects string, string\|null given\.$#'
+			identifier: argument.type
 			count: 1
 			path: app/Services/Spamfilter.php
 
 		-
-			message: "#^Parameter \\#2 \\$spam_detection of method App\\\\Services\\\\Spamfilter\\:\\:removeSpam\\(\\) expects string, string\\|null given\\.$#"
+			message: '#^Parameter \#2 \$spam_detection of method App\\Services\\Spamfilter\:\:removeHam\(\) expects string, string\|null given\.$#'
+			identifier: argument.type
 			count: 1
 			path: app/Services/Spamfilter.php
 
 		-
-			message: "#^Access to an undefined property Illuminate\\\\Database\\\\Eloquent\\\\Model\\:\\:\\$category\\.$#"
+			message: '#^Parameter \#2 \$spam_detection of method App\\Services\\Spamfilter\:\:removeSpam\(\) expects string, string\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Services/Spamfilter.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$category\.$#'
+			identifier: property.notFound
 			count: 4
 			path: tests/Feature/GuestbookTest.php
 
 		-
-			message: "#^Access to an undefined property Illuminate\\\\Database\\\\Eloquent\\\\Model\\:\\:\\$message\\.$#"
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$message\.$#'
+			identifier: property.notFound
 			count: 4
 			path: tests/Feature/GuestbookTest.php
 
 		-
-			message: "#^Access to an undefined property Illuminate\\\\Database\\\\Eloquent\\\\Model\\:\\:\\$name\\.$#"
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$name\.$#'
+			identifier: property.notFound
 			count: 4
 			path: tests/Feature/GuestbookTest.php
 
 		-
-			message: "#^Unable to resolve the template type TValue in call to function expect$#"
+			message: '#^Unable to resolve the template type TValue in call to function expect$#'
+			identifier: argument.templateType
 			count: 12
 			path: tests/Feature/GuestbookTest.php
 
 		-
-			message: "#^Cannot access property \\$cartoon on App\\\\Models\\\\PublicationDate\\|null\\.$#"
+			message: '#^Cannot access property \$cartoon on App\\Models\\PublicationDate\|null\.$#'
+			identifier: property.nonObject
 			count: 1
 			path: tests/Feature/PublicationDateTest.php
 
 		-
-			message: "#^Cannot access property \\$id on App\\\\Models\\\\PublicationDate\\|null\\.$#"
+			message: '#^Cannot access property \$id on App\\Models\\PublicationDate\|null\.$#'
+			identifier: property.nonObject
 			count: 1
 			path: tests/Feature/PublicationDateTest.php
 
 		-
-			message: "#^Cannot access property \\$rebus on App\\\\Models\\\\Cartoon\\|null\\.$#"
+			message: '#^Cannot access property \$rebus on App\\Models\\Cartoon\|null\.$#'
+			identifier: property.nonObject
 			count: 1
 			path: tests/Feature/PublicationDateTest.php
+
+		-
+			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:component\(\)\.$#'
+			identifier: method.notFound
+			count: 4
+			path: tests/Feature/View/Components/DateTimeTest.php
+
+		-
+			message: '#^Cannot call method assertDontSee\(\) on mixed\.$#'
+			identifier: method.nonObject
+			count: 3
+			path: tests/Feature/View/Components/DateTimeTest.php
+
+		-
+			message: '#^Cannot call method assertSee\(\) on mixed\.$#'
+			identifier: method.nonObject
+			count: 4
+			path: tests/Feature/View/Components/DateTimeTest.php
