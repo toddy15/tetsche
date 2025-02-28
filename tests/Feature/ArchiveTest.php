@@ -5,7 +5,6 @@ declare(strict_types=1);
 use Carbon\Carbon;
 use Tests\Seeders\CartoonSeeder;
 
-use function Pest\Laravel\get;
 use function Pest\Laravel\seed;
 
 uses()->beforeEach(function () {
@@ -14,7 +13,7 @@ uses()->beforeEach(function () {
 });
 
 test('index returns an ok response', function () {
-    get(route('archiv.index'))
+    $this->get(route('archiv.index'))
         ->assertOk()
         ->assertViewIs('archive.index')
         ->assertViewHas('title')
@@ -23,7 +22,7 @@ test('index returns an ok response', function () {
 });
 
 test('a guest can view the first page of the archive', function () {
-    get('/archiv')
+    $this->get('/archiv')
         ->assertOk()
         ->assertSeeText('Archiv')
         ->assertSeeText('3. Februar 2022')
@@ -31,7 +30,7 @@ test('a guest can view the first page of the archive', function () {
 });
 
 test('a guest can view the second page of the archive', function () {
-    get('/archiv?page=2')
+    $this->get('/archiv?page=2')
         ->assertOk()
         ->assertSeeText('Archiv')
         ->assertDontSeeText('3. Februar 2022')
@@ -39,7 +38,7 @@ test('a guest can view the second page of the archive', function () {
 });
 
 test('a guest cannot view the third page of the archive', function () {
-    get('/archiv?page=3')
+    $this->get('/archiv?page=3')
         ->assertOk()
         ->assertSeeText('Archiv')
         ->assertDontSeeText('3. Februar 2022')
@@ -48,7 +47,7 @@ test('a guest cannot view the third page of the archive', function () {
 });
 
 it('contains expected dates on the first page', function () {
-    get('/archiv')
+    $this->get('/archiv')
         ->assertOk()
         ->assertSeeText('Archiv')
         ->assertSeeText('27. Januar 2022')
@@ -62,7 +61,7 @@ it('contains expected dates on the first page', function () {
 });
 
 test('a guest can view an archived cartoon', function () {
-    get('/archiv/2022-03-03')
+    $this->get('/archiv/2022-03-03')
         ->assertOk()
         ->assertSeeText('Archiv')
         ->assertSeeText('Cartoon der Woche . . . vom 3. März 2022')
@@ -73,7 +72,7 @@ test('a guest can view an archived cartoon', function () {
 });
 
 it('does show the oldest archived cartoon', function () {
-    get('/archiv/2021-12-02')
+    $this->get('/archiv/2021-12-02')
         ->assertOk()
         ->assertSeeText('Archiv')
         ->assertSeeText('Cartoon der Woche . . . vom 2. Dezember 2021')
@@ -86,18 +85,18 @@ it('does show the oldest archived cartoon', function () {
 it(
     'does not show older cartoons which are no longer in the archive',
     function () {
-        get('/archiv/2021-11-25')->assertNotFound();
+        $this->get('/archiv/2021-11-25')->assertNotFound();
     },
 );
 
 it('does not show future cartoons', function () {
-    get('/archiv/2022-03-31')->assertNotFound();
+    $this->get('/archiv/2022-03-31')->assertNotFound();
 });
 
 it('redirects to the current cartoon', function () {
-    get('/archiv/2022-03-24')->assertRedirect('/cartoon');
+    $this->get('/archiv/2022-03-24')->assertRedirect('/cartoon');
 });
 
 test('a guest cannot view a non-existing cartoon', function () {
-    get('/archiv/2022-03-08')->assertNotFound();
+    $this->get('/archiv/2022-03-08')->assertNotFound();
 });

@@ -4,20 +4,18 @@ declare(strict_types=1);
 
 use App\Models\GuestbookPost;
 
-use function Pest\Laravel\get;
-
 it('redirects without a query', function () {
-    get('gaestebuch/suche')
+    $this->get('gaestebuch/suche')
         ->assertRedirect(route('gaestebuch.index'));
 });
 
 it('redirects for an empty query', function () {
-    get('gaestebuch/suche?q=')
+    $this->get('gaestebuch/suche?q=')
         ->assertRedirect(route('gaestebuch.index'));
 });
 
 it('returns ok for a query', function () {
-    get('gaestebuch/suche?q=SEARCH')
+    $this->get('gaestebuch/suche?q=SEARCH')
         ->assertOk()
         ->assertViewIs('guestbook_posts.index')
         ->assertViewHas('guestbook_posts')
@@ -33,13 +31,13 @@ it('returns correct results for a query', function () {
     GuestbookPost::factory()->create(['message' => 'Second Post']);
 
     // Without search, both posts should be visible
-    get('gaestebuch')
+    $this->get('gaestebuch')
         ->assertOk()
         ->assertSeeText('First Post')
         ->assertSeeText('Second Post');
 
     // With search, only the second post should be visible
-    get('gaestebuch/suche?q=second')
+    $this->get('gaestebuch/suche?q=second')
         ->assertOk()
         ->assertDontSeeText('First Post')
         ->assertSeeText('Second Post');

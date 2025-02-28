@@ -5,7 +5,6 @@ declare(strict_types=1);
 use Carbon\Carbon;
 use Tests\Seeders\CartoonSeeder;
 
-use function Pest\Laravel\get;
 use function Pest\Laravel\seed;
 
 uses()->beforeEach(function () {
@@ -14,7 +13,7 @@ uses()->beforeEach(function () {
 });
 
 test('a guest can view the current cartoon', function () {
-    get('/cartoon')
+    $this->get('/cartoon')
         ->assertOk()
         ->assertViewIs('cartoons.show')
         ->assertViewHas('title')
@@ -31,7 +30,7 @@ test('a guest can view the current cartoon', function () {
 test('a guest can view the next current cartoon', function () {
     Carbon::setTestNow('2022-04-01 14:30:00');
 
-    get('/cartoon')
+    $this->get('/cartoon')
         ->assertOk()
         ->assertSeeText('Cartoon der Woche . . . vom 31. März 2022')
         ->assertSeeText(
@@ -44,7 +43,7 @@ test('a guest can view the next cartoon at the correct time', function () {
     // The given time is UTC -> convert to 17:59:59 CEST
     Carbon::setTestNow('2022-03-30 15:59:59');
 
-    get('/cartoon')
+    $this->get('/cartoon')
         ->assertOk()
         ->assertSeeText('Cartoon der Woche . . . vom 24. März 2022')
         ->assertSeeText(
@@ -55,7 +54,7 @@ test('a guest can view the next cartoon at the correct time', function () {
     // The given time is UTC -> convert to 18:00:00 CEST
     Carbon::setTestNow('2022-03-30 16:00:00');
 
-    get('/cartoon')
+    $this->get('/cartoon')
         ->assertOk()
         ->assertSeeText('Cartoon der Woche . . . vom 31. März 2022')
         ->assertSeeText(

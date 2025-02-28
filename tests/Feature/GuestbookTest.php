@@ -11,7 +11,6 @@ use function Pest\Laravel\actingAs;
 use function Pest\Laravel\assertModelExists;
 use function Pest\Laravel\assertModelMissing;
 use function Pest\Laravel\delete;
-use function Pest\Laravel\get;
 use function Pest\Laravel\post;
 use function Pest\Laravel\put;
 use function Pest\Laravel\seed;
@@ -25,7 +24,7 @@ uses()->beforeEach(function () {
 test('a guest cannot edit an entry', function () {
     $guestbookPost = GuestbookPost::factory()->create();
 
-    get(route('gaestebuch.edit', ['gaestebuch' => $guestbookPost]))
+    $this->get(route('gaestebuch.edit', ['gaestebuch' => $guestbookPost]))
         ->assertRedirect(route('login'));
 
     assertModelExists($guestbookPost);
@@ -66,7 +65,7 @@ test('a user can edit an entry', function () {
 
     $guestbookPost = GuestbookPost::factory()->create();
 
-    get(route('gaestebuch.edit', ['gaestebuch' => $guestbookPost]))
+    $this->get(route('gaestebuch.edit', ['gaestebuch' => $guestbookPost]))
         ->assertOk()
         ->assertViewIs('guestbook_posts.edit')
         ->assertViewHas('guestbook_post');
@@ -113,7 +112,7 @@ test('a guest can view the guestbook page', function () {
         ->count(5)
         ->create();
 
-    get(route('gaestebuch.index'))
+    $this->get(route('gaestebuch.index'))
         ->assertOk()
         ->assertViewIs('guestbook_posts.index')
         ->assertViewHas('guestbook_posts')
@@ -131,7 +130,7 @@ test('a guest can post a new entry', function () {
         ->count(5)
         ->create();
 
-    get(route('gaestebuch.create'))
+    $this->get(route('gaestebuch.create'))
         ->assertOk()
         ->assertViewIs('guestbook_posts.create')
         ->assertSeeText('Gästebuch: Neuer Eintrag');
@@ -146,7 +145,7 @@ test('a guest can post a new entry', function () {
     $message = $entry['message'];
     settype($name, 'string');
     settype($message, 'string');
-    get(route('gaestebuch.index'))
+    $this->get(route('gaestebuch.index'))
         ->assertSeeText($name)
         ->assertSeeText($message);
 });

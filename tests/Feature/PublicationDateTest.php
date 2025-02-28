@@ -8,7 +8,6 @@ use Carbon\Carbon;
 use Tests\Seeders\CartoonSeeder;
 
 use function Pest\Laravel\actingAs;
-use function Pest\Laravel\get;
 use function Pest\Laravel\put;
 use function Pest\Laravel\seed;
 
@@ -18,12 +17,12 @@ uses()->beforeEach(function () {
 });
 
 test('a guest cannot view all published cartoons', function () {
-    get('/publication_dates')->assertRedirect('/login');
+    $this->get('/publication_dates')->assertRedirect('/login');
 });
 
 test('a user can view all published cartoons', function () {
     actingAs(User::factory()->create());
-    get('/publication_dates')
+    $this->get('/publication_dates')
         ->assertOk()
         ->assertViewIs('publication_dates.index')
         ->assertViewHas('title')
@@ -36,7 +35,7 @@ test('a user can view all published cartoons', function () {
 
 test('a user can view all published cartoons on page 2', function () {
     actingAs(User::factory()->create());
-    get('/publication_dates?page=2')
+    $this->get('/publication_dates?page=2')
         ->assertOk()
         ->assertDontSeeText('31. März 2022')
         ->assertSeeText('3. Februar 2022')
@@ -45,7 +44,7 @@ test('a user can view all published cartoons on page 2', function () {
 
 test('a user can view all published cartoons on page 3', function () {
     actingAs(User::factory()->create());
-    get('/publication_dates?page=3')
+    $this->get('/publication_dates?page=3')
         ->assertOk()
         ->assertDontSeeText('31. März 2022')
         ->assertDontSeeText('3. Februar 2022')
@@ -60,7 +59,7 @@ test('a user cannot force a new cartoon for the current publication date', funct
 
     expect($latest->id)->not->toBe($current->id);
 
-    get('/publication_dates/forceNewCartoon')->assertRedirect(
+    $this->get('/publication_dates/forceNewCartoon')->assertRedirect(
         '/publication_dates',
     );
 
@@ -74,7 +73,7 @@ test('a user cannot force a new cartoon for the current publication date', funct
 );
 
 test('a guest cannot edit or update a cartoon', function () {
-    get('/publication_dates/13/edit')->assertRedirect(route('login'));
+    $this->get('/publication_dates/13/edit')->assertRedirect(route('login'));
     put('/publication_dates/13', ['rebus' => 'New rebus text'])->assertRedirect(
         route('login'),
     );
@@ -87,7 +86,7 @@ test('a user can edit and update a cartoon', closure: function () {
         ->first();
     $rebus = $publication_date->cartoon->rebus;
 
-    get(route('publication_dates.edit', $publication_date))
+    $this->get(route('publication_dates.edit', $publication_date))
         ->assertOk()
         ->assertSeeText('Cartoon bearbeiten')
         ->assertSeeText('10. Februar 2022')
@@ -101,7 +100,7 @@ test('a user can edit and update a cartoon', closure: function () {
         ]),
     )->assertRedirect(route('publication_dates.index'));
 
-    get(route('publication_dates.edit', $publication_date))
+    $this->get(route('publication_dates.edit', $publication_date))
         ->assertOk()
         ->assertSeeText('Cartoon bearbeiten')
         ->assertSeeText('10. Februar 2022')
