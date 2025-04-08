@@ -1,10 +1,10 @@
 {
   "node_modules/bootstrap/dist/js/bootstrap.esm.js": {
-    "file": "assets/bootstrap.esm-BIRXU5Tj.js",
+    "file": "assets/bootstrap.esm-DpHkMb3h.js",
     "name": "bootstrap.esm",
     "src": "node_modules/bootstrap/dist/js/bootstrap.esm.js",
     "isDynamicEntry": true,
-    "integrity": "sha384-91rmQ+W2mDTC5vKDfC2ShMw0FJ1y8MRXNqCCzd0wQgWHaGG27bXTcy+P2Gz1Lhzf"
+    "integrity": "sha384-tVWgatNbK5cpIA1d/pLtS+SGItWPDiQnNc5uFveOaX+NWp581rEzrKUsDdT/O0rn"
   },
   "resources/fonts/Assistant-VariableFont_wght.woff2": {
     "file": "assets/Assistant-VariableFont_wght-D1Mcf2u2.woff2",
@@ -17,19 +17,19 @@
     "integrity": "sha384-01DG+tIAqJ+GnupLUpeapL/0g1EbAvCac55AA5sR+5FjeNIm8AGJv+7aZxpNurJc"
   },
   "resources/js/app.js": {
-    "file": "assets/app-CJhrINN-.js",
+    "file": "assets/app-BnBs5o_9.js",
     "name": "app",
     "src": "resources/js/app.js",
     "isEntry": true,
     "dynamicImports": [
       "node_modules/bootstrap/dist/js/bootstrap.esm.js"
     ],
-    "integrity": "sha384-oNsOXeifI3Nd9hD2UWB8UWsnBMNZQPD4a993GL9RZl4phFqqNjbSwmXj6ewU4NN9"
+    "integrity": "sha384-jRJ4ntCqQ1AFF3ONIIamtb3wtV3+foN4mRng3Y+sqafCFHknZlf2Cv4zvk7iTnzm"
   },
   "resources/sass/app.scss": {
-    "file": "assets/app-B-JA7bLG.css",
+    "file": "assets/app-siRbCAGh.css",
     "src": "resources/sass/app.scss",
     "isEntry": true,
-    "integrity": "sha384-HkSuvqwwVHjtkg7E3gzO0KnrfwTHiXSQs6BtDCDgq1ZyB4He50ljfiqHYR8+6O2m"
+    "integrity": "sha384-Ih3kWLOu5KKVFwtNd0connHeeWYM/cfLNradjnAoGw3ntvDOmzYR5vXn0AluHWnN"
   }
 }
