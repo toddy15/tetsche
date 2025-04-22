@@ -19,30 +19,6 @@ parameters:
 			path: app/Http/Controllers/Auth/RegisterController.php
 
 		-
-			message: '#^Binary operation "\." between ''Gästebuch – Suche…'' and non\-empty\-array\|non\-falsy\-string results in an error\.$#'
-			identifier: binaryOp.invalid
-			count: 1
-			path: app/Http/Controllers/GuestBookSearchController.php
-
-		-
-			message: '#^Binary operation "\." between mixed and ''«'' results in an error\.$#'
-			identifier: binaryOp.invalid
-			count: 1
-			path: app/Http/Controllers/GuestBookSearchController.php
-
-		-
-			message: '#^Part \$query \(non\-empty\-array\|non\-falsy\-string\) of encapsed string cannot be cast to string\.$#'
-			identifier: encapsedStringPart.nonString
-			count: 3
-			path: app/Http/Controllers/GuestBookSearchController.php
-
-		-
-			message: '#^Binary operation "\." between '', Browser\: '' and array\|string\|null results in an error\.$#'
-			identifier: binaryOp.invalid
-			count: 1
-			path: app/Http/Controllers/GuestbookPostsController.php
-
-		-
 			message: '#^Binary operation "\." between mixed and '' '' results in an error\.$#'
 			identifier: binaryOp.invalid
 			count: 1
@@ -51,12 +27,6 @@ parameters:
 		-
 			message: '#^Binary operation "\." between non\-falsy\-string and mixed results in an error\.$#'
 			identifier: binaryOp.invalid
-			count: 1
-			path: app/Http/Controllers/GuestbookPostsController.php
-
-		-
-			message: '#^Binary operation "\.\=" between non\-falsy\-string and mixed results in an error\.$#'
-			identifier: assignOp.invalid
 			count: 1
 			path: app/Http/Controllers/GuestbookPostsController.php
 
@@ -245,63 +215,3 @@ parameters:
 			identifier: argument.type
 			count: 1
 			path: app/Services/Spamfilter.php
-
-		-
-			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$category\.$#'
-			identifier: property.notFound
-			count: 4
-			path: tests/Feature/GuestbookTest.php
-
-		-
-			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$message\.$#'
-			identifier: property.notFound
-			count: 4
-			path: tests/Feature/GuestbookTest.php
-
-		-
-			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$name\.$#'
-			identifier: property.notFound
-			count: 4
-			path: tests/Feature/GuestbookTest.php
-
-		-
-			message: '#^Unable to resolve the template type TValue in call to function expect$#'
-			identifier: argument.templateType
-			count: 12
-			path: tests/Feature/GuestbookTest.php
-
-		-
-			message: '#^Cannot access property \$cartoon on App\\Models\\PublicationDate\|null\.$#'
-			identifier: property.nonObject
-			count: 1
-			path: tests/Feature/PublicationDateTest.php
-
-		-
-			message: '#^Cannot access property \$id on App\\Models\\PublicationDate\|null\.$#'
-			identifier: property.nonObject
-			count: 1
-			path: tests/Feature/PublicationDateTest.php
-
-		-
-			message: '#^Cannot access property \$rebus on App\\Models\\Cartoon\|null\.$#'
-			identifier: property.nonObject
-			count: 1
-			path: tests/Feature/PublicationDateTest.php
-
-		-
-			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:component\(\)\.$#'
-			identifier: method.notFound
-			count: 4
-			path: tests/Feature/View/Components/DateTimeTest.php
-
-		-
-			message: '#^Cannot call method assertDontSee\(\) on mixed\.$#'
-			identifier: method.nonObject
-			count: 3
-			path: tests/Feature/View/Components/DateTimeTest.php
-
-		-
-			message: '#^Cannot call method assertSee\(\) on mixed\.$#'
-			identifier: method.nonObject
-			count: 4
-			path: tests/Feature/View/Components/DateTimeTest.php
