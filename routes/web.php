@@ -9,6 +9,7 @@ use App\Http\Controllers\GuestBookSearchController;
 use App\Http\Controllers\HomepageController;
 use App\Http\Controllers\NewCartoonController;
 use App\Http\Controllers\PublicationDateController;
+use App\Http\Controllers\SonderseiteController;
 use App\Http\Controllers\SpamController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -35,8 +36,8 @@ Route::view('/datenschutz', 'pages.datenschutz', [
 ])->name('datenschutz');
 
 // Homepage
-Route::get('/', HomepageController::class)->name('homepage');
-// Route::get('/', SonderseiteController::class)->name('homepage');
+// Route::get('/', HomepageController::class)->name('homepage');
+Route::get('/', SonderseiteController::class)->name('homepage');
 
 // Guestbook
 Route::resource('/gaestebuch', GuestbookPostsController::class)->only([
