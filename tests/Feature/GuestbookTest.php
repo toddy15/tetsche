@@ -248,3 +248,50 @@ it('ensures a maximum number of posts in a given interval', function () {
         ->assertSessionMissing('error')
         ->assertRedirect(route('gaestebuch.index'));
 });
+
+it('rejects an entry coming from a blocked subnet', function () {
+    // 109.43.113 is a blocked subnet
+    $entry = GuestbookPost::factory()->raw();
+
+    withServerVariables(['REMOTE_ADDR' => '109.43.113.34'])
+        ->post(route('gaestebuch.store'), $entry)
+        ->assertSessionHasErrors(['message'])
+        ->assertRedirect(route('gaestebuch.create'));
+
+    withServerVariables(['REMOTE_ADDR' => '109.43.113.201'])
+        ->post(route('gaestebuch.store'), $entry)
+        ->assertSessionHasErrors(['message'])
+        ->assertRedirect(route('gaestebuch.create'));
+});
+
+it('accepts an entry coming from a non-blocked subnet', function () {
+    // 109.43.114 is *not* a blocked subnet
+    $entry = GuestbookPost::factory()->raw();
+
+    withServerVariables(['REMOTE_ADDR' => '109.43.114.34'])
+        ->post(route('gaestebuch.store'), $entry)
+        ->assertSessionHasNoErrors()
+        ->assertSessionMissing('error')
+        ->assertRedirect(route('gaestebuch.index'));
+});
+
+it('rejects an entry coming from a blocked IP6 address', function () {
+    // 2001:a61:5a2:4d01:4b49:62f1:fff2:88e8 is a blocked IP6 address
+    $entry = GuestbookPost::factory()->raw();
+
+    withServerVariables(['REMOTE_ADDR' => '2001:a61:5a2:4d01:4b49:62f1:fff2:88e8'])
+        ->post(route('gaestebuch.store'), $entry)
+        ->assertSessionHasErrors(['message'])
+        ->assertRedirect(route('gaestebuch.create'));
+});
+
+it('accepts an entry coming from a non-blocked IP6 address', function () {
+    // 2001:a61:5a2:4d01:4b49:62f1:fff2:88e8 is a blocked IP6 address
+    $entry = GuestbookPost::factory()->raw();
+
+    withServerVariables(['REMOTE_ADDR' => '2001:a61:5a2::'])
+        ->post(route('gaestebuch.store'), $entry)
+        ->assertSessionHasNoErrors()
+        ->assertSessionMissing('error')
+        ->assertRedirect(route('gaestebuch.index'));
+});

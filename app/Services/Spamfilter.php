@@ -40,6 +40,13 @@ class Spamfilter
     ];
 
     /**
+     * @var array<int, string>
+     */
+    private array $blocked_ip6 = [
+        '2001:a61:5a2:4d01:4b49:62f1:fff2:88e8',
+    ];
+
+    /**
      * Initialize the filter database
      *
      * @param  array{'ham': array<int, string>, 'spam': array<int, string>}  $texts
@@ -111,6 +118,10 @@ class Spamfilter
      */
     public function isBlockedSubnet(string $address): bool
     {
+        if (str_contains($address, ':') === true) {
+            return $this->isBlockedIP6($address);
+        }
+
         $address_parts = explode('.', $address);
         if (count($address_parts) !== 4) {
             return false;
@@ -130,6 +141,14 @@ class Spamfilter
         }
 
         return false;
+    }
+
+    /**
+     * Check if the given IP6 address is blocked.
+     */
+    public function isBlockedIP6(string $address): bool
+    {
+        return in_array($address, $this->blocked_ip6);
     }
 
     /**
