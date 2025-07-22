@@ -76,8 +76,11 @@ class GuestbookPostsController extends Controller
         }
         // Filter out the fuckheads, based on message length
         if (! $spamfilter->isSpam($post['score'])) {
-            if (isset($post['message']) && strlen($post['message']) > 2000) {
-                $post['score'] = $spamfilter->threshold_no_autolearn_spam;
+            if (isset($post['message'])) {
+                settype($post['message'], 'string');
+                if (strlen($post['message']) > 2000) {
+                    $post['score'] = $spamfilter->threshold_no_autolearn_spam;
+                }
             }
         }
         // New feature: detect the solution to current rebus
