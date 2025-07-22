@@ -74,6 +74,12 @@ class GuestbookPostsController extends Controller
                 $post['score'] = $spamfilter->threshold_autolearn_spam;
             }
         }
+        // Filter out the fuckheads, based on message length
+        if (! $spamfilter->isSpam($post['score'])) {
+            if (strlen($post['message']) > 2000) {
+                $post['score'] = $spamfilter->threshold_no_autolearn_spam;
+            }
+        }
         // New feature: detect the solution to current rebus
         // @todo: This code is copied from CartoonController, remove duplication.
         $date = date('Y-m-d', time() + 6 * 60 * 60);

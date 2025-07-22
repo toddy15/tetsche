@@ -295,3 +295,23 @@ it('accepts an entry coming from a non-blocked IP6 address', function () {
         ->assertSessionMissing('error')
         ->assertRedirect(route('gaestebuch.index'));
 });
+
+it('rejects an entry with too many characters', function () {
+    $entry = GuestbookPost::factory()->raw();
+    $entry['message'] = str_repeat('A ', 1000).'A';
+
+    post(route('gaestebuch.store'), $entry)
+        ->assertSessionHasErrors(['message'])
+        ->assertRedirect(route('gaestebuch.create'));
+});
+
+it('accepts an entry with the maximal number of characters', function () {
+    $entry = GuestbookPost::factory()->raw();
+
+    // Create 2000 characters (Single letter and space).
+    $entry['message'] = str_repeat('A ', 1000);
+    post(route('gaestebuch.store'), $entry)
+        ->assertSessionHasNoErrors()
+        ->assertSessionMissing('error')
+        ->assertRedirect(route('gaestebuch.index'));
+});

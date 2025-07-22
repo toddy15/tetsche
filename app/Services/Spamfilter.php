@@ -19,7 +19,7 @@ class Spamfilter
 
     public float $threshold_autolearn_spam = 0.55;
 
-    private float $threshold_no_autolearn_spam = 0.9;
+    public float $threshold_no_autolearn_spam = 0.9;
 
     /**
      * @var array<int, string>
