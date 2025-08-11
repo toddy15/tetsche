@@ -18,10 +18,17 @@ class SonderseiteController extends Controller
         $alt .= 'Dienstag bis Sonntag von 10 bis 17 Uhr. ';
         $alt .= 'Los Loide … also nix wie hin! Zur angesagten Knaller-Ausstellung im Kurpark und im Schloss!';
 
+        $image2 = 'images/soltau.webp';
+        $alt2 = '100 Jahre Tetsche im Museum Soltau – ';
+        $alt2 .= 'Diese Ausstellung ist vom 29. Juli bis ';
+        $alt2 .= 'zum 9. November täglich, außer montags, von 14 bis 17 Uhr geöffnet.';
+
         return view('pages.sonderseite', [
             'description' => 'Tetsche-Website',
             'image' => $image,
+            'image2' => $image2,
             'alt' => $alt,
+            'alt2' => $alt2,
         ]);
     }
 }
