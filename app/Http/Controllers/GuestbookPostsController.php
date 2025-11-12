@@ -66,7 +66,9 @@ class GuestbookPostsController extends Controller
         $text = $post['name'].' '.$post['message'];
         // Use IP address and browser identification for more robust spam detection
         $spam_detection = 'IP: '.$request->ip();
-        $spam_detection .= ', Browser: '.$request->server('HTTP_USER_AGENT');
+        $http_user_agent = $request->server('HTTP_USER_AGENT');
+        settype($http_user_agent, 'string');
+        $spam_detection .= ', Browser: '.$http_user_agent;
         $post['score'] = $spamfilter->classify($text, $spam_detection);
         // Filter out the fuckheads, based on IP address
         if (! $spamfilter->isSpam($post['score'])) {
