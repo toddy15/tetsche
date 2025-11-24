@@ -36,8 +36,8 @@ Route::view('/datenschutz', 'pages.datenschutz', [
 ])->name('datenschutz');
 
 // Homepage
-Route::get('/', HomepageController::class)->name('homepage');
-// Route::get('/', SonderseiteController::class)->name('homepage');
+// Route::get('/', HomepageController::class)->name('homepage');
+Route::get('/', SonderseiteController::class)->name('homepage');
 
 // Guestbook
 Route::resource('/gaestebuch', GuestbookPostsController::class)->only([
