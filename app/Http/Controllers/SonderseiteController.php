@@ -14,7 +14,7 @@ class SonderseiteController extends Controller
     public function __invoke(Request $request): View
     {
         $show_until = Carbon::create(2025, 12, 24, 0, 0, 0, 'Europe/Berlin');
-        if (Carbon::now()->greaterThan($show_until)) {
+        if ($show_until === null || Carbon::now()->greaterThan($show_until)) {
             return (new HomepageController)($request);
         }
         $image = 'images/weihnachtskugel.webp';
